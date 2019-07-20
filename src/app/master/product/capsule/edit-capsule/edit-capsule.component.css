@@ -1,0 +1,43 @@
+.input-group {
+  margin-bottom: 0em;
+}
+
+.custom-button{
+  background-color: #4680ff;
+  color: #fff;
+  width: 75px;
+  text-align: center;
+}
+
+.custom-button .text{
+  margin-top:5px;
+}
+
+
+.graphOn{
+  margin-top:10px;
+  font-size: 13px;color: black;
+}
+
+.frmproduct-controls-label{
+  font-size: 13px;color: black;
+}
+
+.card-border{
+  border:1px solid !important;
+  color: rgba(216, 216, 216, 1);
+}
+
+.tab-border{
+  border:1px solid !important;
+  color: rgb(10, 10, 10);
+}
+
+.disabledBtn { cursor: not-allowed; }
+.viewMode {
+     opacity: 0.6;
+    pointer-events: none;
+}
+
+
+

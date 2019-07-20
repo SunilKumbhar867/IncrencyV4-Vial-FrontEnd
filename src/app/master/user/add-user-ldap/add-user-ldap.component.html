@@ -1,0 +1,123 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}">
+        </ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'> ADD USER</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="addUserForm" (ngSubmit)="onFormSubmit()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label>
+                      User ID
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="icofont icofont-user"></i>
+                      </span>
+                      <input type="text" class="form-control" formControlName="userID" (keyup)="onKeyUpUser($event)"
+                        maxlength="{{userIDMaxlenth}}" (keydown.space)="$event.preventDefault()"
+                        (keypress)="omit_special_char($event)" >
+                    </div>
+                    <div *ngIf="!userID.valid && userID.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{userID?.errors['required']}}
+                    </div>
+                    <div style="color:red;margin-top:3px;font-weight: bold;" *ngIf="bln_showWarningitemCode">
+                      User Id already exists!
+                    </div>
+                    <label>
+                      Windows User Name
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="icofont icofont-user"></i>
+                      </span>
+                      <input type="text" class="form-control" formControlName="userName" maxlength="45"   >
+                    </div>
+                     <div *ngIf="!userName.valid && userName.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{userName?.errors['required']}}
+                    </div>
+                    <label>
+                      User Name
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="icofont icofont-user"></i>
+                      </span>
+                      <input type="text" class="form-control" formControlName="userInitials" >
+                    </div>
+                    <div *ngIf="!userInitials.valid && userInitials.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{userInitials?.errors['required']}}
+                    </div>
+
+                    <label>
+                      Department
+                    </label>
+                    <ngx-select [formControl]="userDepartment" [items]="sarr_department" placeholder="Select department"
+                      class="select">
+                    </ngx-select>
+
+                    <label>
+                      Role
+                    </label>
+                    <ngx-select [formControl]="userRoles" [items]="sarr_roles" placeholder="Select Role"
+                      (select)="OnChange($event)">
+                    </ngx-select>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="card" *ngIf="bln_rightsArrayBox">
+                      <div class="card-body">
+                        <div [hidden]="hidden">
+                          <div class="row " style="background-color:#4680FF; padding:10px;">
+                            <div class="col-lg-12">
+                              <span style='text-align: center;color:white'>RIGHTS ASSIGNED TO {{selectedRole |
+                                uppercase}}
+                                ROLE</span>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row" [class.disabled]="disabled">
+                            <div *ngFor="let role of sarr_rights" class="col-lg-6">
+                              <div class="pretty p-svg p-curve">
+                                <input type="checkbox" checked />
+                                <div class="state p-primary">
+                                  <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                    <path
+                                      d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                      style="stroke: white;fill:white;"></path>
+                                  </svg>
+                                  <label>{{role}}</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="text-center">
+                  <button type="submit" [disabled]="!addUserForm.valid || bln_exist == true"
+                    [ngClass]="{disabledBtn:!addUserForm.valid || bln_exist == true }" class="btn btn-primary">Save
+                    Changes</button>
+                  &nbsp;&nbsp;&nbsp;
+                  <button type="button" (click)="reset()" class="btn btn-default waves-effect">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoBatchSummaryPrintReason" language="groovy" pageWidth="650" pageHeight="842" whenNoDataType="BlankPage" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="1252c73c-99e1-4d15-b1b5-ea008596d51f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="str_productType" class="java.lang.String"/>
+	<parameter name="str_cubicleType" class="java.lang.String"/>
+	<parameter name="str_batches" class="java.lang.String"/>
+	<parameter name="str_reportOption" class="java.lang.String"/>
+	<parameter name="str_side" class="java.lang.String"/>
+	<parameter name="str_prdID" class="java.lang.String"/>
+	<parameter name="str_prdName" class="java.lang.String"/>
+	<parameter name="str_prdVersion" class="java.lang.String"/>
+	<parameter name="str_version" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(Print_Tm,'%H:%i:%s')TIMEONLY,
+     tbl_batchsummary_printrecord.`RecNo` AS tbl_batchsummary_printrecord_RecNo,
+     tbl_batchsummary_printrecord.`Print_Dt` AS tbl_batchsummary_printrecord_Print_Dt,
+     tbl_batchsummary_printrecord.`Print_Tm` AS tbl_batchsummary_printrecord_Print_Tm,
+     tbl_batchsummary_printrecord.`UserID` AS tbl_batchsummary_printrecord_UserID,
+     tbl_batchsummary_printrecord.`UserName` AS tbl_batchsummary_printrecord_UserName,
+     tbl_batchsummary_printrecord.`BFGCode` AS tbl_batchsummary_printrecord_BFGCode,
+     tbl_batchsummary_printrecord.`PrdName` AS tbl_batchsummary_printrecord_PrdName,
+     tbl_batchsummary_printrecord.`PrdVersion` AS tbl_batchsummary_printrecord_PrdVersion,
+     tbl_batchsummary_printrecord.`Version` AS tbl_batchsummary_printrecord_Version,
+     tbl_batchsummary_printrecord.`ProductType` AS tbl_batchsummary_printrecord_ProductType,
+     tbl_batchsummary_printrecord.`CubType` AS tbl_batchsummary_printrecord_CubType,
+     tbl_batchsummary_printrecord.`ParamName` AS tbl_batchsummary_printrecord_ParamName,
+     tbl_batchsummary_printrecord.`BatchNo` AS tbl_batchsummary_printrecord_BatchNo,
+     tbl_batchsummary_printrecord.`Side` AS tbl_batchsummary_printrecord_Side,
+     tbl_batchsummary_printrecord.`PrintNo` AS tbl_batchsummary_printrecord_PrintNo,
+     tbl_batchsummary_printrecord.`Reason` AS tbl_batchsummary_printrecord_Reason,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_batchsummary_printrecord` tbl_batchsummary_printrecord,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_printrecord.`ProductType` = $P{str_productType}
+AND tbl_batchsummary_printrecord.`ParamName` = $P{str_reportOption}
+ AND tbl_batchsummary_printrecord.`CubType` = $P{str_cubicleType}
+     and tbl_batchsummary_printrecord.`BatchNo` = $P{str_batches}
+   and tbl_batchsummary_printrecord.`Side` = $P{str_side}
+AND tbl_batchsummary_printrecord.`BFGCode` = $P{str_prdID}
+ AND tbl_batchsummary_printrecord.`PrdName` = $P{str_prdName}
+     and tbl_batchsummary_printrecord.`PrdVersion` = $P{str_prdVersion}
+   and tbl_batchsummary_printrecord.`Version` = $P{str_version}]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_printrecord_Print_Dt" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_printrecord_Print_Tm" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_printrecord_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_PrdName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_PrdVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_ProductType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_ParamName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_printrecord_PrintNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_printrecord_Reason" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="16" width="413" height="24" uuid="773b1662-2516-490c-9a8e-51b872625356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Print Reason For Printout - Batch Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="144" y="46" width="376" height="20" uuid="fc8c6fde-247c-4988-923b-a2921e17984e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{str_reportOption}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="12" y="72" width="589" height="88" uuid="92bdf1b0-06a9-4d3b-9261-1b208d5405dc"/>
+			</rectangle>
+			<line>
+				<reportElement x="13" y="118" width="587" height="1" uuid="b438d268-83be-461b-b1dd-20fa871954b7"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="16" y="74" width="83" height="44" uuid="57ed70ab-5a53-4a63-948a-6bc058d8f0b5"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_nomenclature_ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="119" width="102" height="20" uuid="868556f9-e3f3-4fc1-8688-cde15f2f0f9e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_nomenclature_BFGCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="118" y="72" width="1" height="87" uuid="53114959-db05-400c-b204-b7635b05f4b7"/>
+			</line>
+			<line>
+				<reportElement x="13" y="139" width="587" height="1" uuid="010984af-3f29-495a-b460-5ec636850ce7"/>
+			</line>
+			<staticText>
+				<reportElement x="312" y="121" width="100" height="20" uuid="4c850ac2-d1ea-4bbf-8c1f-78a246c9a5c7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Batch No. ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="306" y="118" width="1" height="42" uuid="a8cc42ae-3ede-4687-9504-3e3624dc1a5a"/>
+			</line>
+			<line>
+				<reportElement x="408" y="118" width="1" height="42" uuid="2dd26cce-6d36-467b-849d-af1f4382a596"/>
+			</line>
+			<staticText>
+				<reportElement x="312" y="140" width="100" height="20" uuid="5335707d-e82b-4d3f-a3f5-7bad8b058c9e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Side]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="140" width="100" height="20" uuid="06178558-00c0-4716-a984-50c2db1ca323"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cubicle Type]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="123" y="74" width="477" height="44" uuid="ca5f80c2-0549-429d-8a47-94dfe0e6657b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_PrdName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="120" width="172" height="20" uuid="cefc8a97-766c-4740-ac8a-f87516dc35d5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_BFGCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="141" width="172" height="20" uuid="95cee48f-c44d-48cf-bf1c-e12a5c273ddc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_CubType}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="139" width="179" height="20" uuid="f36e07e0-d166-469a-a1b9-1f3100ba5ac6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_Side}.equals( "NA" )
+?
+"Single"
+:
+"Double"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="121" width="179" height="20" uuid="18653e0c-f3f9-4e7c-8d5d-38d238cd29ef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_BatchNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="62" height="20" uuid="8ac7d4f5-1301-48ce-8333-e4c8416a3b2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="0" width="54" height="20" uuid="305a7c53-7061-4703-9cd7-bb3c5103570f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="89" height="20" uuid="1b69bb4c-1b62-4dc0-ac0a-3e8118bb7be8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[USER ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="0" width="52" height="20" uuid="dbc2b015-a947-4541-babb-db16b155d279"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Print No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="0" width="203" height="20" uuid="557c5074-6c33-42a1-b3d3-cea3c44678d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REASON]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="0" width="589" height="1" uuid="ea4bc44e-5f8f-43f2-a3f0-f158ec9ab559"/>
+			</line>
+			<line>
+				<reportElement x="12" y="21" width="589" height="1" uuid="5a7d9113-4949-445f-a528-97cf77e5fe70"/>
+			</line>
+			<line>
+				<reportElement x="12" y="0" width="1" height="22" uuid="ae9e5e0f-0465-4bb5-b1c8-10a760683cdb"/>
+			</line>
+			<line>
+				<reportElement x="74" y="0" width="1" height="22" uuid="094ac05e-f1f4-4c0d-aa78-0c69fca27b4e"/>
+			</line>
+			<line>
+				<reportElement x="129" y="0" width="1" height="22" uuid="c30f015c-6584-4569-b559-2270303b2f50"/>
+			</line>
+			<line>
+				<reportElement x="338" y="0" width="1" height="22" uuid="6e97155b-2604-4897-9d36-9579e32e01bc"/>
+			</line>
+			<line>
+				<reportElement x="600" y="0" width="1" height="22" uuid="ddf7f2b1-e0f7-482c-a509-6d481fcbe291"/>
+			</line>
+			<line>
+				<reportElement x="219" y="0" width="1" height="22" uuid="d3ea0489-ad30-487a-a4e1-bd6ddeb0a8e1"/>
+			</line>
+			<staticText>
+				<reportElement x="223" y="0" width="115" height="20" uuid="e3d9e80b-995c-4146-822d-35d8c66cff39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[USER NAME]]></text>
+			</staticText>
+			<line>
+				<reportElement x="391" y="1" width="1" height="20" uuid="4bafdca7-0646-4923-ba57-aaff30307cbe"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="0" width="59" height="20" uuid="2b1d77a3-de68-4925-b14a-ca5f9a5fe5e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{tbl_batchsummary_printrecord_Print_Dt})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="0" width="54" height="20" uuid="61775f6d-9515-4414-88e9-f4618c6f2bb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="131" y="0" width="89" height="20" uuid="1c29481f-41f1-47d3-b930-3e4e4d015d61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_UserID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="340" y="0" width="52" height="20" uuid="7b4e33a5-653e-47e9-bbcf-3677b73ff5ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_PrintNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="203" height="20" uuid="e6cd779c-17c7-4c08-b4fb-1040869916e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tbl_batchsummary_printrecord_Reason}==""? "NA" :  $F{tbl_batchsummary_printrecord_Reason})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="129" y="-2" width="1" height="22" uuid="ed5f3f04-68fa-445c-a509-44c2462f3eb1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="338" y="-2" width="1" height="22" uuid="281d9184-43a0-4a39-a84b-096df0d9b477"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="600" y="-2" width="1" height="22" uuid="9181d469-4a67-4c51-9b4b-7241a9692c96"/>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="12" y="20" width="589" height="1" uuid="3d6a2ea8-8590-49f7-947a-98070b5b9653"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="74" y="-2" width="1" height="22" uuid="5890be30-7912-444d-834e-3484728b4a71"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="12" y="-2" width="1" height="22" uuid="587b1aff-0a42-4d8c-9c3f-58a681b5ba63"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="219" y="-2" width="1" height="22" uuid="d27bd144-a3cb-4f28-9321-9100e3f9cd8b"/>
+			</line>
+			<textField>
+				<reportElement x="223" y="0" width="115" height="20" uuid="08214ca1-74b5-4cba-9567-e38803c1ebd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_printrecord_UserName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="391" y="-2" width="1" height="22" uuid="1f529a3d-4a38-4d33-a1ab-efc6a936914c"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="76">
+			<staticText>
+				<reportElement x="10" y="36" width="81" height="20" uuid="8ce6d9ed-b741-41ca-9ce9-b4004eac83b4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="99" y="36" width="180" height="20" uuid="dc54f6db-2756-4f20-9347-27564b6a5200"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="034b6757-fa52-44e1-99f1-d8e5594e2d1c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="10" width="495" height="20" uuid="83cc8686-490a-4eb6-bafd-0978fd1d9df8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="53" width="80" height="20" uuid="6361abb6-43d8-4725-9a2f-e1fbd045e914"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="375" y="53" width="40" height="20" uuid="47df9f43-c0a7-4c57-b4bb-c654bb3c3873"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

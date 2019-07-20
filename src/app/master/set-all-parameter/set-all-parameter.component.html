@@ -1,0 +1,229 @@
+<ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}">
+        </ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'> SET ALL PARAMETER</span>
+          </div>
+        </div>
+        <Br>
+        <form [formGroup]="setAllParametersForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                          <label >
+                              Time Out Period :
+                            </label>
+                            <div class="input-group" >
+                              <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                                maxlength="1" formControlName="tbl_config_TimeoutPeriod">
+                              <span class="custom-button">
+                                <div class="text">Minutes</div>
+                              </span>
+                            </div>
+                            <div *ngIf="!tbl_config_TimeoutPeriod.valid && tbl_config_TimeoutPeriod.touched"
+                              style="color:red;margin-top:3px;font-weight: bold;">
+                              {{tbl_config_TimeoutPeriod?.errors['required']}}
+                            </div>
+                            <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Login Failure Limit :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="1" formControlName="tbl_config_LoginAttempts">
+                          <span class="custom-button">
+                            <div class="text" style="font-size: 15px;
+                            margin-top: 8px;">Attempts
+                            </div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_LoginAttempts.valid && tbl_config_LoginAttempts.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_LoginAttempts?.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Lock Period :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="2" formControlName="tbl_config_DisabledTime">
+                          <span class="custom-button">
+                            <div class="text">Seconds</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_DisabledTime.valid && tbl_config_DisabledTime.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_DisabledTime?.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Auto Enable Chances :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="1" formControlName="tbl_config_AutoEnableChances">
+                          <span class="custom-button">
+                            <div class="text">Times</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_AutoEnableChances.valid && tbl_config_AutoEnableChances.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_AutoEnableChances?.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Non Login Period :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="2" formControlName="tbl_config_AutoDisablePeriod">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div>
+
+
+                        <!--
+                        <label>
+                          Calibration Reminder :
+                        </label>
+                        <div class="input-group">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="3" formControlName="tbl_config_calibrationReminder">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div> -->
+                        <div *ngIf="!tbl_config_calibrationReminder.valid && tbl_config_calibrationReminder.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_calibrationReminder?.errors['required']}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label >
+                          Archive Period :
+                        </label>
+                        <div class="input-group" >
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="3" formControlName="tbl_config_ArchivePeriod">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_ArchivePeriod.valid && tbl_config_ArchivePeriod.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_ArchivePeriod?.errors['required']}}
+                        </div>
+                        <div *ngIf="!tbl_config_AutoDisablePeriod.valid && tbl_config_AutoDisablePeriod.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_AutoDisablePeriod?.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Password Aging Period :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="2" formControlName="tbl_config_PasswordExpPeriod">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_PasswordExpPeriod.valid && tbl_config_PasswordExpPeriod.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_PasswordExpPeriod?.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Password Aging Reminder :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="1" formControlName="tbl_config_ReminderPassword">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_ReminderPassword.valid && tbl_config_ReminderPassword.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_ReminderPassword.errors['required']}}
+                        </div>
+                        <br>
+                        <label *ngIf="bln_isLdap==0">
+                          Password History Count :
+                        </label>
+                        <div class="input-group" *ngIf="bln_isLdap==0">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="1" formControlName="tbl_config_PwdHistoryCount">
+                          <span class="custom-button">
+                            <div class="text">Times</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_PwdHistoryCount.valid && tbl_config_PwdHistoryCount.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_PwdHistoryCount?.errors['required']}}
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                    <!-- <div class="row">
+                      <div class="col-md-6">
+                        <label>
+                          Periodic Caliberation Balance :
+                        </label>
+                        <div class="input-group">
+                          <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                            maxlength="1" formControlName="tbl_config_PeriodicCalibDays">
+                          <span class="custom-button">
+                            <div class="text">Days</div>
+                          </span>
+                        </div>
+                        <div *ngIf="!tbl_config_PeriodicCalibDays.valid && tbl_config_PeriodicCalibDays.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                          {{tbl_config_PeriodicCalibDays?.errors['required']}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <label>
+                            Periodic Caliberation Vernier :
+                          </label>
+                          <div class="input-group">
+                            <input type="text" (keypress)="checkValidation($event)" pattern="\d*" class="form-control"
+                              maxlength="1" formControlName="tbl_PeriodicCalbVer">
+                            <span class="custom-button">
+                              <div class="text">Days</div>
+                            </span>
+                          </div>
+                          <div *ngIf="!tbl_PeriodicCalbVer.valid && tbl_PeriodicCalbVer.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                            {{tbl_PeriodicCalbVer?.errors['required']}}
+                          </div>
+                        </div>
+
+                    </div> -->
+                    <Br>
+                    <div class="text-center">
+                      <button type="submit" [disabled]="!setAllParametersForm.valid"
+                        [ngClass]="{'disabledBtn' : !setAllParametersForm.valid}" class="btn btn-primary">Save
+                        Changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

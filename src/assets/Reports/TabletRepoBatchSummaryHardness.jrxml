@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TabletRepoBatchSummaryHardness" language="groovy" pageWidth="650" pageHeight="842" whenNoDataType="BlankPage" columnWidth="600" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="384"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="TabletBatchSummaryDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_master_temp_hdlb.`SerNo` AS tbl_batchsummary_master_temp_hdlb_SerNo,
+     tbl_batchsummary_master_temp_hdlb.`RepSerNo` AS tbl_batchsummary_master_temp_hdlb_RepSerNo,
+     tbl_batchsummary_master_temp_hdlb.`BFGCode` AS tbl_batchsummary_master_temp_hdlb_BFGCode,
+     tbl_batchsummary_master_temp_hdlb.`ProductName` AS tbl_batchsummary_master_temp_hdlb_ProductName,
+     tbl_batchsummary_master_temp_hdlb.`PVersion` AS tbl_batchsummary_master_temp_hdlb_PVersion,
+     tbl_batchsummary_master_temp_hdlb.`Version` AS tbl_batchsummary_master_temp_hdlb_Version,
+     tbl_batchsummary_master_temp_hdlb.`PrdType` AS tbl_batchsummary_master_temp_hdlb_PrdType,
+     tbl_batchsummary_master_temp_hdlb.`CubType` AS tbl_batchsummary_master_temp_hdlb_CubType,
+     tbl_batchsummary_master_temp_hdlb.`BatchNo` AS tbl_batchsummary_master_temp_hdlb_BatchNo,
+     tbl_batchsummary_master_temp_hdlb.`Stage` AS tbl_batchsummary_master_temp_hdlb_Stage,
+     tbl_batchsummary_master_temp_hdlb.`Dept` AS tbl_batchsummary_master_temp_hdlb_Dept,
+     tbl_batchsummary_master_temp_hdlb.`NomHard` AS tbl_batchsummary_master_temp_hdlb_NomHard,
+     tbl_batchsummary_master_temp_hdlb.`LwrHard` AS tbl_batchsummary_master_temp_hdlb_LwrHard,
+     tbl_batchsummary_master_temp_hdlb.`UppHard` AS tbl_batchsummary_master_temp_hdlb_UppHard,
+     tbl_batchsummary_master_temp_hdlb.`UnitHard` AS tbl_batchsummary_master_temp_hdlb_UnitHard,
+     tbl_batchsummary_master_temp_hdlb.`NomThick` AS tbl_batchsummary_master_temp_hdlb_NomThick,
+     tbl_batchsummary_master_temp_hdlb.`LwrThick` AS tbl_batchsummary_master_temp_hdlb_LwrThick,
+     tbl_batchsummary_master_temp_hdlb.`UppThick` AS tbl_batchsummary_master_temp_hdlb_UppThick,
+     tbl_batchsummary_master_temp_hdlb.`NomDLB` AS tbl_batchsummary_master_temp_hdlb_NomDLB,
+     tbl_batchsummary_master_temp_hdlb.`LwrDLB` AS tbl_batchsummary_master_temp_hdlb_LwrDLB,
+     tbl_batchsummary_master_temp_hdlb.`UppDLB` AS tbl_batchsummary_master_temp_hdlb_UppDLB,
+     tbl_batchsummary_master_temp_hdlb.`BatchCompleted` AS tbl_batchsummary_master_temp_hdlb_BatchCompleted,
+     tbl_batchsummary_master_temp_hdlb.`IsArchived` AS tbl_batchsummary_master_temp_hdlb_IsArchived,
+     tbl_batchsummary_master_temp_hdlb.`HMIID` AS tbl_batchsummary_master_temp_hdlb_HMIID,
+     tbl_batchsummary_detail_temp_hdlb.`SerNo` AS tbl_batchsummary_detail_temp_hdlb_SerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RepSerNo` AS tbl_batchsummary_detail_temp_hdlb_RepSerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RecSeqNo` AS tbl_batchsummary_detail_temp_hdlb_RecSeqNo,
+     tbl_batchsummary_detail_temp_hdlb.`Date` AS tbl_batchsummary_detail_temp_hdlb_Date,
+     tbl_batchsummary_detail_temp_hdlb.`Time` AS tbl_batchsummary_detail_temp_hdlb_Time,
+     tbl_batchsummary_detail_temp_hdlb.`InstrumentID` AS tbl_batchsummary_detail_temp_hdlb_InstrumentID,
+     tbl_batchsummary_detail_temp_hdlb.`Side` AS tbl_batchsummary_detail_temp_hdlb_Side,
+     tbl_batchsummary_detail_temp_hdlb.`MinHard` AS tbl_batchsummary_detail_temp_hdlb_MinHard,
+     tbl_batchsummary_detail_temp_hdlb.`MaxHard` AS tbl_batchsummary_detail_temp_hdlb_MaxHard,
+     tbl_batchsummary_detail_temp_hdlb.`AvgHard` AS tbl_batchsummary_detail_temp_hdlb_AvgHard,
+     tbl_batchsummary_detail_temp_hdlb.`MinThick` AS tbl_batchsummary_detail_temp_hdlb_MinThick,
+     tbl_batchsummary_detail_temp_hdlb.`MaxThick` AS tbl_batchsummary_detail_temp_hdlb_MaxThick,
+     tbl_batchsummary_detail_temp_hdlb.`AvgThick` AS tbl_batchsummary_detail_temp_hdlb_AvgThick,
+     tbl_batchsummary_detail_temp_hdlb.`MinDLB` AS tbl_batchsummary_detail_temp_hdlb_MinDLB,
+     tbl_batchsummary_detail_temp_hdlb.`MaxDLB` AS tbl_batchsummary_detail_temp_hdlb_MaxDLB,
+     tbl_batchsummary_detail_temp_hdlb.`AvgDLB` AS tbl_batchsummary_detail_temp_hdlb_AvgDLB,
+     tbl_batchsummary_detail_temp_hdlb.`TestResult` AS tbl_batchsummary_detail_temp_hdlb_TestResult,
+     tbl_batchsummary_detail_temp_hdlb.`UserID` AS tbl_batchsummary_detail_temp_hdlb_UserID,
+     tbl_batchsummary_detail_temp_hdlb.`UserName` AS tbl_batchsummary_detail_temp_hdlb_UserName,
+     tbl_batchsummary_detail_temp_hdlb.`HMIID` AS tbl_batchsummary_detail_temp_hdlb_HMIID,
+     tbl_batchsummary_master_temp_hdlb.`DLBParamName` AS tbl_batchsummary_master_temp_hdlb_DLBParamName,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_master_temp_hdlb` tbl_batchsummary_master_temp_hdlb,
+     `tbl_batchsummary_detail_temp_hdlb` tbl_batchsummary_detail_temp_hdlb,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp_hdlb.`HMIID` = $P{HmiId}
+     and tbl_batchsummary_detail_temp_hdlb.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_SerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_BFGCode" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_ProductName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_PVersion" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_Version" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_PrdType" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_CubType" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_BatchNo" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_Stage" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_Dept" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_NomHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_LwrHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_UppHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_UnitHard" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_NomThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_LwrThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_UppThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_NomDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_LwrDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_UppDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_BatchCompleted" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_IsArchived" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_SerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_RecSeqNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_Date" class="java.sql.Date"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_Time" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_InstrumentID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_Side" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MinHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MaxHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_AvgHard" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MinThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MaxThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_AvgThick" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MinDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_MaxDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_AvgDLB" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_TestResult" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_UserID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_UserName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_hdlb_HMIID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_hdlb_DLBParamName" class="java.lang.String"/>
+		<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+		<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_master_temp_hdlb.`SerNo` AS tbl_batchsummary_master_temp_hdlb_SerNo,
+     tbl_batchsummary_master_temp_hdlb.`RepSerNo` AS tbl_batchsummary_master_temp_hdlb_RepSerNo,
+     tbl_batchsummary_master_temp_hdlb.`BFGCode` AS tbl_batchsummary_master_temp_hdlb_BFGCode,
+     tbl_batchsummary_master_temp_hdlb.`ProductName` AS tbl_batchsummary_master_temp_hdlb_ProductName,
+     tbl_batchsummary_master_temp_hdlb.`PVersion` AS tbl_batchsummary_master_temp_hdlb_PVersion,
+     tbl_batchsummary_master_temp_hdlb.`Version` AS tbl_batchsummary_master_temp_hdlb_Version,
+     tbl_batchsummary_master_temp_hdlb.`PrdType` AS tbl_batchsummary_master_temp_hdlb_PrdType,
+     tbl_batchsummary_master_temp_hdlb.`CubType` AS tbl_batchsummary_master_temp_hdlb_CubType,
+     tbl_batchsummary_master_temp_hdlb.`BatchNo` AS tbl_batchsummary_master_temp_hdlb_BatchNo,
+     tbl_batchsummary_master_temp_hdlb.`Stage` AS tbl_batchsummary_master_temp_hdlb_Stage,
+     tbl_batchsummary_master_temp_hdlb.`Dept` AS tbl_batchsummary_master_temp_hdlb_Dept,
+     tbl_batchsummary_master_temp_hdlb.`NomHard` AS tbl_batchsummary_master_temp_hdlb_NomHard,
+     tbl_batchsummary_master_temp_hdlb.`LwrHard` AS tbl_batchsummary_master_temp_hdlb_LwrHard,
+     tbl_batchsummary_master_temp_hdlb.`UppHard` AS tbl_batchsummary_master_temp_hdlb_UppHard,
+     tbl_batchsummary_master_temp_hdlb.`UnitHard` AS tbl_batchsummary_master_temp_hdlb_UnitHard,
+     tbl_batchsummary_master_temp_hdlb.`NomThick` AS tbl_batchsummary_master_temp_hdlb_NomThick,
+     tbl_batchsummary_master_temp_hdlb.`LwrThick` AS tbl_batchsummary_master_temp_hdlb_LwrThick,
+     tbl_batchsummary_master_temp_hdlb.`UppThick` AS tbl_batchsummary_master_temp_hdlb_UppThick,
+     tbl_batchsummary_master_temp_hdlb.`NomDLB` AS tbl_batchsummary_master_temp_hdlb_NomDLB,
+     tbl_batchsummary_master_temp_hdlb.`LwrDLB` AS tbl_batchsummary_master_temp_hdlb_LwrDLB,
+     tbl_batchsummary_master_temp_hdlb.`UppDLB` AS tbl_batchsummary_master_temp_hdlb_UppDLB,
+     tbl_batchsummary_master_temp_hdlb.`BatchCompleted` AS tbl_batchsummary_master_temp_hdlb_BatchCompleted,
+     tbl_batchsummary_master_temp_hdlb.`IsArchived` AS tbl_batchsummary_master_temp_hdlb_IsArchived,
+     tbl_batchsummary_master_temp_hdlb.`HMIID` AS tbl_batchsummary_master_temp_hdlb_HMIID,
+     tbl_batchsummary_detail_temp_hdlb.`SerNo` AS tbl_batchsummary_detail_temp_hdlb_SerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RepSerNo` AS tbl_batchsummary_detail_temp_hdlb_RepSerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RecSeqNo` AS tbl_batchsummary_detail_temp_hdlb_RecSeqNo,
+     tbl_batchsummary_detail_temp_hdlb.`Date` AS tbl_batchsummary_detail_temp_hdlb_Date,
+     tbl_batchsummary_detail_temp_hdlb.`Time` AS tbl_batchsummary_detail_temp_hdlb_Time,
+     tbl_batchsummary_detail_temp_hdlb.`InstrumentID` AS tbl_batchsummary_detail_temp_hdlb_InstrumentID,
+     tbl_batchsummary_detail_temp_hdlb.`Side` AS tbl_batchsummary_detail_temp_hdlb_Side,
+     tbl_batchsummary_detail_temp_hdlb.`MinHard` AS tbl_batchsummary_detail_temp_hdlb_MinHard,
+     tbl_batchsummary_detail_temp_hdlb.`MaxHard` AS tbl_batchsummary_detail_temp_hdlb_MaxHard,
+     tbl_batchsummary_detail_temp_hdlb.`AvgHard` AS tbl_batchsummary_detail_temp_hdlb_AvgHard,
+     tbl_batchsummary_detail_temp_hdlb.`MinThick` AS tbl_batchsummary_detail_temp_hdlb_MinThick,
+     tbl_batchsummary_detail_temp_hdlb.`MaxThick` AS tbl_batchsummary_detail_temp_hdlb_MaxThick,
+     tbl_batchsummary_detail_temp_hdlb.`AvgThick` AS tbl_batchsummary_detail_temp_hdlb_AvgThick,
+     tbl_batchsummary_detail_temp_hdlb.`MinDLB` AS tbl_batchsummary_detail_temp_hdlb_MinDLB,
+     tbl_batchsummary_detail_temp_hdlb.`MaxDLB` AS tbl_batchsummary_detail_temp_hdlb_MaxDLB,
+     tbl_batchsummary_detail_temp_hdlb.`AvgDLB` AS tbl_batchsummary_detail_temp_hdlb_AvgDLB,
+     tbl_batchsummary_detail_temp_hdlb.`TestResult` AS tbl_batchsummary_detail_temp_hdlb_TestResult,
+     tbl_batchsummary_detail_temp_hdlb.`UserID` AS tbl_batchsummary_detail_temp_hdlb_UserID,
+     tbl_batchsummary_detail_temp_hdlb.`UserName` AS tbl_batchsummary_detail_temp_hdlb_UserName,
+     tbl_batchsummary_detail_temp_hdlb.`HMIID` AS tbl_batchsummary_detail_temp_hdlb_HMIID,
+     tbl_batchsummary_master_temp_hdlb.`DLBParamName` AS tbl_batchsummary_master_temp_hdlb_DLBParamName,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_master_temp_hdlb` tbl_batchsummary_master_temp_hdlb,
+     `tbl_batchsummary_detail_temp_hdlb` tbl_batchsummary_detail_temp_hdlb,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp_hdlb.`HMIID` = $P{HmiId}
+     and tbl_batchsummary_detail_temp_hdlb.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_ProductName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_PVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_PrdType" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Stage" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Dept" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UnitHard" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BatchCompleted" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_IsArchived" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Date" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Time" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_InstrumentID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_TestResult" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_HMIID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_DLBParamName" class="java.lang.String"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MinHard_1" class="java.lang.Float" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MinHard}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MaxHard_1" class="java.lang.Float" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MaxHard}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_AvgHard_1" class="java.lang.Float" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_AvgHard}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MaxHard_2" class="java.lang.Float" resetType="Column" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MaxHard}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MinThick_1" class="java.lang.Float" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MinThick}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MaxThick_1" class="java.lang.Float" resetType="Column" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MaxThick}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_AvgThick_1" class="java.lang.Float" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_AvgThick}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MinDLB_1" class="java.lang.Float" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MinDLB}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_MaxDLB_1" class="java.lang.Float" resetType="Column" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MaxDLB}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_hdlb_AvgDLB_1" class="java.lang.Float" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_AvgDLB}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="792" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{UserId} == ""]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="4" width="590" height="164" forecolor="#E2E2E2" uuid="b189cffa-5514-4c73-abac-6262b2072c1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font size="36" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[
+Preview						    Preview
+Only						       Only]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="321">
+			<staticText>
+				<reportElement x="454" y="5" width="115" height="18" uuid="36d058f9-707a-456d-b4af-a403c0564e6c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1033-CIPLA/PTG-II/PHARMA]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="174" y="16" width="251" height="20" uuid="92dbe91b-cf54-4ce4-8829-e31b06b8f522"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annexure I/t"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="32" y="32" width="533" height="20" uuid="37382c76-4649-455f-9321-0c9d6969ba69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BATCH REPORT OF HARDNESS & DIMENSION TEST"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="427" y="74" width="1" height="41" uuid="5cdb43f9-9985-4575-babb-5bc779913c42"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="152" y="56" width="391" height="17" uuid="e2d68a64-9cdf-46be-8bcf-9292d17422f0"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="76" width="132" height="18" uuid="84c53d9c-7ddf-4368-84e9-f256a4a98249"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_Dept}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="97" width="132" height="18" uuid="73455ceb-2191-4ad0-a85d-584721fa6a94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_Stage}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="75" width="108" height="18" uuid="aa42a2e1-41e2-43bc-b93c-09090ee4e5cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Batch No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="125" width="108" height="15" uuid="666163f0-5cc7-4deb-9cc6-b0bbbf121563"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard Limits"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="76" width="125" height="18" uuid="9cc2d980-7fe0-4bdc-8669-4f0aaf780952"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_BatchNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="95" width="587" height="1" uuid="bcaa104c-3168-4e63-a6e6-4e83e7e2c80d"/>
+			</line>
+			<line>
+				<reportElement x="287" y="74" width="1" height="41" uuid="f935c8fc-4f05-495a-af92-32593bdc2ee1"/>
+			</line>
+			<line>
+				<reportElement x="6" y="74" width="587" height="1" uuid="dbb324b2-416e-4382-91eb-59df419ed0dd"/>
+			</line>
+			<line>
+				<reportElement x="5" y="56" width="1" height="60" uuid="1e446ba6-554d-4e71-b626-f62ba2f1d0be"/>
+			</line>
+			<line>
+				<reportElement x="593" y="56" width="1" height="59" uuid="3cfe9b2f-a883-4ce2-972a-39252c01aa92"/>
+			</line>
+			<staticText>
+				<reportElement x="293" y="97" width="66" height="18" uuid="beb98d41-ff81-4397-afd0-0f21deb3631c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="77" width="66" height="18" uuid="fcda7c2d-8364-4145-b26e-6e4d4be72934"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="55" width="108" height="17" uuid="0618ed7e-b45c-4789-a8ed-4f54854756d1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Product Name ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="146" y="57" width="1" height="58" uuid="14e71be8-8577-4558-8717-6dc224827323"/>
+			</line>
+			<line>
+				<reportElement x="6" y="142" width="587" height="1" uuid="37e055fe-b631-4f21-b47d-feb9f1c6c165"/>
+			</line>
+			<line>
+				<reportElement x="6" y="115" width="588" height="1" uuid="fb159880-f585-45a5-9908-de92ebfc07e0"/>
+			</line>
+			<line>
+				<reportElement x="6" y="56" width="587" height="1" uuid="5a6300a6-2301-4df1-8463-08de1075e8c0"/>
+			</line>
+			<textField>
+				<reportElement x="152" y="97" width="125" height="18" uuid="6fb2e033-5a8a-49ef-8abd-3442036e7013"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_BFGCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="124" width="586" height="1" uuid="3e561b98-4b79-44fe-bf1a-7868069710d5"/>
+			</line>
+			<line>
+				<reportElement x="5" y="124" width="1" height="87" uuid="16153eb7-702d-4794-8d51-8bd0e9469ddb"/>
+			</line>
+			<line>
+				<reportElement x="224" y="142" width="1" height="69" uuid="2662a76f-072d-4bb2-8c78-0dc7690a2c56"/>
+			</line>
+			<line>
+				<reportElement x="397" y="142" width="1" height="70" uuid="9ae7cd88-60e8-47b9-b6a1-af5f2ab0ea58"/>
+			</line>
+			<line>
+				<reportElement x="592" y="124" width="1" height="87" uuid="f9f57161-96fa-4872-9f0d-1529eed20112"/>
+			</line>
+			<textField>
+				<reportElement x="228" y="143" width="169" height="15" uuid="895098da-c942-4fd2-a962-e47452e55bdd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thickness (mm)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="143" width="164" height="15" uuid="d5d17281-342f-49ab-92e3-3bf62e7c0108"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Diameter")?
+"Diameter (mm)"
+:
+$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Length")?
+"Length (mm)"
+:
+"Breadth (mm)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="159" width="587" height="1" uuid="76907dc4-b80f-4a81-8482-d1ab207264a0"/>
+			</line>
+			<line>
+				<reportElement x="5" y="211" width="588" height="1" uuid="3865c369-8bbe-467a-96f1-8d70913114fa"/>
+			</line>
+			<line>
+				<reportElement x="127" y="159" width="1" height="52" uuid="fbc5ee65-f6d6-41d3-872f-135d54ffc681"/>
+			</line>
+			<line>
+				<reportElement x="314" y="160" width="1" height="51" uuid="6ccfe8d0-9f1f-4bfd-b5c0-4989c545ad53"/>
+			</line>
+			<line>
+				<reportElement x="481" y="159" width="1" height="52" uuid="51c426dd-d2d7-472f-8e05-780ae6b833e8"/>
+			</line>
+			<textField>
+				<reportElement x="30" y="160" width="97" height="15" uuid="96a3cb43-9e1a-4a70-bb6a-075f957e1465"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lower ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="176" width="97" height="15" uuid="eeca4c5f-e789-4c0e-8811-4b61935b32d5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="192" width="97" height="15" uuid="cedb0a86-981b-4850-80a5-2908e627f269"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Upper ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="177" width="83" height="15" uuid="93514f50-f9ac-4a60-b6b1-a4df995c213c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="161" width="83" height="15" uuid="85f61957-6dde-4d5d-b5c4-a6746b54209e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lower ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="193" width="83" height="15" uuid="3ece7e36-1ed7-4376-bca1-0091fcf96434"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Upper ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="178" width="81" height="15" uuid="cecafb39-4efd-4f88-ab82-6cf16bed519b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="162" width="81" height="15" uuid="51f2391c-b4f9-4429-96ce-97c972167535"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lower ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="194" width="81" height="15" uuid="d3f648ce-7229-4007-934b-aa824eb5a8cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Upper ="]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="161" width="84" height="14" uuid="6a2ddab5-bdbe-411a-8373-a8cfd6b210fd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($F{tbl_batchsummary_master_temp_hdlb_LwrHard})
+:
+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_master_temp_hdlb_LwrHard})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="177" width="84" height="14" uuid="e4e4e8ab-83df-4147-9a99-f9efdc56ee28"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($F{tbl_batchsummary_master_temp_hdlb_NomHard})
+:
+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_master_temp_hdlb_NomHard})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="193" width="84" height="14" uuid="ecb63fd2-deff-4c22-a249-40d3a339012f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($F{tbl_batchsummary_master_temp_hdlb_UppHard})
+:
+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_master_temp_hdlb_UppHard})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="194" width="71" height="14" uuid="688c1323-99b6-4de8-8d81-43ad2f12c3e9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_UppThick})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="178" width="71" height="14" uuid="baa6bdfc-5446-43d0-8e38-3e2f767ffb31"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_NomThick})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="162" width="71" height="14" uuid="fe8cfee3-08c9-4684-a12f-044c5b04ff0b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_LwrThick})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="194" width="82" height="14" uuid="fc66b2a0-f981-4e19-8370-eda27ecb701a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_UppDLB})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="178" width="82" height="14" uuid="678234d7-831a-4e81-a917-ca7130bb3259"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_NomDLB})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="162" width="82" height="14" uuid="8869a51a-eb9e-422c-ad3b-20070e1b11b4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_hdlb_LwrDLB})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="141" width="188" height="18" uuid="395e539c-21da-4fb0-b09e-456b8e2b7087"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Hardness(" + $F{tbl_batchsummary_master_temp_hdlb_UnitHard} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="98" width="122" height="15" uuid="ff41a16c-afb4-43b6-9eef-fa89f0903316"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_nomenclature_BFGCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="592" y="222" width="1" height="93" uuid="c669312b-c0c6-4c5a-9fdb-f92c5e8b5fb5"/>
+			</line>
+			<line>
+				<reportElement x="5" y="222" width="1" height="93" uuid="5be034a5-aefa-4247-ae9a-aaf58b26b5bc"/>
+			</line>
+			<line>
+				<reportElement x="6" y="238" width="586" height="1" uuid="4b36f3a2-7c38-4a15-a481-d599525ace7c"/>
+			</line>
+			<textField>
+				<reportElement x="14" y="240" width="121" height="15" uuid="09a79aa4-320a-40ee-acc0-c111858354b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Parameter"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="222" width="587" height="1" uuid="d5f029dd-6585-4c80-8c65-6c4a81b11461"/>
+			</line>
+			<staticText>
+				<reportElement x="193" y="222" width="232" height="14" uuid="f72a02df-2a90-458a-8808-99a3b1054663"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Batch Summary]]></text>
+			</staticText>
+			<line>
+				<reportElement x="307" y="238" width="1" height="77" uuid="c2601e40-91e0-4984-9bf8-787d7db3b3ea"/>
+			</line>
+			<line>
+				<reportElement x="178" y="239" width="1" height="76" uuid="5aeaba4f-ccf2-45a3-8716-a6480cccc847"/>
+			</line>
+			<line>
+				<reportElement x="6" y="278" width="586" height="1" uuid="e7530d67-05eb-47c9-8a6f-39f21996eb9d"/>
+			</line>
+			<line>
+				<reportElement x="6" y="259" width="586" height="1" uuid="64566b00-545c-4cb2-94f0-7715990b952d"/>
+			</line>
+			<textField>
+				<reportElement x="181" y="240" width="113" height="15" uuid="ad9bbd79-4e95-40b0-99cf-4411052d3d9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimum"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="239" width="120" height="15" uuid="42b2ea45-a053-47e1-a0db-3a1add93939e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Maximum"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="437" y="238" width="1" height="77" uuid="7d7bc81e-0372-4265-b6ce-a034fcb1f7b9"/>
+			</line>
+			<textField>
+				<reportElement x="441" y="240" width="126" height="15" uuid="fc4d261c-d880-4133-8ff0-a5a5896b3623"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Average"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="295" width="586" height="1" uuid="4081daa5-727b-4926-934b-056ec832c4ab"/>
+			</line>
+			<line>
+				<reportElement x="5" y="315" width="588" height="1" uuid="e7e1a1ae-e67a-44aa-8d44-796393436087"/>
+			</line>
+			<textField>
+				<reportElement x="14" y="278" width="121" height="15" uuid="4c3bc858-2216-4ca9-b8b6-19c6fd551405"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thickness(mm)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="259" width="159" height="18" uuid="3693b0ef-ba06-457a-aac0-e5ec01a81cbc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Hardness(" + $F{tbl_batchsummary_master_temp_hdlb_UnitHard} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="298" width="164" height="15" uuid="50f76b71-0230-406c-bed7-ae114dcb855d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Diameter")?
+"Diameter (mm)"
+:
+$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Length")?
+"Length (mm)"
+:
+"Breadth (mm)"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="188" y="262" width="100" height="15" uuid="0d849652-85cf-4de3-b5b8-bbe763db2a95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($V{tbl_batchsummary_detail_temp_hdlb_MinHard_1})
+:
+new DecimalFormat("#,###0.0").format($V{tbl_batchsummary_detail_temp_hdlb_MinHard_1})]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="457" y="262" width="100" height="15" uuid="96942e70-5304-4b91-8bc9-cbf0471649b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($V{tbl_batchsummary_detail_temp_hdlb_AvgHard_1})
+:
+new DecimalFormat("#,###0.0").format($V{tbl_batchsummary_detail_temp_hdlb_AvgHard_1})]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="320" y="262" width="100" height="15" uuid="cff44fe6-9aae-4ae3-8ce4-db258a939065"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($V{tbl_batchsummary_detail_temp_hdlb_MaxHard_2})
+:
+new DecimalFormat("#,###0.0").format($V{tbl_batchsummary_detail_temp_hdlb_MaxHard_2})]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="188" y="279" width="100" height="15" uuid="09bf1bd7-d66f-41f0-a12f-a187468214cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_MinThick_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="320" y="279" width="100" height="15" uuid="c3953c01-28e3-41fe-b276-58af24c81290"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_MaxThick_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="457" y="279" width="100" height="15" uuid="e4335ecc-051e-46ab-b050-1129e8d3de1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_AvgThick_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="188" y="298" width="100" height="15" uuid="f9b18b64-0212-4454-ba2d-078a4b6ddd17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_MinDLB_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="320" y="298" width="100" height="15" uuid="f665ce81-9933-459e-95a2-f36a396313c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_MaxDLB_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="###0.00">
+				<reportElement x="457" y="298" width="100" height="15" uuid="b8f524e9-587a-46de-b02a-a3c7fe26ad3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tbl_batchsummary_detail_temp_hdlb_AvgDLB_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="75">
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="28" width="180" height="20" uuid="2fb726a0-a133-4200-a86d-91b70c0f53e3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="297" y="51" width="40" height="20" uuid="6b46e2df-6a2d-4dac-9e80-6c17b8a3c3cf"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="28" width="81" height="20" uuid="ee3b431f-3b97-419e-a24d-a56b8c8cc3c4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="217" y="51" width="80" height="20" uuid="23d0f01f-e691-46df-a4dd-9ea76adfbf50"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="5" width="440" height="20" uuid="44af1496-f5de-4ab9-93c0-7ca000afd7ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="5" width="81" height="20" uuid="37b426a7-2e96-4528-b182-2198e4f3c6a2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="362" splitType="Stretch">
+			<line>
+				<reportElement positionType="Float" x="5" y="302" width="1" height="20" uuid="f4b6e464-87b6-4230-847d-69d15dcacd92"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="5" y="301" width="588" height="1" uuid="4346df74-b2ef-4107-b53d-093dbd960cbe"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="168" y="304" width="232" height="15" uuid="585f81dc-104e-48b0-afca-0c4c73eabf6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Detailed Report]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="592" y="302" width="1" height="20" uuid="5a893c73-9ae2-4fe5-98c9-ffdeeb70a0f6"/>
+			</line>
+			<componentElement>
+				<reportElement key="table" style="table" positionType="Float" x="6" y="321" width="588" height="40" uuid="518f5014-e324-49c7-ac85-870d600acb5e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TabletBatchSummaryDataset" uuid="bb931c84-e11d-4287-b6c3-0183f401fdc6">
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="HmiId">
+							<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="34" uuid="b4d90bd6-fa58-48eb-a7c3-ad25f2976d81">
+						<jr:columnHeader height="40" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="34" height="39" uuid="c747283e-7f2d-456e-a237-315fcf3e03a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="34" height="17" uuid="9f09a311-f952-4723-b4f8-78f40cea669b"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="45" uuid="cf2b9f61-9baa-4b10-97d4-2eeca59ddaa9">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="45" height="39" uuid="5546cc6d-6e08-4f17-88f3-55052e87bc9a"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField pattern="dd.MM.yyyy">
+								<reportElement x="0" y="0" width="45" height="17" uuid="15555206-fb85-45b8-bf1f-5fbe0f04490d"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_Date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="935bd164-7551-4ed2-9326-dbe5d72db7a1">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="41" height="39" uuid="6490acf3-82b9-4f85-8e13-1cb459bffe1b"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Time]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField pattern="HH:mm:ss">
+								<reportElement x="0" y="0" width="41" height="17" uuid="37e13173-dd13-4409-9f70-398dbd2bbdf0"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_Time}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="49" uuid="4e033185-85d8-456d-a976-b1b96de380d9">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="1" y="0" width="48" height="39" uuid="fe03c58e-3c56-4977-8006-15d794af1b0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Hardness
+Tester Code
+ No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="49" height="17" uuid="2b699bf3-59c6-43e3-b5c7-ab0f631f8dc1"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_InstrumentID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="552970d5-13da-4177-9e6c-5af406383856">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="39" uuid="3804a993-dbb1-4582-b9e1-870c23fa9847"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Side]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="17" uuid="88913526-47cb-40aa-92d1-6fc35b01a5ab"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_Side}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75" uuid="87271806-3669-415b-a60f-80367d9ed013">
+						<jr:columnHeader height="40" rowSpan="1">
+							<line>
+								<reportElement x="0" y="25" width="75" height="1" uuid="119aaa45-16c5-404b-a1fb-5ec1b9d0eaff"/>
+							</line>
+							<staticText>
+								<reportElement x="1" y="26" width="36" height="14" uuid="2d5f90cb-14c6-4ade-b1cb-521ebdfec681"/>
+								<box>
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Min]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="38" y="26" width="37" height="14" uuid="8a143150-29cc-4d00-b619-820d218f9991"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Max]]></text>
+							</staticText>
+							<textField>
+								<reportElement x="1" y="0" width="74" height="25" uuid="00f0bf89-6137-4bab-bf90-5ba2f926d621"/>
+								<box>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Hardness (" + $F{tbl_batchsummary_master_temp_hdlb_UnitHard} + ")"]]></textFieldExpression>
+							</textField>
+							<line>
+								<reportElement x="37" y="26" width="1" height="14" uuid="ce9170a5-9840-44d2-b344-55acb66ea4eb"/>
+							</line>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<line>
+								<reportElement x="37" y="0" width="1" height="17" uuid="4a3ae756-014c-4d0e-b8c0-bede15dd5759"/>
+							</line>
+							<textField>
+								<reportElement x="0" y="0" width="37" height="17" uuid="ec194203-8e57-40e2-8583-c2727421505b"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($F{tbl_batchsummary_detail_temp_hdlb_MinHard})
+:
+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_detail_temp_hdlb_MinHard})]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="38" y="0" width="37" height="17" uuid="ad653b2e-5e8e-4068-b77c-240591d868b0"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UnitHard}.equals( "N" )
+?
+new DecimalFormat("#,###0").format($F{tbl_batchsummary_detail_temp_hdlb_MaxHard})
+:
+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_detail_temp_hdlb_MaxHard})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="74" uuid="2fd3d05f-2787-4bcd-96d9-6eaf52fe70ad">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="74" height="25" uuid="b821558e-c9b3-492a-bb8f-4aa11cdff545"/>
+								<box>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Thickness
+(mm)]]></text>
+							</staticText>
+							<line>
+								<reportElement x="37" y="26" width="1" height="14" uuid="dd6b0384-aa31-4f74-b07d-e04c13207b4d"/>
+							</line>
+							<line>
+								<reportElement x="0" y="25" width="74" height="1" uuid="d5ad80a3-aa75-48f9-8596-fc3bc78b40bc"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="26" width="36" height="14" uuid="fca7a7c7-c7fe-4c62-9e50-1bfa15a97568"/>
+								<box>
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Min]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="37" y="26" width="37" height="14" uuid="4d5892d3-1952-4e61-b35c-72ae3404c2e4"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Max]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<line>
+								<reportElement x="36" y="0" width="1" height="17" uuid="c37df407-210a-447a-aef9-6b8e9e32654c"/>
+							</line>
+							<textField>
+								<reportElement x="0" y="0" width="36" height="17" uuid="ec278b9a-a183-44fc-8f9a-5ae822802ef7"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_detail_temp_hdlb_MinThick})]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="37" y="0" width="37" height="17" uuid="0b31d384-37eb-40f2-83f6-1af227b3c797"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_detail_temp_hdlb_MaxThick})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="af0de9f6-e030-40bb-b0f6-9208793194df">
+						<jr:columnHeader height="40" rowSpan="1">
+							<line>
+								<reportElement x="35" y="26" width="1" height="14" uuid="e07f6dee-3c71-41ba-aa0b-a63cc2dd9fb3"/>
+							</line>
+							<line>
+								<reportElement x="0" y="25" width="76" height="1" uuid="93f91fad-a41f-4f65-bcc8-5473d09f3b01"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="26" width="35" height="14" uuid="2e63f171-1937-466a-a14d-4836af1c85c1"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Min]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="36" y="26" width="40" height="14" uuid="1c80e7d3-606d-4fa2-bc42-b07e9ac05b13"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Max]]></text>
+							</staticText>
+							<textField>
+								<reportElement x="0" y="0" width="76" height="25" uuid="aea42b63-5b3c-4ba3-a868-66681d6c1bc4"/>
+								<box>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Diameter")?
+"Diameter (mm)"
+:
+$F{tbl_batchsummary_master_temp_hdlb_DLBParamName}.equals("Length")?
+"Length (mm)"
+:
+"Breadth (mm)"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<line>
+								<reportElement x="35" y="0" width="1" height="17" uuid="86c0bc01-53c2-4d85-8a35-faf6ff16b389"/>
+							</line>
+							<textField>
+								<reportElement x="0" y="0" width="35" height="17" uuid="80aa363c-4f1f-4a1e-a280-bc78d42d1ac2"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_detail_temp_hdlb_MinDLB})]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="36" y="0" width="40" height="17" uuid="0b0540a1-1cab-4f7b-ba09-5efaae246608"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_detail_temp_hdlb_MaxDLB})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="77" uuid="af4ae0f7-2cb2-478d-87c6-6c3751f485d3">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="77" height="39" uuid="041afa0c-0ef8-4d2a-bab7-f0bec3e91dbc"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test result]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="77" height="17" uuid="c90e423a-1a01-4f43-88ff-ecc407b0aa6f"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_TestResult}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75" uuid="271e664f-971e-4860-9a1a-30181fa503de">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="40" uuid="2cb5f53d-3222-417d-9c49-28637c2df47f"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Performed by]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="75" height="17" uuid="a95df7d4-51a8-434e-a57a-df8b7849d8ba"/>
+								<box>
+									<bottomPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_UserName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<subreport>
+				<reportElement positionType="Float" x="7" y="51" width="587" height="42" uuid="d80d8539-1a92-4cc6-a11e-dc582cf0035c"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryHardnessRight_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="8" y="2" width="586" height="42" uuid="ea45eba7-7857-44c3-a2cf-1ab518ba0edb"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryHardnessLeft_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="7" y="149" width="587" height="42" uuid="e0247f4b-2f70-4437-9d7a-7773056b9025"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryThicknessRight_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="7" y="100" width="587" height="42" uuid="74f9796b-9e88-4988-a2e6-d2f0be88429e"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryThicknessLeft_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="6" y="245" width="588" height="42" uuid="4fdbc90d-3bd5-42e5-84dd-85bd1c3e35cd"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryDiameterRight_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="6" y="197" width="588" height="42" uuid="e3566cad-e9db-4a2f-afb9-b0cb5b76498e"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryDiameterLeft_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

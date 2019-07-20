@@ -1,0 +1,233 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>ADD INSTRUMENT</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frm_addEquipment" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Instrument Type :</label>
+              <div class="form-group" style="display:block">
+                <ngx-select
+                [items]="sarr_getEquipmentType"
+                placeholder="Select"
+                [formControl]="str_equipmentType"
+                (select)="getEquipmentModel($event)">
+                </ngx-select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label>Instrument Code No. :</label>
+              <div class="form-group">
+                <input class="form-control"
+                type="text"
+                formControlName="str_equipmentID"
+                maxlength="25"
+                (keyup)="onkey_checkDataExistForID($event)">
+
+                <span *ngIf="bln_IDexist == true" class="text-danger" style="color:red;font-weight: bold;">
+                  Instrument Code No. already exist!
+                </span>
+
+                <div *ngIf="!str_eqpID.valid && str_eqpID.touched " class="form__error" style="color:red;margin-top:3px;font-weight: bold;">
+                  {{str_eqpID?.errors['required']}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Make :</label>
+              <div class="form-group" style="display:block" *ngIf="bln_flgShowHideControl_Make == true">
+                <ngx-select
+                [items]="sarr_getMake"
+                placeholder="Select"
+                [formControl]="str_make">
+                </ngx-select>
+              </div>
+
+              <div class="form-group" *ngIf="bln_flgShowHideControl_Make == false">
+                <input
+                class="form-control"
+                type="text"
+                formControlName="str_make"
+                maxlength="25">
+                <div *ngIf="!str_make.valid && str_make.touched" class="form__error" style="color:red;margin-top:3px;font-weight: bold;">{{str_make?.errors['required']}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label>Model :</label>
+              <div class="form-group">
+                <input
+                class="form-control"
+                type="text"
+                formControlName="str_model"
+                maxlength="25">
+                <div *ngIf="!str_model.valid && str_model.touched" class="form__error" style="color:red;margin-top:3px;font-weight: bold;">{{str_model?.errors['required']}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Serial No. :</label>
+              <div class="form-group">
+                <input
+                class="form-control"
+                type="text"
+                formControlName="str_serialNo"
+                maxlength="25">
+                <div *ngIf="!str_Serial.valid && str_Serial.touched" class="form__error" style="color:red;margin-top:3px;font-weight: bold;">{{str_Serial?.errors['required']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6"  *ngIf="bln_isCalibration && (bln_showCalibrationForHD == 1 || bln_showCalibrationForMA == 1)">
+                <label>Calibration Date [MM/DD/YYYY]:</label>
+                <mat-form-field>
+                  <input
+                  [min]="minDate"
+                  matInput md-min-date="minDate"
+                  [readonly]="true"
+                  [matDatepicker]="picker1"
+                  formControlName = "dt_calibrationDT"
+                  style="font-size:18px">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+          </div>
+
+          <br>
+          <div class="text-center">
+            <button
+            *ngIf="(bln_isCalibration == true) && (bln_showCalibrationForHD == 1 || bln_showCalibrationForMA == 1)"
+            type="button"
+            class="btn btn-outline-secondary"
+            [disabled]="!frm_addEquipment.valid || bln_IDexist == true || dt_calibrationDT.pristine"
+            [ngClass]="{'disabledBtn' : !frm_addEquipment.valid || bln_IDexist == true || dt_calibrationDT.pristine}"
+            (click)="open2(content)">Set Calibration
+            </button>
+            &nbsp;&nbsp;&nbsp;
+
+            <button type="submit" class="btn btn-primary"
+            [disabled]="!frm_addEquipment.valid || bln_IDexist == true
+            || (bln_isCalibration == true && int_weightLength == 0 && (bln_showCalibrationForHD == 1 || bln_showCalibrationForMA == 1))"
+            [ngClass]="{'disabledBtn' : !frm_addEquipment.valid || bln_IDexist == true
+            || (bln_isCalibration == true && int_weightLength == 0 && (bln_showCalibrationForHD == 1 || bln_showCalibrationForMA == 1))}">Save
+              Changes</button>&nbsp;&nbsp;&nbsp;
+
+            <button type="button" class="btn btn-default waves-effect" (click)="onReset()">Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Calibration Table for hardness and Moisture analyzer -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" style="color:blue;">Add Calibration Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>No. Of Weight Added : {{int_weightLength}}</h6>
+    <hr>
+    <div class="row" style="text-align: center">
+      <div class="col-md-2">
+        <label>Std Weight </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="StdWeight"
+        maxlength="8"
+        (keypress)="onlyNumbersWithDecimal($event);">
+      </div>
+      <div class="col-md-2">
+        <label>Neg Tol </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="NegTol"
+        maxlength="8"
+        (keypress)="onlyNumbersWithDecimal($event);">
+      </div>
+      <div class="col-md-2">
+        <label>Pos Tol </label>
+        <input
+        type="text"
+        class="form-control"
+        maxlength="8"
+        [(ngModel)]="PosTol"
+        (keypress)="onlyNumbersWithDecimal($event);">
+      </div>
+      <div class="col-md-3">
+        <label>Calibration Type </label>
+        <input
+        style="text-align: center"
+        type="text"
+        class="form-control"
+        readonly value="Periodic"
+        [(ngModel)]="calibrationType">
+      </div>
+      <div class="col-md-3">
+        <label>Action</label>
+        <button
+        (click)="addWeights()"
+        style="float:right;height:38px"
+        class="btn btn-outline-secondary btn-block" type="button"><i class="fa fa-plus-circle"></i>
+          Add Weight </button>
+      </div>
+    </div>
+    <br>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <td>Std Weight </td>
+          <td>Neg Tol </td>
+          <td>Pos Tol </td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let weight of sarr_selectedWeights">
+          <td>{{weight.StdWeight}}</td>
+          <td>{{weight.NegTol}}</td>
+          <td>{{weight.PosTol}}</td>
+          <td>
+            <button
+            (click)="removeSelectedWeights(weight)"
+            style="float:right;height:33px"
+            class="btn btn-danger btn-sm btn-block"
+            type="button"><i class="fa fa-times"></i>
+            REMOVE </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="text-center">
+      <button
+      (click)="saveWeightsData()"
+      *ngIf="bln_ifLenghtMore"
+      type="button"
+      class="btn btn-primary waves-effect"> Save Changes
+      </button>
+    </div>
+  </div>
+</ng-template>

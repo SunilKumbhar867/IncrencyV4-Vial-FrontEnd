@@ -1,0 +1,75 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Audit Trail for Area Setting</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="areaSetting" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>
+                          Select Area:
+                        </label>
+                        <br>
+                        <ngx-select formControlName="selectedArea" [items]="sarr_areaName" placeholder="Select"></ngx-select>
+                      </div>
+                      <div class="col-md-4">
+                        <label>
+                          From :
+                        </label>
+                        <mat-form-field>
+                          <input matInput md-min-date="minDate" formControlName="fromDate" [matDatepicker]="picker1"
+                            style="font-size:18px" placeholder="Select Date [MM/DD/YYYY]" readonly [max]="todayDate" (dateInput)="addEvent()">
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <label>
+                          To :
+                        </label>
+                        <mat-form-field>
+                          <input matInput md-min-date="minDate" formControlName="toDate" [matDatepicker]="picker2"
+                            style="font-size:18px" placeholder="Select Date [MM/DD/YYYY]" [min]="fromDate" [max]="todayDate" (dateInput)="addEvent()"
+                            readonly>
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                      <button type="submit" [disabled]="!areaSetting.valid" [ngClass]="{'disabledBtn' : !areaSetting.valid}"
+                        class="btn btn-primary" [ngx-scroll-to]="'#destination'">View
+                        Report</button>&nbsp;&nbsp;&nbsp;
+                      <button type="button" class="btn btn-default waves-effect" (click)="reset()">Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card" *ngIf="bln_show" id="destination">
+      <div class="card-body">
+        <object [data]="Url" type="application/pdf" width="100%" height="1000px"></object>
+        <br><br>
+        <div class="text-center">
+          <button class="btn btn-primary" (click)="open()">Print Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

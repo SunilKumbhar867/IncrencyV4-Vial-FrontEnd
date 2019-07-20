@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BalancePeriodicCalibForPTGII" language="groovy" pageWidth="802" pageHeight="554" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="754" leftMargin="24" rightMargin="24" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="d3798b30-3f77-4233-98f0-3000e420d0cd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="JDBC Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Balance Periodic Calib" uuid="3ba9c3e3-f63b-45a8-b6b2-97e162557b8e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="JDBC Data Adapter "/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="SelectedValue" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ReqMenu" class="java.lang.String"/>
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\mds - Test\\Reports\\jrxml_jasper\\"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="CalibStatus" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_calibration_periodic_master.`Periodic_RepNo` AS tbl_calibration_periodic_master_Periodic_RepNo,
+     tbl_calibration_periodic_master.`Periodic_CalbDate` AS tbl_calibration_periodic_master_Periodic_CalbDate,
+     tbl_calibration_periodic_master.`Periodic_CalbTime` AS tbl_calibration_periodic_master_Periodic_CalbTime,
+     tbl_calibration_periodic_master.`Periodic_BalID` AS tbl_calibration_periodic_master_Periodic_BalID,
+     tbl_calibration_periodic_master.`Periodic_BalSrNo` AS tbl_calibration_periodic_master_Periodic_BalSrNo,
+     tbl_calibration_periodic_master.`Periodic_Make` AS tbl_calibration_periodic_master_Periodic_Make,
+     tbl_calibration_periodic_master.`Periodic_Model` AS tbl_calibration_periodic_master_Periodic_Model,
+     tbl_calibration_periodic_master.`Periodic_Unit` AS tbl_calibration_periodic_master_Periodic_Unit,
+     tbl_calibration_periodic_master.`Periodic_Dept` AS tbl_calibration_periodic_master_Periodic_Dept,
+     tbl_calibration_periodic_master.`Periodic_LeastCnt` AS tbl_calibration_periodic_master_Periodic_LeastCnt,
+     tbl_calibration_periodic_master.`Periodic_MaxCap` AS tbl_calibration_periodic_master_Periodic_MaxCap,
+     tbl_calibration_periodic_master.`Periodic_MinCap` AS tbl_calibration_periodic_master_Periodic_MinCap,
+     tbl_calibration_periodic_master.`Periodic_ZeroError` AS tbl_calibration_periodic_master_Periodic_ZeroError,
+     tbl_calibration_periodic_master.`Periodic_SpritLevel` AS tbl_calibration_periodic_master_Periodic_SpritLevel,
+     tbl_calibration_periodic_master.`Periodic_GerneralCare` AS tbl_calibration_periodic_master_Periodic_GerneralCare,
+     tbl_calibration_periodic_master.`Periodic_UserID` AS tbl_calibration_periodic_master_Periodic_UserID,
+     tbl_calibration_periodic_master.`Periodic_UserName` AS tbl_calibration_periodic_master_Periodic_UserName,
+     tbl_calibration_periodic_master.`Periodic_VerifyID` AS tbl_calibration_periodic_master_Periodic_VerifyID,
+     tbl_calibration_periodic_master.`Periodic_VerifyName` AS tbl_calibration_periodic_master_Periodic_VerifyName,
+     tbl_calibration_periodic_master.`Periodic_PrintNo` AS tbl_calibration_periodic_master_Periodic_PrintNo,
+     tbl_calibration_periodic_master.`Periodic_IsRecalib` AS tbl_calibration_periodic_master_Periodic_IsRecalib,
+     tbl_calibration_periodic_master.`Periodic_Location` AS tbl_calibration_periodic_master_Periodic_Location,
+     tbl_calibration_periodic_master.`Periodic_CubicalNo` AS tbl_calibration_periodic_master_Periodic_CubicalNo,
+     tbl_calibration_periodic_master.`Periodic_Bal_MaxoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange,
+     tbl_calibration_periodic_master.`Periodic_Bal_MinoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MinoptRange,
+     tbl_calibration_periodic_master.`Periodic_RoomNo` AS tbl_calibration_periodic_master_Periodic_RoomNo,
+     tbl_calibration_periodic_master.`Periodic_DueDate` AS tbl_calibration_periodic_master_Periodic_DueDate,
+     tbl_calibration_periodic_master.`Decimal_Point` AS tbl_calibration_periodic_master_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_RepNo` AS tbl_calibration_periodic_detail_Periodic_RepNo,
+     tbl_calibration_periodic_detail.`Periodic_RecNo` AS tbl_calibration_periodic_detail_Periodic_RecNo,
+     tbl_calibration_periodic_detail.`Periodic_BalStdWt` AS tbl_calibration_periodic_detail_Periodic_BalStdWt,
+     tbl_calibration_periodic_detail.`Periodic_BalNegTol` AS tbl_calibration_periodic_detail_Periodic_BalNegTol,
+     tbl_calibration_periodic_detail.`Periodic_BalPosTol` AS tbl_calibration_periodic_detail_Periodic_BalPosTol,
+     tbl_calibration_periodic_detail.`Periodic_ActualWt` AS tbl_calibration_periodic_detail_Periodic_ActualWt,
+     tbl_calibration_periodic_detail.`Periodic_StdWtBoxID` AS tbl_calibration_periodic_detail_Periodic_StdWtBoxID,
+     tbl_calibration_periodic_detail.`Periodic_StdWt` AS tbl_calibration_periodic_detail_Periodic_StdWt,
+     tbl_calibration_periodic_detail.`Periodic_WtIdentification` AS tbl_calibration_periodic_detail_Periodic_WtIdentification,
+     tbl_calibration_periodic_detail.`Periodic_WeightBox_certfctNo` AS tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo,
+     tbl_calibration_periodic_detail.`PercentofCapacity` AS tbl_calibration_periodic_detail_PercentofCapacity,
+     tbl_calibration_periodic_detail.`Decimal_Point` AS tbl_calibration_periodic_detail_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_ValDate` AS tbl_calibration_periodic_detail_Periodic_ValDate,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_calibration_periodic_detail` tbl_calibration_periodic_detail,
+     `tbl_calibration_periodic_master` tbl_calibration_periodic_master
+WHERE
+     tbl_calibration_periodic_master.`Periodic_RepNo` = $P{SelectedAction}
+ AND tbl_calibration_periodic_detail.`Periodic_RepNo` = $P{SelectedAction}
+Order by
+tbl_calibration_periodic_detail.`Periodic_RecNo`]]>
+		</queryString>
+		<field name="tbl_calibration_periodic_master_Periodic_RepNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CalbDate" class="java.sql.Date"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CalbTime" class="java.sql.Time"/>
+		<field name="tbl_calibration_periodic_master_Periodic_BalID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_BalSrNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Make" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Model" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Unit" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Dept" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_LeastCnt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_MaxCap" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_MinCap" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_ZeroError" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_SpritLevel" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_GerneralCare" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_UserID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_UserName" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_VerifyID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_VerifyName" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_PrintNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_IsRecalib" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Location" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CubicalNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Bal_MinoptRange" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_RoomNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_DueDate" class="java.sql.Date"/>
+		<field name="tbl_calibration_periodic_master_Decimal_Point" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_RepNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalStdWt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalNegTol" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalPosTol" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_ActualWt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_StdWtBoxID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_StdWt" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_WtIdentification" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_PercentofCapacity" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Decimal_Point" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_ValDate" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Balance Periodic Calib Rec Is 1" uuid="92cb56af-6217-4ac3-bb1e-66fed93096c0">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="JDBC Data Adapter "/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="SelectedValue" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ReqMenu" class="java.lang.String"/>
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\mds - Test\\Reports\\jrxml_jasper\\"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="LowerWt" class="java.lang.Double"/>
+		<parameter name="Middle1wt" class="java.lang.Double"/>
+		<parameter name="Middle2wt" class="java.lang.Double"/>
+		<parameter name="Upperwt" class="java.lang.Double"/>
+		<parameter name="CalibStatus" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(Periodic_CalbTime,'%H:%i:%s')TIMEONLY,
+     tbl_calibration_periodic_master.`Periodic_RepNo` AS tbl_calibration_periodic_master_Periodic_RepNo,
+     tbl_calibration_periodic_master.`Periodic_CalbDate` AS tbl_calibration_periodic_master_Periodic_CalbDate,
+     tbl_calibration_periodic_master.`Periodic_CalbTime` AS tbl_calibration_periodic_master_Periodic_CalbTime,
+     tbl_calibration_periodic_master.`Periodic_BalID` AS tbl_calibration_periodic_master_Periodic_BalID,
+     tbl_calibration_periodic_master.`Periodic_BalSrNo` AS tbl_calibration_periodic_master_Periodic_BalSrNo,
+     tbl_calibration_periodic_master.`Periodic_Make` AS tbl_calibration_periodic_master_Periodic_Make,
+     tbl_calibration_periodic_master.`Periodic_Model` AS tbl_calibration_periodic_master_Periodic_Model,
+     tbl_calibration_periodic_master.`Periodic_Unit` AS tbl_calibration_periodic_master_Periodic_Unit,
+     tbl_calibration_periodic_master.`Periodic_Dept` AS tbl_calibration_periodic_master_Periodic_Dept,
+     tbl_calibration_periodic_master.`Periodic_LeastCnt` AS tbl_calibration_periodic_master_Periodic_LeastCnt,
+     tbl_calibration_periodic_master.`Periodic_MaxCap` AS tbl_calibration_periodic_master_Periodic_MaxCap,
+     tbl_calibration_periodic_master.`Periodic_MinCap` AS tbl_calibration_periodic_master_Periodic_MinCap,
+     tbl_calibration_periodic_master.`Periodic_ZeroError` AS tbl_calibration_periodic_master_Periodic_ZeroError,
+     tbl_calibration_periodic_master.`Periodic_SpritLevel` AS tbl_calibration_periodic_master_Periodic_SpritLevel,
+     tbl_calibration_periodic_master.`Periodic_GerneralCare` AS tbl_calibration_periodic_master_Periodic_GerneralCare,
+     tbl_calibration_periodic_master.`Periodic_UserID` AS tbl_calibration_periodic_master_Periodic_UserID,
+     tbl_calibration_periodic_master.`Periodic_UserName` AS tbl_calibration_periodic_master_Periodic_UserName,
+     tbl_calibration_periodic_master.`Periodic_VerifyID` AS tbl_calibration_periodic_master_Periodic_VerifyID,
+     tbl_calibration_periodic_master.`Periodic_VerifyName` AS tbl_calibration_periodic_master_Periodic_VerifyName,
+     tbl_calibration_periodic_master.`Periodic_PrintNo` AS tbl_calibration_periodic_master_Periodic_PrintNo,
+     tbl_calibration_periodic_master.`Periodic_IsRecalib` AS tbl_calibration_periodic_master_Periodic_IsRecalib,
+     tbl_calibration_periodic_master.`Periodic_Location` AS tbl_calibration_periodic_master_Periodic_Location,
+     tbl_calibration_periodic_master.`Periodic_CubicalNo` AS tbl_calibration_periodic_master_Periodic_CubicalNo,
+     tbl_calibration_periodic_master.`Periodic_Bal_MaxoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange,
+     tbl_calibration_periodic_master.`Periodic_Bal_MinoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MinoptRange,
+     tbl_calibration_periodic_master.`Periodic_RoomNo` AS tbl_calibration_periodic_master_Periodic_RoomNo,
+     tbl_calibration_periodic_master.`Periodic_DueDate` AS tbl_calibration_periodic_master_Periodic_DueDate,
+     tbl_calibration_periodic_master.`Decimal_Point` AS tbl_calibration_periodic_master_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_RepNo` AS tbl_calibration_periodic_detail_Periodic_RepNo,
+     tbl_calibration_periodic_detail.`Periodic_RecNo` AS tbl_calibration_periodic_detail_Periodic_RecNo,
+     tbl_calibration_periodic_detail.`Periodic_BalStdWt` AS tbl_calibration_periodic_detail_Periodic_BalStdWt,
+     tbl_calibration_periodic_detail.`Periodic_BalNegTol` AS tbl_calibration_periodic_detail_Periodic_BalNegTol,
+     tbl_calibration_periodic_detail.`Periodic_BalPosTol` AS tbl_calibration_periodic_detail_Periodic_BalPosTol,
+     tbl_calibration_periodic_detail.`Periodic_ActualWt` AS tbl_calibration_periodic_detail_Periodic_ActualWt,
+     tbl_calibration_periodic_detail.`Periodic_StdWtBoxID` AS tbl_calibration_periodic_detail_Periodic_StdWtBoxID,
+     tbl_calibration_periodic_detail.`Periodic_StdWt` AS tbl_calibration_periodic_detail_Periodic_StdWt,
+     tbl_calibration_periodic_detail.`Periodic_WtIdentification` AS tbl_calibration_periodic_detail_Periodic_WtIdentification,
+     tbl_calibration_periodic_detail.`Periodic_WeightBox_certfctNo` AS tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo,
+     tbl_calibration_periodic_detail.`PercentofCapacity` AS tbl_calibration_periodic_detail_PercentofCapacity,
+     tbl_calibration_periodic_detail.`Decimal_Point` AS tbl_calibration_periodic_detail_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_ValDate` AS tbl_calibration_periodic_detail_Periodic_ValDate,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_calibration_periodic_detail` tbl_calibration_periodic_detail,
+     `tbl_calibration_periodic_master` tbl_calibration_periodic_master
+WHERE
+     tbl_calibration_periodic_master.`Periodic_RepNo` = $P{SelectedAction}
+ AND tbl_calibration_periodic_detail.`Periodic_RepNo` = $P{SelectedAction}
+ AND tbl_calibration_periodic_detail.`Periodic_RecNo` = 1
+Order by
+tbl_calibration_periodic_detail.`Periodic_RecNo`]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_RepNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CalbDate" class="java.sql.Date"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CalbTime" class="java.sql.Time"/>
+		<field name="tbl_calibration_periodic_master_Periodic_BalID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_BalSrNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Make" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Model" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Unit" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Dept" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_LeastCnt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_MaxCap" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_MinCap" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_ZeroError" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_SpritLevel" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_GerneralCare" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_UserID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_UserName" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_VerifyID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_VerifyName" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_PrintNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_IsRecalib" class="java.lang.Boolean"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Location" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_CubicalNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_Bal_MinoptRange" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_master_Periodic_RoomNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_master_Periodic_DueDate" class="java.sql.Date"/>
+		<field name="tbl_calibration_periodic_master_Decimal_Point" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_RepNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalStdWt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalNegTol" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_BalPosTol" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_ActualWt" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_StdWtBoxID" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_StdWt" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_WtIdentification" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo" class="java.lang.String"/>
+		<field name="tbl_calibration_periodic_detail_PercentofCapacity" class="java.lang.Double"/>
+		<field name="tbl_calibration_periodic_detail_Decimal_Point" class="java.lang.Integer"/>
+		<field name="tbl_calibration_periodic_detail_Periodic_ValDate" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CalibStatus" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReqMenu" class="java.lang.String"/>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\minpcs\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="waterMark" class="java.lang.String"/>
+	<parameter name="LowerWt" class="java.lang.Double"/>
+	<parameter name="Middle1wt" class="java.lang.Double"/>
+	<parameter name="Middle2wt" class="java.lang.Double"/>
+	<parameter name="Upperwt" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(Periodic_CalbTime,'%H:%i:%s')TIMEONLY,
+     tbl_calibration_periodic_master.`Periodic_RepNo` AS tbl_calibration_periodic_master_Periodic_RepNo,
+     tbl_calibration_periodic_master.`Periodic_CalbDate` AS tbl_calibration_periodic_master_Periodic_CalbDate,
+     tbl_calibration_periodic_master.`Periodic_CalbTime` AS tbl_calibration_periodic_master_Periodic_CalbTime,
+     tbl_calibration_periodic_master.`Periodic_BalID` AS tbl_calibration_periodic_master_Periodic_BalID,
+     tbl_calibration_periodic_master.`Periodic_BalSrNo` AS tbl_calibration_periodic_master_Periodic_BalSrNo,
+     tbl_calibration_periodic_master.`Periodic_Make` AS tbl_calibration_periodic_master_Periodic_Make,
+     tbl_calibration_periodic_master.`Periodic_Model` AS tbl_calibration_periodic_master_Periodic_Model,
+     tbl_calibration_periodic_master.`Periodic_Unit` AS tbl_calibration_periodic_master_Periodic_Unit,
+     tbl_calibration_periodic_master.`Periodic_Dept` AS tbl_calibration_periodic_master_Periodic_Dept,
+     tbl_calibration_periodic_master.`Periodic_LeastCnt` AS tbl_calibration_periodic_master_Periodic_LeastCnt,
+     tbl_calibration_periodic_master.`Periodic_MaxCap` AS tbl_calibration_periodic_master_Periodic_MaxCap,
+     tbl_calibration_periodic_master.`Periodic_MinCap` AS tbl_calibration_periodic_master_Periodic_MinCap,
+     tbl_calibration_periodic_master.`Periodic_ZeroError` AS tbl_calibration_periodic_master_Periodic_ZeroError,
+     tbl_calibration_periodic_master.`Periodic_SpritLevel` AS tbl_calibration_periodic_master_Periodic_SpritLevel,
+     tbl_calibration_periodic_master.`Periodic_GerneralCare` AS tbl_calibration_periodic_master_Periodic_GerneralCare,
+     tbl_calibration_periodic_master.`Periodic_UserID` AS tbl_calibration_periodic_master_Periodic_UserID,
+     tbl_calibration_periodic_master.`Periodic_UserName` AS tbl_calibration_periodic_master_Periodic_UserName,
+     tbl_calibration_periodic_master.`Periodic_VerifyID` AS tbl_calibration_periodic_master_Periodic_VerifyID,
+     tbl_calibration_periodic_master.`Periodic_VerifyName` AS tbl_calibration_periodic_master_Periodic_VerifyName,
+     tbl_calibration_periodic_master.`Periodic_PrintNo` AS tbl_calibration_periodic_master_Periodic_PrintNo,
+     tbl_calibration_periodic_master.`Periodic_IsRecalib` AS tbl_calibration_periodic_master_Periodic_IsRecalib,
+     tbl_calibration_periodic_master.`Periodic_Location` AS tbl_calibration_periodic_master_Periodic_Location,
+     tbl_calibration_periodic_master.`Periodic_CubicalNo` AS tbl_calibration_periodic_master_Periodic_CubicalNo,
+     tbl_calibration_periodic_master.`Periodic_Bal_MaxoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange,
+     tbl_calibration_periodic_master.`Periodic_Bal_MinoptRange` AS tbl_calibration_periodic_master_Periodic_Bal_MinoptRange,
+     tbl_calibration_periodic_master.`Periodic_RoomNo` AS tbl_calibration_periodic_master_Periodic_RoomNo,
+     tbl_calibration_periodic_master.`Periodic_DueDate` AS tbl_calibration_periodic_master_Periodic_DueDate,
+     tbl_calibration_periodic_master.`Decimal_Point` AS tbl_calibration_periodic_master_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_RepNo` AS tbl_calibration_periodic_detail_Periodic_RepNo,
+     tbl_calibration_periodic_detail.`Periodic_RecNo` AS tbl_calibration_periodic_detail_Periodic_RecNo,
+     tbl_calibration_periodic_detail.`Periodic_BalStdWt` AS tbl_calibration_periodic_detail_Periodic_BalStdWt,
+     tbl_calibration_periodic_detail.`Periodic_BalNegTol` AS tbl_calibration_periodic_detail_Periodic_BalNegTol,
+     tbl_calibration_periodic_detail.`Periodic_BalPosTol` AS tbl_calibration_periodic_detail_Periodic_BalPosTol,
+     tbl_calibration_periodic_detail.`Periodic_ActualWt` AS tbl_calibration_periodic_detail_Periodic_ActualWt,
+     tbl_calibration_periodic_detail.`Periodic_StdWtBoxID` AS tbl_calibration_periodic_detail_Periodic_StdWtBoxID,
+     tbl_calibration_periodic_detail.`Periodic_StdWt` AS tbl_calibration_periodic_detail_Periodic_StdWt,
+     tbl_calibration_periodic_detail.`Periodic_WtIdentification` AS tbl_calibration_periodic_detail_Periodic_WtIdentification,
+     tbl_calibration_periodic_detail.`Periodic_WeightBox_certfctNo` AS tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo,
+     tbl_calibration_periodic_detail.`PercentofCapacity` AS tbl_calibration_periodic_detail_PercentofCapacity,
+     tbl_calibration_periodic_detail.`Decimal_Point` AS tbl_calibration_periodic_detail_Decimal_Point,
+     tbl_calibration_periodic_detail.`Periodic_ValDate` AS tbl_calibration_periodic_detail_Periodic_ValDate,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_calibration_periodic_detail` tbl_calibration_periodic_detail,
+     `tbl_calibration_periodic_master` tbl_calibration_periodic_master
+WHERE
+     tbl_calibration_periodic_master.`Periodic_RepNo` = $P{SelectedAction}
+ AND tbl_calibration_periodic_detail.`Periodic_RepNo` = $P{SelectedAction}
+Order by
+tbl_calibration_periodic_detail.`Periodic_RecNo`]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_RepNo" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_master_Periodic_CalbDate" class="java.sql.Date"/>
+	<field name="tbl_calibration_periodic_master_Periodic_CalbTime" class="java.sql.Time"/>
+	<field name="tbl_calibration_periodic_master_Periodic_BalID" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_BalSrNo" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Make" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Model" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Unit" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Dept" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_LeastCnt" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_master_Periodic_MaxCap" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_master_Periodic_MinCap" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_master_Periodic_ZeroError" class="java.lang.Boolean"/>
+	<field name="tbl_calibration_periodic_master_Periodic_SpritLevel" class="java.lang.Boolean"/>
+	<field name="tbl_calibration_periodic_master_Periodic_GerneralCare" class="java.lang.Boolean"/>
+	<field name="tbl_calibration_periodic_master_Periodic_UserID" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_UserName" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_VerifyID" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_VerifyName" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_PrintNo" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_master_Periodic_IsRecalib" class="java.lang.Boolean"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Location" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_CubicalNo" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_master_Periodic_Bal_MinoptRange" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_master_Periodic_RoomNo" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_master_Periodic_DueDate" class="java.sql.Date"/>
+	<field name="tbl_calibration_periodic_master_Decimal_Point" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_RepNo" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_BalStdWt" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_BalNegTol" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_BalPosTol" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_ActualWt" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_StdWtBoxID" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_StdWt" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_WtIdentification" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo" class="java.lang.String"/>
+	<field name="tbl_calibration_periodic_detail_PercentofCapacity" class="java.lang.Double"/>
+	<field name="tbl_calibration_periodic_detail_Decimal_Point" class="java.lang.Integer"/>
+	<field name="tbl_calibration_periodic_detail_Periodic_ValDate" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String" calculation="First">
+		<variableExpression><![CDATA[$F{tbl_calibration_periodic_detail_Periodic_BalStdWt}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="200" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{waterMark} == "true"]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="375" height="200" forecolor="#CCCCCC" uuid="4b3bb8ac-1241-47a1-b51e-666c4815084b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="48"/>
+				</textElement>
+				<text><![CDATA[Preview Only]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="375" height="200" forecolor="#CCCCCC" uuid="c399d709-babb-439b-ab35-af1f8aa0bdf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="48"/>
+				</textElement>
+				<text><![CDATA[Preview Only]]></text>
+			</staticText>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="55">
+			<staticText>
+				<reportElement x="590" y="2" width="162" height="18" uuid="408c4424-a904-45f7-9a75-75b736841fe2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1033-CIPLA/PTG-II/PHARMA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="36" width="726" height="18" uuid="2f41f9c8-c106-4773-b1e7-ffe8766bc0f7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FULL SCALE WEIGHING BALANCE CALIBRATION REPORT"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement mode="Opaque" x="12" y="0" width="726" height="14" forecolor="#999999" uuid="b871cee9-5fb3-4b9f-9ad6-fbd460474043">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["This document is Confidential, electronically generated by " + $P{UserName} + " " + new SimpleDateFormat("dd.MM.yyyy").format(new Date()) + " " + new SimpleDateFormat("HH:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<componentElement>
+				<reportElement key="table" style="table" positionType="Float" x="12" y="144" width="726" height="50" uuid="83e2ed32-5c19-4669-9f80-a6b37d79edea"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Balance Periodic Calib Rec Is 1" uuid="dffe48e9-4f88-4f27-a862-96ff317c4ead">
+						<datasetParameter name="HmiId">
+							<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="LowerWt">
+							<datasetParameterExpression><![CDATA[$P{LowerWt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Middle1wt">
+							<datasetParameterExpression><![CDATA[$P{Middle1wt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Middle2wt">
+							<datasetParameterExpression><![CDATA[$P{Middle2wt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Upperwt">
+							<datasetParameterExpression><![CDATA[$P{Upperwt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="ff8bf5c3-1a96-40b9-bf98-06355ea21e6e">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="2b2bc844-9801-4393-acef-e9bbecc03ead"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd.MM.yyyy">
+								<reportElement x="0" y="0" width="50" height="14" uuid="c19b1877-5255-4608-bb8d-f2d1e652e06c"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_CalbDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="2b9c220e-09ea-4f60-bda6-35930ed0b67e">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="401e23a5-525b-4048-b1b6-2425e8460d5b"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Time]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="HH.mm.ss">
+								<reportElement x="0" y="0" width="40" height="14" uuid="402a0d1f-5b04-4899-b32b-272138e64ae6"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="8bb059c0-9fe3-42ba-97d7-e337c582537c">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="06ed4c34-2603-4763-92e7-ff4654efe44b"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Cleanliness]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="14" uuid="12d53be2-79df-4da7-9bd4-0aac9e832889"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA["OK"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="9ad01b60-35d4-4099-b5cd-fc0fa95c5fb3">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="9cdffb01-2405-4214-a886-9ad6b37a9ae8"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Spirit
+Level ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="14" uuid="6cd80df6-6d87-4692-8199-a1da61032381"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA["OK"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="ca7bef2c-97c4-483e-8934-68e7a8a75c84">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="05d69b8b-76ee-489b-92d8-b9a7bddfb42c"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Zero
+Error]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="14" uuid="a2a2490c-7917-4795-b9a9-a510af1d1710"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA["No Zero Error"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="356" uuid="17ee530a-26a5-411e-9fbd-ef4d20682ac6">
+						<jr:columnHeader height="14" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="356" height="14" uuid="e68b570c-5c1a-4a7f-a680-1764e05f2fd7"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Reading]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="88" uuid="3d52edd6-ecc0-4e8c-98bd-570cae94ccaf">
+							<jr:columnHeader style="table_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="88" height="14" uuid="883328d8-3053-4f57-b5d3-af8a8febb1c3"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+									</textElement>
+									<text><![CDATA[Lower Weight (gm)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table_TD" height="18" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement x="0" y="0" width="88" height="14" uuid="6fa66efc-a2ee-4049-9f8a-d327e87310e2"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{LowerWt}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="90" uuid="f2624b70-9a4c-4985-b533-632edbbf1c1b">
+							<jr:columnHeader height="17" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="14" uuid="f9b569d5-6bbd-43e6-94ef-1e1ce0b3f885"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+									</textElement>
+									<text><![CDATA[Middle 1 wt. (gm)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="18" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement x="0" y="0" width="90" height="14" uuid="d7d25cc5-95a6-4333-866b-774dc1c7b83c"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{Middle1wt}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="90" uuid="e130c041-b5e9-4733-8910-d4b97f06f9d3">
+							<jr:columnHeader height="17" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="14" uuid="0436e641-6f58-441a-88e4-b500ceb1fc59"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+									</textElement>
+									<text><![CDATA[Middle 2 wt. (gm)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="18" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement x="0" y="0" width="90" height="14" uuid="efe37d67-78dc-4068-9709-c5c78dfec515"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{Middle2wt}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="88" uuid="0e3dcac8-18b7-471f-95ea-a47eb813bdd1">
+							<jr:columnHeader style="table_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="88" height="14" uuid="4e18efb8-65c9-4e8d-bc86-fa748bab95e5"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+									</textElement>
+									<text><![CDATA[Upper Weight (gm)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table_TD" height="18" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement x="0" y="0" width="88" height="14" uuid="10cee28a-f53a-41bb-b9f9-bd95c5192786"/>
+									<textElement textAlignment="Center">
+										<font fontName="Calibri"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{Upperwt}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:column width="60" uuid="df47ed2a-a8c1-401e-a75b-99c0acff5487">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="d3479b56-12b8-4c1f-bf4b-b0e4def3e3f8"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Calibration
+Status]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="14" uuid="9c93383b-09d8-4bb2-b0c8-e93d85c65e00"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Complies"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="82f8117d-1be5-44d1-aeef-9e1534200187">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="2">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="d5fced69-cf52-4116-a079-75406e3d1a7f"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Done By]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="18" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="70" height="14" uuid="8d7709d4-e28a-4161-9c54-19c9eb3ebdbd"/>
+								<textElement textAlignment="Center">
+									<font fontName="Calibri"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_UserID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="12" y="84" width="726" height="30" uuid="ae2028a1-87c9-4341-8d6b-cbf61f173855"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Balance Periodic Calib" uuid="c247bfe3-f2f6-48dc-abd6-7bc969a3a07f">
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="364" uuid="757afe7e-2392-4203-ae6e-28eca33efed7">
+						<jr:columnHeader height="14" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="364" height="14" uuid="b755c508-03d1-4591-a24c-f8d752831038"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Standard Weights (gm)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="181" uuid="ca562c75-edf1-4d97-8821-fb66165ca861">
+							<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
+								<textField>
+									<reportElement x="12" y="0" width="168" height="14" uuid="404bcc76-91db-46b9-bc5c-b9c12bc0b69d"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(
+    ($F{tbl_calibration_periodic_detail_Periodic_RecNo} == 1)
+    ?
+    "Lower Weight"
+    :
+    (
+        ($F{tbl_calibration_periodic_detail_Periodic_RecNo} == 2)
+        ?
+        "Middle 1 Weight"
+        :
+        (
+            ($F{tbl_calibration_periodic_detail_Periodic_RecNo} == 3)
+            ?
+            "Middle 2 Weight"
+            :
+            "Upper Weight"
+        )
+    )
+)]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="183" uuid="e19c50c7-063d-4428-a52c-041317ceb84c">
+							<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
+								<textField pattern="###0.000">
+									<reportElement x="12" y="0" width="171" height="14" uuid="6cca9805-effc-406a-9fb7-3ff3d99f28c7"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Calibri" size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_detail_Periodic_BalStdWt}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:column width="181" uuid="0ba135d8-e87f-4a97-8e27-dccf67e1e220">
+						<jr:columnHeader style="table 1_CH" height="14" rowSpan="1">
+							<staticText>
+								<reportElement x="10" y="0" width="171" height="14" uuid="e4cdebaa-56e5-4f2a-8ca4-fcb5a9de8f6a"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Tolerance (gm)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="171" height="14" uuid="ee0c1e25-e2a2-4a2c-9af8-403f8c4fe873"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA["± " + new DecimalFormat("#,###0.000").format(new BigDecimal($F{tbl_calibration_periodic_detail_Periodic_BalStdWt}-$F{tbl_calibration_periodic_detail_Periodic_BalNegTol}).setScale(3, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="181" uuid="b4ee0925-9e58-40cd-90f7-4e557f66bfdd">
+						<jr:columnHeader style="table 1_CH" height="14" rowSpan="1">
+							<staticText>
+								<reportElement x="10" y="0" width="171" height="14" uuid="a727f0dc-311b-45e4-ad71-5f7e71a03b8a"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Accuracy limit (gm)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="171" height="14" uuid="3beafbfc-a42b-4ad0-9512-085cca5f2cf6"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.000").format(new BigDecimal($F{tbl_calibration_periodic_detail_Periodic_BalNegTol}).setScale(3, BigDecimal.ROUND_HALF_UP))+ "  -  " +new DecimalFormat("#,###0.000").format(new BigDecimal($F{tbl_calibration_periodic_detail_Periodic_BalPosTol}).setScale(3, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="18" y="2" width="102" height="14" uuid="61def7f1-6ba8-4872-9b19-1da9ffae4a8a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Balance Code No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="16" width="130" height="14" uuid="ce7fd7e7-d37d-4ac2-8c1d-110da910b704"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Capacity (gm)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="524" y="2" width="200" height="14" uuid="6ee33b14-e812-47c9-88a6-5e33fccd1172"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_Dept}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="12" y="58" width="726" height="1" uuid="3416ede0-31fc-4835-a38e-812f8e7bbe38"/>
+			</line>
+			<textField>
+				<reportElement x="200" y="16" width="170" height="14" uuid="dfb6abc3-568d-483a-aaf4-ab9806d6a186"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("MMMMM / yyyy").format($F{tbl_calibration_periodic_master_Periodic_CalbDate})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="30" width="100" height="14" uuid="c913f627-7877-4dc4-8466-9e1966d82a2c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Operating Range (gm)]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="200" y="44" width="170" height="14" uuid="c3d444a1-443e-4c82-a710-f30e1f885cbc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_detail_Periodic_StdWtBoxID}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="200" y="2" width="170" height="14" uuid="ed57af0e-45b4-4752-8f53-d9dd49c28cfc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_BalID}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="13" y="16" width="726" height="1" uuid="f85ec3f9-8453-4ff9-b2dc-39f967ffa337"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="44" width="100" height="14" uuid="276b23be-811c-466f-b8a5-0b189b97ef50"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Std. Weight Box ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="44" width="727" height="1" uuid="2b6a4443-f5e0-4a42-acff-fc8bfe7dde1b"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="16" width="102" height="14" uuid="47e36f45-7ead-4070-ae4d-755f98f3d527"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Month / Year]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0.000">
+				<reportElement positionType="Float" x="524" y="16" width="200" height="14" uuid="621b0576-08ca-4a63-904d-b4f42e1e196c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_MaxCap}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="200" y="30" width="170" height="14" uuid="746d84f4-da41-4ad1-b9b6-e667c0f040db"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_Bal_MinoptRange} + "  -  " + $F{tbl_calibration_periodic_master_Periodic_Bal_MaxoptRange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="2" width="130" height="14" uuid="2b6f2e70-4223-4864-b777-7305dda21c5d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="2" width="726" height="1" uuid="71455369-5308-4414-8784-0005efd100d3"/>
+			</line>
+			<line>
+				<reportElement x="12" y="30" width="726" height="1" uuid="bef15a8d-6d06-4050-9ddf-5bfffd363430"/>
+			</line>
+			<line>
+				<reportElement x="192" y="2" width="1" height="56" uuid="e2b739da-466e-49ff-a6af-15b3a7b18cd3"/>
+			</line>
+			<line>
+				<reportElement x="12" y="2" width="1" height="56" uuid="dfcb21c4-9ceb-44ca-a557-2b81f57a8ba8"/>
+			</line>
+			<line>
+				<reportElement x="738" y="2" width="1" height="56" uuid="fd461bf3-0369-4ffb-bee9-5be41113d028"/>
+			</line>
+			<line>
+				<reportElement x="518" y="2" width="1" height="56" uuid="e2b8eeb8-bf82-42a0-a6da-3e2fb5fae730"/>
+			</line>
+			<line>
+				<reportElement x="372" y="2" width="1" height="56" uuid="cb8f524b-a87a-4712-a2a7-cea45e5c2ef0"/>
+			</line>
+			<staticText>
+				<reportElement x="380" y="30" width="130" height="14" uuid="384ddc34-e13d-4c42-b5f1-5a3630a3528f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Least Count (gm)]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0.000">
+				<reportElement positionType="Float" x="524" y="30" width="200" height="14" uuid="d95a6626-b495-4fbb-a882-5ad1b5310772"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_master_Periodic_LeastCnt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="44" width="130" height="14" uuid="6d0d3b77-a82c-4e75-9cce-82c45ac41fe3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Certificate Number / Validity ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0.000">
+				<reportElement positionType="Float" x="524" y="44" width="200" height="14" uuid="a066f51c-f695-4bd8-ad3e-2d796246df53"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_calibration_periodic_detail_Periodic_WeightBox_certfctNo} + "/ " + $F{tbl_calibration_periodic_detail_Periodic_ValDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

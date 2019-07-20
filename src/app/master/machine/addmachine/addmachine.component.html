@@ -1,0 +1,90 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-md-12">
+            <span style='text-align: center;color:white'>ADD EQUIPMENT</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frmAddMachine" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Equipment Code No. :</label>
+                <input class="form-control" type="text" formControlName="strMachineID" maxlength="25" (keyup)="checkDataExistForID($event)">
+                <div *ngIf="bln_IDexist == true" style="color:red;margin-top:3px;font-weight: bold;">
+                  Equipment Code No. already exist!
+                </div>
+                <div *ngIf="!strMachineID.valid && strMachineID.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                  {{strMachineID?.errors['required']}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Make : </label>
+                <input class="form-control" type="text" formControlName="str_make" maxlength="25">
+                <div *ngIf="!str_make.valid && str_make.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                  {{str_make?.errors['required']}}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Model :</label>
+                <input class="form-control" type="text" formControlName="str_model" maxlength="25">
+                <div *ngIf="!str_model.valid && str_model.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                  {{str_model?.errors['required']}}
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Serial No. :</label>
+                <input class="form-control" type="text" formControlName="str_serialNo" maxlength="25">
+                <div *ngIf="!str_serialNo.valid && str_serialNo.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                  {{str_serialNo?.errors['required']}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Rotary Type :</label>
+                <ngx-select [items]="sarr_rotaryType" formControlName="strRotaryType" [defaultValue]="sarr_rotaryType[0]">
+                </ngx-select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Cubicle Type :</label>
+                <ngx-select [items]="arrCubicleType" formControlName="strCubicleType" [defaultValue]="arrCubicleType[0]">
+                </ngx-select>
+              </div>
+            </div>
+          </div>
+          <Br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="!frmAddMachine.valid || bln_IDexist == true"
+              [ngClass]="{disabledBtn:!frmAddMachine.valid || bln_IDexist == true }">Save Changes</button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-default  waves-effect" (click)="onReset()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

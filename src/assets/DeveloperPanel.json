@@ -1,0 +1,252 @@
+﻿{
+  "System":
+  [
+    {"Value":1,"Name":"OPC-Posting"},
+    {"Value":2,"Name":"Biomatric"},
+    {"Value":3,"Name":"LDAP"},
+    {"Value":4,"Name":"Retina"}
+  ],
+  "Login":
+  [
+    {"Value":0,"Name":"Biomatric"},
+    {"Value":1,"Name":"Retina"}
+  ],
+ "User":
+  [
+    {"Value":10,"Name":"UserID"}
+  ],
+  "Alert":
+  [
+     {"Value":1,"Name":"Menu_Alert"},
+     {"Value":0,"Name":"Fixed"},
+     {"Value":1,"Name":"Flexible"},
+     {"Value":2,"Name":"Other"}
+  ],
+  "AlertMenus":
+  [
+     {"Value":0,"Name":"Individual"},
+     {"Value":1,"Name":"Group"},
+     {"Value":0,"Name":"Thickness"},
+     {"Value":0,"Name":"Width"},
+     {"Value":0,"Name":"Length"},
+     {"Value":0,"Name":"Diameter"},
+     {"Value":0,"Name":"IndLayer"},
+     {"Value":0,"Name":"IndLayer1"},
+     {"Value":0,"Name":"Hardness"},
+     {"Value":0,"Name":"Friability"},
+     {"Value":0,"Name":"DT"},
+     {"Value":0,"Name":"GrpLayer"},
+     {"Value":0,"Name":"GrpLayer1"},
+     {"Value":0,"Name":"LOD"},
+     {"Value":0,"Name":"TD"},
+     {"Value":0,"Name":"SS"}
+  ],
+  "Unit":
+  [
+     {"Value":1,"Name":"g","menu":"B"},
+     {"Value":1,"Name":"kg","menu":"B"},
+     {"Value":1,"Name":"mg","menu":"B"},
+     {"Value":1,"Name":"Kp","menu":"H"},
+     {"Value":1,"Name":"N","menu":"H"},
+     {"Value":0,"Name":"Lb","menu":"H"}
+  ],
+  "CalibrationBox":
+  [
+     {"Value":1,"Name":"Weight Box"},
+     {"Value":0,"Name":"Block Box"}
+  ],
+ "Equipment":
+  [
+     {"Value":1,"Name":"Hardness"},
+     {"Value":1,"Name":"Disintegration Tester"},
+     {"Value":1,"Name":"Friabilator"},
+     {"Value":1,"Name":"Moisture Analyzer"},
+     {"Value":1,"Name":"Tapped Density"},
+     {"Value":1,"Name":"Sieve Shaker"}
+  ],
+  "Balance":
+  [
+    {"Value":0,"Name":"RepCountDaily"},
+    {"Value":0,"Name":"RepCountPeriodic"},
+    {"Value":0,"Name":"RepCountLinearity"},
+    {"Value":5,"Name":"RepCountEccentricity"},
+    {"Value":10,"Name":"RepCountUncertainty"},
+    {"Value":10,"Name":"RepCountRepeatability"},
+    {"Value":1,"Name":"Balance"},
+    {"Value":1,"Name":"Identification"}
+  ],
+  "BalanceCalibrationType":
+  [
+    {"Value":1,"Name":"Daily"},
+    {"Value":1,"Name":"Periodic"},
+    {"Value":0,"Name":"Linerity"},
+    {"Value":0,"Name":"Eccentricity"},
+    {"Value":0,"Name":"Uncertainty"},
+    {"Value":0,"Name":"Repetability"}
+  ],
+  "BalanceCalibrationWeightControl":
+  [
+    {"Value":2,"Name":"Daily"},
+    {"Value":4,"Name":"Periodic"},
+    {"Value":0,"Name":"Linerity"},
+    {"Value":0,"Name":"Eccentricity"},
+    {"Value":0,"Name":"Uncertainty"},
+    {"Value":0,"Name":"Repetability"}
+  ],
+  "Vernier":
+  [
+     {"Value":1,"Name":"Vernier"}
+  ],
+  "VernierCalibrationType":
+  [
+    {"Value":0,"Name":"Daily"},
+    {"Value":1,"Name":"Periodic"}
+  ],
+  "EquipmentCalibration":
+  [
+     {"Value":1,"Name":"Balance"},
+     {"Value":0,"Name":"Vernier"},
+     {"Value":0,"Name":"Moisture Analyzer"},
+     {"Value":0,"Name":"Hardness"}
+  ],
+  "DTMake":
+  [
+     {"Value":1,"Name":"Electrolab"},
+     {"Value":1,"Name":"Labindia-1000"},
+     {"Value":0,"Name":"Labindia-1000P"},
+     {"Value":1,"Name":"Erweka"}
+  ],
+  "HardnessMake":
+  [
+     {"Value":0,"Name":"Dr Scheulinger"},
+     {"Value":0,"Name":"ElectroLab"},
+     {"Value":1,"Name":"Erweka TBH-425"},
+     {"Value":1,"Name":"Erweka TBH-125"},
+     {"Value":0,"Name":"Kraemer"},
+     {"Value":0,"Name":"LabIndia"},
+     {"Value":0,"Name":"Pharmatron MT50"}
+  ],
+  "MoistureAnalyzerCalibrationType":
+  [
+    {"Value":1,"Name":"Daily"},
+    {"Value":1,"Name":"Periodic"}
+  ],
+  "HardnessCalibrationType":
+  [
+    {"Value":0,"Name":"Daily"},
+    {"Value":1,"Name":"Periodic"}
+  ],
+  "Master":
+  [
+     {"Value":1,"Name":"Department"},
+     {"Value":0,"Name":"EscForCalibration"},
+     {"Value":0,"Name":"Yield"},
+     {"Value":1,"Name":"BatchSizeForCubicle"},
+     {"Value":1,"Name":"Equipment"},
+     {"Value":1,"Name":"CalibrationBox"}
+  ],
+  "Product":
+  [
+     {"Value":1,"Name":"Tablet"},
+     {"Value":0,"Name":"Capsule"}
+  ],
+  "Tablet":
+  [
+     {"Value":1,"Name":"Edit"},
+     {"Value":1,"Name":"Coating"},
+     {"Value":"g","Name":"Unit"},
+     {"Value":1,"Name":"Individual"},
+     {"Value":1,"Name":"Group"},
+     {"Value":1,"Name":"Thickness"},
+     {"Value":1,"Name":"Breadth"},
+     {"Value":1,"Name":"Length"},
+     {"Value":1,"Name":"Diameter"},
+     {"Value":1,"Name":"Hardness"},
+     {"Value":1,"Name":"Disintegration Tester"},
+     {"Value":1,"Name":"Friabilator"},
+     {"Value":1,"Name":"Moisture Analyzer"},
+     {"Value":1,"Name":"Tapped Density"},
+     {"Value":1,"Name":"Sieve Shaker"},
+     {"Value":1,"Name":"Individual Layer"},
+     {"Value":1,"Name":"Group Layer"},
+     {"Value":1,"Name":"Individual Layer1"},
+     {"Value":1,"Name":"Group Layer1"},
+     {"Value":1,"Name":"Granulation"},
+     {"Value": 1,"Name": "Particle Size"},
+     {"Value": 1,"Name": "Fine %"}
+  ],
+  "Capsule":
+  [
+     {"Value":1,"Name":"Edit"},
+     {"Value":"g","Name":"Unit"},
+     {"Value":1,"Name":"Individual"},
+     {"Value":1,"Name":"Group"},
+     {"Value":1,"Name":"Differential"},
+     {"Value":1,"Name":"Length"},
+     {"Value":1,"Name":"Disintegration Tester"}
+  ],
+  "ProductTypes":
+  [
+    {"typeArray": [
+      {"Value": 1, "Name": "Compression"},
+      {"Value": 1, "Name": "Coating"}
+      ], "type":"Tablet"},
+      {"typeArray": [
+        {"Value": 1, "Name": "Capsule Filling"}
+        ],"type": "Capsule"}
+  ],
+"CubicleType":
+  [
+     {"Value":1,"Name":"Compression"},
+     {"Value":1,"Name":"Coating"},
+     {"Value":0,"Name":"Capsule Filling"},
+     {"Value":0,"Name":"Bin Weighing"},
+     {"Value":1,"Name":"IPQC"},
+     {"Value":0,"Name":"IPQA"},
+     {"Value":1,"Name":"Granulation"}
+  ],
+  "CubicleSetting":[
+    {"Value":1,"Name":"IndSample"},
+    {"Value":1,"Name":"GrpSample"},
+    {"Value":0,"Name":"BatchSize"},
+    {"Value":1,"Name":"LODStage"},
+    {"Value":1,"Name":"Department"},
+    {"Value":1,"Name":"DTMedia"},
+    {"Value":1,"Name":"Stage"},
+    {"Value":1,"Name":"Validation"}
+  ],
+  "Summary":
+  [
+     {"Value":1,"Name":"Batch"},
+     {"Value":0,"Name":"Product"}
+  ],
+  "Bin":
+  [
+     {"Value":0,"Name":"Calibration"},
+     {"Value":0,"Name":"IsBinWeighing"},
+     {"Value":0,"Name":"CommonBinWeighing"},
+     {"Value":0,"Name":"WithTareOrNot"},
+     {"Value":0,"Name":"Product"},
+     {"Value":0,"Name":"Cleaner"},
+     {"Value":0,"Name":"IndividualReport"},
+     {"Value":0,"Name":"SummaryReport"}
+  ],
+  "TabletCoating":
+  [
+    {"Value":1,"Name":"Individual"},
+    {"Value":1,"Name":"Group"},
+    {"Value":1,"Name":"Thickness"},
+    {"Value":1,"Name":"Breadth"},
+    {"Value":1,"Name":"Length"},
+    {"Value":1,"Name":"Diameter"},
+    {"Value":1,"Name":"Hardness"},
+    {"Value":0,"Name":"Disintegration Tester"},
+    {"Value":0,"Name":"Friabilator"}
+ ],
+ "Ldap":
+ [
+    {"Value":1,"Name":"isLdap"}
+ ]
+}
+
+

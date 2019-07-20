@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditAlert" language="groovy" pageWidth="842" pageHeight="650" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="201c3b0b-0f3f-4e74-9883-5459af08658f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AlertDataSet" uuid="3f9e676f-4026-46fa-bfba-5c79259c0f94">
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_alertsetting.`RecNo` AS tbl_audit_alertsetting_RecNo,
+     tbl_audit_alertsetting.`dt` AS tbl_audit_alertsetting_dt,
+     tbl_audit_alertsetting.`tm` AS tbl_audit_alertsetting_tm,
+     tbl_audit_alertsetting.`userid` AS tbl_audit_alertsetting_userid,
+     tbl_audit_alertsetting.`username` AS tbl_audit_alertsetting_username,
+     tbl_audit_alertsetting.`ACT` AS tbl_audit_alertsetting_ACT,
+     tbl_audit_alertsetting.`Remark` AS tbl_audit_alertsetting_Remark,
+     tbl_audit_alertsetting.`Area` AS tbl_audit_alertsetting_Area,
+     tbl_audit_alertsetting.`ProductId` AS tbl_audit_alertsetting_ProductId,
+     tbl_audit_alertsetting.`ProductName` AS tbl_audit_alertsetting_ProductName,
+     tbl_audit_alertsetting.`ProductVersion` AS tbl_audit_alertsetting_ProductVersion,
+     tbl_audit_alertsetting.`Version` AS tbl_audit_alertsetting_Version,
+     tbl_audit_alertsetting.`Batch` AS tbl_audit_alertsetting_Batch,
+     tbl_audit_alertsetting.`OldValue` AS tbl_audit_alertsetting_OldValue,
+     tbl_audit_alertsetting.`NewValue` AS tbl_audit_alertsetting_NewValue,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name
+FROM
+     `tbl_audit_alertsetting` tbl_audit_alertsetting,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_alertsetting.`Area` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+and
+ tbl_audit_alertsetting.`Batch` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction}= ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+     AND tbl_audit_alertsetting.`dt` >= $P{FromDate}
+ AND tbl_audit_alertsetting.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_alertsetting.`dt` DESC, tbl_audit_alertsetting.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_alertsetting_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_alertsetting_tm" class="java.sql.Time"/>
+		<field name="tbl_audit_alertsetting_userid" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_username" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_Area" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_ProductId" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_ProductName" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_ProductVersion" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_Version" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_Batch" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_OldValue" class="java.lang.String"/>
+		<field name="tbl_audit_alertsetting_NewValue" class="java.lang.String"/>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_alertsetting.`RecNo` AS tbl_audit_alertsetting_RecNo,
+     tbl_audit_alertsetting.`dt` AS tbl_audit_alertsetting_dt,
+     tbl_audit_alertsetting.`tm` AS tbl_audit_alertsetting_tm,
+     tbl_audit_alertsetting.`userid` AS tbl_audit_alertsetting_userid,
+     tbl_audit_alertsetting.`username` AS tbl_audit_alertsetting_username,
+     tbl_audit_alertsetting.`ACT` AS tbl_audit_alertsetting_ACT,
+     tbl_audit_alertsetting.`Remark` AS tbl_audit_alertsetting_Remark,
+     tbl_audit_alertsetting.`Area` AS tbl_audit_alertsetting_Area,
+     tbl_audit_alertsetting.`ProductId` AS tbl_audit_alertsetting_ProductId,
+     tbl_audit_alertsetting.`ProductName` AS tbl_audit_alertsetting_ProductName,
+     tbl_audit_alertsetting.`ProductVersion` AS tbl_audit_alertsetting_ProductVersion,
+     tbl_audit_alertsetting.`Version` AS tbl_audit_alertsetting_Version,
+     tbl_audit_alertsetting.`Batch` AS tbl_audit_alertsetting_Batch,
+     tbl_audit_alertsetting.`OldValue` AS tbl_audit_alertsetting_OldValue,
+     tbl_audit_alertsetting.`NewValue` AS tbl_audit_alertsetting_NewValue,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name
+FROM
+     `tbl_audit_alertsetting` tbl_audit_alertsetting,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_alertsetting.`Area` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+and
+ tbl_audit_alertsetting.`Batch` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction}= ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+     AND tbl_audit_alertsetting.`dt` >= $P{FromDate}
+ AND tbl_audit_alertsetting.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_alertsetting.`dt` DESC, tbl_audit_alertsetting.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_alertsetting_dt" class="java.sql.Date"/>
+	<field name="tbl_audit_alertsetting_tm" class="java.sql.Time"/>
+	<field name="tbl_audit_alertsetting_userid" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_username" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_Area" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_ProductId" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_ProductName" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_ProductVersion" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_Version" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_Batch" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_OldValue" class="java.lang.String"/>
+	<field name="tbl_audit_alertsetting_NewValue" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="19" width="790" height="20" uuid="c4860f6b-bc83-4dff-8e48-776895c8b4c2"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AUDIT TRAIL FOR ALERT SETTING OF " + $F{tbl_audit_alertsetting_Area}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="74">
+			<staticText>
+				<reportElement x="10" y="25" width="81" height="20" uuid="5b723e38-26c9-424f-aecc-e916118c0882"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="25" width="100" height="20" uuid="5e2c5813-a184-4e67-be42-18afa6dc5d79"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="3" width="81" height="20" uuid="71cea5c2-4cfd-4ad0-8c3c-8c366d6ee08b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="3" width="491" height="20" uuid="d6f0338b-7a33-4990-ac7a-ec58f74ed3fa"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + "("+ $P{UserName} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="51" width="80" height="20" uuid="f7eebb7d-17ce-468d-9143-40dcf86a0652"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="375" y="51" width="40" height="20" uuid="6fb19936-7be9-420b-8e8d-2cb54d91092d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="130">
+			<componentElement>
+				<reportElement key="table" style="table" x="2" y="19" width="790" height="99" uuid="3e17be3c-a341-4523-8120-5d4833012b6b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AlertDataSet" uuid="d62e8f92-8f3b-4990-ab96-eb9f2a87ce72">
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="63" uuid="91b393e0-7fa6-4885-932c-9a3074d5f16a">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="63" height="20" uuid="d6f749bc-165d-4d4b-a7f1-c3b42842658c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="63" height="20" uuid="c4088ced-e929-4e02-8070-e5affd4e869c"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_alertsetting_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="54" uuid="073aaa05-b08c-4f00-91de-3be3d2a6500a">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="54" height="20" uuid="4ba94848-0aa2-499a-bc95-7ef83fd86e7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="54" height="20" uuid="58303b9b-d7ea-46db-bbcd-3d81401028e6"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="196c0770-357f-42d9-abdf-9f5db73b38ac">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="20" uuid="37e608f1-3212-4644-a07c-6a6c3e5cf3b2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="78" height="20" uuid="c5651862-3c1f-44da-acf2-d81b91fd1044"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_userid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="21d11020-d099-4ba1-a516-d55f201dfb05">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20" uuid="c8bd9572-7c52-4b7d-bb5e-4834a626fa7d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="75" rowSpan="1">
+							<box bottomPadding="0">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="59cbb3b3-4baf-40c1-a7f5-51e1dc12a673"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_username}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="877c92e5-1be5-4233-a7e9-7147fe137bc7">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20" uuid="23e81c4e-44ca-42d3-b1e4-b64bb8fe89ed"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[BATCH]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="982e09aa-b815-4256-907b-a24744f4c97c"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_Batch}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="107" uuid="4b3fa830-a89c-4703-91db-4badc9cdabb8">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="107" height="20" uuid="b04201ce-0b78-47eb-bc48-48759e6fb3b4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRODUCT DETAIL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="75" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="6" y="0" width="98" height="75" uuid="20fec861-aaf6-4c8f-9917-57094b2d47f2"/>
+								<textFieldExpression><![CDATA["ID:"+$F{tbl_audit_alertsetting_ProductId}+"\n"+"Name:"+$F{tbl_audit_alertsetting_ProductName}+"\n"+"PrdVersion:"+$F{tbl_audit_alertsetting_ProductVersion}+"\n"+"Version:"+$F{tbl_audit_alertsetting_Version}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="72d16a85-0d41-4011-b336-c49b67258d7c">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="62" height="20" uuid="e7018205-99eb-4226-8da0-58a7b51ac9fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[OLD VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="62" height="20" uuid="fdfbf1fd-fbe4-4eca-b058-e7ad8667e992"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_OldValue}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="60ccc25b-e200-44b2-95b0-e6b1f3372150">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="62" height="20" uuid="ccbdb524-d874-4c6b-a6de-8f1af2fa8341"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NEW VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="75" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="62" height="20" uuid="f8699054-cdef-4252-818f-fa52622d5ca1"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_NewValue}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="182" uuid="f3d3dd28-c56e-49fd-93f3-f5095e35beb0">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="182" height="20" uuid="c678f70b-0df6-4045-b609-4a30540f5407"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="75" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="182" height="75" uuid="3719200d-6237-4f4e-8077-ae9593f7a86b"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_alertsetting_Remark}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

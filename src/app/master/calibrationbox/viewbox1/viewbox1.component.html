@@ -1,0 +1,103 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>VIEW CALIBRATION BOX</span>
+          </div>
+        </div>
+        <br>
+        <form>
+          <div class="row">
+            <div class="col-md-6" style="margin:auto;">
+              <div class="form-group">
+                <ngx-select
+                [items]="sarr_CalibBoxType"
+                placeholder="Select"
+                (select)="getBoxType($event)">
+                </ngx-select>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="table table-responsive">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped"
+              *ngIf="bln_showTable == true">
+              <thead>
+                <tr style="text-align: center;font-size: small;">
+                  <th>{{str_StdLabel}} Box ID</th>
+                  <th>Certification No</th>
+                  <th>Valid Upto [MM/DD/YYYY] </th>
+                  <th>Last Calibration Date [MM/DD/YYYY] </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let str_Val of sarr_stdTableData">
+                  <td>{{str_Val.CB_ID}}</td>
+                  <td>{{str_Val.CB_CertNo}}</td>
+                  <td>{{str_Val.CB_validDt | date: 'MM/dd/yyyy'}}</td>
+                  <td>{{str_Val.CB_CalibDt | date: 'MM/dd/yyyy'}}</td>
+                  <td>
+                    <ng-template #content let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title" style="color:blue;">{{ str_StdLabel }} Detail</h4>
+                        <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h5>{{str_StdLabel}} Box ID : {{str_StdID}}</h5>
+                        <h5
+                         style="margin-left: 70%;margin-top: -5.3%;">No. of {{ str_StdLabel | lowercase }} :
+                          {{int_countWeight}}
+                        </h5>
+                        <hr />
+                        <div class="table-responsive" style="overflow-y: auto; overflow-x: hidden;height:250px;">
+                          <table class="table table-bordered table-striped">
+                            <thead>
+                              <tr>
+                                <th>{{ str_StdLabel }}</th>
+                                <th>Unit</th>
+                                <th *ngIf="int_IdentificationNo == 1">Identification No.</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let strValue of sarr_stdWeightTableData">
+                                <td>{{strValue.CB_Wt | number : '.'+strValue.CB_DP}}</td>
+                                <td>{{strValue.CB_unit}}</td>
+                                <td *ngIf="int_IdentificationNo == 1">{{strValue.CB_identificationNo}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="c('Close click')">Close
+                      </button>
+                      </div>
+                    </ng-template>
+
+                    <button
+                    type="button"
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="open2(content);getWeightDetail(str_Val)">&nbsp;Weight Detail
+                  </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

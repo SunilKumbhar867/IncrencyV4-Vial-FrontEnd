@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoUserStatus" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="545" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="RepoUserStatusDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="HmiId" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_user_statusreport.`RecNo` AS tbl_user_statusreport_RecNo,
+     tbl_user_statusreport.`UserID` AS tbl_user_statusreport_UserID,
+     tbl_user_statusreport.`UserName` AS tbl_user_statusreport_UserName,
+     tbl_user_statusreport.`Role` AS tbl_user_statusreport_Role,
+     tbl_user_statusreport.`Dept` AS tbl_user_statusreport_Dept,
+     tbl_user_statusreport.`Status` AS tbl_user_statusreport_Status,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_user_statusreport.`HMIID` AS tbl_user_statusreport_HMIID
+FROM
+     `tbl_user_statusreport` tbl_user_statusreport,
+     `tbl_rpt_path` tbl_rpt_path
+where
+tbl_user_statusreport.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="tbl_user_statusreport_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_user_statusreport_UserID" class="java.lang.String"/>
+		<field name="tbl_user_statusreport_UserName" class="java.lang.String"/>
+		<field name="tbl_user_statusreport_Role" class="java.lang.String"/>
+		<field name="tbl_user_statusreport_Dept" class="java.lang.String"/>
+		<field name="tbl_user_statusreport_Status" class="java.lang.String"/>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_user_statusreport_HMIID" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_user_statusreport.`RecNo` AS tbl_user_statusreport_RecNo,
+     tbl_user_statusreport.`UserID` AS tbl_user_statusreport_UserID,
+     tbl_user_statusreport.`UserName` AS tbl_user_statusreport_UserName,
+     tbl_user_statusreport.`Role` AS tbl_user_statusreport_Role,
+     tbl_user_statusreport.`Dept` AS tbl_user_statusreport_Dept,
+     tbl_user_statusreport.`Status` AS tbl_user_statusreport_Status,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_user_statusreport.`HMIID` AS tbl_user_statusreport_HMIID
+FROM
+     `tbl_user_statusreport` tbl_user_statusreport,
+     `tbl_rpt_path` tbl_rpt_path
+where
+tbl_user_statusreport.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="tbl_user_statusreport_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_user_statusreport_UserID" class="java.lang.String"/>
+	<field name="tbl_user_statusreport_UserName" class="java.lang.String"/>
+	<field name="tbl_user_statusreport_Role" class="java.lang.String"/>
+	<field name="tbl_user_statusreport_Dept" class="java.lang.String"/>
+	<field name="tbl_user_statusreport_Status" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_user_statusreport_HMIID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="17" width="534" height="20" uuid="d05124b7-ddea-4bff-846a-266aec407df6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["User " + $F{tbl_user_statusreport_Status} + " Report"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="64">
+			<staticText>
+				<reportElement x="10" y="30" width="81" height="20" uuid="8390164e-b5c4-493c-8f91-783d65baea63"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="99" y="30" width="100" height="20" uuid="72abe9ac-a00f-4f57-8aee-09f8ddbae426"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="730b7e58-4e7b-42d5-b5c7-5b8115ed47dd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="10" width="100" height="20" uuid="c1878e0a-4c6f-4c69-bedf-e0c5d0addda1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="44" width="80" height="20" uuid="1c0cc23a-c76f-4112-abf1-60bcb23b79d7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="323" y="44" width="40" height="20" uuid="217f7533-5b28-4e59-b96c-bb5a9302c5c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="71" splitType="Stretch">
+			<elementGroup>
+				<elementGroup>
+					<componentElement>
+						<reportElement key="table" style="table" x="11" y="0" width="534" height="65" uuid="f9724b77-cfe3-41da-abae-b3914cadab83"/>
+						<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<datasetRun subDataset="RepoUserStatusDataset" uuid="39c4337f-feb6-4562-9a3f-e6443b237426">
+								<datasetParameter name="UserId">
+									<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="UserName">
+									<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="HmiId">
+									<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+								</datasetParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+							<jr:column width="108" uuid="4231dd44-57f6-4e58-b3b3-3b972df50d9f">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="108" height="30" uuid="44b2dab3-3d19-4e9f-827f-d24f452b51ec"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[USER ID]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="108" height="30" uuid="503c48a1-8612-498c-87a8-326913074863"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_user_statusreport_UserID})) || ( "".equals($F{tbl_user_statusreport_UserID}))) ? "NA" : $F{tbl_user_statusreport_UserID}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="128" uuid="17ee96a3-4f39-4b96-b886-8267ed1fa087">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="128" height="30" uuid="3388d847-d1f5-4c8d-b5a4-a87130a38e91"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[USER NAME]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="128" height="30" uuid="2ab7343d-36c0-4d46-8f75-54cdd45f9368"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_user_statusreport_UserName})) || ( "".equals($F{tbl_user_statusreport_UserName}))) ? "NA" : $F{tbl_user_statusreport_UserName}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="144" uuid="6d4912e7-cd61-4904-b559-92d2610dfa20">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="144" height="30" uuid="0e3dc9eb-7ce3-428d-a240-62ea3fe878ce"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[ROLE]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="144" height="30" uuid="ef5a1275-7d50-4db4-a057-dea19b7b5788"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_user_statusreport_Role})) || ( "".equals($F{tbl_user_statusreport_Role}))) ? "NA" : $F{tbl_user_statusreport_Role}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="152" uuid="c5e1f121-21b1-4a73-97b2-07d3436ba451">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="152" height="30" uuid="e6cb9ec1-f461-4922-aa79-3a73b1d181ec"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[DEPARTMENT]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="152" height="30" uuid="e021d34f-b2be-4e1d-a82d-4c78c5aec850"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_user_statusreport_Dept})) || ( "".equals($F{tbl_user_statusreport_Dept}))) ? "NA" : $F{tbl_user_statusreport_Dept}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:table>
+					</componentElement>
+				</elementGroup>
+			</elementGroup>
+		</band>
+	</summary>
+</jasperReport>

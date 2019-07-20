@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditSystem" language="groovy" pageWidth="842" pageHeight="650" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="201c3b0b-0f3f-4e74-9883-5459af08658f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="SystemDataSet" uuid="3f9e676f-4026-46fa-bfba-5c79259c0f94">
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_cubicle.`RecNo` AS tbl_audit_cubicle_RecNo,
+     tbl_audit_cubicle.`dt` AS tbl_audit_cubicle_dt,
+     tbl_audit_cubicle.`tm` AS tbl_audit_cubicle_tm,
+     tbl_audit_cubicle.`userid` AS tbl_audit_cubicle_userid,
+     tbl_audit_cubicle.`username` AS tbl_audit_cubicle_username,
+     tbl_audit_cubicle.`ACT` AS tbl_audit_cubicle_ACT,
+     tbl_audit_cubicle.`Remark` AS tbl_audit_cubicle_Remark,
+     tbl_audit_cubicle.`CubicleNo` AS tbl_audit_cubicle_CubicleNo,
+     tbl_audit_cubicle.`OldData` AS tbl_audit_cubicle_OldData,
+     tbl_audit_cubicle.`NewData` AS tbl_audit_cubicle_NewData,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_audit_cubicle.`Area` AS tbl_audit_cubicle_Area
+FROM
+     `tbl_audit_cubicle` tbl_audit_cubicle,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_cubicle.`Area` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+     and tbl_audit_cubicle.`dt` >= $P{FromDate}
+ AND tbl_audit_cubicle.`dt` <= $P{ToDate}
+ORDER BY
+     tbl_audit_cubicle.`dt` DESC,
+     tbl_audit_cubicle.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_cubicle_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_cubicle_tm" class="java.sql.Time"/>
+		<field name="tbl_audit_cubicle_userid" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_username" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_CubicleNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_cubicle_OldData" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_NewData" class="java.lang.String"/>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_audit_cubicle_Area" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_cubicle.`RecNo` AS tbl_audit_cubicle_RecNo,
+     tbl_audit_cubicle.`dt` AS tbl_audit_cubicle_dt,
+     tbl_audit_cubicle.`tm` AS tbl_audit_cubicle_tm,
+     tbl_audit_cubicle.`userid` AS tbl_audit_cubicle_userid,
+     tbl_audit_cubicle.`username` AS tbl_audit_cubicle_username,
+     tbl_audit_cubicle.`ACT` AS tbl_audit_cubicle_ACT,
+     tbl_audit_cubicle.`Remark` AS tbl_audit_cubicle_Remark,
+     tbl_audit_cubicle.`CubicleNo` AS tbl_audit_cubicle_CubicleNo,
+     tbl_audit_cubicle.`OldData` AS tbl_audit_cubicle_OldData,
+     tbl_audit_cubicle.`NewData` AS tbl_audit_cubicle_NewData,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_audit_cubicle.`Area` AS tbl_audit_cubicle_Area
+FROM
+     `tbl_audit_cubicle` tbl_audit_cubicle,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_cubicle.`Area` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+     and tbl_audit_cubicle.`dt` >= $P{FromDate}
+ AND tbl_audit_cubicle.`dt` <= $P{ToDate}
+ORDER BY
+     tbl_audit_cubicle.`dt` DESC,
+     tbl_audit_cubicle.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_cubicle_dt" class="java.sql.Date"/>
+	<field name="tbl_audit_cubicle_tm" class="java.sql.Time"/>
+	<field name="tbl_audit_cubicle_userid" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_username" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_CubicleNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_cubicle_OldData" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_NewData" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_audit_cubicle_Area" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="237" y="18" width="312" height="24" uuid="b28f7f27-eaf2-4b43-bf4e-fc9e840fceec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR SYSTEM SETTING]]></text>
+			</staticText>
+			<image>
+				<reportElement x="712" y="6" width="78" height="50" uuid="f84e7b8f-15cb-4b54-807e-04ed54fef4a9"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="65">
+			<staticText>
+				<reportElement x="10" y="32" width="81" height="20" uuid="5b723e38-26c9-424f-aecc-e916118c0882"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH.mm.ss">
+				<reportElement x="99" y="32" width="100" height="20" uuid="5e2c5813-a184-4e67-be42-18afa6dc5d79"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="71cea5c2-4cfd-4ad0-8c3c-8c366d6ee08b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="10" width="559" height="20" uuid="d6f0338b-7a33-4990-ac7a-ec58f74ed3fa"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="42" width="80" height="20" uuid="f7eebb7d-17ce-468d-9143-40dcf86a0652"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="405" y="42" width="40" height="20" uuid="6fb19936-7be9-420b-8e8d-2cb54d91092d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="86">
+			<componentElement>
+				<reportElement key="table" style="table" x="2" y="11" width="800" height="63" uuid="3e17be3c-a341-4523-8120-5d4833012b6b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="SystemDataSet" uuid="bbfc5975-5b4b-49f6-81ce-2917f6ee4b93">
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="74" uuid="91b393e0-7fa6-4885-932c-9a3074d5f16a">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="74" height="30" uuid="d6f749bc-165d-4d4b-a7f1-c3b42842658c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="74" height="30" uuid="c4088ced-e929-4e02-8070-e5affd4e869c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_cubicle_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="86" uuid="073aaa05-b08c-4f00-91de-3be3d2a6500a">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="86" height="30" uuid="4ba94848-0aa2-499a-bc95-7ef83fd86e7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="86" height="30" uuid="58303b9b-d7ea-46db-bbcd-3d81401028e6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="96" uuid="196c0770-357f-42d9-abdf-9f5db73b38ac">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="96" height="30" uuid="37e608f1-3212-4644-a07c-6a6c3e5cf3b2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="96" height="30" uuid="c5651862-3c1f-44da-acf2-d81b91fd1044"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_cubicle_userid}) ? "NA" : $F{tbl_audit_cubicle_userid}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="104" uuid="21d11020-d099-4ba1-a516-d55f201dfb05">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="30" uuid="c8bd9572-7c52-4b7d-bb5e-4834a626fa7d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box bottomPadding="0">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="104" height="30" uuid="59cbb3b3-4baf-40c1-a7f5-51e1dc12a673"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_cubicle_username}) ? "NA" : $F{tbl_audit_cubicle_username}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="877c92e5-1be5-4233-a7e9-7147fe137bc7">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="76" height="30" uuid="23e81c4e-44ca-42d3-b1e4-b64bb8fe89ed"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[AREA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="76" height="30" uuid="982e09aa-b815-4256-907b-a24744f4c97c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_cubicle_Area}) ? "NA" : "Area="+$F{tbl_audit_cubicle_Area} + ",Cubicle No.=" + $F{tbl_audit_cubicle_CubicleNo}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="114" uuid="72d16a85-0d41-4011-b336-c49b67258d7c">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="114" height="30" uuid="e7018205-99eb-4226-8da0-58a7b51ac9fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[OLD VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="114" height="30" uuid="04a2437c-217e-434a-9cfd-e65c68513058"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_cubicle_OldData}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="94" uuid="60ccc25b-e200-44b2-95b0-e6b1f3372150">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="94" height="30" uuid="ccbdb524-d874-4c6b-a6de-8f1af2fa8341"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NEW VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="94" height="30" uuid="334b5937-d6ff-4566-81ea-8b34453fc49b"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_cubicle_NewData}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="155" uuid="f3d3dd28-c56e-49fd-93f3-f5095e35beb0">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="155" height="30" uuid="918cd877-05f4-41d4-92a5-097308013d1e"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="155" height="30" uuid="15cf850f-8d56-4f90-a558-0272b6698906"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_cubicle_Remark}) ? "NA" : $F{tbl_audit_cubicle_Remark}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

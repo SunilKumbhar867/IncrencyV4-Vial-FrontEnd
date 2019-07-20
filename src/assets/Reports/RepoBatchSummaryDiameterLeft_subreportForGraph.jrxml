@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoBatchSummaryVernierLeft_subreportForGraph" language="groovy" pageWidth="585" pageHeight="225" columnWidth="585" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cc864282-6f10-4e30-b7ca-cbcf5b468bf1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_detail_temp_hdlb.`SerNo` AS tbl_batchsummary_detail_temp_hdlb_SerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RepSerNo` AS tbl_batchsummary_detail_temp_hdlb_RepSerNo,
+     tbl_batchsummary_detail_temp_hdlb.`RecSeqNo` AS tbl_batchsummary_detail_temp_hdlb_RecSeqNo,
+     tbl_batchsummary_detail_temp_hdlb.`Date` AS tbl_batchsummary_detail_temp_hdlb_Date,
+     tbl_batchsummary_detail_temp_hdlb.`Time` AS tbl_batchsummary_detail_temp_hdlb_Time,
+     tbl_batchsummary_detail_temp_hdlb.`InstrumentID` AS tbl_batchsummary_detail_temp_hdlb_InstrumentID,
+     tbl_batchsummary_detail_temp_hdlb.`Side` AS tbl_batchsummary_detail_temp_hdlb_Side,
+     tbl_batchsummary_detail_temp_hdlb.`MinHard` AS tbl_batchsummary_detail_temp_hdlb_MinHard,
+     tbl_batchsummary_detail_temp_hdlb.`MaxHard` AS tbl_batchsummary_detail_temp_hdlb_MaxHard,
+     tbl_batchsummary_detail_temp_hdlb.`AvgHard` AS tbl_batchsummary_detail_temp_hdlb_AvgHard,
+     tbl_batchsummary_detail_temp_hdlb.`MinThick` AS tbl_batchsummary_detail_temp_hdlb_MinThick,
+     tbl_batchsummary_detail_temp_hdlb.`MaxThick` AS tbl_batchsummary_detail_temp_hdlb_MaxThick,
+     tbl_batchsummary_detail_temp_hdlb.`AvgThick` AS tbl_batchsummary_detail_temp_hdlb_AvgThick,
+     tbl_batchsummary_detail_temp_hdlb.`MinDLB` AS tbl_batchsummary_detail_temp_hdlb_MinDLB,
+     tbl_batchsummary_detail_temp_hdlb.`MaxDLB` AS tbl_batchsummary_detail_temp_hdlb_MaxDLB,
+     tbl_batchsummary_detail_temp_hdlb.`AvgDLB` AS tbl_batchsummary_detail_temp_hdlb_AvgDLB,
+     tbl_batchsummary_detail_temp_hdlb.`TestResult` AS tbl_batchsummary_detail_temp_hdlb_TestResult,
+     tbl_batchsummary_detail_temp_hdlb.`UserID` AS tbl_batchsummary_detail_temp_hdlb_UserID,
+     tbl_batchsummary_detail_temp_hdlb.`UserName` AS tbl_batchsummary_detail_temp_hdlb_UserName,
+     tbl_batchsummary_detail_temp_hdlb.`HMIID` AS tbl_batchsummary_detail_temp_hdlb_HMIID,
+     tbl_batchsummary_master_temp_hdlb.`SerNo` AS tbl_batchsummary_master_temp_hdlb_SerNo,
+     tbl_batchsummary_master_temp_hdlb.`RepSerNo` AS tbl_batchsummary_master_temp_hdlb_RepSerNo,
+     tbl_batchsummary_master_temp_hdlb.`BFGCode` AS tbl_batchsummary_master_temp_hdlb_BFGCode,
+     tbl_batchsummary_master_temp_hdlb.`ProductName` AS tbl_batchsummary_master_temp_hdlb_ProductName,
+     tbl_batchsummary_master_temp_hdlb.`PVersion` AS tbl_batchsummary_master_temp_hdlb_PVersion,
+     tbl_batchsummary_master_temp_hdlb.`Version` AS tbl_batchsummary_master_temp_hdlb_Version,
+     tbl_batchsummary_master_temp_hdlb.`PrdType` AS tbl_batchsummary_master_temp_hdlb_PrdType,
+     tbl_batchsummary_master_temp_hdlb.`CubType` AS tbl_batchsummary_master_temp_hdlb_CubType,
+     tbl_batchsummary_master_temp_hdlb.`BatchNo` AS tbl_batchsummary_master_temp_hdlb_BatchNo,
+     tbl_batchsummary_master_temp_hdlb.`Stage` AS tbl_batchsummary_master_temp_hdlb_Stage,
+     tbl_batchsummary_master_temp_hdlb.`Dept` AS tbl_batchsummary_master_temp_hdlb_Dept,
+     tbl_batchsummary_master_temp_hdlb.`NomHard` AS tbl_batchsummary_master_temp_hdlb_NomHard,
+     tbl_batchsummary_master_temp_hdlb.`LwrHard` AS tbl_batchsummary_master_temp_hdlb_LwrHard,
+     tbl_batchsummary_master_temp_hdlb.`UppHard` AS tbl_batchsummary_master_temp_hdlb_UppHard,
+     tbl_batchsummary_master_temp_hdlb.`UnitHard` AS tbl_batchsummary_master_temp_hdlb_UnitHard,
+     tbl_batchsummary_master_temp_hdlb.`NomThick` AS tbl_batchsummary_master_temp_hdlb_NomThick,
+     tbl_batchsummary_master_temp_hdlb.`LwrThick` AS tbl_batchsummary_master_temp_hdlb_LwrThick,
+     tbl_batchsummary_master_temp_hdlb.`UppThick` AS tbl_batchsummary_master_temp_hdlb_UppThick,
+     tbl_batchsummary_master_temp_hdlb.`NomDLB` AS tbl_batchsummary_master_temp_hdlb_NomDLB,
+     tbl_batchsummary_master_temp_hdlb.`LwrDLB` AS tbl_batchsummary_master_temp_hdlb_LwrDLB,
+     tbl_batchsummary_master_temp_hdlb.`UppDLB` AS tbl_batchsummary_master_temp_hdlb_UppDLB,
+     tbl_batchsummary_master_temp_hdlb.`DLBParamName` AS tbl_batchsummary_master_temp_hdlb_DLBParamName,
+     tbl_batchsummary_master_temp_hdlb.`Side` AS tbl_batchsummary_master_temp_hdlb_Side,
+     tbl_batchsummary_master_temp_hdlb.`BatchCompleted` AS tbl_batchsummary_master_temp_hdlb_BatchCompleted,
+     tbl_batchsummary_master_temp_hdlb.`IsArchived` AS tbl_batchsummary_master_temp_hdlb_IsArchived,
+     tbl_batchsummary_master_temp_hdlb.`HMIID` AS tbl_batchsummary_master_temp_hdlb_HMIID
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_detail_temp_hdlb` tbl_batchsummary_detail_temp_hdlb,
+     `tbl_batchsummary_master_temp_hdlb` tbl_batchsummary_master_temp_hdlb
+WHERE
+     tbl_batchsummary_master_temp_hdlb.`HMIID` = $P{HmiId}
+ AND (tbl_batchsummary_detail_temp_hdlb.`Side` = "LEFT"
+  OR tbl_batchsummary_detail_temp_hdlb.`Side` = "NA")]]>
+	</queryString>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Date" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Time" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_InstrumentID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MinDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_MaxDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_AvgDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_TestResult" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_hdlb_HMIID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_ProductName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_PVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_PrdType" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Stage" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Dept" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppHard" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UnitHard" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppThick" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_NomDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_LwrDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_UppDLB" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_DLBParamName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_BatchCompleted" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_IsArchived" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_hdlb_HMIID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="140">
+			<xyLineChart>
+				<chart isShowLegend="true" evaluationTime="Report" customizerClass="indLimitsDifferentSetShapeAndSize.IndLimitsDifferentSetShapeAndSize" renderType="draw" theme="default">
+					<reportElement x="1" y="1" width="584" height="139" uuid="846955d8-80bc-474c-9449-c1b4f621f07d">
+						<propertyExpression name="net.sf.jasperreports.chart.domain.axis.tick.interval"><![CDATA[($V{COLUMN_COUNT}<=25)? "1" :
+    (($V{COLUMN_COUNT}<=40)) ? "2":
+        (($V{COLUMN_COUNT}<=60)) ? "4":
+          (($V{COLUMN_COUNT}<=90)) ? "6":
+            (($V{COLUMN_COUNT}<=120)) ? "8":"10"]]></propertyExpression>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom">
+						<font fontName="Calibri" size="9"/>
+					</chartLegend>
+				</chart>
+				<xyDataset>
+					<xySeries>
+						<seriesExpression><![CDATA["Standard"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_NomDLB}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Upper"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UppDLB}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Lower"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_LwrDLB}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Min"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MinDLB}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Max"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_hdlb_MaxDLB}]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
+				<linePlot isShowLines="true" isShowShapes="true">
+					<plot>
+						<seriesColor seriesOrder="0" color="#006633"/>
+						<seriesColor seriesOrder="1" color="#FF0000"/>
+						<seriesColor seriesOrder="2" color="#FF3333"/>
+						<seriesColor seriesOrder="3" color="#0000FF"/>
+						<seriesColor seriesOrder="4" color="#990099"/>
+					</plot>
+					<categoryAxisLabelExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_Side}.equals( "NA" )
+?
+"X-Axis : Test no. (NA)"
+:
+"X-Axis : Test no. (LHS)"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat tickLabelMask="0" verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Calibri" size="9"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_DLBParamName} + "(mm)"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat tickLabelMask="0.00" verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Calibri" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_LwrDLB}-0.01]]></rangeAxisMinValueExpression>
+					<rangeAxisMaxValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_hdlb_UppDLB}+0.01]]></rangeAxisMaxValueExpression>
+				</linePlot>
+			</xyLineChart>
+		</band>
+	</summary>
+</jasperReport>

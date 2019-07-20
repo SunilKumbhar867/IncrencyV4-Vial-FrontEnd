@@ -1,0 +1,393 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}">
+        </ngx-loading>
+        <form [formGroup]="addBalance" (ngSubmit)="onFormSubmit()">
+          <div class="card">
+            <div class="card-body">
+              <div class="row" style="background-color:#4680FF; padding:10px;">
+                <div class="col-lg-12">
+                  <span style='text-align: center;color:white'>EDIT BALANCE DETAIL</span>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>
+                    Balance Code No :
+                  </label>
+                  <ngx-select [formControl]="balID" [items]="balanceData" placeholder="Select Balance Code No"
+                    (select)="doSelect($event)">
+                  </ngx-select>
+                  <div [class.disabled]="!bln_editmode">
+                    <br>
+                    <label>
+                      Model No :
+                    </label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="modelNo">
+                    </div>
+                    <div *ngIf="!modelNo.valid && modelNo.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{modelNo?.errors['required']}}
+                    </div>
+                    <br>
+                    <label>
+                      Make :
+                    </label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="make">
+                    </div>
+                    <div *ngIf="!make.valid && make.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{make?.errors['required']}}
+                    </div>
+                    <br>
+                    <label>
+                      Serial No :
+                    </label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="serialNo">
+                    </div>
+                    <div *ngIf="!serialNo.valid && serialNo.touched"
+                      style="color:red;margin-top:3px;font-weight: bold;">
+                      {{serialNo?.errors['required']}}
+                    </div>
+                    <!-- <label>
+                      Deparment
+                    </label>
+                    <ngx-select formControlName="department"  [items]="department" placeholder="Select department"
+                      class="select">
+                    </ngx-select> -->
+                    <br>
+                    <label>
+                      Select Unit :
+                    </label>
+                    <ngx-select style="padding: 6px;" formControlName="selectedUnit" [items]="unitData"
+                      placeholder="Select Unit">
+                    </ngx-select>
+                    <br>
+                    <label>
+                      Least Count :
+                    </label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="leastCount"
+                        (keypress)="onlyNumbersWithDecimal($event);">
+                    </div>
+                    <div *ngIf="!leastCount.valid && leastCount.touched"
+                      style="color:red;margin-top:3px;font-weight: bold;">
+                      {{leastCount?.errors['required']}}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <br>
+                        <label>
+                          Minimum Capacity
+                        </label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" formControlName="minCapacity"
+                            (keypress)="onlyNumbersWithDecimal($event);">
+                        </div>
+                        <div *ngIf="!minCapacity.valid && minCapacity.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{minCapacity?.errors['required']}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <br>
+                        <label>
+                          Maximum Capacity
+                        </label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" formControlName="maxCapacity"
+                            (keypress)="onlyNumbersWithDecimal($event);">
+                        </div>
+                        <div *ngIf="!maxCapacity.valid && maxCapacity.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{maxCapacity?.errors['required']}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <br>
+                        <label>
+                          Minimum Operating Range
+                        </label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" formControlName="minOperatingRange"
+                            (keypress)="onlyNumbersWithDecimal($event);">
+                        </div>
+                        <div *ngIf="!minOperatingRange.valid && minOperatingRange.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{minOperatingRange?.errors['required']}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <br>
+                        <label>
+                          Maximum Operating Range
+                        </label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" formControlName="maxOperatingRange"
+                            (keypress)="onlyNumbersWithDecimal($event);">
+                        </div>
+                        <div *ngIf="!maxOperatingRange.valid && maxOperatingRange.touched"
+                          style="color:red;margin-top:3px;font-weight: bold;">
+                          {{maxOperatingRange?.errors['required']}}
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+                <div class="col-md-6" [hidden]="!isCalibration" [class.disabled]=" !bln_editmode">
+                  <div class="row" style="background-color:#4680FF; padding:10px;">
+                    <div class="col-lg-12">
+                      <span style='text-align: center;color:white'>PERIODIC CALIBRATION</span>
+                    </div>
+                  </div><br><br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="pretty p-default p-round" (click)="radio(e.value)">
+                        <input type="radio" formControlName="cal_store_type" value="set_days" checked #e>
+                        <div class="state">
+                          <label>Set Days</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9" style="background-color:#e6eeff;padding:5%" [class.disabled]="HideRadioPart">
+                      <mat-form-field>
+                        <input [min]="minDate" matInput md-min-date="minDate" matInput
+                          formControlName="calibration_date" [matDatepicker]="picker1" style="font-size:18px"
+                          placeholder="Calibration date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                      <div class="input-group">
+                        <input type="text" class="form-control" formControlName="duration" placeholder="Enter duration"
+                          (keypress)="onlyNumbers($event);">
+                      </div>
+                      <div *ngIf="!duration.valid && duration.touched"
+                        style="color:red;margin-top:3px;font-weight: bold;">
+                        {{duration?.errors['isZeroEntry']}}
+                      </div>
+                    </div>
+                  </div><br><br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="pretty p-default p-round" (click)="radio(d.value)">
+                        <input type="radio" formControlName="cal_store_type" value="set_dates" #d>
+                        <div class="state">
+                          <label>Set Dates</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9" style="background-color:#e6eeff;" [class.disabled]="!HideRadioPart">
+                      <table>
+                        <tr>
+                          <td align="center" style="padding:15px;">
+                            <div
+                              style="height:150px;width:70px;border:1px solid #777;overflow-y: scroll;background-color:white;">
+                              <div *ngFor="let day of iarr_monthDates" (click)="selectDay(day, $event)"
+                                [class.highlighted]="day === highlight">{{day}}<br></div>
+                            </div>
+                          </td>
+                          <td align="center" style="padding:15px;">
+                            <button type="button" (click)="push()" class="btn btn-inverse"><i
+                                class=" icon-arrow-right"></i></button><br><br>
+                            <button type="button" (click)="pop()" class="btn btn-inverse"><i
+                                class=" icon-arrow-left"></i></button>
+                          </td>
+                          <td align="center" style="padding:15px;">
+                            <div
+                              style="height:150px;width:70px;border:1px solid #777;overflow-y: scroll;background-color:white;">
+                              <div *ngFor="let day of selecteDaysArray" (click)="selectDay1(day, $event)"
+                                [class.highlighted]="day === highlight1">{{day}}<br></div>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div><br><br>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Set Reminder</label>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="input-group">
+                        <input type="text" class="form-control" formControlName="set_reminder"
+                          (keypress)="onlyNumbers($event);">
+                      </div>
+                      <div *ngIf="!set_reminder.valid && set_reminder.touched"
+                        style="color:red;margin-top:3px;font-weight: bold;">
+                        {{set_reminder?.errors['required']}}
+                      </div>
+                      <div *ngIf="!set_reminder.valid && set_reminder.touched"
+                        style="color:red;margin-top:3px;font-weight: bold;">
+                        {{set_reminder?.errors['isZeroEntry']}}
+                      </div>
+                    </div>
+                  </div><br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div [hidden]="!isCalibration" [class.disabled]="!bln_editmode">
+                <div class="row" style="background-color:#4680FF; padding:10px;">
+                  <div class="col-lg-12">
+                    <span style='text-align: center;color:white'>CALIBRATION WEIGHTS</span>&nbsp;&nbsp;
+                    <button type="button" (click)="addWeights()" class="btn btn1 btn-inverse"><i
+                        class="icofont icofont-plus"></i>Add
+                      Weights</button>
+                    <!-- loop throught units -->
+                  </div>
+                </div>
+                <div class="basic-container">
+                  <br>
+                  <table class="table table-bordered" width="100%" formArrayName="weights">
+                    <thead style="background-color:#cccccc">
+                      <tr style="font-size:14px;text-align: center">
+                        <td>Std Weight</td>
+                        <td>Neg Tol</td>
+                        <td>Pos Tol</td>
+                        <td>Daily</td>
+                        <td>Linearity</td>
+                        <td>Eccentricity </td>
+                        <td>Repeatability </td>
+                        <td>Periodic</td>
+                        <td>Uncertainty</td>
+                        <td>Action</td>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let unitWt of DynamicFormArray; let i=index">
+
+
+                      <tr [formGroupName]="i">
+
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" formControlName="std_wt" style="max-width: 80px;"
+                              (keypress)="onlyNumbersWithDecimal($event);">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" formControlName="neg_Tol" style="max-width: 80px;"
+                              (keypress)="onlyNumbersWithDecimal($event);">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" formControlName="pos_Tol" style="max-width: 80px;"
+                              (keypress)="onlyNumbersWithDecimal($event);">
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="daily" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="linerity" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="eccentricity" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="repetability" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="periodic" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td align="center" valign="center">
+                          <div class="pretty p-svg p-curve">
+                            <input type="checkbox" formControlName="uncertinity" (change)="checkDisabling()" />
+                            <div class="state p-primary">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span>
+                            <button type="button" (click)="removeWeight(i)" class="btn btn1 btn-danger">Remove</button>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="text-center">
+                <!-- [disabled]="!addBalance.valid" -->
+                <button type="button" [class.disabled]="bln_editmode" (click)="editMode()"
+                  class="btn btn-warning">Edit</button>
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" [disabled]="!addBalance.valid" [ngClass]="{disabledBtn:!addBalance.valid || !bln_editmode }"
+                  [class.disabled]="!bln_editmode" class="btn btn-primary">Save Changes</button>
+                &nbsp;&nbsp;&nbsp;
+                <button (click)="resetForm()" type="button"
+                  class="btn btn-default waves-effect">Reset</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

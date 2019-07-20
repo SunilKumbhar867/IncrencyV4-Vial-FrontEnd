@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoViewReasonPrintout" language="groovy" pageWidth="650" pageHeight="842" whenNoDataType="BlankPage" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="1252c73c-99e1-4d15-b1b5-ea008596d51f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Print Reason Dataset" uuid="07f69087-e148-4845-af86-4b9373bc5e0f">
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(Print_Tm,'%H:%i:%s')TIMEONLY,
+     tbl_printoutreason_weighingreport.`RecNo` AS tbl_printoutreason_weighingreport_RecNo,
+     tbl_printoutreason_weighingreport.`RepSrNo` AS tbl_printoutreason_weighingreport_RepSrNo,
+     tbl_printoutreason_weighingreport.`PrintNo` AS tbl_printoutreason_weighingreport_PrintNo,
+     tbl_printoutreason_weighingreport.`Reason` AS tbl_printoutreason_weighingreport_Reason,
+     tbl_printoutreason_weighingreport.`Title` AS tbl_printoutreason_weighingreport_Title,
+     tbl_printoutreason_weighingreport.`UserID` AS tbl_printoutreason_weighingreport_UserID,
+     tbl_printoutreason_weighingreport.`UserName` AS tbl_printoutreason_weighingreport_UserName,
+     tbl_printoutreason_weighingreport.`Print_Dt` AS tbl_printoutreason_weighingreport_Print_Dt,
+     tbl_printoutreason_weighingreport.`Print_Tm` AS tbl_printoutreason_weighingreport_Print_Tm,
+     tbl_printoutreason_weighingreport.`IsIncomplete` AS tbl_printoutreason_weighingreport_IsIncomplete,
+     tbl_printoutreason_weighingreport.`HMIID` AS tbl_printoutreason_weighingreport_HMIID,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_printoutreason_weighingreport` tbl_printoutreason_weighingreport,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+      tbl_printoutreason_weighingreport.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_printoutreason_weighingreport_RepSrNo" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_PrintNo" class="java.lang.Integer"/>
+		<field name="tbl_printoutreason_weighingreport_Reason" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_Title" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_UserID" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_UserName" class="java.lang.String"/>
+		<field name="tbl_printoutreason_weighingreport_Print_Dt" class="java.sql.Date"/>
+		<field name="tbl_printoutreason_weighingreport_Print_Tm" class="java.sql.Time"/>
+		<field name="tbl_printoutreason_weighingreport_IsIncomplete" class="java.lang.Boolean"/>
+		<field name="tbl_printoutreason_weighingreport_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(Print_Tm,'%H:%i:%s')TIMEONLY,
+     tbl_printoutreason_weighingreport.`RecNo` AS tbl_printoutreason_weighingreport_RecNo,
+     tbl_printoutreason_weighingreport.`RepSrNo` AS tbl_printoutreason_weighingreport_RepSrNo,
+     tbl_printoutreason_weighingreport.`PrintNo` AS tbl_printoutreason_weighingreport_PrintNo,
+     tbl_printoutreason_weighingreport.`Reason` AS tbl_printoutreason_weighingreport_Reason,
+     tbl_printoutreason_weighingreport.`Title` AS tbl_printoutreason_weighingreport_Title,
+     tbl_printoutreason_weighingreport.`UserID` AS tbl_printoutreason_weighingreport_UserID,
+     tbl_printoutreason_weighingreport.`UserName` AS tbl_printoutreason_weighingreport_UserName,
+     tbl_printoutreason_weighingreport.`Print_Dt` AS tbl_printoutreason_weighingreport_Print_Dt,
+     tbl_printoutreason_weighingreport.`Print_Tm` AS tbl_printoutreason_weighingreport_Print_Tm,
+     tbl_printoutreason_weighingreport.`IsIncomplete` AS tbl_printoutreason_weighingreport_IsIncomplete,
+     tbl_printoutreason_weighingreport.`HMIID` AS tbl_printoutreason_weighingreport_HMIID,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_printoutreason_weighingreport` tbl_printoutreason_weighingreport,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+      tbl_printoutreason_weighingreport.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_printoutreason_weighingreport_RepSrNo" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_PrintNo" class="java.lang.Integer"/>
+	<field name="tbl_printoutreason_weighingreport_Reason" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_Title" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_UserID" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_UserName" class="java.lang.String"/>
+	<field name="tbl_printoutreason_weighingreport_Print_Dt" class="java.sql.Date"/>
+	<field name="tbl_printoutreason_weighingreport_Print_Tm" class="java.sql.Time"/>
+	<field name="tbl_printoutreason_weighingreport_IsIncomplete" class="java.lang.Boolean"/>
+	<field name="tbl_printoutreason_weighingreport_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="13" width="229" height="24" uuid="773b1662-2516-490c-9a8e-51b872625356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Print Reason For Printout]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="36" width="420" height="20" uuid="4327cc20-eb26-4d0d-a0b1-54fa75817827"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_printoutreason_weighingreport_Title}.equals( "1" ) ? "INDIVIDUAL" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "2" ) ? "GROUP" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "3" ) ? "THICKNESS" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "4" ) ? "BREADTH" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "5" ) ? "LENGTH" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "6" ) ? "DIAMETER" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "7" ) ? "HARDNESS" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "8" ) ? "FRIABILITY" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "VernierCalibration" ) ? "VERNIER CALIBRATION" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "PeriodicCalibration" ) ? "BALANCE-PERIODIC CALIBRATION" :
+$F{tbl_printoutreason_weighingreport_Title}.equals( "DailyCalibration" ) ? "BALANCE-DAILY CALIBRATION" : ""
+]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="73">
+			<staticText>
+				<reportElement x="10" y="36" width="81" height="20" uuid="8ce6d9ed-b741-41ca-9ce9-b4004eac83b4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="99" y="36" width="100" height="20" uuid="dc54f6db-2756-4f20-9347-27564b6a5200"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="034b6757-fa52-44e1-99f1-d8e5594e2d1c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="10" width="450" height="20" uuid="83cc8686-490a-4eb6-bafd-0978fd1d9df8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="49" width="80" height="20" uuid="6361abb6-43d8-4725-9a2f-e1fbd045e914"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="375" y="49" width="40" height="20" uuid="47df9f43-c0a7-4c57-b4bb-c654bb3c3873"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<componentElement>
+				<reportElement key="table" style="table" x="12" y="0" width="590" height="50" uuid="33dffe12-b4fb-4609-8131-c2ecb97f0fa7"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Print Reason Dataset" uuid="ceefb398-1d01-43c1-9212-a22a226db380">
+						<datasetParameter name="HmiId">
+							<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="60" uuid="f87a6e7f-c0e6-45a1-a7d4-12f69129ac0b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="2b32ddc3-3ad4-45f4-8650-1220cd9dc50b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="30" uuid="9b6c9f54-1dbb-4917-b74f-2c3680229bd4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{tbl_printoutreason_weighingreport_Print_Dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="3d85d0cb-d967-4285-8db1-871bfb45fffd">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="0e8ec221-3c72-4def-9bfa-f433f38512cd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="30" uuid="f09e64eb-a835-4e26-b1dd-f701facc8c30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="f084e8a1-8b02-4f36-abd6-2d1add152941">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="cf54caaa-6a24-4a39-8805-43c6536373b1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="c1cbfa45-6939-4419-abdd-83722d2e0f6b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_printoutreason_weighingreport_UserID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="f6ab6842-255e-4bb4-bd67-77b02c6776ff">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="bfa548b9-108b-447c-9f02-e7d7c8db61ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="5a74a4f0-478c-4a1a-a022-5e1df030fdfe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_printoutreason_weighingreport_UserName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="d3cea7df-66c3-4822-a765-907c0ff42494">
+						<printWhenExpression><![CDATA[$F{tbl_printoutreason_weighingreport_Title} == "DailyCalibration" || $F{tbl_printoutreason_weighingreport_Title} == "PeriodicCalibration"]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="a4516d0b-e6d3-4c18-b033-d2426cc37b30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[BALANCE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="5f18e6df-d79b-449f-a553-66cd28422a6c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_printoutreason_weighingreport_UserName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="71ef31c1-d8dd-449f-b7e4-3fc9587ab212">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="2028d8f8-2e90-451d-b80c-07c0c9c2b8dc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Print No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="2116dcf7-d73d-41d3-8111-3282f431f5a3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_printoutreason_weighingreport_PrintNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="ebb319d3-8020-44a3-9bdc-7000c0c8e355">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="daf9889d-b4ad-4608-bdd4-d6f6ddf736d2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[REASON]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="110" height="30" uuid="edb790d2-97b8-4afa-99d8-1c6e94a98004"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( $F{tbl_printoutreason_weighingreport_Reason}=="" ? "-" : $F{tbl_printoutreason_weighingreport_Reason} )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

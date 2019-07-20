@@ -1,0 +1,14 @@
+thead
+{
+  background-color:#4680ffeb;
+  color:white;
+  text-align: center;
+  font-family: 'Calibri';
+  font-size: 13px;
+}
+td{
+  width: 20%;
+  height:10%;
+  text-align: center;
+  color:black;
+}

@@ -1,0 +1,54 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="row" style="margin-top:-15px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>ALERT SETTING FOR {{str_areaName}}
+              ({{str_cubicleName}})</span>
+          </div>
+        </div>
+        <br>
+
+        <form [formGroup]="frm_alertSetting">
+
+          <span><b>{{lbl_productCode}} :</b> {{str_productCode}}</span><br/>
+          <span><b>Product Name :</b> {{str_prdName}}</span><br/>
+          <span><b>Product Version :</b> {{str_prdVersion}}</span><br/>
+          <span><b>Version :</b> {{str_version}}</span><br/>
+          <span><b>Batch :</b> {{str_batch}}</span>
+          <hr/>
+          <div class="row">
+            <div class="col-md-6" *ngIf="int_grp == 1">
+              <label>Group :</label>
+              <div class="form-group">
+                <input class="form-control"
+                type="text"
+                formControlName="int_grp"
+                (keypress)="txtgrpDur_enterOnlyNum($event)"
+                maxlength="3">
+
+                <div *ngIf="!int_grp1.valid && int_grp1.touched && int_grp1?.errors['required']"
+                  class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <hr/><br/>
+          <div style="text-align: center">
+            <!--Update Button-->
+          <button class="btn btn-primary" type="button" style="width: 150px;"
+            [disabled]="bln_locked == true || int_grp1.invalid"
+            [ngClass]="{'disabledBtn' : bln_locked == true || int_grp1.invalid}"
+            (click)="btnSave()">Save Changes</button>&nbsp;&nbsp;&nbsp;
+
+            <button class="btn btn-secondary" type="button" (click)="onClose()">Close</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.disabledBtn { cursor: not-allowed; }
+.mat-form-field {
+  display: inherit;
+  position: relative;
+  text-align: left;
+}
+.highlighted {
+  background-color: #93BE52;
+}
+.btn1 {
+  font-size: 12px;
+  padding: 5px 5px;
+}
+.dis {
+  pointer-events: none;
+  opacity: 0.7;
+}
+

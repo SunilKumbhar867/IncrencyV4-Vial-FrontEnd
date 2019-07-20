@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditProduct" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="201c3b0b-0f3f-4e74-9883-5459af08658f">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Audit Product Dataset" uuid="63eb0ac6-fc0a-4a59-93cb-41f837cbc924">
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="prdType" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_audit_product.`RecNo` AS tbl_audit_product_RecNo,
+     tbl_audit_product.`DT` AS tbl_audit_product_DT,
+     tbl_audit_product.`TM` AS tbl_audit_product_TM,
+     tbl_audit_product.`userid` AS tbl_audit_product_userid,
+     tbl_audit_product.`username` AS tbl_audit_product_username,
+     tbl_audit_product.`ProductId` AS tbl_audit_product_ProductId,
+     tbl_audit_product.`ProductName` AS tbl_audit_product_ProductName,
+     tbl_audit_product.`PrdVersion` AS tbl_audit_product_PrdVersion,
+     tbl_audit_product.`Version` AS tbl_audit_product_Version,
+     tbl_audit_product.`ProductType` AS tbl_audit_product_ProductType,
+     tbl_audit_product.`ACT` AS tbl_audit_product_ACT,
+     tbl_audit_product.`type` AS tbl_audit_product_TYPE,
+     tbl_audit_product.`Remark` AS tbl_audit_product_Remark,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_audit_product.`OldValueComp` AS tbl_audit_product_OldValueComp,
+     tbl_audit_product.`NewValueComp` AS tbl_audit_product_NewValueComp,
+     tbl_audit_product.`OldValueGran` AS tbl_audit_product_OldValueGran,
+     tbl_audit_product.`NewValueGran` AS tbl_audit_product_NewValueGran,
+     tbl_audit_product.`OldValueCoat` AS tbl_audit_product_OldValueCoat,
+     tbl_audit_product.`NewValueCoat` AS tbl_audit_product_NewValueCoat,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_audit_product` tbl_audit_product,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+where
+tbl_audit_product.`ProductType` LIKE
+  CASE
+    WHEN
+      $P{SelectedValue} = ''
+    THEN
+      '%'
+  ELSE
+    $P{SelectedValue}
+  END
+ AND
+tbl_audit_product.`ACT` LIKE
+  CASE
+    WHEN
+      $P{SelectedAction} = ''
+    THEN
+      '%'
+  ELSE
+    $P{SelectedAction}
+  END
+  AND
+  tbl_audit_product.`TYPE` LIKE
+  CASE
+    WHEN
+      $P{prdType} = ''
+    THEN
+      '%'
+  ELSE
+    $P{prdType}
+  END
+  AND tbl_audit_product.`dt` >= $P{FromDate}
+ AND tbl_audit_product.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_product.`dt` DESC, tbl_audit_product.`tm` DESC]]>
+		</queryString>
+		<field name="tbl_audit_product_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_product_DT" class="java.sql.Date"/>
+		<field name="tbl_audit_product_TM" class="java.sql.Time"/>
+		<field name="tbl_audit_product_userid" class="java.lang.String"/>
+		<field name="tbl_audit_product_username" class="java.lang.String"/>
+		<field name="tbl_audit_product_ProductId" class="java.lang.String"/>
+		<field name="tbl_audit_product_ProductName" class="java.lang.String"/>
+		<field name="tbl_audit_product_PrdVersion" class="java.lang.String"/>
+		<field name="tbl_audit_product_Version" class="java.lang.String"/>
+		<field name="tbl_audit_product_ProductType" class="java.lang.Integer"/>
+		<field name="tbl_audit_product_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_product_TYPE" class="java.lang.String"/>
+		<field name="tbl_audit_product_Remark" class="java.lang.String"/>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_audit_product_OldValueComp" class="java.lang.String"/>
+		<field name="tbl_audit_product_NewValueComp" class="java.lang.String"/>
+		<field name="tbl_audit_product_OldValueGran" class="java.lang.String"/>
+		<field name="tbl_audit_product_NewValueGran" class="java.lang.String"/>
+		<field name="tbl_audit_product_OldValueCoat" class="java.lang.String"/>
+		<field name="tbl_audit_product_NewValueCoat" class="java.lang.String"/>
+		<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+		<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+		<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+		<sortField name="tbl_audit_product_DT" order="Descending"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="prdType" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_audit_product.`RecNo` AS tbl_audit_product_RecNo,
+     tbl_audit_product.`DT` AS tbl_audit_product_DT,
+     tbl_audit_product.`TM` AS tbl_audit_product_TM,
+     tbl_audit_product.`userid` AS tbl_audit_product_userid,
+     tbl_audit_product.`username` AS tbl_audit_product_username,
+     tbl_audit_product.`ProductId` AS tbl_audit_product_ProductId,
+     tbl_audit_product.`ProductName` AS tbl_audit_product_ProductName,
+     tbl_audit_product.`PrdVersion` AS tbl_audit_product_PrdVersion,
+     tbl_audit_product.`Version` AS tbl_audit_product_Version,
+     tbl_audit_product.`ProductType` AS tbl_audit_product_ProductType,
+     tbl_audit_product.`ACT` AS tbl_audit_product_ACT,
+     tbl_audit_product.`type` AS tbl_audit_product_TYPE,
+     tbl_audit_product.`Remark` AS tbl_audit_product_Remark,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_audit_product.`OldValueComp` AS tbl_audit_product_OldValueComp,
+     tbl_audit_product.`NewValueComp` AS tbl_audit_product_NewValueComp,
+     tbl_audit_product.`OldValueGran` AS tbl_audit_product_OldValueGran,
+     tbl_audit_product.`NewValueGran` AS tbl_audit_product_NewValueGran,
+     tbl_audit_product.`OldValueCoat` AS tbl_audit_product_OldValueCoat,
+     tbl_audit_product.`NewValueCoat` AS tbl_audit_product_NewValueCoat,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_audit_product` tbl_audit_product,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+where
+tbl_audit_product.`ProductType` LIKE
+  CASE
+    WHEN
+      $P{SelectedValue} = ''
+    THEN
+      '%'
+  ELSE
+    $P{SelectedValue}
+  END
+ AND
+tbl_audit_product.`ACT` LIKE
+  CASE
+    WHEN
+      $P{SelectedAction} = ''
+    THEN
+      '%'
+  ELSE
+    $P{SelectedAction}
+  END
+  AND
+  tbl_audit_product.`TYPE` LIKE
+  CASE
+    WHEN
+      $P{prdType} = ''
+    THEN
+      '%'
+  ELSE
+    $P{prdType}
+  END
+  AND tbl_audit_product.`dt` >= $P{FromDate}
+ AND tbl_audit_product.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_product.`dt` DESC, tbl_audit_product.`tm` DESC]]>
+	</queryString>
+	<field name="tbl_audit_product_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_product_DT" class="java.sql.Date"/>
+	<field name="tbl_audit_product_TM" class="java.sql.Time"/>
+	<field name="tbl_audit_product_userid" class="java.lang.String"/>
+	<field name="tbl_audit_product_username" class="java.lang.String"/>
+	<field name="tbl_audit_product_ProductId" class="java.lang.String"/>
+	<field name="tbl_audit_product_ProductName" class="java.lang.String"/>
+	<field name="tbl_audit_product_PrdVersion" class="java.lang.String"/>
+	<field name="tbl_audit_product_Version" class="java.lang.String"/>
+	<field name="tbl_audit_product_ProductType" class="java.lang.Integer"/>
+	<field name="tbl_audit_product_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_product_TYPE" class="java.lang.String"/>
+	<field name="tbl_audit_product_Remark" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_audit_product_OldValueComp" class="java.lang.String"/>
+	<field name="tbl_audit_product_NewValueComp" class="java.lang.String"/>
+	<field name="tbl_audit_product_OldValueGran" class="java.lang.String"/>
+	<field name="tbl_audit_product_NewValueGran" class="java.lang.String"/>
+	<field name="tbl_audit_product_OldValueCoat" class="java.lang.String"/>
+	<field name="tbl_audit_product_NewValueCoat" class="java.lang.String"/>
+	<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<variable name="tbl_audit_product_ProductType_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{tbl_audit_product_ProductType}]]></variableExpression>
+	</variable>
+	<variable name="tbl_audit_product_ProductType_2" class="java.lang.Integer" resetType="Page" calculation="System">
+		<variableExpression><![CDATA[$F{tbl_audit_product_ProductType}]]></variableExpression>
+	</variable>
+	<variable name="tbl_audit_product_ProductType_3" class="java.lang.Integer" resetType="Page" calculation="First">
+		<variableExpression><![CDATA[$F{tbl_audit_product_ProductType}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="173" y="15" width="248" height="24" uuid="b28f7f27-eaf2-4b43-bf4e-fc9e840fceec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR PRODUCT -]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="393" y="15" width="79" height="24" uuid="aae051a9-f562-4e73-a6a5-05518dc56305"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tbl_audit_product_ProductType}.equals(new Integer("1")))? "TABLET" : "CAPSULE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="15" width="179" height="24" uuid="cf77c16a-c796-425b-8434-7ffec9fc7df4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prdType}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="62">
+			<staticText>
+				<reportElement x="10" y="27" width="89" height="20" uuid="4bb35f93-e315-477d-a680-2a53047a74ad"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yy HH:mm:ss">
+				<reportElement x="113" y="27" width="162" height="20" uuid="c9b80a2d-d028-48bf-b45c-76d5b423d3f2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="5" width="89" height="20" uuid="f149ed9b-feac-4025-82fa-d29552b8c9fb"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="113" y="5" width="435" height="20" uuid="54a49215-3b04-42a1-9631-a7f1d2440497"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="39" width="80" height="20" uuid="66832315-3b3b-42e8-9df0-3366a29da5f9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="418" y="39" width="40" height="20" uuid="3dc89519-6831-40d0-b44f-928d34df04fb"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="81">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="10" y="6" width="780" height="68" uuid="392373a9-eaa9-4fbc-a2bd-38cf8c711a4b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Audit Product Dataset" uuid="f46b2cd1-7627-404c-a032-d1c80abc9aa1">
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="prdType">
+							<datasetParameterExpression><![CDATA[$P{prdType}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="42" uuid="8507ce69-c690-4a8c-b959-7869ec5d138a">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="42" height="19" uuid="a720ae23-10f6-417e-9b24-671e6d1c0b58"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd/MM/yy">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="42" height="39" uuid="f88746d8-1829-46cf-ab89-5da1d6e2425d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_product_DT})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="a71142cb-c76c-4b7d-b570-cb8b5314357e">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="19" uuid="7198dcb1-bf80-4635-a139-38f8b502c16b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="HH:mm">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="40" height="39" uuid="1033176e-0b4a-453e-99e1-5b8753ad758e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_audit_product_TM}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59" uuid="0b43edf3-9d64-4e8b-a800-03af2f67ac36">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="19" uuid="3e9e117a-1a10-497b-92b3-f96822220bfc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="59" height="39" uuid="ac5f8dbf-3d14-43c4-a41e-3f5c0917fb02"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[" "+( "NULL".equals($F{tbl_audit_product_userid}) ? "-" : $F{tbl_audit_product_userid}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="b3a559fc-1333-40e5-9d47-b24018f85777">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="52" height="19" uuid="a2790807-7b77-483d-b2f3-6697ed0bb236"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="39" uuid="11e09f87-97e0-4d34-a1cd-0198759506eb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[" "+( "NULL".equals($F{tbl_audit_product_username}) ? "-" : $F{tbl_audit_product_username}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="f8c4062d-05f9-47aa-ac17-c77fa9294301">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="41" height="19" uuid="6f2e7303-24dd-471e-8d91-3bbf7a4f9a2c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="41" height="39" uuid="4bb0ecf5-df32-4bec-ab14-b2ef499be7a3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[" "+( "NULL".equals($F{tbl_audit_product_ACT}) ? "-" : $F{tbl_audit_product_ACT}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="1e66aa0a-cc3f-4c39-ae7e-50774f6b121b">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="19" uuid="d0b5bdb3-3043-4d7f-8247-71508a155109"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRODUCT DETAIL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="39" uuid="c49ab6e4-a857-4084-b0b2-b012a8fc6690"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="4"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_nomenclature_BFGCode}+":"+$F{tbl_audit_product_ProductId}+"\n"+"Product Name:"+$F{tbl_audit_product_ProductName}+"\n"+"Product Version No:"+$F{tbl_audit_product_PrdVersion}+"\n"+"Version No:"+$F{tbl_audit_product_Version}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="170" uuid="ed831775-8661-46a1-b71b-a4f27a9d7b78">
+						<jr:columnHeader height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="170" height="19" uuid="27405d21-78f4-4ab3-9d32-6b24afe98b14"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[OLD VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="40" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="170" height="40" uuid="81563747-d3d3-421f-b941-afab3de837c1"/>
+								<box>
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement markup="none">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[($P{prdType}=="Compressed" )
+?
+$F{tbl_audit_product_OldValueComp}
+:
+($P{prdType}=="Coated" )
+?
+$F{tbl_audit_product_OldValueCoat}
+:
+$F{tbl_audit_product_OldValueGran}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="179" uuid="e34c2992-62df-4877-b587-8535aefaf24c">
+						<jr:columnHeader height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="179" height="19" uuid="e409e402-0776-436e-bbef-6cc67e9ec6a9"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[NEW VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="40" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="179" height="40" uuid="2f5475c2-2ed3-4e79-83b3-d94b35d3bdbd"/>
+								<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement markup="none">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[($P{prdType}=="Compressed")
+?
+$F{tbl_audit_product_NewValueComp}
+:
+($P{prdType}=="Coated")
+?
+$F{tbl_audit_product_NewValueCoat}
+:
+$F{tbl_audit_product_NewValueGran}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="115" uuid="d6348b6f-29f4-4014-8b46-3f87c958fceb">
+						<jr:columnHeader style="table 1_CH" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="115" height="19" uuid="c4477185-e7cb-46fd-9d60-a821dd391b1a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="115" height="39" uuid="7727bd83-2f11-45b6-9559-ef80fc932d87"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[" "+( "NULL".equals($F{tbl_audit_product_Remark}) ? "-" :$F{tbl_audit_product_Remark}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

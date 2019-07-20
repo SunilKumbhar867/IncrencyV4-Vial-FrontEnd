@@ -1,0 +1,930 @@
+<div class="row" style="margin-top:-15px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>PRODUCT PARAMETER FOR {{str_areaName | uppercase}} ({{str_cubicleType}})</span>
+          </div>
+        </div>
+        <br>
+        <form>
+            <span><b>{{str_prdIDNomenclature}} :</b> {{str_prdID}}</span><br/>
+            <span><b>Product Name :</b> {{str_prdName}}</span><br/>
+            <span><b>Product Version :</b> {{str_prdVersion}}</span><br/>
+            <span><b>Version :</b> {{str_version}}</span>
+            <hr/>
+            <div class="table-responsive" *ngIf="str_areaName != 'Granulation'">
+              <table class="table table-bordered" style="font-size: 12px;color:black;">
+                <thead>
+                  <tr>
+                    <!--1-->
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual Nominal</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual T1 Neg</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual T1 Pos</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual T2 Neg</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual T2 Pos</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual Limit On</th>
+                    <th *ngIf="int_ind==1 || int_ind_coat==1">Individual Report Type</th>
+                    <!--2-->
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group Nominal</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group T1 Neg</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group T1 Pos</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group T2 Neg</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group T2 Pos</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group Limit On</th>
+                    <th *ngIf="int_grp==1 || int_grp_coat==1">Group Report Type</th>
+                    <!--3-->
+                    <th *ngIf="int_thick==1 || int_thick_coat==1">Thickness Nominal</th>
+                    <th *ngIf="int_thick==1 || int_thick_coat==1">Thickness T1 Neg</th>
+                    <th *ngIf="int_thick==1 || int_thick_coat==1">Thickness T1 Pos</th>
+                    <th *ngIf="int_thick==1 || int_thick_coat==1">Thickness T2 Neg</th>
+                    <th *ngIf="int_thick==1 || int_thick_coat==1">Thickness T2 Pos</th>
+                    <!--4-->
+                    <th *ngIf="int_brd==1 || int_brd_coat==1">Breadth Nominal</th>
+                    <th *ngIf="int_brd==1 || int_brd_coat==1">Breadth T1 Neg</th>
+                    <th *ngIf="int_brd==1 || int_brd_coat==1">Breadth T1 Pos</th>
+                    <th *ngIf="int_brd==1 || int_brd_coat==1">Breadth T2 Neg</th>
+                    <th *ngIf="int_brd==1 || int_brd_coat==1">Breadth T2 Pos</th>
+                    <!--5-->
+                    <th *ngIf="int_len==1 || int_len_coat==1">Length Nominal</th>
+                    <th *ngIf="int_len==1 || int_len_coat==1">Length T1 Neg</th>
+                    <th *ngIf="int_len==1 || int_len_coat==1">Length T1 Pos</th>
+                    <th *ngIf="int_len==1 || int_len_coat==1">Length T2 Neg</th>
+                    <th *ngIf="int_len==1 || int_len_coat==1">Length T2 Pos</th>
+
+                    <!--6-->
+                    <th *ngIf="int_dia==1 || int_dia_coat==1">Diameter Nominal</th>
+                    <th *ngIf="int_dia==1 || int_dia_coat==1">Diameter T1 Neg</th>
+                    <th *ngIf="int_dia==1 || int_dia_coat==1">Diameter T1 Pos</th>
+                    <th *ngIf="int_dia==1 || int_dia_coat==1">Diameter T2 Neg</th>
+                    <th *ngIf="int_dia==1 || int_dia_coat==1">Diameter T2 Pos</th>
+
+                    <!--7-->
+                    <th *ngIf="int_hard==1">Hardness Nominal</th>
+                    <th *ngIf="int_hard==1">Hardness NLT</th>
+                    <th *ngIf="int_hard==1">Hardness NMT</th>
+                    <th *ngIf="int_hard==1">Hardness Unit</th>
+                    <th *ngIf="int_hard==1">Hardness Report Type</th>
+
+                    <!--8-->
+                    <th *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">Friability NMT(%)</th>
+                    <th *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">Set Count</th>
+                    <th *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">RPM</th>
+
+                     <!--9-->
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual Nominal</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual T1 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual T1 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual T2 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual T2 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual Limit On</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer==1">Individual Report Type</th>
+
+                     <!--10-->
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group Nominal</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group T1 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group T1 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group T2 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group T2 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group Limit On</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer==1">Group Report Type</th>
+
+                     <!--11-->
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) Nominal</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) T1 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) T1 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) T2 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) T2 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) Limit On</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_indLayer1==1">Individual(Lay-1) Report Type</th>
+                     <!--12-->
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group(Lay-1) Nominal</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group(Lay-1) T1 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group(Lay-1) T1 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group(Lay-1) T2 Neg</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group(Lay-1) T2 Pos</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group Limit On</th>
+                     <th *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">Group Report Type</th>
+
+                    <!--13-->
+                    <th *ngIf="(int_dt==1 || int_dt_coat==1)">DT Std Limit</th>
+                    <th *ngIf="(int_dt==1 || int_dt_coat==1)">DT Min Temp</th>
+                    <th *ngIf="(int_dt==1 || int_dt_coat==1)">DT Max Temp</th>
+
+                    <!--15-->
+                    <th *ngIf="str_areaName == 'Compression' && int_td==1">TD T1(gm/ml)</th>
+                    <th *ngIf="str_areaName == 'Compression' && int_td==1">TD T2(gm/ml)</th>
+
+                    <!--16-->
+                    <th *ngIf="str_areaName == 'Compression' && int_Lod==1">LOD NLT</th>
+                    <th *ngIf="str_areaName == 'Compression' && int_Lod==1">LOD NMT</th>
+
+                    <!--17-->
+                    <th *ngIf="str_areaName == 'Compression' && int_fine==1">%Fine T1 Limit(%)</th>
+                    <th *ngIf="str_areaName == 'Compression' && int_fine==1">%Fine T2 Limit(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <!--1-->
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                    {{
+                      dsTabletDetails?.Param1_Nom == 99999 || dsTabletDetails?.Param1_Nom == null ? "NA"  : dsTabletDetails?.Param1_Nom
+                      | number:'.'+dsTabletDetails.Param1_DP
+                    }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                    {{
+                      dsTabletDetails?.Param1_T1Neg == 99999 || dsTabletDetails?.Param1_T1Neg == null
+                        ? "NA"
+                        : dsTabletDetails?.Param1_T1Neg | number:'.'+dsTabletDetails.Param1_DP
+                    }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                    {{
+                      dsTabletDetails?.Param1_T1Pos == 99999 || dsTabletDetails?.Param1_T1Pos == null
+                        ? "NA"
+                        : dsTabletDetails?.Param1_T1Pos | number:'.'+dsTabletDetails.Param1_DP
+                    }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                      {{
+                        dsTabletDetails?.Param1_T2Neg == 99999 || dsTabletDetails?.Param1_T2Neg == null
+                          ? "NA"
+                          : dsTabletDetails?.Param1_T2Neg | number:'.'+dsTabletDetails.Param1_DP
+                      }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                        {{
+                          dsTabletDetails?.Param1_T2Pos == 99999 || dsTabletDetails?.Param1_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param1_T2Pos | number:'.'+dsTabletDetails.Param1_DP
+                        }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                        {{
+                          dsTabletDetails?.Param1_Nom == 99999 || dsTabletDetails?.Param1_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param1_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                    </td>
+                    <td *ngIf="int_ind==1 || int_ind_coat==1">
+                        {{
+                          dsTabletDetails?.Param1_Nom == 99999 || dsTabletDetails?.Param1_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param1_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+                    <!--2-->
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                      {{
+                        dsTabletDetails?.Param2_Nom == 99999 || dsTabletDetails?.Param2_Nom == null
+                          ? "NA"
+                          : dsTabletDetails?.Param2_Nom | number:'.'+dsTabletDetails.Param2_DP
+                      }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                      {{
+                        dsTabletDetails?.Param2_T1Neg == 99999 || dsTabletDetails?.Param2_T1Neg == null
+                          ? "NA"
+                          : dsTabletDetails?.Param2_T1Neg | number:'.'+dsTabletDetails.Param2_DP
+                      }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                        {{
+                          dsTabletDetails?.Param2_T1Pos == 99999 || dsTabletDetails?.Param2_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param2_T1Pos | number:'.'+dsTabletDetails.Param2_DP
+                        }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                        {{
+                          dsTabletDetails?.Param2_T2Neg == 99999 || dsTabletDetails?.Param2_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param2_T2Neg | number:'.'+dsTabletDetails.Param2_DP
+                        }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                        {{
+                          dsTabletDetails?.Param2_T2Pos == 99999 || dsTabletDetails?.Param2_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param2_T2Pos | number:'.'+dsTabletDetails.Param2_DP
+                        }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                        {{
+                          dsTabletDetails?.Param2_Nom == 99999 || dsTabletDetails?.Param2_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param2_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                    </td>
+                    <td *ngIf="int_grp==1 || int_grp_coat==1">
+                        {{
+                          dsTabletDetails?.Param2_Nom == 99999 || dsTabletDetails?.Param2_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param2_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+                    <!--3-->
+                    <td *ngIf="int_thick==1 || int_thick_coat==1">
+                      {{
+                        dsTabletDetails?.Param3_Nom == 99999 || dsTabletDetails?.Param3_Nom == null
+                          ? "NA"
+                          : dsTabletDetails?.Param3_Nom | number:'.'+dsTabletDetails.Param3_Dp
+                      }}
+                    </td>
+                    <td *ngIf="int_thick==1 || int_thick_coat==1">
+                        {{
+                          dsTabletDetails?.Param3_T1Neg == 99999 || dsTabletDetails?.Param3_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param3_T1Neg | number:'.'+dsTabletDetails.Param3_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_thick==1 || int_thick_coat==1">
+                        {{
+                          dsTabletDetails?.Param3_T1Pos == 99999 || dsTabletDetails?.Param3_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param3_T1Pos | number:'.'+dsTabletDetails.Param3_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_thick==1 || int_thick_coat==1">
+                        {{
+                          dsTabletDetails?.Param3_T2Neg == 99999 || dsTabletDetails?.Param3_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param3_T2Neg | number:'.'+dsTabletDetails.Param3_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_thick==1 || int_thick_coat==1">
+                        {{
+                          dsTabletDetails?.Param3_T2Pos == 99999 || dsTabletDetails?.Param3_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param3_T2Pos | number:'.'+dsTabletDetails.Param3_Dp
+                        }}
+                    </td>
+                    <!--4-->
+                    <td *ngIf="int_brd==1 || int_brd_coat==1">
+                        {{
+                          dsTabletDetails?.Param4_Nom == 99999 || dsTabletDetails?.Param4_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param4_Nom | number:'.'+dsTabletDetails.Param4_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_brd==1 || int_brd_coat==1">
+                        {{
+                          dsTabletDetails?.Param4_T1Neg == 99999 || dsTabletDetails?.Param4_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param4_T1Neg | number:'.'+dsTabletDetails.Param4_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_brd==1 || int_brd_coat==1">
+                        {{
+                          dsTabletDetails?.Param4_T1Pos == 99999 || dsTabletDetails?.Param4_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param4_T1Pos | number:'.'+dsTabletDetails.Param4_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_brd==1 || int_brd_coat==1">
+                        {{
+                          dsTabletDetails?.Param4_T2Neg == 99999 || dsTabletDetails?.Param4_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param4_T2Neg | number:'.'+dsTabletDetails.Param4_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_brd==1 || int_brd_coat==1">
+                        {{
+                          dsTabletDetails?.Param4_T2Pos == 99999 || dsTabletDetails?.Param4_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param4_T2Pos | number:'.'+dsTabletDetails.Param4_Dp
+                        }}
+                    </td>
+                    <!--5-->
+                    <td *ngIf="int_len==1 || int_len_coat==1">
+                        {{
+                          dsTabletDetails?.Param5_Nom == 99999 || dsTabletDetails?.Param5_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param5_Nom | number:'.'+dsTabletDetails.Param5_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_len==1 || int_len_coat==1">
+                        {{
+                          dsTabletDetails?.Param5_T1Neg == 99999 || dsTabletDetails?.Param5_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param5_T1Neg | number:'.'+dsTabletDetails.Param5_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_len==1 || int_len_coat==1">
+                        {{
+                          dsTabletDetails?.Param5_T1Pos == 99999 || dsTabletDetails?.Param5_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param5_T1Pos | number:'.'+dsTabletDetails.Param5_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_len==1 || int_len_coat==1">
+                        {{
+                          dsTabletDetails?.Param5_T2Neg == 99999 || dsTabletDetails?.Param5_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param5_T2Neg | number:'.'+dsTabletDetails.Param5_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_len==1 || int_len_coat==1">
+                        {{
+                          dsTabletDetails?.Param5_T2Pos == 99999 || dsTabletDetails?.Param5_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param5_T2Pos | number:'.'+dsTabletDetails.Param5_Dp
+                        }}
+                    </td>
+                    <!--6-->
+                    <td *ngIf="int_dia==1 || int_dia_coat==1">
+                        {{
+                          dsTabletDetails?.Param6_Nom == 99999 || dsTabletDetails?.Param6_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param6_Nom | number:'.'+dsTabletDetails.Param6_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_dia==1 || int_dia_coat==1">
+                        {{
+                          dsTabletDetails?.Param6_T1Neg == 99999 || dsTabletDetails?.Param6_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param6_T1Neg | number:'.'+dsTabletDetails.Param6_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_dia==1 || int_dia_coat==1">
+                        {{
+                          dsTabletDetails?.Param6_T1Pos == 99999 || dsTabletDetails?.Param6_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param6_T1Pos | number:'.'+dsTabletDetails.Param6_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_dia==1 || int_dia_coat==1">
+                        {{
+                          dsTabletDetails?.Param6_T2Neg == 99999  || dsTabletDetails?.Param6_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param6_T2Neg | number:'.'+dsTabletDetails.Param6_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_dia==1 || int_dia_coat==1">
+                        {{
+                          dsTabletDetails?.Param6_T2Pos == 99999 || dsTabletDetails?.Param6_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param6_T2Pos | number:'.'+dsTabletDetails.Param6_Dp
+                        }}
+                    </td>
+                    <!--7-->
+                    <td *ngIf="int_hard==1 || int_hard_coat==1">
+                        {{
+                          dsTabletDetails?.Param7_Nom == 99999 || dsTabletDetails?.Param7_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param7_Nom | number:'.'+dsTabletDetails.Param7_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_hard==1 || int_hard_coat==1">
+                        {{
+                          dsTabletDetails?.Param7_T1Neg == 99999 || dsTabletDetails?.Param7_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param7_T1Neg | number:'.'+dsTabletDetails.Param7_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_hard==1 || int_hard_coat==1">
+                        {{
+                          dsTabletDetails?.Param7_T1Pos == 99999 || dsTabletDetails?.Param7_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param7_T1Pos | number:'.'+dsTabletDetails.Param7_Dp
+                        }}
+                    </td>
+                    <td *ngIf="int_hard==1 || int_hard_coat==1">
+                        {{
+                          dsTabletDetails?.Param7_Unit == 99999 || dsTabletDetails?.Param7_Unit == "NULL"
+                          ? "NA"
+                          : dsTabletDetails?.Param7_Unit
+                        }}
+                    </td>
+                    <td *ngIf="int_hard==1 || int_hard_coat==1">
+                        {{
+                          dsTabletDetails?.Param7_Nom == 99999 || dsTabletDetails?.Param7_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param7_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+
+                    <!--8-->
+                    <td *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">
+                        {{
+                          dsTabletDetails?.Param8_Nom == 99999 || dsTabletDetails?.Param8_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param8_Nom | number:'.'+dsTabletDetails.Param8_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">
+                        {{
+                          dsTabletDetails?.Param8_T1Neg == 99999 || dsTabletDetails?.Param8_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param8_T1Neg | number:'.'+dsTabletDetails.Param8_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && (int_fri==1 || int_fri_coat==1)">
+                        {{
+                          dsTabletDetails?.Param8_T1Pos == 99999 || dsTabletDetails?.Param8_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param8_T1Pos | number:'.'+dsTabletDetails.Param8_Dp
+                        }}
+                    </td>
+
+                     <!--9-->
+                     <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_Nom == 99999 || dsTabletDetails?.Param9_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param9_Nom | number:'.'+dsTabletDetails.Param9_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_T1Neg == 99999 || dsTabletDetails?.Param9_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param9_T1Neg | number:'.'+dsTabletDetails.Param9_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_T1Pos == 99999 || dsTabletDetails?.Param9_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param9_T1Pos | number:'.'+dsTabletDetails.Param9_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_T2Neg == 99999 || dsTabletDetails?.Param9_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param9_T2Neg | number:'.'+dsTabletDetails.Param9_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_T2Pos == 99999 || dsTabletDetails?.Param9_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param9_T2Pos | number:'.'+dsTabletDetails.Param9_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_Nom == 99999 || dsTabletDetails?.Param9_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param9_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                      </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer==1">
+                        {{
+                          dsTabletDetails?.Param9_Nom == 99999 || dsTabletDetails?.Param9_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param9_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+
+                     <!--10-->
+                     <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_Nom == 99999 || dsTabletDetails?.Param10_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param10_Nom  | number:'.'+dsTabletDetails.Param10_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_T1Neg == 99999 || dsTabletDetails?.Param10_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param10_T1Neg | number:'.'+dsTabletDetails.Param10_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_T1Pos == 99999 || dsTabletDetails?.Param10_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param10_T1Pos | number:'.'+dsTabletDetails.Param10_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_T2Neg == 99999 || dsTabletDetails?.Param10_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param10_T2Neg | number:'.'+dsTabletDetails.Param10_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_T2Pos == 99999 || dsTabletDetails?.Param10_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param10_T2Pos | number:'.'+dsTabletDetails.Param10_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_Nom == 99999 || dsTabletDetails?.Param10_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param10_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer==1">
+                        {{
+                          dsTabletDetails?.Param10_Nom == 99999 || dsTabletDetails?.Param10_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param10_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+
+                     <!--11-->
+                     <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_Nom == 99999 || dsTabletDetails?.Param11_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param11_Nom | number:'.'+dsTabletDetails.Param11_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_T1Neg == 99999 || dsTabletDetails?.Param11_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param11_T1Neg | number:'.'+dsTabletDetails.Param11_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_T1Pos == 99999 || dsTabletDetails?.Param11_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param11_T1Pos | number:'.'+dsTabletDetails.Param11_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_T2Neg == 99999 || dsTabletDetails?.Param11_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param11_T2Neg | number:'.'+dsTabletDetails.Param11_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_T2Pos == 99999 || dsTabletDetails?.Param11_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param11_T2Pos | number:'.'+dsTabletDetails.Param11_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_Nom == 99999 || dsTabletDetails?.Param11_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param11_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                      </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_indLayer1==1">
+                        {{
+                          dsTabletDetails?.Param11_Nom == 99999 || dsTabletDetails?.Param11_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param11_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+
+                     <!--12-->
+                     <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_Nom == 99999 || dsTabletDetails?.Param12_Nom == null
+                            ? "NA"
+                            : dsTabletDetails?.Param12_Nom | number:'.'+dsTabletDetails.Param12_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_T1Neg == 99999 || dsTabletDetails?.Param12_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param12_T1Neg | number:'.'+dsTabletDetails.Param12_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_T1Pos == 99999 || dsTabletDetails?.Param12_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param12_T1Pos | number:'.'+dsTabletDetails.Param12_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_T2Neg == 99999 || dsTabletDetails?.Param12_T2Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param12_T2Neg | number:'.'+dsTabletDetails.Param12_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_T2Pos == 99999 || dsTabletDetails?.Param12_T2Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param12_T2Pos | number:'.'+dsTabletDetails.Param12_Dp
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_Nom == 99999 || dsTabletDetails?.Param12_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param12_LimitOn.data)[0] == "0"
+                            ? "Actual"
+                            : "Percentage"
+                        }}
+                      </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_grpLayer1==1">
+                        {{
+                          dsTabletDetails?.Param12_Nom == 99999 || dsTabletDetails?.Param12_Nom == null
+                          ? "NA"
+                          :
+                          (dsTabletDetails?.Param12_IsOnStd.data)[0] == "0"
+                            ? "Standard"
+                            : "Average"
+                        }}
+                    </td>
+
+                    <!--13-->
+                    <td *ngIf="(int_dt==1 || int_dt_coat==1)">
+                        {{
+                          dsTabletDetails?.Param13_Nom == 99999  || dsTabletDetails?.Param13_Nom == "null:null:null"
+                            ? "NA"
+                            : dsTabletDetails?.Param13_Nom
+                        }}
+                    </td>
+                    <td *ngIf="(int_dt==1 || int_dt_coat==1)">
+                        {{
+                          dsTabletDetails?.Param13_T1Neg == 99999  || dsTabletDetails?.Param13_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param13_T1Neg
+                        }}
+                    </td>
+                    <td *ngIf="(int_dt==1 || int_dt_coat==1)">
+                        {{
+                          dsTabletDetails?.Param13_T1Pos == 99999  || dsTabletDetails?.Param13_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param13_T1Pos
+                        }}
+                    </td>
+                     <!--15-->
+                    <td *ngIf="str_areaName == 'Compression' && int_td==1">
+                        {{
+                          dsTabletDetails?.Param15_T1Neg == 99999  || dsTabletDetails?.Param15_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param15_T1Neg | number:'.'+dsTabletDetails.Param15_DP
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_td==1">
+                        {{
+                          dsTabletDetails?.Param15_T1Pos == 99999  || dsTabletDetails?.Param15_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param15_T1Pos | number:'.'+dsTabletDetails.Param15_DP
+                        }}
+                    </td>
+                    <!--16-->
+                    <td *ngIf="str_areaName == 'Compression' && int_Lod==1">
+                        {{
+                          dsTabletDetails?.Param16_T1Neg == 99999  || dsTabletDetails?.Param16_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param16_T1Neg | number:'.'+dsTabletDetails.Param16_DP
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_Lod==1">
+                        {{
+                          dsTabletDetails?.Param16_T1Pos == 99999  || dsTabletDetails?.Param16_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param16_T1Pos | number:'.'+dsTabletDetails.Param16_DP
+                        }}
+                    </td>
+                    <!--17-->
+                    <td *ngIf="str_areaName == 'Compression' && int_fine==1">
+                        {{
+                          dsTabletDetails?.Param17_T1Neg == 99999  || dsTabletDetails?.Param17_T1Neg == null
+                            ? "NA"
+                            : dsTabletDetails?.Param17_T1Neg | number:'.'+dsTabletDetails.Param17_DP
+                        }}
+                    </td>
+                    <td *ngIf="str_areaName == 'Compression' && int_fine==1">
+                        {{
+                          dsTabletDetails?.Param17_T1Pos == 99999  || dsTabletDetails?.Param17_T1Pos == null
+                            ? "NA"
+                            : dsTabletDetails?.Param17_T1Pos | number:'.'+dsTabletDetails.Param17_DP
+                        }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Granulation -->
+            <div class="table-responsive" *ngIf="str_areaName == 'Granulation'">
+              <table class="table table-bordered" style="font-size: 12px;color:black;">
+                <thead>
+                  <tr>
+                    <th>LOD (Dry Grannual) Min(%)</th>
+                    <th>LOD (Dry Grannual) Max(%)</th>
+
+                    <th>LOD (Lubricated Grannual) Min(%)</th>
+                    <th>LOD (Lubricated Grannual) Max(%)</th>
+
+                    <th>LOD Layer1 (Dry Grannual) Min(%)</th>
+                    <th>LOD Layer1 (Dry Grannual) Max(%)</th>
+
+                    <th>LOD Layer1 (Lubricated Grannual) Min(%)</th>
+                    <th>LOD Layer1 (Lubricated Grannual) Max(%)</th>
+
+                    <th>LOD Layer2 (Dry Grannual) Min(%)</th>
+                    <th>LOD Layer2 (Dry Grannual) Max(%)</th>
+
+                    <th>LOD Layer2 (Lubricated Grannual) Min(%)</th>
+                    <th>LOD Layer2 (Lubricated Grannual) Max(%)</th>
+
+                    <th>Tapped Density Min(%)</th>
+                    <th>Tapped Density Max(%)</th>
+
+                    <th>%Fine Min(%)</th>
+                    <th>%Fine Max(%)</th>
+
+                    <th>Particle Sizing Min(%)</th>
+                    <th>Particle Sizing Max(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param1_Low == 99999  || dsTabletDetails?.Param1_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param1_Low | number:'.'+dsTabletDetails.Param1_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param1_Upp == 99999  || dsTabletDetails?.Param1_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param1_Upp | number:'.'+dsTabletDetails.Param1_DP
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param2_Low == 99999  || dsTabletDetails?.Param2_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param2_Low | number:'.'+dsTabletDetails.Param2_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param2_Upp == 99999  || dsTabletDetails?.Param2_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param2_Upp | number:'.'+dsTabletDetails.Param2_DP
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param3_Low == 99999  || dsTabletDetails?.Param3_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param3_Low | number:'.'+dsTabletDetails.Param3_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param3_Upp == 99999  || dsTabletDetails?.Param3_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param3_Upp | number:'.'+dsTabletDetails.Param3_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param4_Low == 99999  || dsTabletDetails?.Param4_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param4_Low | number:'.'+dsTabletDetails.Param4_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param4_Upp == 99999  || dsTabletDetails?.Param4_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param4_Upp | number:'.'+dsTabletDetails.Param4_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param5_Low == 99999  || dsTabletDetails?.Param5_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param5_Low | number:'.'+dsTabletDetails.Param5_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param5_Upp == 99999  || dsTabletDetails?.Param5_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param5_Upp | number:'.'+dsTabletDetails.Param5_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param6_Low == 99999  || dsTabletDetails?.Param6_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param6_Low | number:'.'+dsTabletDetails.Param6_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param6_Upp == 99999  || dsTabletDetails?.Param6_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param6_Upp | number:'.'+dsTabletDetails.Param6_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param7_Low == 99999  || dsTabletDetails?.Param7_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param7_Low | number:'.'+dsTabletDetails.Param7_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param7_Upp == 99999  || dsTabletDetails?.Param7_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param7_Upp | number:'.'+dsTabletDetails.Param7_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param8_Low == 99999  || dsTabletDetails?.Param8_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param8_Low | number:'.'+dsTabletDetails.Param8_Dp
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param8_Upp == 99999  || dsTabletDetails?.Param8_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param8_Upp | number:'.'+dsTabletDetails.Param8_Dp
+                      }}
+                  </td>
+
+                  <td>
+                      {{
+                        dsTabletDetails?.Param9_Low == 99999  || dsTabletDetails?.Param9_Low == null
+                          ? "NA"
+                          : dsTabletDetails?.Param9_Low | number:'.'+dsTabletDetails.Param9_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param9_Upp == 99999  || dsTabletDetails?.Param9_Upp == null
+                          ? "NA"
+                          : dsTabletDetails?.Param9_Upp | number:'.'+dsTabletDetails.Param9_DP
+                      }}
+                  </td>
+                </tbody>
+              </table>
+            </div>
+
+          <br/>
+
+         <!--Close Button-->
+         <div class="text-center">
+            <button class="btn btn-secondary" type="button" (click)="onClose()">Close</button>
+         </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

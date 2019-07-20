@@ -1,0 +1,54 @@
+<ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="login-register" style="background-image:url('./assets/images/1.jpg');
+">
+  <div class="login-box card" style="padding:0.5%">
+    <div class="col-md-12" style="background-color:#4286f4;margin-top:5px">
+      <h3 class="text-center txt-primary" style="margin-bottom: 0px;color:White">Incrency Vial Line</h3>
+    </div>
+    <div class="col-md-12">
+      <br>
+      <h5 class="text-center txt-primary" style="font-size:15px;color:#4286f4">Version : Angular / Incrency / V4</h5>
+    </div>
+    <div class="col-md-12">
+      <div class="text-center">
+        <br>
+        <img src="assets/images/incrency-logo.jpg" alt="logo.png" style="width: 100%;">
+      </div>
+    </div>
+    <div class="card-body">
+      <form class="form-horizontal form-material" [formGroup]="loginForm" >
+          <div class="alert alert-{{str_warningState}}" style="font-size:14px;text-align: center">
+              {{str_message}}
+            </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control" type="text" formControlName="username"  placeholder="Username" autocomplete="off"  (focusout)="checkUserID()">
+          </div>
+          <div *ngIf="!username.valid && username.touched" style="color:red;margin-top:3px;font-weight: bold;">
+            {{username?.errors['required']}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control" type="password" formControlName="password"  placeholder="Password" autocomplete="off"  (focusout)="checkUserID()"> </div>
+            <div *ngIf="!password.valid && password.touched" style="color:red;margin-top:3px;font-weight: bold;">
+              {{password?.errors['required']}}
+            </div>
+        </div>
+        <div class="form-group text-center m-t-20">
+          <div class="col-xs-12">
+            <!-- <button type="submit" class="btn btn-primary  btn-block" *ngIf="bln_changePasswordButton==false" [ngClass]="{'disabledBtn' : !loginForm.valid}"
+              [disabled]="!loginForm.valid">LOG IN</button> -->
+              <button *ngIf="hideLogin" (click)="onFormSubmit()" class="btn btn-primary  btn-block"
+              [ngClass]="{disabledBtn:true  }"
+              >LOG IN</button>
+              <button *ngIf="showValidateBtn" (click)="validate()" class="btn btn-primary  btn-block"
+              [ngClass]="{disabledBtn:true  }"
+              >Validate</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

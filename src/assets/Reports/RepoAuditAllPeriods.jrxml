@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditAllPeriods" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AllPeriodsDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_all_periods.`userid` AS tbl_audit_all_periods_userid,
+     tbl_audit_all_periods.`username` AS tbl_audit_all_periods_username,
+     tbl_audit_all_periods.`oldValue` AS tbl_audit_all_periods_oldValue,
+     tbl_audit_all_periods.`NewValue` AS tbl_audit_all_periods_NewValue,
+     tbl_audit_all_periods.`Remark` AS tbl_audit_all_periods_Remark,
+     tbl_audit_all_periods.`TypeOfPeriod` AS tbl_audit_all_periods_TypeOfPeriod,
+     tbl_audit_all_periods.`dt` AS tbl_audit_all_periods_dt,
+     tbl_audit_all_periods.`tm` AS tbl_audit_all_periods_tm
+FROM
+     `tbl_audit_all_periods` tbl_audit_all_periods
+WHERE
+tbl_audit_all_periods.`TypeOfPeriod` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+ AND tbl_audit_all_periods.`dt` >= $P{FromDate}
+ AND tbl_audit_all_periods.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_all_periods.`dt` DESC, tbl_audit_all_periods.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_userid" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_username" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_oldValue" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_NewValue" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_TypeOfPeriod" class="java.lang.String"/>
+		<field name="tbl_audit_all_periods_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_all_periods_tm" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_audit_all_periods.`RecNo` AS tbl_audit_all_periods_RecNo,
+     tbl_audit_all_periods.`tm` AS tbl_audit_all_periods_tm,
+     tbl_audit_all_periods.`userid` AS tbl_audit_all_periods_userid,
+     tbl_audit_all_periods.`username` AS tbl_audit_all_periods_username,
+     tbl_audit_all_periods.`oldValue` AS tbl_audit_all_periods_oldValue,
+     tbl_audit_all_periods.`NewValue` AS tbl_audit_all_periods_NewValue,
+     tbl_audit_all_periods.`Remark` AS tbl_audit_all_periods_Remark,
+     tbl_audit_all_periods.`TypeOfPeriod` AS tbl_audit_all_periods_TypeOfPeriod,
+     tbl_audit_all_periods.`dt` AS tbl_audit_all_periods_dt,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_all_periods` tbl_audit_all_periods,
+     `tbl_rpt_path` tbl_rpt_path
+
+where
+tbl_audit_all_periods.`TypeOfPeriod` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+ AND tbl_audit_all_periods.`dt` >= $P{FromDate}
+ AND tbl_audit_all_periods.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_all_periods.`dt` DESC, tbl_audit_all_periods.`tm` DESC]]>
+	</queryString>
+	<field name="tbl_audit_all_periods_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_all_periods_tm" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_userid" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_username" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_oldValue" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_NewValue" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_TypeOfPeriod" class="java.lang.String"/>
+	<field name="tbl_audit_all_periods_dt" class="java.sql.Date"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="217" y="13" width="132" height="34" uuid="4dca176d-8250-4f9e-a6f8-674db1a731bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="349" y="13" width="322" height="34" uuid="56d10147-bc8b-4929-8c8c-6dde5507d402"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{SelectedValue}.intern() == "TIME OUT PERIOD") ? "TIME OUT PERIOD" :  (
+($P{SelectedValue}.intern() == "CALIBRATION REMINDER") ? "CALIBRATION REMINDER" :  (
+($P{SelectedValue}.intern() == "PASSWORD AGING PERIOD") ? "PASSWORD AGING PERIOD" : (
+($P{SelectedValue}.intern() == "NO. OF DAYS TO REMIND PASSWORD AGING") ? "NO. OF DAYS TO REMIND PASSWORD AGING" :  (
+($P{SelectedValue}.intern() == "ARCHIVE TIME PERIOD") ? "ARCHIVE TIME PERIOD" : (
+($P{SelectedValue}.intern() == "AUTODISABLE PERIOD FOR NON LOGIN USER") ? "AUTODISABLE PERIOD FOR NON LOGIN USER" :  (
+($P{SelectedValue}.intern() == "PASSWORD HISTORY COUNT") ? "PASSWORD HISTORY COUNT" :  (
+($P{SelectedValue}.intern() == "AUTO ENABLE CHANCES") ? "AUTO ENABLE CHANCE" :  (
+($P{SelectedValue}.intern() == "PERIODIC CALIBRATION BALANCE") ? "PERIODIC CALIBRATION REMINDER FOR BALANCE" :  (
+($P{SelectedValue}.intern() == "PERIODIC CALIBRATION VERNIER") ? "PERIODIC CALIBRATION REMINDER FOR VERNIER" :  (
+($P{SelectedValue}.intern() == "LOCK PERIOD") ? "LOCK PERIOD" :  (
+($P{SelectedValue}.intern() == "NO. OF ATTEMPTS FOR TRYING LOGIN") ? "NO. OF ATTEMPTS FOR TRYING LOGIN" :  "NO DATA FOUND"
+)
+)
+)
+)
+)
+)
+)
+)
+)
+)
+)]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="714" y="3" width="78" height="58" uuid="20bc6608-c47f-4df1-8501-b12c270c683c"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="66">
+			<staticText>
+				<reportElement x="10" y="27" width="81" height="20" uuid="8390164e-b5c4-493c-8f91-783d65baea63"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="27" width="100" height="20" uuid="72abe9ac-a00f-4f57-8aee-09f8ddbae426"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="4" width="81" height="20" uuid="730b7e58-4e7b-42d5-b5c7-5b8115ed47dd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="4" width="572" height="20" uuid="c1878e0a-4c6f-4c69-bedf-e0c5d0addda1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="40" width="80" height="20" uuid="1c0cc23a-c76f-4112-abf1-60bcb23b79d7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="415" y="40" width="40" height="20" uuid="217f7533-5b28-4e59-b96c-bb5a9302c5c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="75" splitType="Stretch">
+			<elementGroup>
+				<elementGroup>
+					<componentElement>
+						<reportElement key="table" style="table" x="11" y="0" width="781" height="65" uuid="f9724b77-cfe3-41da-abae-b3914cadab83"/>
+						<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<datasetRun subDataset="AllPeriodsDataset" uuid="fd58aa9a-778f-4333-a36d-3239c05facd1">
+								<datasetParameter name="FromDate">
+									<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="ToDate">
+									<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="SelectedValue">
+									<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="UserId">
+									<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="UserName">
+									<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+								</datasetParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+							<jr:column width="97" uuid="261c6f9a-8080-4541-8815-2ad29c7d9b7b">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="97" height="30" uuid="b8a69501-f4ad-4140-a61b-a5c131e1aab7"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[DATE]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true" pattern="dd.MM.yyyy">
+										<reportElement x="0" y="0" width="97" height="30" uuid="b5b2618c-b8d1-4414-8a54-76599b162607"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[$F{tbl_audit_all_periods_dt}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="94" uuid="06e1ad6c-b006-460d-a379-51e982ff40e3">
+								<jr:columnHeader height="30" rowSpan="1">
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<staticText>
+										<reportElement x="0" y="0" width="94" height="30" uuid="e802a45d-6c93-47df-94e4-53d3b9b3a78f"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[TIME]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell height="30" rowSpan="1">
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="94" height="30" uuid="acae7dba-8208-462f-9d12-dcec37551bd9"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="108" uuid="4231dd44-57f6-4e58-b3b3-3b972df50d9f">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="108" height="30" uuid="44b2dab3-3d19-4e9f-827f-d24f452b51ec"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[USER ID]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="108" height="30" uuid="503c48a1-8612-498c-87a8-326913074863"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_all_periods_userid}) ? "NA" : $F{tbl_audit_all_periods_userid}  )]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="102" uuid="17ee96a3-4f39-4b96-b886-8267ed1fa087">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="102" height="30" uuid="3388d847-d1f5-4c8d-b5a4-a87130a38e91"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[USER NAME]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="102" height="30" uuid="2ab7343d-36c0-4d46-8f75-54cdd45f9368"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_all_periods_username}) ? "NA" : $F{tbl_audit_all_periods_username}  )]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="101" uuid="6d4912e7-cd61-4904-b559-92d2610dfa20">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="101" height="30" uuid="0e3dc9eb-7ce3-428d-a240-62ea3fe878ce"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[OLD VALUE]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="101" height="30" uuid="ef5a1275-7d50-4db4-a057-dea19b7b5788"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_all_periods_oldValue}) ? "NA" : $F{tbl_audit_all_periods_oldValue}  )]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="105" uuid="c5e1f121-21b1-4a73-97b2-07d3436ba451">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="105" height="30" uuid="e6cb9ec1-f461-4922-aa79-3a73b1d181ec"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[NEW VALUE]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="105" height="30" uuid="e021d34f-b2be-4e1d-a82d-4c78c5aec850"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_all_periods_NewValue}) ? "NA" : $F{tbl_audit_all_periods_NewValue}  )]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="177" uuid="158672c1-092c-4272-a92c-1e2fedc04886">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="177" height="30" uuid="a940aa80-2922-4834-9791-7bb8cbb64a5f"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[REMARK]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="177" height="30" uuid="2777ad64-34ca-479a-b78d-1ab96bf98bc9"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_all_periods_Remark}) ? "NA" : $F{tbl_audit_all_periods_Remark}  )]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:table>
+					</componentElement>
+				</elementGroup>
+			</elementGroup>
+		</band>
+	</summary>
+</jasperReport>

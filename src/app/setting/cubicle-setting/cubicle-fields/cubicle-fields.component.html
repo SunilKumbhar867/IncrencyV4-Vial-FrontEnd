@@ -1,0 +1,333 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="row" style="margin-top:-15px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>CUBICLE SETTING FOR {{str_areaName}}
+              ({{str_cubicleName}})</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frm_cubicleSetting">
+  <!-- if weightment is in process and locked cubicle with start and resume batch then disable div -->
+            <div class="row">
+              <table class="table table-bordered">
+                <tr>
+                  <td><b>Cubicle Type</b></td>
+                  <td>{{str_cubicleType}}</td>
+                  <td><b>{{lbl_machineCode}}</b></td>
+                  <td>{{str_machineCode}}</td>
+                  <td><b>Rotary Type</b></td>
+                  <td>{{str_rotaryType}}</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6">
+                <label>Report Type :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_reportType"
+                  [items]="sarr_reportType"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="int_department == 1">
+                <label>Department :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_dept"
+                  [items]="sarr_departemnt"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6" *ngIf="bln_disableIPQCType == true">
+                <label> Product Type :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_IPQCType"
+                  [items]="sarr_IPQCType"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-md-12">
+                <label>Product Detail :
+                  <span style="color:teal">[Product Name | {{lbl_productCode}} | Product Version | Version]</span>
+                  <!-- <span style="color:slateblue"><a href="open2(content);"> &nbsp;&nbsp;&nbsp;Show Detail</a></span> -->
+                  <span>&nbsp;&nbsp;&nbsp;<button
+                    type="button" int_showHideParamDetail
+                    [hidden] = "int_showHideParamDetail == 1 || lblProductMsg == 'Product Not Set'"
+                    class="btn btn-sm btn-outline-info"
+                    (click)="btnShow_displayParameter()">&nbsp;Show Parameter
+                  </button></span>
+                </label>
+                <div class="form-group">
+                  <ngx-select
+                  [disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'"
+                  formControlName="str_prdDetail"
+                  [items]="sarr_productData"
+                  (select)="cboProduct_getProductID($event)"
+                  placeholder="Select">
+                  </ngx-select>
+
+                  <div class="form__error" style="color:red;margin-top:3px;font-weight: bold;">{{lblProductMsg}}</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div [hidden]="bln_disableSpanIfNoneProduct == true">
+              <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true">
+                <div class="col-md-6" *ngIf="int_Validation == 1">
+                  <div class="form-group">
+                    <input type="checkbox" [formControl]="int_validation" [checked]="bln_validationValue" (change)="chkValidation($event)"/> &nbsp;&nbsp;
+                    <label style="color: blue;">Validation Test</label>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+            <div [hidden]="bln_disableSpanIfNoneProduct == true"> <!--If Product set None-->
+              <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6" *ngIf="int_indSample == 1">
+                <label>No. Of Samples(Ind) :</label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="int_indSample"
+                  (keypress)="txtindSample_enterOnlyNum($event)"
+                  maxlength="3">
+
+                  <div *ngIf="!int_indSample1.valid && int_indSample1.touched && int_indSample1?.errors['required']"
+                    class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                  </div>
+
+                  <div *ngIf="!int_indSample1.valid && int_indSample1.touched && bln_disableSpanIfNoneProduct == false"
+                  style="color:red;margin-top:3px;font-weight: bold;">
+                  {{int_indSample1?.errors['isZeroEntry']}}
+                 </div>
+
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="int_grpSample == 1">
+                <label>No. Of Samples(Grp) :</label>
+                <div class="form-group">
+                  <input formControlName="int_grpSample"
+                  class="form-control"
+                  type="text"
+                  (keypress)="txtgrpSample_enterOnlyNum($event)"
+                  maxlength="3">
+
+                  <div *ngIf="!int_grpSample1.valid && int_grpSample1.touched && int_grpSample1?.errors['required']"
+                    class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                  </div>
+
+                  <div *ngIf="!int_grpSample1.valid && int_grpSample1.touched && bln_disableSpanIfNoneProduct == false"
+                  style="color:red;margin-top:3px;font-weight: bold;">
+                  {{int_grpSample1?.errors['isZeroEntry']}}
+                 </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6">
+                <label>Batch No. :</label>
+                <div class="form-group" [class.disabled]="btnText != 'Start' && str_cubicleType != 'IPQC'">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="str_batchNo"
+                  (keypress)="txtbatchNo_enterchr($event)"
+                  maxlength="25">
+
+                  <div *ngIf="!str_batchNo1.valid && str_batchNo1.touched && str_batchNo1?.errors['required']"
+                    class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="int_batchSize == 1">
+                <label>Batch Size :</label>
+                <div class="input-group mb-3 form-group" [class.disabled]="btnText != 'Start'">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="str_batchSize"
+                  (keypress)="txtsize_onlyNumberDecimal($event)"
+                  maxlength="4" style="width:50%;">
+                  <ngx-select
+                  [items]="sarr_batchSizeUnit"
+                  formControlName="str_batchUnit"
+                  style="width:50%;"
+                  placeholder="Unit">
+                  </ngx-select>
+                </div>
+
+                <div *ngIf="!str_batchSize1.valid && str_batchSize1.touched && str_batchSize1?.errors['required']"
+                  class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                </div>
+                <div *ngIf="str_batchUnit1.value == 'Unit' && bln_disableSpanIfNoneProduct == false" class="form__error"
+                style="color:red;margin-top:3px;font-weight: bold;">Please Select Unit
+                </div>
+                <div *ngIf="!str_batchSize1.valid && str_batchSize1.touched"
+                  style="color:red;margin-top:3px;font-weight: bold;">
+                  {{str_batchSize1?.errors['isZeroEntry']}}
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6" *ngIf="int_Lodstage == 1">
+                <label>LOD(Stage) :</label>
+                <div class="form-group">
+                  <input
+                  formControlName="str_lodStage"
+                  class="form-control"
+                  type="text"
+                  (keypress)="txtlodStage_enterchr($event)"
+                  maxlength="25">
+
+                  <div *ngIf="!str_lodStage1.valid && str_lodStage1.touched && str_lodStage1?.errors['required']"
+                    class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="int_DTMedia == 1">
+                <label>DT Media :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_DTMedia"
+                  [items]="sarr_mediaData"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" [class.disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true || btnText == 'Pause'">
+              <div class="col-md-6" *ngIf="int_stage == 1">
+                <label>Stage :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_stage"
+                  [items]="sarr_stageData"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+            </div>
+
+          </div> <!--If Product set None -->
+
+          <hr>
+
+          <div class="text-center">
+              <!--Update Button-->
+            <button class="btn btn-primary" type="button" style="width: 120px;"
+              [hidden]="bln_disableButtonIfStartBatch == true && bln_disableButtonIfIPQC == false"
+              [disabled]="bln_disableDivWeighment ==  true
+              || bln_disableDivLock == true
+              ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+              ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+              ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+              ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+              ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+              ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+              ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == 1)"
+
+              [ngClass]="{'disabledBtn' : bln_disableDivWeighment ==  true
+              || bln_disableDivLock == true
+              ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+              ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+              ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+              ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+              ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+              ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+              ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == 1)}"
+
+              (click)="btnUpdate(1)">
+              Update</button>&nbsp;&nbsp;&nbsp;
+
+              <!--Start,Stop,Resume Button-->
+            <button class="btn btn-success" type="button" style="width: 120px;"
+            [hidden]="bln_disableButtonIfIPQC == true"
+            [disabled]="bln_disableDivWeighment ==  true
+            || bln_disableDivLock == true
+            ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+            ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+            ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+            ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+            ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == 1)"
+
+            [ngClass]="{'disabledBtn' : bln_disableDivWeighment ==  true
+            || bln_disableDivLock == true
+            ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+            ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+            ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+            ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+            ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == true)}"
+
+            (click)="btnSPR()">{{btnText}}</button>&nbsp;&nbsp;&nbsp;
+
+            <!--End Button-->
+            <button type="button" class="btn btn-danger" style="width: 120px;"
+            [hidden]="bln_disableButtonIfIPQC == true"
+            [disabled]="bln_disableDivWeighment ==  true
+            || bln_disableDivLock == true
+            || bln_disableButtonIfStartBatch == false
+            ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+            ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+            ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+            ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+            ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == 1)"
+
+            [ngClass]="{'disabledBtn' : bln_disableDivWeighment ==  true
+            || bln_disableDivLock == true
+            || bln_disableButtonIfStartBatch == false
+            ||(int_indSample == 1 && bln_disableSpanIfNoneProduct == false && int_indSample1.invalid)
+            ||(int_grpSample == 1 && bln_disableSpanIfNoneProduct == false && int_grpSample1.invalid)
+            ||(bln_disableSpanIfNoneProduct == false && (str_batchNo1.invalid || str_batchNo1.value == 'NULL'))
+            ||(int_Lodstage == 1 && bln_disableSpanIfNoneProduct == false && str_lodStage1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchSize1.invalid)
+            ||(int_batchSize == 1 && bln_disableSpanIfNoneProduct == false && str_batchUnit1.value == 'Unit')
+            ||(bln_disableSpanIfNoneProduct == false && int_showHideParamDetail == 1)}"
+
+            (click)="btnEnd(1)">End</button>&nbsp;&nbsp;&nbsp;
+
+            <!--Reset Button-->
+            <button class="btn btn-secondary" style="width: 120px;"
+            type="button"
+            [disabled]="bln_disableDivWeighment ==  true|| bln_disableDivLock == true "
+            [ngClass]="{'disabledBtn' : bln_disableDivWeighment ==  true|| bln_disableDivLock == true}"
+            (click)="onReset()">Reset</button>&nbsp;&nbsp;&nbsp;
+
+            <!--Close Button-->
+            <button class="btn btn-default waves-effect" style="width: 120px;" type="button" (click)="onClose()">Close</button>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+
+thead
+{
+  background-color:#4680ffeb;
+  color:white;
+  text-align: center;
+  font-family: sans-serif;
+}
+td{
+  width: 20%;
+  height:10%;
+  text-align: center;
+  color:black;
+}
+.dark-modal .modal-content {
+  background-color: #009efb;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+

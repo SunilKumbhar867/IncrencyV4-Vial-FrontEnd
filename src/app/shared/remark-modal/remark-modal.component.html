@@ -1,0 +1,26 @@
+<div role="document" class="">
+  <div class="modal-header">
+    <h4 class="modal-title" style="color:blue;">Select Printer</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="int_printNo >= '1'">
+        <textarea
+        [(ngModel)]="str_remark"
+        placeholder="Please enter the remark"
+        type="text" rows= "5"
+        class="form-control">
+        </textarea>
+        <hr>
+    </div>
+
+    <h4 *ngFor="let printer of sarr_printers" (click)="selectedPrinter(printer)" [class.highlighted]="printer === highlight"
+      style="padding: 1%;"><i class="fa fa-print"></i> {{printer}} </h4>
+    <hr>
+    <div class="text-center">
+      <button class="btn btn-info" (click)="print()"><i class="fa fa-print"></i> Print</button>
+    </div>
+  </div>
+</div>

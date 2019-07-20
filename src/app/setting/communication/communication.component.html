@@ -1,0 +1,32 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Communication Status</span>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <table class="table-bordered" width="100%">
+              <thead style="background-color:grey;color:white;text-align: center">
+                <th style="width: 33%">Cubicle No</th>
+                <th style="width: 33%">IDS</th>
+                <th style="width: 33%"> Status</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of arrCommunicationStatus" [ngClass]="obj.class">
+                  <td>{{obj.cubicleNo}}</td>
+                  <td>{{obj.IdsNo}}</td>
+                  <td>{{obj.class}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

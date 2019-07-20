@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditRoles" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="55384e4f-ca22-41dd-86bd-ebf4a0f67ee1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AuditRolesDataset" uuid="277e16a7-90a4-45c5-833f-a02de104244d">
+		<parameter name="SelectedValue" class="java.lang.String">
+			<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SelectedAction" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FromDate" class="java.lang.String"/>
+		<parameter name="ToDate" class="java.lang.String"/>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_role.`DT` AS tbl_audit_role_DT,
+     tbl_audit_role.`TM` AS tbl_audit_role_TM,
+     tbl_audit_role.`userid` AS tbl_audit_role_userid,
+     tbl_audit_role.`username` AS tbl_audit_role_username,
+     tbl_audit_role.`Remark` AS tbl_audit_role_Remark,
+     tbl_audit_role.`ACT` AS tbl_audit_role_ACT,
+     tbl_audit_role.`RoleName` AS tbl_audit_role_RoleName,
+     tbl_audit_role.`RightAdded` AS tbl_audit_role_RightAdded,
+     tbl_audit_role.`RightRemoved` AS tbl_audit_role_RightRemoved,
+     tbl_audit_role.`old_add_user_assign_roles` AS tbl_audit_role_old_add_user_assign_roles,
+     tbl_audit_role.`new_add_user_assign_roles` AS tbl_audit_role_new_add_user_assign_roles,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_role` tbl_audit_role,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+     tbl_audit_role.`RoleName` LIKE
+          CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+ AND tbl_audit_role.`ACT` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+  AND tbl_audit_role.`dt` >= $P{FromDate}
+ ORDER BY tbl_audit_role.`dt` DESC, tbl_audit_role.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_role_DT" class="java.sql.Date"/>
+		<field name="tbl_audit_role_TM" class="java.sql.Time"/>
+		<field name="tbl_audit_role_userid" class="java.lang.String"/>
+		<field name="tbl_audit_role_username" class="java.lang.String"/>
+		<field name="tbl_audit_role_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_role_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_role_RoleName" class="java.lang.String"/>
+		<field name="tbl_audit_role_RightAdded" class="java.lang.String"/>
+		<field name="tbl_audit_role_RightRemoved" class="java.lang.String"/>
+		<field name="tbl_audit_role_old_add_user_assign_roles" class="java.lang.String"/>
+		<field name="tbl_audit_role_new_add_user_assign_roles" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SelectedAction" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FromDate" class="java.lang.String"/>
+	<parameter name="ToDate" class="java.lang.String"/>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_role.`DT` AS tbl_audit_role_DT,
+     tbl_audit_role.`TM` AS tbl_audit_role_TM,
+     tbl_audit_role.`userid` AS tbl_audit_role_userid,
+     tbl_audit_role.`username` AS tbl_audit_role_username,
+     tbl_audit_role.`Remark` AS tbl_audit_role_Remark,
+     tbl_audit_role.`ACT` AS tbl_audit_role_ACT,
+     tbl_audit_role.`RoleName` AS tbl_audit_role_RoleName,
+     tbl_audit_role.`RightAdded` AS tbl_audit_role_RightAdded,
+     tbl_audit_role.`RightRemoved` AS tbl_audit_role_RightRemoved,
+     tbl_audit_role.`old_add_user_assign_roles` AS tbl_audit_role_old_add_user_assign_roles,
+     tbl_audit_role.`new_add_user_assign_roles` AS tbl_audit_role_new_add_user_assign_roles,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_role` tbl_audit_role,
+      `tbl_rpt_path` tbl_rpt_path
+WHERE
+     tbl_audit_role.`RoleName` LIKE
+          CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+ AND tbl_audit_role.`ACT` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+  AND tbl_audit_role.`dt` >= $P{FromDate}
+ ORDER BY tbl_audit_role.`dt` DESC, tbl_audit_role.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_role_DT" class="java.sql.Date"/>
+	<field name="tbl_audit_role_TM" class="java.sql.Time"/>
+	<field name="tbl_audit_role_userid" class="java.lang.String"/>
+	<field name="tbl_audit_role_username" class="java.lang.String"/>
+	<field name="tbl_audit_role_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_role_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_role_RoleName" class="java.lang.String"/>
+	<field name="tbl_audit_role_RightAdded" class="java.lang.String"/>
+	<field name="tbl_audit_role_RightRemoved" class="java.lang.String"/>
+	<field name="tbl_audit_role_old_add_user_assign_roles" class="java.lang.String"/>
+	<field name="tbl_audit_role_new_add_user_assign_roles" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="63">
+			<image>
+				<reportElement x="714" y="0" width="78" height="50" uuid="5465c1bb-3b98-4640-aba5-af9aae572fb1"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="21" width="563" height="29" uuid="a2665a53-3344-45b2-9574-f8259360ad1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR ROLE(S)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="63">
+			<staticText>
+				<reportElement x="6" y="25" width="81" height="20" uuid="695bb4df-a2f2-40a2-b42f-bebba2a01cd8"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss" isBlankWhenNull="true">
+				<reportElement x="95" y="25" width="100" height="20" uuid="0f6c7778-ca39-4767-8fe0-351484f70296"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="3" width="81" height="20" uuid="eaccdc99-3743-4d05-92c5-d7cabfff4272"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="3" width="588" height="20" uuid="b0786cf0-0849-46ea-9d8d-a450c807e765"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="39" width="80" height="20" uuid="1a5db398-af57-451e-93e8-9dd070e1fd29"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="371" y="39" width="40" height="20" uuid="5ba66215-8ce5-4a01-803e-3eac53ebe321"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="63">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="26" y="0" width="753" height="63" uuid="2181ee88-5c02-4beb-b2ef-31f33645a8c3"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AuditRolesDataset" uuid="3dc7f0b5-e292-470a-a8c4-b1a3bcd2b7e9">
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="60" uuid="c5f4d892-317d-4081-b67f-e6f175ce3d29">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="344a2249-7dcf-4b07-afb3-9129d0ce2cce"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="60" height="30" uuid="695c2e68-8078-4d1a-8666-62652f0e3b09"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_role_DT})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="c735400f-351a-446b-8852-14c0e2906067">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="77826cfb-857a-4546-b232-93d99dcfab3d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="81817bd8-cff8-44cf-98d3-077240375985"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="a20982e6-b86e-4b47-a046-31e01c860b77">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="9ac45dc3-8f45-44a5-8d71-e8fc9434a338"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Role]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="30" uuid="5c55db01-1e1c-4d55-8723-76e6d2699648"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_role_RoleName}) ? "NA" : $F{tbl_audit_role_RoleName}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="7097dccc-2b39-4458-90cb-b70f74888bdc">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="6c92145e-d409-4e96-8962-509dfa8fa12e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="30" uuid="a0211677-33f9-492f-86e6-6d6b9838a49f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[($F{tbl_audit_role_ACT}.intern() == "Add") ? "New Role Added" : "Role Edited"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="9f62d7fe-8256-4529-b42c-8128ca460337">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="8a698b50-4cd6-445b-8840-d187fd81b781"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="60" height="30" uuid="a29b3437-6e7f-40c2-b5c5-9999d291baf2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_role_userid}) ? "NA" : $F{tbl_audit_role_userid}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="5b39eccc-f908-47d7-a3b2-0f733bad8a0d">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="80f3f197-c77a-49a7-a4c4-261f423124c4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="30" uuid="2ea69d30-6125-452e-9ac0-59d07602cc78"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_role_username}) ? "NA" :$F{tbl_audit_role_username}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="9471178d-8a95-46ef-b281-c03a9b3aa482">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="19dfb69f-2f7b-44c0-8350-12cdca3aca15"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[RIGHT ADDED]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="120" height="30" uuid="73f639e3-18f4-4d13-ab93-45bcbe830345"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[(($F{tbl_audit_role_RightAdded}=="NULL")||($F{tbl_audit_role_RightAdded}=="") ? "NA" : $F{tbl_audit_role_RightAdded} )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="6ee79b68-a05c-4ddf-9b22-05d6b6054d89">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="713b5ebc-2738-4071-a08f-cde713b3f618"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[RIGHT REMOVED]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="120" height="30" uuid="c0e657a1-e8e3-4411-a67a-be3e20b426a3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[(($F{tbl_audit_role_RightRemoved}=="NULL")||($F{tbl_audit_role_RightRemoved}=="") ? "NA" : $F{tbl_audit_role_RightRemoved})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="98eaa51d-bb69-4213-9201-6dbfecf64f59">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="5487d3f5-f461-465a-ac3b-9989bbb253a7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="150" height="30" uuid="752e65d9-b9c9-4dd5-8d56-57661acebbb5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[(($F{tbl_audit_role_Remark}=="NULL")||($F{tbl_audit_role_Remark}=="") ? "NA" : $F{tbl_audit_role_Remark} )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

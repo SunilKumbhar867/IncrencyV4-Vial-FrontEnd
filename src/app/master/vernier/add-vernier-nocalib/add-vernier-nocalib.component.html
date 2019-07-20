@@ -1,0 +1,119 @@
+<ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'> Add Vernier Detail</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="addVernierForm" (ngSubmit)="proceedToSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <label>
+                    Vernier Code No :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="vernierCode" (keyup)="onKeyUpCheckID($event)" maxlength="25">
+                  </div>
+                  <div *ngIf="!vernierCode.valid && vernierCode.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{vernierCode?.errors['required']}}
+                    </div>
+                  <div style="color:red;margin-top:3px;font-weight: bold;" *ngIf="bln_showWarningVernierCode">Vernier Code Already
+                    Exist..!</div>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Model No :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="vernierModelNo" maxlength="25">
+                  </div>
+                  <div *ngIf="!vernierModelNo.valid && vernierModelNo.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{vernierModelNo?.errors['required']}}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Serial No :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="vernierSerialNo" maxlength="25">  <!--(keyup)="onKeyUpCheckSrNo($event)" >-->
+                  </div>
+                  <div *ngIf="!vernierSerialNo.valid && vernierSerialNo.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{vernierSerialNo?.errors['required']}}
+                    </div>
+                  <!-- <div style="color:red;margin-top:3px;font-weight: bold;" *ngIf="bln_showWarningVernierSrNo">Vernier Serial No Already
+                    Exist..!</div> -->
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Unit :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="unit" readonly>
+                  </div>
+
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Least Count :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="leastCount" (keypress)="onlyNumbersWithDecimal($event);" maxlength="10">
+                  </div>
+                  <div *ngIf="!leastCount.valid && leastCount.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{leastCount?.errors['required']}}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Min Range :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="minRange" (keypress)="onlyNumbersWithDecimal($event);" maxlength="10">
+                  </div>
+                  <div *ngIf="!minRange.valid && minRange.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{minRange?.errors['required']}}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <br>
+                  <label>
+                    Max Range :
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="maxRange" (keypress)="onlyNumbersWithDecimal($event);" maxlength="10">
+                  </div>
+                  <div *ngIf="!maxRange.valid && maxRange.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                      {{maxRange?.errors['required']}}
+                    </div>
+                </div>
+
+              </div>
+              <br>
+            </div>
+
+          </div>
+
+          <div class="text-center">
+            <button type="submit" [disabled]="!addVernierForm.valid || (bln_exist == true || bln_exist_srNo == true ) "
+              [ngClass]="{'disabledBtn' : !addVernierForm.valid || (bln_exist == true || bln_exist_srNo == true )}"
+              class="btn btn-primary">Save Changes</button>
+              &nbsp;&nbsp;&nbsp;
+              <button href="javascript:;" type="button" class="btn btn-default waves-effect" (click)="reset()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

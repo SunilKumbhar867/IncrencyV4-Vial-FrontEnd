@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditMachine" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="ff525f8c-7337-41f5-896e-7fdbacc305f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AuditMachineDataset" uuid="55163222-a306-4d22-9749-66d49d5b20b3">
+		<parameter name="SelectedValue" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="SelectedAction" class="java.lang.String" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_audit_machine.`RecNo` AS tbl_audit_machine_RecNo,
+     tbl_audit_machine.`DT` AS tbl_audit_machine_DT,
+     tbl_audit_machine.`TM` AS tbl_audit_machine_TM,
+     tbl_audit_machine.`userid` AS tbl_audit_machine_userid,
+     tbl_audit_machine.`username` AS tbl_audit_machine_username,
+     tbl_audit_machine.`Remark` AS tbl_audit_machine_Remark,
+     tbl_audit_machine.`ACT` AS tbl_audit_machine_ACT,
+     tbl_audit_machine.`MachineID` AS tbl_audit_machine_MachineID,
+     tbl_audit_machine.`OldData` AS tbl_audit_machine_OldData,
+     tbl_audit_machine.`NewData` AS tbl_audit_machine_NewData,
+     tbl_nomenclature.`MachineCode` AS tbl_nomenclature_MachineCode
+FROM
+     `tbl_audit_machine` tbl_audit_machine,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+
+     tbl_audit_machine.`MachineID` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+
+and
+  tbl_audit_machine.`ACT` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+
+ AND tbl_audit_machine.`dt` >= $P{FromDate}
+ AND tbl_audit_machine.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_machine.`dt` DESC, tbl_audit_machine.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_audit_machine_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_machine_DT" class="java.sql.Date"/>
+		<field name="tbl_audit_machine_TM" class="java.sql.Time"/>
+		<field name="tbl_audit_machine_userid" class="java.lang.String"/>
+		<field name="tbl_audit_machine_username" class="java.lang.String"/>
+		<field name="tbl_audit_machine_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_machine_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_machine_MachineID" class="java.lang.String"/>
+		<field name="tbl_audit_machine_OldData" class="java.lang.String"/>
+		<field name="tbl_audit_machine_NewData" class="java.lang.String"/>
+		<field name="tbl_nomenclature_MachineCode" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_audit_machine.`RecNo` AS tbl_audit_machine_RecNo,
+     tbl_audit_machine.`DT` AS tbl_audit_machine_DT,
+     tbl_audit_machine.`TM` AS tbl_audit_machine_TM,
+     tbl_audit_machine.`userid` AS tbl_audit_machine_userid,
+     tbl_audit_machine.`username` AS tbl_audit_machine_username,
+     tbl_audit_machine.`Remark` AS tbl_audit_machine_Remark,
+     tbl_audit_machine.`ACT` AS tbl_audit_machine_ACT,
+     tbl_audit_machine.`MachineID` AS tbl_audit_machine_MachineID,
+     tbl_audit_machine.`OldData` AS tbl_audit_machine_OldData,
+     tbl_audit_machine.`NewData` AS tbl_audit_machine_NewData,
+     tbl_nomenclature.`MachineCode` AS tbl_nomenclature_MachineCode
+FROM
+     `tbl_audit_machine` tbl_audit_machine,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+
+     tbl_audit_machine.`MachineID` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+
+and
+  tbl_audit_machine.`ACT` LIKE
+	CASE
+		WHEN
+			$P{SelectedAction} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedAction}
+	END
+
+ AND tbl_audit_machine.`dt` >= $P{FromDate}
+ AND tbl_audit_machine.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_machine.`dt` DESC, tbl_audit_machine.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_audit_machine_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_machine_DT" class="java.sql.Date"/>
+	<field name="tbl_audit_machine_TM" class="java.sql.Time"/>
+	<field name="tbl_audit_machine_userid" class="java.lang.String"/>
+	<field name="tbl_audit_machine_username" class="java.lang.String"/>
+	<field name="tbl_audit_machine_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_machine_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_machine_MachineID" class="java.lang.String"/>
+	<field name="tbl_audit_machine_OldData" class="java.lang.String"/>
+	<field name="tbl_audit_machine_NewData" class="java.lang.String"/>
+	<field name="tbl_nomenclature_MachineCode" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="55">
+			<textField>
+				<reportElement x="101" y="22" width="581" height="20" uuid="a38dda0f-536d-4f43-b0b9-a2127172b0a9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AUDIT TRAIL FOR " +$F{tbl_nomenclature_MachineCode}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="62">
+			<staticText>
+				<reportElement x="12" y="24" width="81" height="20" uuid="4c4c214c-92e5-4e88-89c3-4c0fda3a5dbc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="101" y="24" width="100" height="20" uuid="5c1b17be-8428-4255-be44-c4a0643ea080"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="2" width="81" height="20" uuid="203229de-cf30-45b7-90b4-de76e8647604"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="101" y="2" width="581" height="20" uuid="c9750485-122d-4390-be37-c6b0bf5a2b0e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="38" width="80" height="20" uuid="579e0c0c-c2dc-4cbf-b36a-807ecd8288b6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="417" y="38" width="40" height="20" uuid="2e71ff64-f472-4d83-84ae-3f2868e7b8ed"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="73">
+			<elementGroup>
+				<componentElement>
+					<reportElement key="table 1" style="table 1" x="12" y="4" width="778" height="66" uuid="83afbee5-8173-4087-bb2e-0833f94ebfe3"/>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="AuditMachineDataset" uuid="98862719-18ba-4009-b880-d9cb71b4db11">
+							<datasetParameter name="SelectedValue">
+								<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="FromDate">
+								<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="ToDate">
+								<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="UserId">
+								<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="UserName">
+								<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="SelectedAction">
+								<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="76" uuid="c5417e5d-fbc9-4a2a-8c0e-20a758df3b95">
+							<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="76" height="30" uuid="fe2297fa-d69d-45a3-83b1-c8f8494de4f4"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[DATE]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="34" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="76" height="34" uuid="383af721-47db-4992-8c68-0245247b042b"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_machine_DT})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="19cb0098-efab-4ef4-8827-d79822942ea8">
+							<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="30" uuid="82793874-b0da-42fd-84d5-68a8f5f177df"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[TIME]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="34" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="61" height="34" uuid="5c6c678c-937d-468f-b103-6b58c1eec5e8"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="67" uuid="43693177-6229-41db-9f87-70996e8c52bb">
+							<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="67" height="30" uuid="eb3c95dc-96fc-4feb-bd3f-d31baf76001d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[USER ID]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="34" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="67" height="34" uuid="7b604dbc-4df8-487f-9ce5-222fd0159c1c"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_userid}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="55" uuid="d50448a6-e8ae-4e7e-b284-9880aac78054">
+							<jr:columnHeader height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="55" height="30" uuid="2c58da9b-f3dd-4a7e-b710-99b322302bcf"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[USER NAME]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="34" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="55" height="34" uuid="9ef23b2d-dc42-49c3-bc69-10ba21b0c0f2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_username}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="73" uuid="e18619f8-c447-4522-8e00-ee442bfcad03">
+							<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="73" height="30" uuid="d0e340ca-47b2-4033-b872-79ffe9784f06"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{tbl_nomenclature_MachineCode}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="34" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="73" height="34" uuid="627b54e8-650a-4394-b790-989d3eb92727"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_MachineID}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="65" uuid="e07b922a-78bb-4037-801b-5ed8646fa961">
+							<jr:columnHeader height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="65" height="30" uuid="90f4c0b3-b45e-4914-b161-2951f84bb411"/>
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ACTION]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="34" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="65" height="34" uuid="d2f360b5-c1d5-42a8-b46b-fa7786a7f7e6"/>
+									<box>
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_ACT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="94" uuid="28e13abd-968c-4d34-9780-25c89181a131">
+							<jr:columnHeader height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="94" height="30" uuid="8c39794d-d6fa-4803-8e4c-06eaeaf7c0dc"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[OLD DATA]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="34" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="94" height="34" uuid="f47f648c-890a-48b0-8b3d-8cbc5cead667"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_OldData}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="92" uuid="3c85f3e0-5321-496a-b19c-134e80568444">
+							<jr:columnHeader height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="92" height="30" uuid="211885aa-f0ce-4e1c-a36b-dde06139f1f5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ NEW DATA]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="34" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="92" height="34" uuid="eb313670-6145-40ea-81ff-12b50dcd9425"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_NewData}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="193" uuid="f9564640-99d4-422b-aedb-ab48f894be87">
+							<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="193" height="30" uuid="5f3e91af-ac12-4961-961b-63ab65ee3f74"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[REMARK]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="34" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="193" height="34" uuid="d2b11c1a-9c25-4d75-83ab-e9167b2c1f11"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{tbl_audit_machine_Remark}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+			</elementGroup>
+		</band>
+	</summary>
+</jasperReport>

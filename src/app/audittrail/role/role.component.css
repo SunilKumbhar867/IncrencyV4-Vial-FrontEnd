@@ -1,0 +1,8 @@
+
+.disabledBtn { cursor: not-allowed; }
+.mat-form-field {
+  display: inherit;
+  position: relative;
+  text-align: left;
+}
+

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoTabTemplateLimits_subreportForGraphForIncrency_Minpcs" language="groovy" pageWidth="546" pageHeight="150" columnWidth="546" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cc864282-6f10-4e30-b7ca-cbcf5b468bf1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SelectedValue" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReqMenu" class="java.lang.String"/>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="AverageValue" class="java.lang.Double"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CalStandDev" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_temp_detail.`RecNo` AS tbl_temp_detail_RecNo,
+     tbl_temp_detail.`RepSerNo` AS tbl_temp_detail_RepSerNo,
+     tbl_temp_detail.`MstSerNo` AS tbl_temp_detail_MstSerNo,
+     tbl_temp_detail.`RecSeqNo` AS tbl_temp_detail_RecSeqNo,
+     tbl_temp_detail.`DataValue` AS tbl_temp_detail_DataValue,
+     tbl_temp_detail.`DataValue1` AS tbl_temp_detail_DataValue1,
+     tbl_temp_detail.`DecimalPoint` AS tbl_temp_detail_DecimalPoint,
+     tbl_temp_detail.`HMI_ID` AS tbl_temp_detail_HMI_ID,
+     tbl_temp_master.`RepSerNo` AS tbl_temp_master_RepSerNo,
+     tbl_temp_master.`MstSerNo` AS tbl_temp_master_MstSerNo,
+     tbl_temp_master.`InstruId` AS tbl_temp_master_InstruId,
+     tbl_temp_master.`BFGCode` AS tbl_temp_master_BFGCode,
+     tbl_temp_master.`ProductName` AS tbl_temp_master_ProductName,
+     tbl_temp_master.`ProductType` AS tbl_temp_master_ProductType,
+     tbl_temp_master.`Qty` AS tbl_temp_master_Qty,
+     tbl_temp_master.`GrpQty` AS tbl_temp_master_GrpQty,
+     tbl_temp_master.`GrpFreq` AS tbl_temp_master_GrpFreq,
+     tbl_temp_master.`Idsno` AS tbl_temp_master_Idsno,
+     tbl_temp_master.`CubicalNo` AS tbl_temp_master_CubicalNo,
+     tbl_temp_master.`BalanceId` AS tbl_temp_master_BalanceId,
+     tbl_temp_master.`BalanceNo` AS tbl_temp_master_BalanceNo,
+     tbl_temp_master.`VernierId` AS tbl_temp_master_VernierId,
+     tbl_temp_master.`VernierNo` AS tbl_temp_master_VernierNo,
+     tbl_temp_master.`BatchNo` AS tbl_temp_master_BatchNo,
+     tbl_temp_master.`UserId` AS tbl_temp_master_UserId,
+     tbl_temp_master.`UserName` AS tbl_temp_master_UserName,
+     tbl_temp_master.`PrDate` AS tbl_temp_master_PrDate,
+     tbl_temp_master.`PrTime` AS tbl_temp_master_PrTime,
+     tbl_temp_master.`PrEndDate` AS tbl_temp_master_PrEndDate,
+     tbl_temp_master.`PrEndTime` AS tbl_temp_master_PrEndTime,
+     tbl_temp_master.`Side` AS tbl_temp_master_Side,
+     tbl_temp_master.`Unit` AS tbl_temp_master_Unit,
+     tbl_temp_master.`DecimalPoint` AS tbl_temp_master_DecimalPoint,
+     tbl_temp_master.`WgmtModeNo` AS tbl_temp_master_WgmtModeNo,
+     tbl_temp_master.`Nom` AS tbl_temp_master_Nom,
+     tbl_temp_master.`T1NegTol` AS tbl_temp_master_T1NegTol,
+     tbl_temp_master.`T1PosTol` AS tbl_temp_master_T1PosTol,
+     tbl_temp_master.`T2NegTol` AS tbl_temp_master_T2NegTol,
+     tbl_temp_master.`T2PosTol` AS tbl_temp_master_T2PosTol,
+     tbl_temp_master.`limitOn` AS tbl_temp_master_limitOn,
+     tbl_temp_master.`T1NMTTab` AS tbl_temp_master_T1NMTTab,
+     tbl_temp_master.`NomEmpty` AS tbl_temp_master_NomEmpty,
+     tbl_temp_master.`T1NegEmpty` AS tbl_temp_master_T1NegEmpty,
+     tbl_temp_master.`T1PosEmpty` AS tbl_temp_master_T1PosEmpty,
+     tbl_temp_master.`T2NegEmpty` AS tbl_temp_master_T2NegEmpty,
+     tbl_temp_master.`T2PosEmpty` AS tbl_temp_master_T2PosEmpty,
+     tbl_temp_master.`NomNet` AS tbl_temp_master_NomNet,
+     tbl_temp_master.`T1NegNet` AS tbl_temp_master_T1NegNet,
+     tbl_temp_master.`T1PosNet` AS tbl_temp_master_T1PosNet,
+     tbl_temp_master.`T2NegNet` AS tbl_temp_master_T2NegNet,
+     tbl_temp_master.`T2PosNet` AS tbl_temp_master_T2PosNet,
+     tbl_temp_master.`CubicleType` AS tbl_temp_master_CubicleType,
+     tbl_temp_master.`ReportType` AS tbl_temp_master_ReportType,
+     tbl_temp_master.`MachineCode` AS tbl_temp_master_MachineCode,
+     tbl_temp_master.`MFGCode` AS tbl_temp_master_MFGCode,
+     tbl_temp_master.`BatchSize` AS tbl_temp_master_BatchSize,
+     tbl_temp_master.`FriabilityID` AS tbl_temp_master_FriabilityID,
+     tbl_temp_master.`HardnessID` AS tbl_temp_master_HardnessID,
+     tbl_temp_master.`CubicleName` AS tbl_temp_master_CubicleName,
+     tbl_temp_master.`CubicleLocation` AS tbl_temp_master_CubicleLocation,
+     tbl_temp_master.`RepoLabel10` AS tbl_temp_master_RepoLabel10,
+     tbl_temp_master.`RepoLabel11` AS tbl_temp_master_RepoLabel11,
+     tbl_temp_master.`RepoLabel12` AS tbl_temp_master_RepoLabel12,
+     tbl_temp_master.`RepoLabel13` AS tbl_temp_master_RepoLabel13,
+     tbl_temp_master.`PrintNo` AS tbl_temp_master_PrintNo,
+     tbl_temp_master.`IsArchived` AS tbl_temp_master_IsArchived,
+     tbl_temp_master.`GraphType` AS tbl_temp_master_GraphType,
+     tbl_temp_master.`BatchComplete` AS tbl_temp_master_BatchComplete,
+     tbl_temp_master.`PVersion` AS tbl_temp_master_PVersion,
+     tbl_temp_master.`Version` AS tbl_temp_master_Version,
+     tbl_temp_master.`CheckedByID` AS tbl_temp_master_CheckedByID,
+     tbl_temp_master.`CheckedByName` AS tbl_temp_master_CheckedByName,
+     tbl_temp_master.`CheckedByDate` AS tbl_temp_master_CheckedByDate,
+     tbl_temp_master.`BRepSerNo` AS tbl_temp_master_BRepSerNo,
+     tbl_temp_master.`HMI_ID` AS tbl_temp_master_HMI_ID,
+     tbl_temp_master.`Stage` AS tbl_temp_master_Stage,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName,
+     tbl_nomenclature.`HardnessID` AS tbl_nomenclature_HardnessID,
+     tbl_nomenclature.`DisintegrationTester` AS tbl_nomenclature_DisintegrationTester,
+     tbl_nomenclature.`FriabilatorID` AS tbl_nomenclature_FriabilatorID,
+     tbl_nomenclature.`TappedDensityID` AS tbl_nomenclature_TappedDensityID,
+     tbl_nomenclature.`MoistureAnalyzerID` AS tbl_nomenclature_MoistureAnalyzerID,
+     tbl_nomenclature.`BalanceID` AS tbl_nomenclature_BalanceID,
+     tbl_nomenclature.`VernierID` AS tbl_nomenclature_VernierID,
+     tbl_nomenclature.`BinBalanceID` AS tbl_nomenclature_BinBalanceID,
+     tbl_nomenclature.`SieveShakerID` AS tbl_nomenclature_SieveShakerID,
+     tbl_nomenclature.`CubicleNo` AS tbl_nomenclature_CubicleNo,
+     tbl_nomenclature.`MachineCode` AS tbl_nomenclature_MachineCode
+FROM
+     `tbl_temp_detail` tbl_temp_detail,
+     `tbl_temp_master` tbl_temp_master,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_temp_detail.`HMI_ID` = $P{HmiId}
+ AND tbl_temp_master.`HMI_ID` = $P{HmiId}
+Order By
+tbl_temp_detail.`RecSeqNo`]]>
+	</queryString>
+	<field name="tbl_temp_detail_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_detail_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_detail_MstSerNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_detail_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_detail_DataValue" class="java.lang.Double"/>
+	<field name="tbl_temp_detail_DataValue1" class="java.lang.Float"/>
+	<field name="tbl_temp_detail_DecimalPoint" class="java.lang.Integer"/>
+	<field name="tbl_temp_detail_HMI_ID" class="java.lang.String"/>
+	<field name="tbl_temp_master_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_MstSerNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_InstruId" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_BFGCode" class="java.lang.String"/>
+	<field name="tbl_temp_master_ProductName" class="java.lang.String"/>
+	<field name="tbl_temp_master_ProductType" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_Qty" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_GrpQty" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_GrpFreq" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_Idsno" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_CubicalNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_BalanceId" class="java.lang.String"/>
+	<field name="tbl_temp_master_BalanceNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_VernierId" class="java.lang.String"/>
+	<field name="tbl_temp_master_VernierNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_BatchNo" class="java.lang.String"/>
+	<field name="tbl_temp_master_UserId" class="java.lang.String"/>
+	<field name="tbl_temp_master_UserName" class="java.lang.String"/>
+	<field name="tbl_temp_master_PrDate" class="java.sql.Date"/>
+	<field name="tbl_temp_master_PrTime" class="java.sql.Time"/>
+	<field name="tbl_temp_master_PrEndDate" class="java.sql.Date"/>
+	<field name="tbl_temp_master_PrEndTime" class="java.sql.Time"/>
+	<field name="tbl_temp_master_Side" class="java.lang.String"/>
+	<field name="tbl_temp_master_Unit" class="java.lang.String"/>
+	<field name="tbl_temp_master_DecimalPoint" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_WgmtModeNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_Nom" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1NegTol" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1PosTol" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2NegTol" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2PosTol" class="java.lang.Double"/>
+	<field name="tbl_temp_master_limitOn" class="java.lang.Boolean"/>
+	<field name="tbl_temp_master_T1NMTTab" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_NomEmpty" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1NegEmpty" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1PosEmpty" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2NegEmpty" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2PosEmpty" class="java.lang.Double"/>
+	<field name="tbl_temp_master_NomNet" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1NegNet" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T1PosNet" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2NegNet" class="java.lang.Double"/>
+	<field name="tbl_temp_master_T2PosNet" class="java.lang.Double"/>
+	<field name="tbl_temp_master_CubicleType" class="java.lang.String"/>
+	<field name="tbl_temp_master_ReportType" class="java.lang.String"/>
+	<field name="tbl_temp_master_MachineCode" class="java.lang.String"/>
+	<field name="tbl_temp_master_MFGCode" class="java.lang.String"/>
+	<field name="tbl_temp_master_BatchSize" class="java.lang.String"/>
+	<field name="tbl_temp_master_FriabilityID" class="java.lang.String"/>
+	<field name="tbl_temp_master_HardnessID" class="java.lang.String"/>
+	<field name="tbl_temp_master_CubicleName" class="java.lang.String"/>
+	<field name="tbl_temp_master_CubicleLocation" class="java.lang.String"/>
+	<field name="tbl_temp_master_RepoLabel10" class="java.lang.String"/>
+	<field name="tbl_temp_master_RepoLabel11" class="java.lang.String"/>
+	<field name="tbl_temp_master_RepoLabel12" class="java.lang.String"/>
+	<field name="tbl_temp_master_RepoLabel13" class="java.lang.String"/>
+	<field name="tbl_temp_master_PrintNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_IsArchived" class="java.lang.Boolean"/>
+	<field name="tbl_temp_master_GraphType" class="java.lang.String"/>
+	<field name="tbl_temp_master_BatchComplete" class="java.lang.Boolean"/>
+	<field name="tbl_temp_master_PVersion" class="java.lang.String"/>
+	<field name="tbl_temp_master_Version" class="java.lang.String"/>
+	<field name="tbl_temp_master_CheckedByID" class="java.lang.String"/>
+	<field name="tbl_temp_master_CheckedByName" class="java.lang.String"/>
+	<field name="tbl_temp_master_CheckedByDate" class="java.sql.Date"/>
+	<field name="tbl_temp_master_BRepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_HMI_ID" class="java.lang.Integer"/>
+	<field name="tbl_temp_master_Stage" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<field name="tbl_nomenclature_HardnessID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_DisintegrationTester" class="java.lang.String"/>
+	<field name="tbl_nomenclature_FriabilatorID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_TappedDensityID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_MoistureAnalyzerID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_BalanceID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_VernierID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_BinBalanceID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_SieveShakerID" class="java.lang.String"/>
+	<field name="tbl_nomenclature_CubicleNo" class="java.lang.String"/>
+	<field name="tbl_nomenclature_MachineCode" class="java.lang.String"/>
+	<variable name="avg" class="java.lang.Double" resetType="Page" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_temp_detail_DataValue}]]></variableExpression>
+	</variable>
+	<variable name="roundAvg" class="java.lang.Double">
+		<variableExpression><![CDATA[new BigDecimal($V{avg}.toString()).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue()]]></variableExpression>
+	</variable>
+	<variable name="minDataValue" class="java.lang.Double" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_temp_detail_DataValue}]]></variableExpression>
+	</variable>
+	<variable name="maxDataValue" class="java.lang.Double" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_temp_detail_DataValue}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="150" splitType="Stretch">
+			<xyLineChart>
+				<chart evaluationTime="Report" customizerClass="indLimitsDifferentSetShapeAndSize.IndLimitsDifferentSetShapeAndSize">
+					<reportElement x="0" y="0" width="546" height="150" uuid="a74ccefe-2518-49d8-a551-9efdfa368175">
+						<propertyExpression name="net.sf.jasperreports.chart.domain.axis.tick.interval"><![CDATA[($F{tbl_temp_master_Qty}<=25)? "1" :
+    (($F{tbl_temp_master_Qty}<=40)) ? "2":
+        (($F{tbl_temp_master_Qty}<=60)) ? "4":
+          (($F{tbl_temp_master_Qty}<=90)) ? "6":
+            (($F{tbl_temp_master_Qty}<=120)) ? "8":"10"]]></propertyExpression>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font fontName="Calibri" size="8"/>
+					</chartLegend>
+				</chart>
+				<xyDataset>
+					<xySeries>
+						<seriesExpression><![CDATA[(
+    $F{tbl_temp_master_ProductType}.equals(new Integer("1")) /* Product Type Is Tablet */
+)
+?
+    "Tablet"
+    :
+    "Capsule"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_temp_detail_DataValue}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Upper Limit1"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false) /* limit On Actual */
+?
+
+    ($F{tbl_temp_master_GraphType} == "0")  /* Graph On Standard */
+    ?
+    (
+        $F{tbl_temp_master_Nom}+$F{tbl_temp_master_T1PosTol}
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue}+$F{tbl_temp_master_T1PosTol}
+    )
+
+:   /* limit On Pecentage */
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standard */
+    ?
+    (
+        $F{tbl_temp_master_Nom}+($F{tbl_temp_master_Nom}*($F{tbl_temp_master_T1PosTol}/100))
+    )
+    : /* Graph On Average */
+    (
+        $P{AverageValue}+($P{AverageValue}*($F{tbl_temp_master_T1PosTol}/100))
+    )]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Lower Limit1"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false)  /* Limit On Actual */
+?
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standard */
+    ?
+    (
+        $F{tbl_temp_master_Nom} - $F{tbl_temp_master_T1NegTol}
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue} - $F{tbl_temp_master_T1NegTol}
+    )
+:    /* Limit On Percentage */
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standard */
+    ?
+    (
+        $F{tbl_temp_master_Nom}-($F{tbl_temp_master_Nom}*($F{tbl_temp_master_T1NegTol}/100))
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue}-($P{AverageValue}*($F{tbl_temp_master_T1NegTol}/100))
+    )]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA[(
+    $F{tbl_temp_master_GraphType}.equals("0") /* Graph On Standard */
+)
+?
+    (
+        ($F{tbl_temp_master_RepoLabel10}.equals( "Standard" ))
+        ?
+            "Standard"
+        :
+            "Target"
+    )
+:
+"Average"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[(
+    $F{tbl_temp_master_GraphType}.equals("0") /* Graph On Standard */
+)
+?
+$F{tbl_temp_master_Nom}
+:
+$P{AverageValue}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Upper Limit2"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false) /* Limit On Actual */
+?
+    ($F{tbl_temp_master_GraphType} == "0")  /* Graph On Standard */
+    ?
+    (
+       $F{tbl_temp_master_Nom}+$F{tbl_temp_master_T2PosTol}
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue} + $F{tbl_temp_master_T2PosTol}
+    )
+:   /* Limit On Percenatge */
+    ($F{tbl_temp_master_GraphType} == "0")    /* Graph On Standard */
+    ?
+    (
+       $F{tbl_temp_master_Nom}+($F{tbl_temp_master_Nom}*($F{tbl_temp_master_T2PosTol}/100))
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue}+($P{AverageValue}*($F{tbl_temp_master_T2PosTol}/100))
+    )]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Lower Limit2"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_temp_detail_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false) /* Limit On Actual */
+?
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standrad */
+    ?
+    (
+        $F{tbl_temp_master_Nom} - $F{tbl_temp_master_T2NegTol}
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue} - $F{tbl_temp_master_T2NegTol}
+    )
+:   /* Limit On Percentage */
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standrad */
+    ?
+    (
+       $F{tbl_temp_master_Nom} - ($F{tbl_temp_master_Nom}*($F{tbl_temp_master_T2NegTol}/100))
+    )
+    :   /* Graph On Average */
+    (
+        $P{AverageValue}-($P{AverageValue}*($F{tbl_temp_master_T2NegTol}/100))
+    )]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
+				<linePlot isShowLines="true" isShowShapes="true">
+					<plot>
+						<seriesColor seriesOrder="0" color="#0000FF"/>
+						<seriesColor seriesOrder="1" color="#FF0000"/>
+						<seriesColor seriesOrder="2" color="#FF3333"/>
+						<seriesColor seriesOrder="3" color="#006633"/>
+						<seriesColor seriesOrder="4" color="#990099"/>
+						<seriesColor seriesOrder="5" color="#990099"/>
+					</plot>
+					<categoryAxisLabelExpression><![CDATA[($F{tbl_temp_master_ProductType}.equals(new Integer("1"))) ?
+"Samples No."
+:
+"X-Axis : No. of Capsules "]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Calibri" size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Calibri" size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[($F{tbl_temp_master_Unit}=="mg")?
+"Wt. in (mg)"
+:
+"Wt. in (gm)"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat tickLabelMask="0.000" verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Calibri" size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Calibri" size="8" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false)  /* Limit On Actual */
+?
+    ($F{tbl_temp_master_GraphType} == "0")  /* Graph On Standard */
+    ?
+    (
+        ($F{tbl_temp_master_Nom} - $F{tbl_temp_master_T2NegTol}) - 0.01
+    )
+    :
+    (   /* Graph On Average */
+        ($P{AverageValue} - $F{tbl_temp_master_T2NegTol}) - 0.01
+    )
+:   /* Limit On Percenatge */
+    ($F{tbl_temp_master_GraphType} == "0")  /* Graph On Standard */
+    ?
+    (
+        ($F{tbl_temp_master_Nom}-(($F{tbl_temp_master_Nom}*$F{tbl_temp_master_T2NegTol})/100))-0.01
+    )
+    :   /* Graph On Average */
+    (
+        ($P{AverageValue}-(($P{AverageValue}*$F{tbl_temp_master_T2NegTol})/100))-0.01
+    )]]></rangeAxisMinValueExpression>
+					<rangeAxisMaxValueExpression><![CDATA[($F{tbl_temp_master_limitOn} == false) /* Limit On Actual */
+?
+    ($F{tbl_temp_master_GraphType} == "0") /* Graph On Standard */
+    ?
+    (
+        ($F{tbl_temp_master_Nom} + $F{tbl_temp_master_T2PosTol}) + 0.01
+    )
+    :   /* Graph On Average */
+    (
+        ($P{AverageValue} + $F{tbl_temp_master_T2PosTol}) + 0.001
+    )
+
+:   /* Limit On Percenatge */
+    ($F{tbl_temp_master_GraphType} == "0")  /* Graph On Standard */
+    ?
+    (
+        ($F{tbl_temp_master_Nom}+(($F{tbl_temp_master_Nom}*$F{tbl_temp_master_T2PosTol})/100)) + 0.01
+    )
+    :   /* Graph On Average */
+    (
+        ($P{AverageValue}+(($P{AverageValue}*$F{tbl_temp_master_T2PosTol})/100)) + 0.001
+    )]]></rangeAxisMaxValueExpression>
+				</linePlot>
+			</xyLineChart>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,87 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-md-12">
+            <span style='text-align: center;color:white'>EDIT EQUIPMENT</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frmEditMachine" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Equipment Code No. :</label>
+                <ngx-select [items]="arrMachineID" formControlName="strMachineId"
+                  (select)="selectedIndexChanged($event)">
+                </ngx-select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Make : </label>
+                <input class="form-control" type="text" formControlName="str_make" maxlength="25" [ngStyle]="{'cursor': blnIsEdit==false ? 'not-allowed' : 'pointer'}">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Model :</label>
+                <input class="form-control" type="text" formControlName="str_model" maxlength="25" [ngStyle]="{'cursor': blnIsEdit==false ? 'not-allowed' : 'pointer'}">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Serial No. :</label>
+                <input class="form-control" type="text" formControlName="str_serialNo" maxlength="25" [ngStyle]="{'cursor': blnIsEdit==false ? 'not-allowed' : 'pointer'}">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Rotary Type :</label>
+                <ngx-select [items]="sarr_rotaryType" formControlName="strRotaryType" [defaultValue]="sarr_rotaryType[0]"
+                  [ngStyle]="{'cursor': blnIsEdit==false ? 'not-allowed' : 'pointer'}">
+                </ngx-select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Cubicle Type :</label>
+                <ngx-select [items]="arrCubicleType" formControlName="strCubicleType" [defaultValue]="arrCubicleType[0]"
+                  [ngStyle]="{'cursor': blnIsEdit==false ? 'not-allowed' : 'pointer'}">
+                </ngx-select>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="text-center">
+
+            <button type="button" class="btn btn-warning " (click)="edit()" [disabled]="blnIsEdit == true"
+              [ngStyle]="{'cursor': blnIsEdit == true ? 'not-allowed' : 'pointer' }"
+              style="width: 142px">Edit</button>
+            &nbsp; &nbsp; &nbsp;
+
+            <button type="submit" class="btn btn-primary " [disabled]="!frmEditMachine.valid  || blnIsEdit == false"
+              [ngStyle]="{'cursor': !frmEditMachine.valid  || blnIsEdit == false ? 'not-allowed' : 'pointer' }"  style="width: 142px">Save
+              Changes</button>
+            &nbsp; &nbsp; &nbsp;
+
+            <button type="button" class="btn btn-default  waves-effect" (click)="onReset()"  style="width: 142px">Reset</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

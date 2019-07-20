@@ -1,0 +1,105 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'> MANAGE USER</span>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="input-group col-lg-6">
+            <span class="input-group-addon">
+              <i class="icofont icofont-user"></i>
+            </span>
+            <select [(ngModel)]="selected" (ngModelChange)="onSelect(selected)" class="form-control">
+              <option *ngFor="let status of statuses" [value]="status">
+                {{ status }}
+              </option>
+            </select>
+            <br>
+          </div>
+        </div>
+        <br>
+
+        <div class="table table-responsive">
+          <table class="table table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr style="text-align: center;font-size:11px">
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Role</th>
+                <th>Status</th>
+                <!-- <th>Password Status</th> -->
+                <th width="30%">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let x of sarr_userData" style="text-align: center;font-size:11px;color:black">
+                <td> {{x.userdata.UserID}}</td>
+                <td> {{x.userdata.UserInitials}}</td>
+                <td> {{x.userdata.Role}}</td>
+                <td>
+                  <span class="label" [ngStyle]="{'background-color':getStatusColor(x.userdata.Status)}">
+                    {{statusText}}
+                  </span>
+                </td>
+
+                <!-- <td *ngIf="x.status.add[0] == 'Expired'; else activeUsers">
+                  <span class="label" style="margin-top:2px" [ngStyle]="{'background-color': 'red'}"> {{x.status.add }}
+                  </span>
+                </td>
+                <ng-template #activeUsers>
+                  <td>
+                    <span class="label" style="margin-top:2px" [ngStyle]="{'background-color': 'green'}"> Active till
+                      {{x.status.add | date }} </span>
+                  </td>
+                </ng-template> -->
+                <td style="text-align: start;padding: 2px">
+
+                  <div *ngIf="statusText=='Enable'">
+                    <button [hidden]="!bln_manageUserEdit" type="button" (click)="ViewEditUser(x)" class="btn btn-sm btn-success"><i class="fa  fa-pencil"></i>
+                      Edit</button>&nbsp;
+                    <button [hidden]="!bln_manageUser || (x.userdata.active==1 || (loggedUserRole == x.userdata.Role))" type="button" (click)="buttonClicked('Temporary Disable',x)"
+                      class="btn btn-sm btn-warning">
+                      <i class="fa fa fa-pause-circle"></i> Temp Disable</button>&nbsp;
+                    <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUser ||  (x.userdata.active==1 || (loggedUserRole == x.userdata.Role))" type="button" (click)="buttonClicked('Permanent Disable',x)"
+                      class="btn btn-sm btn-danger">
+                      <i class="fa fa fa-ban"></i> Perma Disable</button>&nbsp;
+                    <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUserPassword ||  (x.userdata.active==1 ||  (loggedUserRole == x.userdata.Role))" type="button" (click)="changePassword(x)" class="btn btn-sm btn-info">
+                      <i class="fa fa fa-pencil"></i> Change Pass</button>
+                  </div>
+
+                  <div *ngIf="statusText=='Temporary Disabled' && (loggedUserRole == x.userdata.Role)">
+                    <button [hidden]="!bln_manageUser ||  x.userdata.active==1" type="button" (click)="buttonClicked('Enable',x)" class="btn btn-sm btn-primary">
+                      <i class="fa fa fa-check-square-o"></i> Enable</button>&nbsp;
+                    <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUser ||  x.userdata.active==1" type="button" (click)="buttonClicked('Permanent Disable',x)"
+                      class="btn btn-sm btn-danger">
+                      <i class="fa fa fa-ban"></i> Perma Disable</button>&nbsp;
+                      <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUserPassword ||  x.userdata.active==1" type="button" (click)="changePassword(x)" class="btn btn-sm btn-info">
+                        <i class="fa fa fa-pencil"></i> Change Pass</button>
+                  </div>
+
+                  <div *ngIf="statusText=='Auto Disabled' && (loggedUserRole == x.userdata.Role)">
+                    <button [hidden]="!bln_manageUser ||  x.userdata.active==1" type="button" (click)="buttonClicked('Temporary Disable',x)"
+                      class="btn btn-sm btn-warning">
+                      <i class="fa fa fa-pause-circle"></i> Temp Disable</button>&nbsp;
+                    <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUser ||  x.userdata.active==1" type="button" (click)="buttonClicked('Permanent Disable',x)"
+                      class="btn btn-sm btn-danger">
+                      <i class="fa fa fa-ban"></i> Perma Disable</button>&nbsp;
+                      <button *ngIf="bln_isLdap!==1" [hidden]="!bln_manageUserPassword ||  x.userdata.active==1" type="button" (click)="changePassword(x)" class="btn btn-sm btn-info">
+                        <i class="fa fa fa-pencil"></i> Change Pass</button>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

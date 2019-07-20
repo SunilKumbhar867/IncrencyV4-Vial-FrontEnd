@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoRoleRight" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="545" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="RepoRoleRightDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="HmiId" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_assignedrolewithright.`RecNo` AS tbl_assignedrolewithright_RecNo,
+     tbl_assignedrolewithright.`Role` AS tbl_assignedrolewithright_Role,
+     tbl_assignedrolewithright.`Rights` AS tbl_assignedrolewithright_Rights,
+     tbl_assignedrolewithright.`HMIID` AS tbl_assignedrolewithright_HMIID
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_assignedrolewithright` tbl_assignedrolewithright
+WHERE
+     tbl_assignedrolewithright.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_assignedrolewithright_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_assignedrolewithright_Role" class="java.lang.String"/>
+		<field name="tbl_assignedrolewithright_Rights" class="java.lang.String"/>
+		<field name="tbl_assignedrolewithright_HMIID" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_assignedrolewithright.`RecNo` AS tbl_assignedrolewithright_RecNo,
+     tbl_assignedrolewithright.`Role` AS tbl_assignedrolewithright_Role,
+     tbl_assignedrolewithright.`Rights` AS tbl_assignedrolewithright_Rights,
+     tbl_assignedrolewithright.`HMIID` AS tbl_assignedrolewithright_HMIID
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_assignedrolewithright` tbl_assignedrolewithright
+WHERE
+     tbl_assignedrolewithright.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_assignedrolewithright_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_assignedrolewithright_Role" class="java.lang.String"/>
+	<field name="tbl_assignedrolewithright_Rights" class="java.lang.String"/>
+	<field name="tbl_assignedrolewithright_HMIID" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="17" width="534" height="20" uuid="d05124b7-ddea-4bff-846a-266aec407df6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Role With Rights Report"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="64">
+			<staticText>
+				<reportElement x="10" y="30" width="81" height="20" uuid="8390164e-b5c4-493c-8f91-783d65baea63"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="99" y="30" width="100" height="20" uuid="72abe9ac-a00f-4f57-8aee-09f8ddbae426"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="730b7e58-4e7b-42d5-b5c7-5b8115ed47dd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="10" width="100" height="20" uuid="c1878e0a-4c6f-4c69-bedf-e0c5d0addda1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="44" width="80" height="20" uuid="1c0cc23a-c76f-4112-abf1-60bcb23b79d7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="323" y="44" width="40" height="20" uuid="217f7533-5b28-4e59-b96c-bb5a9302c5c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="71" splitType="Stretch">
+			<elementGroup>
+				<elementGroup>
+					<componentElement>
+						<reportElement key="table" style="table" x="11" y="0" width="534" height="65" uuid="f9724b77-cfe3-41da-abae-b3914cadab83"/>
+						<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<datasetRun subDataset="RepoRoleRightDataset" uuid="05c02de8-6b5b-4bbf-b866-9d51260c91d5">
+								<datasetParameter name="FromDate">
+									<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="ToDate">
+									<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="SelectedValue">
+									<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="UserId">
+									<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="UserName">
+									<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="HmiId">
+									<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+								</datasetParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+							<jr:column width="144" uuid="6d4912e7-cd61-4904-b559-92d2610dfa20">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="144" height="30" uuid="0e3dc9eb-7ce3-428d-a240-62ea3fe878ce"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[ROLE]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField>
+										<reportElement x="0" y="0" width="144" height="30" uuid="ef5a1275-7d50-4db4-a057-dea19b7b5788"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_assignedrolewithright_Role})) || ( "".equals($F{tbl_assignedrolewithright_Role}))) ? "NA" : $F{tbl_assignedrolewithright_Role}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="387" uuid="c5e1f121-21b1-4a73-97b2-07d3436ba451">
+								<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="387" height="30" uuid="e6cb9ec1-f461-4922-aa79-3a73b1d181ec"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<text><![CDATA[ASSIGNED RIGHTS]]></text>
+									</staticText>
+								</jr:columnHeader>
+								<jr:detailCell style="table_TD" height="30" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement x="0" y="0" width="387" height="30" uuid="e021d34f-b2be-4e1d-a82d-4c78c5aec850"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[(( "NULL".equals($F{tbl_assignedrolewithright_Rights})) || ( "".equals($F{tbl_assignedrolewithright_Rights}))) ? "NA" : $F{tbl_assignedrolewithright_Rights}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:table>
+					</componentElement>
+				</elementGroup>
+			</elementGroup>
+		</band>
+	</summary>
+</jasperReport>

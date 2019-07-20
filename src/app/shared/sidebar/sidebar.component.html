@@ -1,0 +1,730 @@
+<hr>
+<!-- Sidebar navigation-->
+<nav class="sidebar-nav" [class.disabled]="bln_editMode">
+  <ul id="sidebarnav">
+    <li>
+      <a [routerLink]="['/', 'home']" [routerLinkActive]="'router-link-active'">
+        <i class="mdi mdi-home"></i>
+        <span class="hide-menu">Home
+        </span>
+      </a>
+    </li>
+    <li *ngIf="bln_admin" [routerLinkActive]="['active']" [class.active]="showMenu==='Admin'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Admin')">
+        <i class="mdi mdi-account"></i>
+        <span class="hide-menu">Admin
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Admin'}">
+        <li *ngIf="bln_setAllParameters" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Admin'">
+          <a [routerLink]="['/', 'master','set-all-parameter']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa fa-clock-o"></i>
+            Set All Parameters
+          </a>
+        </li>
+        <li *ngIf="bln_passwordPolicy && bln_isLdap==0" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Admin'">
+          <a [routerLink]="['/', 'admin','pwd-policy']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-key"></i>
+            Password Policy
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li *ngIf="bln_master" [routerLinkActive]="['active']" [class.active]="showMenu==='Master'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Master')">
+        <i class="mdi mdi-database"></i>
+        <span class="hide-menu">Master
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_roles" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Role'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Role')">
+            <i class="fa fa-user"></i>
+            Role
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'Role' }">
+          <li *ngIf="bln_addRole" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','role','add-role']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_editRole" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','role','edit-role']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-pencil"></i>
+              Edit
+            </a>
+          </li>
+        </ul>
+      </ul>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_user" [routerLinkActive]="['active']" [class.active]="showSubMenu==='User'">
+          <a class="has-arrow pointer" (click)="addActiveClass('User')">
+            <i class="fa fa-users"></i>
+            User
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'User' }">
+          <li *ngIf="bln_addUser && bln_isLdap==0" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','user','add-user']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_addUser && bln_isLdap==1" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','user','add-user-ldap']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_manageUser" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','user','manage-user']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-pencil"></i>
+              Manage
+            </a>
+          </li>
+        </ul>
+      </ul>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_department" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Department'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Department')">
+            <i class="fa fa-sitemap"></i>
+            Department
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'Department' }">
+          <li *ngIf="bln_adddepartment" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','department','add-dept']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_editdepartment" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','department','edit-dept']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-pencil"></i>
+              Edit
+            </a>
+          </li>
+        </ul>
+      </ul>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_calibrationBox && int_showHideCalibrationBox == 1" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Calibration Box'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Calibration Box')">
+            <i class="fa fa-cubes"></i>
+            Calibration Box
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'Calibration Box' }">
+          <li *ngIf="bln_AddcalibrationBox" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','calibrationbox','add-box']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_EditcalibrationBox" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','calibrationbox','edit-box']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-pencil"></i>
+              Edit
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/', 'master','calibrationbox','viewbox']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-eye"></i>
+              View
+            </a>
+          </li>
+        </ul>
+      </ul>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_equipments" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Equipments'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Equipments')">
+            <i class="fa fa-wrench"></i>
+            Instruments
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Equipments'}">
+          <li *ngIf="bln_equipments && int_showHideBalance == 1" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Balance'">
+            <a class="has-arrow pointer" (click)="addActiveClass1('Balance')">
+              <i class="fa fa-balance-scale"></i>
+              Balance
+            </a>
+          </li>
+          <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Balance' }">
+            <li *ngIf="bln_addEquipments" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','balance','add-balance']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_editEquipments" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','balance','edit-balance']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li routerLinkActive="active">
+              <a [routerLink]="['/', 'master','balance','view-balance']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-eye"></i>
+                View
+              </a>
+            </li>
+          </ul>
+        </ul>
+
+        <!-- <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Equipments'}">
+          <li *ngIf="bln_equipments && (int_showHideVernier == 1 || int_showHideVernier == 0)" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Vernier'">
+            <a class="has-arrow pointer" (click)="addActiveClass1('Vernier')">
+              <i class="mdi mdi-format-paint"></i>
+              Vernier
+            </a>
+          </li>
+          <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Vernier' }">
+            <li *ngIf="bln_addEquipments && int_showHideVernierCalib==1" routerLinkActive="active" >
+              <a [routerLink]="['/', 'master','vernier','add-vernier']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_addEquipments && int_showHideVernierCalib==0" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','vernier','add-vernier-nocalib']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_editEquipments && int_showHideVernierCalib==1" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','vernier','edit-vernier']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li *ngIf="bln_addEquipments && int_showHideVernierCalib==0" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','vernier','edit-vernier-nocalib']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="bln_addEquipments && int_showHideVernierCalib==1">
+              <a [routerLink]="['/', 'master','vernier','view-vernier']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-eye"></i>
+                View
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="bln_addEquipments && int_showHideVernierCalib==0">
+              <a [routerLink]="['/', 'master','vernier','view-vernier-nocalib']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-eye"></i>
+                View
+              </a>
+            </li>
+          </ul>
+        </ul> -->
+
+        <!-- <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Equipments'}">
+          <li *ngIf="bln_equipments && int_showHideEquipment == 1" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Other'">
+            <a class="has-arrow pointer" (click)="addActiveClass1('Other')">
+              <i class="fa fa-wrench"></i>
+              Other
+            </a>
+          </li>
+          <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Other' }">
+            <li *ngIf="bln_addEquipments" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','otherequipment','add-othereqp']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_editEquipments" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','otherequipment','edit-othereqp']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li routerLinkActive="active">
+              <a [routerLink]="['/', 'master','otherequipment','view-othereqp']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-eye"></i>
+                View
+              </a>
+            </li>
+          </ul>
+        </ul> -->
+      </ul>
+      <!-- <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_machine" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Machine'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Machine')">
+            <i class="mdi mdi-blinds"></i>
+            Equipment
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'Machine' }">
+          <li *ngIf="bln_addMachine" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','machine','add-machine']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-plus-circle"></i>
+              Add
+            </a>
+          </li>
+          <li *ngIf="bln_editMachine" routerLinkActive="active">
+            <a [routerLink]="['/', 'master','machine','edit-machine']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-pencil"></i>
+              Edit
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/', 'master','machine','view-machine']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-eye"></i>
+              View
+            </a>
+          </li>
+        </ul>
+      </ul> -->
+      <!-- <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li routerLinkActive="active" *ngIf="int_showHideMedia == 1 && bln_media">
+          <a [routerLink]="['/', 'master','media']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-tint"></i>
+            Media
+          </a>
+        </li>
+      </ul> -->
+      <!-- <ul *ngIf="bln_stage" class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'master','stage']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-crosshairs"></i>
+            Stage
+          </a>
+        </li>
+      </ul> -->
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Master'}">
+        <li *ngIf="bln_product" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Product'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Product')">
+            <i class="fa fa-flask"></i>
+            Product
+          </a>
+        </li>
+        <!-- <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Product'}">
+          <li *ngIf="bln_product && int_showHideTablet == 1" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Tablet'">
+            <a class="has-arrow pointer" (click)="addActiveClass1('Tablet')">
+              <i class="fa fa-ban"></i>
+              Tablet
+            </a>
+          </li>
+          <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Tablet' }">
+            <li *ngIf="bln_addProduct" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','product','tablet','add-tablet']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_editProduct" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','product','tablet','manage-tablet']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Manage
+              </a>
+            </li>
+          </ul>
+        </ul> -->
+<!-- 
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Product'}">
+          <li *ngIf="bln_product && int_showHideTablet == 1" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Capsule'">
+            <a class="has-arrow pointer" (click)="addActiveClass1('Capsule')">
+              <i class="mdi mdi-pill"></i>
+              Capsule
+            </a>
+          </li>
+          <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Capsule' }">
+            <li *ngIf="bln_addProduct" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','product','capsule','add-capsule']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-plus-circle"></i>
+                Add
+              </a>
+            </li>
+            <li *ngIf="bln_editProduct" routerLinkActive="active">
+              <a [routerLink]="['/', 'master','product','capsule','manage-capsule']" [routerLinkActive]="'router-link-active'">
+                <i class="fa fa-pencil"></i>
+                Manage
+              </a>
+            </li>
+          </ul>
+        </ul> -->
+
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu ==='Product'}">
+            <li *ngIf="bln_product && int_showHideVial == 1" [routerLinkActive]="['active']" [class.active]="showSubSubMenu==='Vial'">
+              <a class="has-arrow pointer" (click)="addActiveClass1('Vial')">
+                <i class="mdi mdi-battery"></i>
+                Vial
+              </a>
+            </li>
+            <ul class="collapse" [ngClass]="{'in' : showSubSubMenu === 'Vial' }">
+              <li *ngIf="bln_addProduct" routerLinkActive="active">
+                <a [routerLink]="['/', 'master','product','vial','add-vial']" [routerLinkActive]="'router-link-active'">
+                  <i class="fa fa-plus-circle"></i>
+                  Add
+                </a>
+              </li>
+              <li *ngIf="bln_editProduct" routerLinkActive="active">
+                <a [routerLink]="['/', 'master','product','vial','manage-vial']" [routerLinkActive]="'router-link-active'">
+                  <i class="fa fa-pencil"></i>
+                  Manage
+                </a>
+              </li>
+            </ul>
+          </ul>
+
+      </ul>
+    </li>
+    <li *ngIf="bln_settting" [routerLinkActive]="['active']" [class.active]="showMenu==='Setting'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Setting')">
+        <i class="mdi mdi-settings"></i>
+         <span class="hide-menu">Setting
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Setting'}">
+        <!-- <li *ngIf="bln_areaSetting"  [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','area-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-home"></i>
+            Area Setting
+          </a>
+        </li> -->
+        <li *ngIf="bln_cubicleSetting" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','cubicle-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-cube"></i>
+            Cubicle Setting
+          </a>
+        </li>
+        <li *ngIf="bln_cubicleSetting" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','system-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-cube"></i>
+            System Setting
+          </a>
+        </li>
+        <!-- <li *ngIf="bln_AlertSetting" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','alert-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-bell"></i>
+            Alert Setting
+          </a>
+        </li> -->
+        <!-- <li *ngIf="bln_BinSetting" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','bin-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-archive"></i>
+            Bin Setting
+          </a>
+        </li> -->
+        <!-- <li [routerLinkActive]="['active']" [class.active]="showSubMenu==='Setting'">
+          <a [routerLink]="['/', 'setting','communication']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-archive"></i>
+            Communication
+          </a>
+        </li> -->
+      </ul>
+    </li>
+    <li *ngIf="bln_calibration" [routerLinkActive]="['active']" [class.active]="showMenu==='Calibration'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Calibration')">
+        <i class="mdi mdi-album"></i>
+        <span class="hide-menu">Calibration
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Calibration'}">
+        <li *ngIf="bln_preCalibration" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Calibration'">
+          <a [routerLink]="['/', 'calibration','precalibration']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-gear"></i>
+            Precalibration
+          </a>
+        </li>
+        <li *ngIf="bln_reCalibration" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Calibration'">
+          <a [routerLink]="['/', 'calibration','recalibration']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-gears"></i>
+            Recalibration
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li *ngIf="bln_viewAuditTrail" [routerLinkActive]="['active']" [class.active]="showMenu==='Audit Trail'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Audit Trail')">
+        <i class="mdi mdi-timetable"></i>
+        <span class="hide-menu">Audit Trail
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Audit Trail'}">
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','change-profile']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-account-convert"></i>
+            Change Profile
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_isLdap==0">
+          <a [routerLink]="['/', 'audit-trail','change-password']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-account-key"></i>
+            Change Password
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_isLdap==0">
+          <a [routerLink]="['/', 'audit-trail','password-policy']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-key"></i>
+            Password Policy
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','set-all-parameter']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa fa-clock-o"></i>
+            Set All Parameter
+          </a>
+        </li>
+        <!-- <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','activity-log']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-calendar-check-o"></i>
+            Activity Log
+          </a>
+        </li> -->
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','unauthorized-login']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-security"></i>
+            Unauthorized Login
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_addRole || bln_editRole">
+          <a [routerLink]="['/', 'audit-trail','role']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-user"></i>
+            Roles
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','user']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-users"></i>
+            User
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','department']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-sitemap"></i>
+            Department
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="int_showHideCalibrationBox == 1">
+          <a [routerLink]="['/', 'audit-trail','calibrationbox']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-cubes"></i>
+            Calibration Box
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="int_showHideBalance == 1">
+          <a [routerLink]="['/', 'audit-trail','balance']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-balance-scale"></i>
+            Balance
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="int_showHideVernier == 1">
+          <a [routerLink]="['/', 'audit-trail','vernier']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-format-paint"></i>
+            Vernier
+          </a>
+        </li>
+        <li *ngIf="int_showHideEquipment == 1" routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','audit-other-equipment']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-wrench"></i>
+            Instruments
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_machine">
+          <a [routerLink]="['/', 'audit-trail','machine']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-blinds"></i>
+            Equipment
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_media">
+          <a [routerLink]="['/', 'audit-trail','media']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-tint"></i>
+            Media
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_stage">
+          <a [routerLink]="['/', 'audit-trail','stage']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-crosshairs"></i>
+            Stage
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','product']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-flask"></i>
+            Product
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_areaSetting">
+          <a [routerLink]="['/', 'audit-trail','area-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-home"></i>
+            Area Setting
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/', 'audit-trail','cubicle-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-cube"></i>
+            Cubicle Setting
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="str_type ==1">
+          <a [routerLink]="['/', 'audit-trail','alert-setting']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-home"></i>
+            Alert Setting
+          </a>
+        </li>
+        <li routerLinkActive="active" *ngIf="bln_reCalibration">
+          <a [routerLink]="['/', 'audit-trail','recalibration']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-gears"></i>
+            Recalibration
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li *ngIf="bln_reports" [routerLinkActive]="['active']" [class.active]="showMenu==='Report'">
+      <a class="has-arrow pointer" (click)="addExpandClass('Report')">
+        <i class="mdi mdi-clipboard-text"></i>
+        <span class="hide-menu">Report
+        </span>
+      </a>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Report'}">
+        <!-- <li *ngIf="bln_test && int_showHideTablet == 1" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','tablet']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-ban"></i>
+            Tablet
+          </a>
+        </li> -->
+        <!-- <li *ngIf="bln_test && int_showHideCapsule == 1" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','capsule']" [routerLinkActive]="'router-link-active'">
+            <i class="mdi mdi-pill"></i>
+            Capsule
+          </a>
+        </li> -->
+        <!-- <li *ngIf="bln_test && int_showHideBatchSummary == 1" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','batch-summary']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-calendar-check-o"></i>
+            Batch Summary
+          </a>
+        </li> -->
+        <li *ngIf="bln_test && int_showHidePrdSummary == 1" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','product-summary']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-flask"></i>
+            Product Summary
+          </a>
+        </li>
+        <li *ngIf="bln_test" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','instrument-usage']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-wrench"></i>
+           Instrument Usage
+          </a>
+        </li>
+        <li *ngIf="bln_test" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','user-status']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-users"></i>
+           User Status
+          </a>
+        </li>
+        <li *ngIf="bln_test && (bln_addRole || bln_editRole)" [routerLinkActive]="['active']">
+          <a [routerLink]="['/', 'report','role-log']" [routerLinkActive]="'router-link-active'">
+            <i class="fa fa-user"></i>
+           Role Log
+          </a>
+        </li>
+      </ul>
+      <ul class="collapse" [ngClass]="{'in' : showMenu ==='Report'}">
+        <li *ngIf="bln_preCalibration" [routerLinkActive]="['active']" [class.active]="showSubMenu==='Calibration'">
+          <a class="has-arrow pointer" (click)="addActiveClass('Calibration')">
+            <i class="fa fa-bullseye"></i>
+            Calibration
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === 'Calibration' }">
+          <li *ngIf="bln_preCalibration && int_showHideBalance==1" routerLinkActive="active">
+            <a [routerLink]="['/', 'report','rpt-calibration','balance']" [routerLinkActive]="'router-link-active'">
+              <i class="fa fa-balance-scale"></i>
+              Balance
+            </a>
+          </li>
+          <!-- <li *ngIf="bln_preCalibration && int_showHideVernier==1" routerLinkActive="active">
+            <a [routerLink]="['/', 'report','rpt-calibration','vernier']" [routerLinkActive]="'router-link-active'">
+              <i class="mdi mdi-format-paint"></i>
+              Vernier
+            </a>
+          </li> -->
+        </ul>
+      </ul>
+      <!-- <ul class="collapse" [ngClass]="{'in' : showMenu ==='Report'}">
+        <li *ngIf="bln_reportBin" [routerLinkActive]="['active']" [class.active]="showSubMenu===' Bin Weighing'">
+          <a class="has-arrow pointer" (click)="addActiveClass(' Bin Weighing')">
+            <i class="fa fa-archive"></i>
+            Bin Weighing
+          </a>
+        </li>
+        <ul class="collapse" [ngClass]="{'in' : showSubMenu === ' Bin Weighing' }">
+          <li *ngIf="bln_reportBin && int_showHideBinInd==1" routerLinkActive="active">
+            <a [routerLink]="['/', 'report','bin-weighing','individual-bin']" [routerLinkActive]="'router-link-active'">
+              <i class="mdi mdi-cart"></i>
+              Individual Bin
+            </a>
+          </li>
+          <li *ngIf="bln_reportBin && int_showHideBinSummary==1" routerLinkActive="active">
+            <a [routerLink]="['/', 'report','bin-weighing','bin-summary']" [routerLinkActive]="'router-link-active'">
+              <i class="mdi mdi-calendar-text"></i>
+              Bin Summary
+            </a>
+          </li>
+        </ul>
+      </ul> -->
+    </li>
+    <li *ngIf="bln_showActivityLog">
+      <a [routerLink]="['/', 'audit-trail','activity-log']" [routerLinkActive]="'router-link-active'">
+        <i class="fa fa-calendar-check-o"></i>
+        <span class="hide-menu">Activity Log</span>
+      </a>
+    </li>
+
+
+
+
+
+
+    <!-- First level menu -->
+    <!-- <li [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
+      [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+      <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div>
+      <a [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null" [ngClass]="[sidebarnavItem.class]"
+        *ngIf="!sidebarnavItem.extralink;" (click)="addExpandClass(sidebarnavItem.title)">
+        <i [ngClass]="[sidebarnavItem.icon]"></i>
+        <span class="hide-menu">{{sidebarnavItem.title}}
+          <span *ngIf="sidebarnavItem.label != '' " [ngClass]="[sidebarnavItem.labelClass]">{{sidebarnavItem.label}}</span>
+        </span>
+      </a> -->
+    <!-- Second level menu -->
+    <!-- <ul class="collapse" *ngIf="sidebarnavItem.submenu.length > 0" [ngClass]="{'in' : showMenu === sidebarnavItem.title }">
+        <li *ngFor="let sidebarnavSubItem of sidebarnavItem.submenu" [class.active]="showSubMenu === sidebarnavSubItem.title"
+          [routerLinkActive]="sidebarnavSubItem.submenu.length > 0 ? '' : 'active'">
+          <a [routerLink]="sidebarnavSubItem.submenu.length > 0 ? null : [sidebarnavSubItem.path]" [routerLinkActive]="sidebarnavSubItem.submenu.length > 0 ? '' : 'router-link-active'"
+            [ngClass]="[sidebarnavSubItem.class]" *ngIf="!sidebarnavSubItem.extralink;" (click)="addActiveClass(sidebarnavSubItem.title)">
+            <i [ngClass]="[sidebarnavSubItem.icon]"></i>
+            {{sidebarnavSubItem.title}}
+          </a> -->
+    <!-- Third level menu -->
+    <!-- <ul class="collapse" *ngIf="sidebarnavSubItem.submenu.length > 0" [ngClass]="{'in' : showSubMenu === sidebarnavSubItem.title }">
+            <li *ngFor="let sidebarnavSubsubItem of sidebarnavSubItem.submenu" [class.active]="showSubSubMenu === sidebarnavSubsubItem.title"
+              [routerLinkActive]="sidebarnavSubsubItem.submenu.length > 0 ? '' : 'active'">
+              <a [routerLink]="sidebarnavSubsubItem.submenu.length > 0 ? null : [sidebarnavSubsubItem.path]"
+                [routerLinkActive]="sidebarnavSubsubItem.submenu.length > 0 ? '' : 'router-link-active'" [ngClass]="[sidebarnavSubsubItem.class]"
+                *ngIf="!sidebarnavSubsubItem.extralink;" (click)="addActiveClass1(sidebarnavSubsubItem.title)">
+                <i [ngClass]="[sidebarnavSubsubItem.icon]"></i>
+                {{sidebarnavSubsubItem.title}}
+              </a> -->
+    <!-- Fourth level menu -->
+    <!-- <ul class="collapse" *ngIf="sidebarnavSubsubItem.submenu.length > 0" [ngClass]="{'in' : showSubSubMenu === sidebarnavSubsubItem.title }">
+                <li *ngFor="let sidebarnavSubsubsubItem of sidebarnavSubsubItem.submenu" routerLinkActive="active"
+                  [ngClass]="[sidebarnavSubsubsubItem.class]">
+                  <a [routerLink]="[sidebarnavSubsubsubItem.path]" *ngIf="!sidebarnavSubsubsubItem.extralink;"
+                    [routerLinkActive]="sidebarnavSubsubsubItem.submenu.length > 0 ? '' : 'router-link-active'">
+                    <i [ngClass]="[sidebarnavSubsubsubItem.icon]"></i>
+                    {{sidebarnavSubsubsubItem.title}}
+                  </a>
+                </li>
+              </ul> -->
+    <!-- </li>
+          </ul>
+        </li>
+      </ul>
+    </li> -->
+  </ul>
+</nav>
+<!-- End Sidebar navigation -->

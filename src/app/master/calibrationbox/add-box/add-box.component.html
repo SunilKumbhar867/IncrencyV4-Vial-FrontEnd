@@ -1,0 +1,212 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>ADD CALIBRATION BOX</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frm_addCalibBox" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6" style="margin:auto;">
+              <div class="form-group" style="display:block">
+                <ngx-select
+                [items]="sarr_CalibBoxType"
+                [formControl]="str_BoxType"
+                placeholder="Select"
+                (select)="getBoxType($event)">
+                </ngx-select>
+              </div>
+            </div>
+          </div>
+
+          <div [hidden]="bln_showHideField==true">
+            <div class="row">
+              <div class="col-md-6">
+                <label>{{ str_IDLabel }} ID :</label>
+                <div class="form-group">
+                  <input
+                  class="form-control"
+                  type="text"
+                  formControlName="str_BoxID"
+                  maxlength="25"
+                  (keyup)="onkey_checkDataExistForID($event)">
+                  <span *ngIf="bln_IDexist == true" class="text-danger" style="font-weight: bold;">
+                    {{ str_IDLabel }} ID already exist!
+                  </span>
+                  <div *ngIf="!str_BoxID.valid && str_BoxID.touched" class="form__error"
+                    style="color:red;margin-top:3px;font-weight: bold;">{{str_BoxID?.errors['required']}}</div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+                <label>Certificate No. :</label>
+                <div class="form-group">
+                  <input
+                  class="form-control"
+                  type="text"
+                  formControlName="str_certificate"
+                  maxlength="25">
+                  <div *ngIf="!str_certificate.valid && str_certificate.touched" class="form__error"
+                    style="color:red;margin-top:3px;font-weight: bold;">{{str_certificate?.errors['required']}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label>Valid Upto [MM/DD/YYYY] :</label>
+                <mat-form-field>
+                  <input
+                  [min]="minDate"
+                  matInput md-min-date="minDate"
+                  [readonly]="true"
+                  [matDatepicker]="picker1"
+                  style="font-size:18px"
+                  formControlName="dt_validUpto">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <label>Last Calibration Date [MM/DD/YYYY] :</label>
+                <mat-form-field>
+                  <input
+                  matInput md-min-date="minDate"
+                  [readonly]="true"
+                  [matDatepicker]="picker2"
+                  style="font-size:18px"
+                  formControlName="dt_calibDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <hr/>
+            <div class="row">
+              <div class="col-md-4">
+                  <label>Standard {{ str_StdLabel }}:</label>
+                  <div class="form-group">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="str_stdValue"
+                    maxlength="8"
+                    [readonly]="bln_showHideField==true"
+                    style="width: 86%"
+                    (keypress)="onlyNumberDecimal($event)">
+                      <div *ngIf="!str_stdValue.valid && str_stdValue.touched && str_stdValue?.errors['required']"
+                        class="form__error" style="color:red;margin-top:3px;font-weight: bold;">Required
+                      </div>
+                      <div *ngIf="!str_stdValue.valid && str_stdValue.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                          {{str_stdValue?.errors['isZeroEntry']}}
+                        </div>
+                  </div>
+                </div>
+
+              <div class="col-md-4">
+                <label>Unit :</label>
+                <div class="form-group">
+                  <ngx-select
+                  [items]="sarr_units"
+                  placeholder="Select"
+                  [formControl]="str_unit">
+                  </ngx-select>
+                </div>
+              </div>
+
+              <div class="col-md-4" *ngIf="int_IdentificationNo == 1">
+                  <label>Identification No. :</label>
+                  <div class="form-group">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="str_Identification"
+                    (keyup)="checkDataExistForIdentification($event)"
+                    maxlength="25">
+                    <div *ngIf="!str_Identification.valid && str_Identification.touched" class="form__error"
+                      style="color:red;margin-top:3px;font-weight: bold;">Required</div>
+                    <span *ngIf="(bln_IdentificationExist == true || bln_IdentificationExistTable == true)
+                    && (str_Identification.value != 'NA' && str_Identification.value != 'na' && str_Identification.value != 'Na' && str_Identification.value != 'nA')" class="text-danger" style="color:red;font-weight: bold;">
+                      Identification No. already exist!
+                    </span>
+                  </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="onAdd(str_stdValue.value,str_unit.value,str_Identification.value)"
+              [disabled]="!str_stdValue.valid || !str_Identification.valid ||
+              ((bln_IdentificationExist == true || bln_IdentificationExistTable == true) && (str_Identification.value != 'NA' && str_Identification.value != 'na' && str_Identification.value != 'Na' && str_Identification.value != 'nA'))
+              || (int_cntWeight >= 30) || (str_stdValue.value == '')  || (str_Identification.value == '')"
+              [ngClass]="{'disabledBtn' : !str_stdValue.valid || !str_Identification.valid ||
+              ((bln_IdentificationExist == true || bln_IdentificationExistTable == true) && (str_Identification.value != 'NA' && str_Identification.value != 'na' && str_Identification.value != 'Na' && str_Identification.value != 'nA'))
+              || (int_cntWeight >= 30) || (str_stdValue.value == '') || (str_Identification.value == '')}"><i class="fa fa-plus-circle"></i> Add Weight
+            </button>
+            </div>
+
+            <hr/>
+            <h4
+            [ngClass]="{'countExceed' : int_cntWeight >= 30}">No. of {{ str_StdLabel | lowercase }} added :
+              {{int_cntWeight}}
+            </h4>
+
+            <div class="table-responsive" style="overflow-y: auto; overflow-x: hidden;height:250px;">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>{{ str_StdLabel }}</th>
+                    <th>Unit</th>
+                    <th *ngIf="int_IdentificationNo == 1">Identification No.</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let values of sarr_stdVal;let i=index">
+                    <td>{{values.weight}}</td>
+                    <td>{{values.unit}}</td>
+                    <td *ngIf="int_IdentificationNo == 1">{{values.identification}}</td>
+                    <td>
+                      <button
+                      type="button"
+                      class="btn btn-danger btn-sm"
+                      (click)="onRemoveValues(i)">Remove
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <hr />
+            <br>
+            <div class="text-center">
+              <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="bln_IDexist == true || (int_cntWeight == 0) || str_certificate.invalid || str_BoxID.invalid || dt_validUpto.invalid || dt_calibDate.invalid"
+              [ngClass]="{'disabledBtn' : bln_IDexist == true || (int_cntWeight == 0) || str_certificate.invalid || str_BoxID.invalid || dt_validUpto.invalid || dt_calibDate.invalid}">Save
+                Changes
+              </button>&nbsp;&nbsp;&nbsp;
+
+              <button
+              type="button"
+              class="btn btn-default waves-effect"
+              (click)="onReset()">Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

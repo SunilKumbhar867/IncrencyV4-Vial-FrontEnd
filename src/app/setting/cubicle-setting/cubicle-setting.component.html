@@ -1,0 +1,96 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>CUBICLE SETTING</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frm_sysSetting">
+            <div class="row">
+                <div class="col-md-6" style="margin:auto;">
+                  <div class="form-group" style="display:block">
+                    <ngx-select
+                    [items]="sarr_areaName"
+                    formControlName="str_area"
+                    placeholder="Select Area"
+                    (select)="cboareaName_fillData($event)">
+                    </ngx-select>
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <div
+              class="table-responsive"
+              style="overflow-y: auto; overflow-x: auto;height:500px;"
+              [hidden]="bln_showHideTable == false">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr style="text-align: center;font-size: small;">
+                      <th style="display:none">Cubicle</th>
+                      <th>Sr.No.</th>
+                      <th>Cubicle Name</th>
+                      <th>Cubicle Type</th>
+                      <th>IDS</th>
+                      <th>{{lbl_productCode}}</th>
+                      <th>Batch No.</th>
+                      <th>Batch Status</th>
+                      <th>Alert Setting</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody  *ngFor="let cubicleData of sarr_areaWiseDataFromCubicleTable;let i=index;">
+                    <tr>
+                      <td style="display:none">{{cubicleData.Sys_CubicNo}}</td>
+                      <td>{{i+1}}.</td>
+                      <td>{{cubicleData.Sys_CubicName}}</td>
+                      <td>{{cubicleData.Sys_CubType}}</td>
+                      <td>{{cubicleData.Sys_IDSNo}}</td>
+                      <td>
+                        <span *ngIf="cubicleData.Sys_BFGCode != 'NULL'">{{cubicleData.Sys_BFGCode}}</span>
+                        <span *ngIf="cubicleData.Sys_BFGCode == 'NULL'">-</span>
+                      </td>
+                      <td>
+                        <span *ngIf="cubicleData.Sys_Batch != 'NULL'">{{cubicleData.Sys_Batch}}</span>
+                        <span *ngIf="cubicleData.Sys_Batch == 'NULL'">-</span>
+                      </td>
+                      <td>
+                        <small *ngIf="cubicleData.BatchStatus == 'S'" class="label label-success">Running</small>
+                        <small *ngIf="cubicleData.BatchStatus == 'P'" class="label label-warning">Paused</small>
+                        <small *ngIf="cubicleData.BatchStatus == 'R'" class="label label-info">Resumed</small>
+                        <small *ngIf="cubicleData.BatchStatus == 'No Batch'" class="label label-danger">No Batch</small>
+                        <small *ngIf="cubicleData.BatchStatus == 'N'" class="label label-inverse">Not In Use</small>
+                        <small *ngIf="cubicleData.BatchStatus == 'I' && cubicleData.Sys_Batch != 'NULL'" class="label label-info">Set In IPQC/IPQA</small>
+                      </td>
+                      <td>
+                        <button
+                        type="button"
+                        [hidden]="cubicleData.Sys_CubType == 'IPQC' || cubicleData.Sys_CubType == 'IPQA'"
+                        [disabled]="cubicleData.Sys_BFGCode == 'NULL' || (cubicleData.BatchStatus == 'No Batch' || cubicleData.BatchStatus == 'N')"
+                        [ngClass]="{'disabledBtn' :cubicleData.Sys_BFGCode == 'NULL' || (cubicleData.BatchStatus == 'No Batch' || cubicleData.BatchStatus == 'N')}"
+                        class="btn btn-sm btn-outline-secondary"
+                        (click)="btnAlert_openComponent(cubicleData)"
+                        >Set Alerts
+                        </button>
+                    </td>
+                      <td>
+                          <button
+                          type="button"
+                          class="btn btn-sm btn-outline-primary"
+                          (click)="btnupdate_openComponent(cubicleData)"
+                          >Show Detail
+                          </button>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              <br>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,147 @@
+<ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<form [formGroup]="balanceCalibration" (ngSubmit)="onFormSubmit()">
+  <div class="row" style="margin-top:20px">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" style="background-color:#4680FF; padding:10px;">
+            <div class="col-lg-12">
+              <span style='text-align: center;color:white'>BALANCE - DAILY & PERIODIC CALIBRATION REPORT</span>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div>
+                <label>
+                  Select Calibration Type :
+                </label>
+                <ngx-select [items]="sarr_calibrationType" placeholder="Select" formControlName="calibrationType"
+                  (select)="onSelectCalibrationType($event)"></ngx-select>
+              </div>
+
+              <div *ngIf="bln_calibrationDaily">
+                <label>
+                  Select Date :
+                </label>
+                <mat-form-field>
+                  <input matInput md-min-date="minDate" formControlName="date" [matDatepicker]="picker2" style="font-size:18px"
+                    readonly [max]="todayDate" (dateInput)="onSelectDate()">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                <!-- <input type="date" formControlName="date" class="form-control" (select)="onSelectDate($event)"> -->
+              </div>
+
+              <div *ngIf="bln_calibrationPeriodic">
+                <label class="example-input-wrapper">
+                  Month & Year Only:
+                  <input placeholder="Year Month:" [owlDateTimeTrigger]="dt" [owlDateTime]="dt" [formControl]="dateTime"
+                    [max]="todayDate" class="form-control" style="margin-top:7px">
+                  <owl-date-time [pickerType]="'calendar'" [startView]="'multi-years'"
+                    (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dt)"
+                    #dt="owlDateTime"></owl-date-time>
+                </label>
+              </div>
+
+              <div>
+                <label>
+                  Report Type :
+                </label>
+                <ngx-select [items]="sarr_reportType" placeholder="Select" formControlName="reportType"
+                  (select)="fetchBalIds($event)"></ngx-select>
+              </div>
+
+              <div>
+                <label>
+                  Balance Code No :
+                </label>
+                <ngx-select [items]="sarr_BalIds" placeholder="Select" formControlName="balanceCode"
+                (select)="fetchPrintNum($event)"></ngx-select>
+                <Br>
+              </div>
+              
+              <div *ngIf="bln_calibrationDaily">
+                <label>
+                  Report Serial No :
+                </label>
+                <ngx-select [items]="iarr_SrNos" placeholder="Select" formControlName="repSrNo" 
+                [(ngModel)]="sarr_RepSrNos" (select)="fetchPrintNumOnRepSr($event)"></ngx-select>
+                <Br>
+              </div>
+
+              <div>
+                <label>
+                  Print No :
+                </label>
+                <input type="text" [ngClass]="{'disabledBtn': true}" class="form-control" readonly
+                  formControlName="printNo">
+              </div>
+            </div>
+            <div class="col-lg-6" *ngIf="bln_noCalibVisible">
+              <div class="card">
+                <div class="card-body">
+                  <div>
+                    <div class="row " style="background-color:#4680FF; padding:10px;">
+                      <div class="col-lg-12">
+                        <span style='text-align: center;color:white'>ENTER REASON FOR NO CALIBRATION</span>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div>
+                          <label>
+                            Select Date :
+                          </label>
+                          <ngx-select [items]="sarr_NoCalibDates" placeholder="Select" formControlName="noCalibDate">
+                          </ngx-select>
+                        </div>
+                        <div>
+                          <label>
+                            Reason :
+                          </label>
+                          <input type="text" class="form-control" formControlName="reason">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="text-center">
+            <button [ngx-scroll-to]="'#destination'" class="btn btn-success"  type="submit" [disabled]="!bln_preBtn"
+              [ngClass]="{'disabledBtn' : !bln_preBtn}">Preview</button>&nbsp;&nbsp;
+
+          <!--  <button class="btn btn-info" type="button" [disabled]="!bln_noCalibBtn"
+              [ngClass]="{'disabledBtn' : !bln_noCalibBtn}"
+              (click)="openNoReasDailyCalibFrm()">{{str_NoCalibBtnLbl}}</button>&nbsp;&nbsp;
+-->
+            <button [ngx-scroll-to]="'#destination'" class="btn btn-warning" type="button" [disabled]="!bln_prtBtnReas"
+              [ngClass]="{'disabledBtn' : !bln_prtBtnReas}" (click)="onPrtReasBtnClk()">Print Reasons for
+              Printout</button>&nbsp;&nbsp;
+
+            <button type="button" (click)="Reset()" class="btn btn-default">Reset</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card" *ngIf="bln_show" id="destination">
+        <div class="card-body">
+          <object [data]="Url" type="application/pdf" width="100%" height="1000px"></object>
+          <br><br>
+          <div class="text-center">
+            <button class="btn btn-primary" type="button" (click)="printReport()">Print Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

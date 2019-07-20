@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditStandardWeightBox" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="a1dd7e56-0ab2-44bf-92b8-1b7adcf14c39">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AuditStandardWeightboxDataset" uuid="3e14a388-dd39-4dae-ac8f-62a30e5cb6c3">
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="selectedBoxType" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+	DATE_FORMAT(ACB_tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_calibrationbox.`RecNo` AS tbl_audit_calibrationbox_RecNo,
+     tbl_audit_calibrationbox.`ACB_dt` AS tbl_audit_calibrationbox_ACB_dt,
+     tbl_audit_calibrationbox.`ACB_tm` AS tbl_audit_calibrationbox_ACB_tm,
+     tbl_audit_calibrationbox.`ACB_userid` AS tbl_audit_calibrationbox_ACB_userid,
+     tbl_audit_calibrationbox.`ACB_username` AS tbl_audit_calibrationbox_ACB_username,
+     tbl_audit_calibrationbox.`ACB_ACT` AS tbl_audit_calibrationbox_ACB_ACT,
+     tbl_audit_calibrationbox.`ACB_Remark` AS tbl_audit_calibrationbox_ACB_Remark,
+     tbl_audit_calibrationbox.`ACB_Type` AS tbl_audit_calibrationbox_ACB_Type,
+     tbl_audit_calibrationbox.`ACB_ID` AS tbl_audit_calibrationbox_ACB_ID,
+     tbl_audit_calibrationbox.`ACB_oldValue` AS tbl_audit_calibrationbox_ACB_oldValue,
+     tbl_audit_calibrationbox.`ACB_newValue` AS tbl_audit_calibrationbox_ACB_newValue,
+     tbl_audit_calibrationbox.`ACB_OldWeight` AS tbl_audit_calibrationbox_ACB_OldWeight,
+     tbl_audit_calibrationbox.`ACB_NewWeight` AS tbl_audit_calibrationbox_ACB_NewWeight,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_calibrationbox` tbl_audit_calibrationbox,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+tbl_audit_calibrationbox.`ACB_Type` LIKE
+CASE
+        WHEN
+           $P{selectedBoxType}  = ''
+        THEN
+            '%'
+    ELSE
+        $P{selectedBoxType}
+    END
+and
+     tbl_audit_calibrationbox.`ACB_ID` LIKE
+CASE
+        WHEN
+            $P{SelectedValue} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedValue}
+    END
+ and
+tbl_audit_calibrationbox.`ACB_ACT` LIKE
+    CASE
+        WHEN
+            $P{SelectedAction} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedAction}
+    END
+
+ AND tbl_audit_calibrationbox.`ACB_dt` >= $P{FromDate}
+ AND tbl_audit_calibrationbox.`ACB_dt` <= $P{ToDate}
+ORDER BY tbl_audit_calibrationbox.`ACB_dt` DESC, tbl_audit_calibrationbox.`ACB_tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_audit_calibrationbox_ACB_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_calibrationbox_ACB_tm" class="java.sql.Time"/>
+		<field name="tbl_audit_calibrationbox_ACB_userid" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_username" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_Type" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_ID" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_oldValue" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_newValue" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_OldWeight" class="java.lang.String"/>
+		<field name="tbl_audit_calibrationbox_ACB_NewWeight" class="java.lang.String"/>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="selectedBoxType" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	DATE_FORMAT(ACB_tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_calibrationbox.`RecNo` AS tbl_audit_calibrationbox_RecNo,
+     tbl_audit_calibrationbox.`ACB_dt` AS tbl_audit_calibrationbox_ACB_dt,
+     tbl_audit_calibrationbox.`ACB_tm` AS tbl_audit_calibrationbox_ACB_tm,
+     tbl_audit_calibrationbox.`ACB_userid` AS tbl_audit_calibrationbox_ACB_userid,
+     tbl_audit_calibrationbox.`ACB_username` AS tbl_audit_calibrationbox_ACB_username,
+     tbl_audit_calibrationbox.`ACB_ACT` AS tbl_audit_calibrationbox_ACB_ACT,
+     tbl_audit_calibrationbox.`ACB_Remark` AS tbl_audit_calibrationbox_ACB_Remark,
+     tbl_audit_calibrationbox.`ACB_Type` AS tbl_audit_calibrationbox_ACB_Type,
+     tbl_audit_calibrationbox.`ACB_ID` AS tbl_audit_calibrationbox_ACB_ID,
+     tbl_audit_calibrationbox.`ACB_oldValue` AS tbl_audit_calibrationbox_ACB_oldValue,
+     tbl_audit_calibrationbox.`ACB_newValue` AS tbl_audit_calibrationbox_ACB_newValue,
+     tbl_audit_calibrationbox.`ACB_OldWeight` AS tbl_audit_calibrationbox_ACB_OldWeight,
+     tbl_audit_calibrationbox.`ACB_NewWeight` AS tbl_audit_calibrationbox_ACB_NewWeight,
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_calibrationbox` tbl_audit_calibrationbox,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+tbl_audit_calibrationbox.`ACB_Type` LIKE
+CASE
+        WHEN
+           $P{selectedBoxType}  = ''
+        THEN
+            '%'
+    ELSE
+        $P{selectedBoxType}
+    END
+and
+     tbl_audit_calibrationbox.`ACB_ID` LIKE
+CASE
+        WHEN
+            $P{SelectedValue} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedValue}
+    END
+ and
+tbl_audit_calibrationbox.`ACB_ACT` LIKE
+    CASE
+        WHEN
+            $P{SelectedAction} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedAction}
+    END
+
+ AND tbl_audit_calibrationbox.`ACB_dt` >= $P{FromDate}
+ AND tbl_audit_calibrationbox.`ACB_dt` <= $P{ToDate}
+ORDER BY tbl_audit_calibrationbox.`ACB_dt` DESC, tbl_audit_calibrationbox.`ACB_tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_audit_calibrationbox_ACB_dt" class="java.sql.Date"/>
+	<field name="tbl_audit_calibrationbox_ACB_tm" class="java.sql.Time"/>
+	<field name="tbl_audit_calibrationbox_ACB_userid" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_username" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_Type" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_ID" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_oldValue" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_newValue" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_OldWeight" class="java.lang.String"/>
+	<field name="tbl_audit_calibrationbox_ACB_NewWeight" class="java.lang.String"/>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="65">
+			<image>
+				<reportElement x="712" y="6" width="78" height="54" uuid="dd72ccb2-a232-4253-aba0-cd2f8a1013b5"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="101" y="22" width="558" height="20" uuid="bdee999a-9c13-4533-842c-9953229ae551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{selectedBoxType}.equals( "Weight Box" ))
+?
+"AUDIT TRAIL FOR STANDARD WEIGHT BOX"
+:
+"AUDIT TRAIL FOR STANDARD BLOCK BOX"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="66">
+			<staticText>
+				<reportElement x="12" y="25" width="81" height="20" uuid="e4087649-8c77-4492-98a0-dda05052fe07"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="101" y="25" width="100" height="20" uuid="dd7ed9fc-d043-4608-9481-5a5d2aebbe58"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="39" width="80" height="20" uuid="bd23ef22-d929-403e-8739-51aa72f6fcdd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="409" y="39" width="40" height="20" uuid="2bd13aea-df8b-4379-a14d-9c7f218e42cd"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="5" width="81" height="20" uuid="3955bb5d-4e95-4b83-af86-3e73e3a7d0cd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="101" y="5" width="575" height="20" uuid="b8e9c4be-41ad-4205-8ec0-f24f093f3fa8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="88">
+			<componentElement>
+				<reportElement key="table" style="table" x="4" y="10" width="788" height="73" uuid="d3dba034-f5d5-4a0b-a592-f97a7f29a60a"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AuditStandardWeightboxDataset" uuid="16c2f02f-9ea1-4894-b5a2-ed9bce1eb392">
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="selectedBoxType">
+							<datasetParameterExpression><![CDATA[$P{selectedBoxType}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="68" uuid="191a5ddb-1831-4d83-bb55-73b312843d9a">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="8bfbe57b-ed47-4891-8c0a-5c9d9132f7eb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="68" height="39" uuid="5f2768b8-3abe-42bb-99aa-29c9b73c7762"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_calibrationbox_ACB_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="51" uuid="25835e9b-d332-4287-9280-92b31ee90781">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="1" width="51" height="30" uuid="b80dcb5b-8356-4d1c-9304-40f07b8e5c65"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="51" height="39" uuid="0a7da98e-6956-494e-a5f5-77d67625c1c9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="61" uuid="7842a238-519c-4d83-8851-2ace58678bfa">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="61" height="30" uuid="275caf1e-e387-47f2-a465-39f577d22069"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="61" height="39" uuid="00bd8640-f6f1-497d-8c7b-6102e80bd743"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals( $F{tbl_audit_calibrationbox_ACB_userid}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_userid} )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="dbd2b5b1-3326-405f-9a5f-db413d0eb8b3">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="2d34c1b8-be4b-442b-8942-13739e2550dc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="66" height="39" uuid="d539e635-ef93-4814-ab6c-64396b206df5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_username}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_username})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43" uuid="e4004532-dd4b-4e0a-b5cf-307e12e5474f">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="43" height="30" uuid="850657e3-9bca-4e4f-b328-f933d41807cc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="1" width="43" height="37" uuid="a4124262-1a95-4cea-b58e-62cdae4300de"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_ACT}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_ACT}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="64" uuid="f4045ab3-8a29-40c1-913e-874f54396c8e">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="64" height="31" uuid="3c1bc422-80ef-4547-8d01-bace83d89b26"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{selectedBoxType}.toUpperCase() + " ID"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="64" height="39" uuid="c22f3149-22b2-4052-a45a-f44bcc8d6cfa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_ID})
+    ?
+    "NA"
+    :
+    $F{tbl_audit_calibrationbox_ACB_ID}
+)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="79" uuid="5f284814-031d-404f-b2cc-c0da516e133c">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="1" width="78" height="30" uuid="da6d741e-bf38-4fd4-b039-216487c5784c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[OLD VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="78" height="39" isPrintWhenDetailOverflows="true" uuid="35dad552-7f6f-4823-9cdb-a11f916aae1b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_oldValue}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_oldValue}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="82" uuid="99d95231-00ab-4fd4-9be1-4a59561e7afd">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="1" width="82" height="30" uuid="3cf160d3-9aa9-402a-923f-bf4561f0e8b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NEW VALUE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="82" height="40" uuid="7f963ffd-4859-4389-8361-750937553914"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_newValue}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_newValue}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69" uuid="77ee62d4-89e2-4072-aae8-3febf066410c">
+						<jr:columnHeader height="31" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="69" height="31" uuid="6e010e8b-5958-45ce-a86b-6db92734a0e5"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( $P{selectedBoxType}.equals( "Weight Box" )
+    ?
+    "OLD WEIGHT"
+    :
+    "OLD BLOCK"
+)]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="69" height="40" uuid="53d9fca1-d804-466c-8f1a-4fd3521f77e5"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_OldWeight}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_OldWeight}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69" uuid="efd283d6-0f3a-4f4d-98a6-9b0052209db7">
+						<jr:columnHeader height="31" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="69" height="31" uuid="0ad948ba-3680-445a-87e8-0a1fa2a2df08"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( $P{selectedBoxType}.equals( "Weight Box" )
+    ?
+    "NEW WEIGHT"
+    :
+    "NEW BLOCK"
+)]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="69" height="40" uuid="acb696c4-8e6d-4bec-89b0-6e2f8f8f5c0a"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_NewWeight}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_NewWeight}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="136" uuid="367728c3-726e-4290-b9bc-03d648dae8c8">
+						<jr:columnHeader style="table_CH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="136" height="28" uuid="bdb53d0c-b4b9-4090-afca-588fad3c9bfa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="1" width="136" height="38" uuid="ac2aa59f-6c28-4ab7-8e07-acf77c754fc4"/>
+								<textElement verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_calibrationbox_ACB_Remark}) ? "NA" : $F{tbl_audit_calibrationbox_ACB_Remark}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

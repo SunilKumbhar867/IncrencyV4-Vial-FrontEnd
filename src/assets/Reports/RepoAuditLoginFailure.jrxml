@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditAlert" language="groovy" pageWidth="520" pageHeight="650" orientation="Landscape" columnWidth="470" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="201c3b0b-0f3f-4e74-9883-5459af08658f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AlertDataSet" uuid="3f9e676f-4026-46fa-bfba-5c79259c0f94">
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_login_failure.`dt` AS tbl_audit_login_failure_dt,
+     tbl_audit_login_failure.`tm` AS tbl_audit_login_failure_tm,
+     tbl_audit_login_failure.`userid` AS tbl_audit_login_failure_userid,
+     tbl_audit_login_failure.`Host` AS tbl_audit_login_failure_Host,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_unauthorized_user` tbl_audit_login_failure,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_login_failure.`Host` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = 'ALL'
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+     AND tbl_audit_login_failure.`dt` >= $P{FromDate}
+ AND tbl_audit_login_failure.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_login_failure.`dt` DESC, tbl_audit_login_failure.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_login_failure_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_login_failure_tm" class="java.sql.Time"/>
+		<field name="tbl_audit_login_failure_userid" class="java.lang.String"/>
+		<field name="tbl_audit_login_failure_Host" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_login_failure.`dt` AS tbl_audit_login_failure_dt,
+     tbl_audit_login_failure.`tm` AS tbl_audit_login_failure_tm,
+     tbl_audit_login_failure.`userid` AS tbl_audit_login_failure_userid,
+     tbl_audit_login_failure.`Host` AS tbl_audit_login_failure_Host,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_audit_unauthorized_user` tbl_audit_login_failure,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+    tbl_audit_login_failure.`Host` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = 'All'
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+     AND tbl_audit_login_failure.`dt` >= $P{FromDate}
+ AND tbl_audit_login_failure.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_login_failure.`dt` DESC, tbl_audit_login_failure.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_login_failure_dt" class="java.sql.Date"/>
+	<field name="tbl_audit_login_failure_tm" class="java.sql.Time"/>
+	<field name="tbl_audit_login_failure_userid" class="java.lang.String"/>
+	<field name="tbl_audit_login_failure_Host" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="65" y="23" width="312" height="24" uuid="b28f7f27-eaf2-4b43-bf4e-fc9e840fceec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR LOGIN FAILURE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="382" y="3" width="78" height="50" uuid="b3ed75b8-87bb-4f3d-8b63-d6483a0f4cfd"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="72">
+			<staticText>
+				<reportElement x="10" y="31" width="81" height="20" uuid="5b723e38-26c9-424f-aecc-e916118c0882"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="31" width="100" height="20" uuid="5e2c5813-a184-4e67-be42-18afa6dc5d79"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="71cea5c2-4cfd-4ad0-8c3c-8c366d6ee08b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="10" width="346" height="20" uuid="d6f0338b-7a33-4990-ac7a-ec58f74ed3fa"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="51" width="80" height="20" uuid="f7eebb7d-17ce-468d-9143-40dcf86a0652"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="261" y="51" width="40" height="20" uuid="6fb19936-7be9-420b-8e8d-2cb54d91092d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="86">
+			<componentElement>
+				<reportElement key="table" style="table" x="13" y="16" width="448" height="50" uuid="3e17be3c-a341-4523-8120-5d4833012b6b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AlertDataSet" uuid="bbfc5975-5b4b-49f6-81ce-2917f6ee4b93">
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="91b393e0-7fa6-4885-932c-9a3074d5f16a">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="10" y="5" width="63" height="20" uuid="d6f749bc-165d-4d4b-a7f1-c3b42842658c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="5" width="63" height="20" uuid="c4088ced-e929-4e02-8070-e5affd4e869c"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_login_failure_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="073aaa05-b08c-4f00-91de-3be3d2a6500a">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="10" y="5" width="71" height="20" uuid="4ba94848-0aa2-499a-bc95-7ef83fd86e7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="5" width="71" height="20" uuid="58303b9b-d7ea-46db-bbcd-3d81401028e6"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="196c0770-357f-42d9-abdf-9f5db73b38ac">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="30" y="5" width="78" height="20" uuid="37e608f1-3212-4644-a07c-6a6c3e5cf3b2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="30" y="5" width="78" height="20" uuid="c5651862-3c1f-44da-acf2-d81b91fd1044"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_login_failure_userid}) ? "NA" : $F{tbl_audit_login_failure_userid}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="127" uuid="21d11020-d099-4ba1-a516-d55f201dfb05">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="20" y="5" width="90" height="20" uuid="775e93c4-3a37-4011-91a9-3b9a101fbf0b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[IP ADDRESS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box bottomPadding="0">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="20" y="0" width="90" height="30" uuid="982e09aa-b815-4256-907b-a24744f4c97c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_login_failure_Host}) ? "NA" : $F{tbl_audit_login_failure_Host}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

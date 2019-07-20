@@ -1,0 +1,376 @@
+<div class="form-group" [formGroup]="parentFormGroup">
+    <div class="row" style="margin-top: 11px">
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Compressed Dry" title="LOD (Dry Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                T1 % (MIN)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_CompDryMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_CompDryMin.valid && flt_CompDryMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_CompDryMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                T2 % (MAX)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_CompDryMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_CompDryMax.valid && flt_CompDryMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_CompDryMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_CompDryMax.valid && flt_CompDryMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_CompDryMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Compressed Lubricated" title="LOD (Lubricated Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_CompLubMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_CompLubMin.valid && flt_CompLubMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_CompLubMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_CompLubMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_CompLubMax.valid && flt_CompLubMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_CompLubMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_CompLubMax.valid && flt_CompLubMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_CompLubMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 11px">
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Layer1 Dry" title="LOD Layer 1 (Dry Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer1DryMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer1DryMin.valid && flt_Layer1DryMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer1DryMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer1DryMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer1DryMax.valid && flt_Layer1DryMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer1DryMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_Layer1DryMax.valid && flt_Layer1DryMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_Layer1DryMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Layer 1 Lubricated" title="LOD Layer 1 (Lubricated Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer1LubMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer1LubMin.valid && flt_Layer1LubMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer1LubMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer1LubMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer1LubMax.valid && flt_Layer1LubMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer1LubMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_Layer1LubMax.valid && flt_Layer1LubMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_Layer1LubMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 11px">
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Layer2 Dry" title="LOD Layer 2 (Dry Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer2DryMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer2DryMin.valid && flt_Layer2DryMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer2DryMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer2DryMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer2DryMax.valid && flt_Layer2DryMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer2DryMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_Layer2DryMax.valid && flt_Layer2DryMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_Layer2DryMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="LOD Layer 2 Lubricated" title="LOD Layer 2 (Lubricated Grannual)">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer2LubMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer2LubMin.valid && flt_Layer2LubMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer2LubMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_Layer2LubMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_Layer2LubMax.valid && flt_Layer2LubMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_Layer2LubMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_Layer2LubMax.valid && flt_Layer2LubMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_Layer2LubMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 11px">
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="Tap Density" title="Tap Density">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_TapDenMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_TapDenMin.valid && flt_TapDenMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_TapDenMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_TapDenMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_TapDenMax.valid && flt_TapDenMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_TapDenMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_TapDenMax.valid && flt_TapDenMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_TapDenMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="% Fine" title="% Fine">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_FineMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_FineMin.valid && flt_FineMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_FineMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_FineMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_FineMax.valid && flt_FineMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_FineMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_FineMax.valid && flt_FineMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_FineMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 11px">
+
+        <div class="col-6">
+            <div class="card card-border">
+              <ngb-accordion #acc="ngbAccordion" class="accordion" (panelChange)="tglPnlFunc($event)" [activeIds]="childMessage">
+                  <ngb-panel id="Particle Sizing" title="Particle Sizing">
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MIN (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_PartSizingMin" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_PartSizingMin.valid && flt_PartSizingMin.touched" style="color:red;font-weight: bold;">
+                                  {{flt_PartSizingMin.errors['required']}}
+                              </div>
+                            </div>
+
+                            <div class="col-md-4 frmproduct-controls-label">
+                                MAX (%)
+                              <input type="text" class="form-control" style="margin-top: 6px;" maxlength="9"
+                              (keypress)="onlyNumbersWithDecimal($event)"
+                              formControlName="flt_PartSizingMax" (keyup)="checkValidParameterValues();">
+
+                              <div *ngIf="!flt_PartSizingMax.valid && flt_PartSizingMax.touched" style="color:red;font-weight: bold;">
+                                  {{flt_PartSizingMax.errors['required']}}
+                              </div>
+
+                              <div *ngIf="!flt_PartSizingMax.valid && flt_PartSizingMax.touched" style="color:red;margin-top:3px;font-weight: bold;">
+                                {{flt_PartSizingMax?.errors['cmpMsg']}}
+                              </div>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                  </ngb-panel>
+              </ngb-accordion>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

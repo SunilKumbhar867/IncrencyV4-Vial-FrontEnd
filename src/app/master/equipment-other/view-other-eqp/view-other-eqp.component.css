@@ -1,0 +1,22 @@
+thead
+{
+  background-color:#4680ffeb;
+  color:white;
+  text-align: center;
+  font-family: sans-serif;
+}
+td{
+  text-align: center;
+  color:black;
+}
+#DataTables_Table_0_paginate{
+  font-size: 11px !important;
+ }
+ .dark-modal .modal-content {
+  background-color: #009efb;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+

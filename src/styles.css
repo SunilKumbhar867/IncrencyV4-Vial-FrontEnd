@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.ps .ps__scrollbar-y-rail {
+    left: 3px;
+    right: auto;
+}
+
+/* When  input field is blank then on out display border blank*/
+input.ng-invalid.ng-touched
+{
+  border:2px solid red;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dataTables_paginate{
+  font-size: 11px;
+ }
+
+
+.pointer {cursor: pointer;}

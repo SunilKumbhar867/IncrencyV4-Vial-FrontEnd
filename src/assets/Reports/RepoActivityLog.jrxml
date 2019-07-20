@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoActivityLog" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b31eca05-087e-49c9-8b06-ef2d52ce6268">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ActivityLogDataset" uuid="025256f4-904c-44fa-902b-85f7e9107161">
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_activity_log.`RecNo` AS tbl_activity_log_RecNo,
+     tbl_activity_log.`dt` AS tbl_activity_log_dt,
+     tbl_activity_log.`tm` AS tbl_activity_log_tm,
+     tbl_activity_log.`userid` AS tbl_activity_log_userid,
+     tbl_activity_log.`username` AS tbl_activity_log_username,
+     tbl_activity_log.`activity` AS tbl_activity_log_activity
+FROM
+     `tbl_activity_log` tbl_activity_log
+
+WHERE
+tbl_activity_log.`userid` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+  and tbl_activity_log.`dt` >= $P{FromDate}
+ AND tbl_activity_log.`dt` <= $P{ToDate}
+order by tbl_activity_log.`dt` DESC, tbl_activity_log.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_activity_log_RecNo" class="java.lang.Integer"/>
+		<field name="tbl_activity_log_dt" class="java.sql.Date"/>
+		<field name="tbl_activity_log_tm" class="java.sql.Time"/>
+		<field name="tbl_activity_log_userid" class="java.lang.String"/>
+		<field name="tbl_activity_log_username" class="java.lang.String"/>
+		<field name="tbl_activity_log_activity" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_activity_log.`RecNo` AS tbl_activity_log_RecNo,
+     tbl_activity_log.`dt` AS tbl_activity_log_dt,
+     tbl_activity_log.`tm` AS tbl_activity_log_tm,
+     tbl_activity_log.`userid` AS tbl_activity_log_userid,
+     tbl_activity_log.`username` AS tbl_activity_log_username,
+     tbl_activity_log.`activity` AS tbl_activity_log_activity,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path
+FROM
+     `tbl_activity_log` tbl_activity_log,
+     `tbl_rpt_path` tbl_rpt_path
+WHERE
+tbl_activity_log.`userid` LIKE
+	CASE
+		WHEN
+			$P{SelectedValue} = ''
+		THEN
+			'%'
+	ELSE
+		$P{SelectedValue}
+	END
+  and tbl_activity_log.`dt` >= $P{FromDate}
+ AND tbl_activity_log.`dt` <= $P{ToDate}
+ ORDER BY tbl_activity_log.`dt` DESC, tbl_activity_log.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_activity_log_RecNo" class="java.lang.Integer"/>
+	<field name="tbl_activity_log_dt" class="java.sql.Date"/>
+	<field name="tbl_activity_log_tm" class="java.sql.Time"/>
+	<field name="tbl_activity_log_userid" class="java.lang.String"/>
+	<field name="tbl_activity_log_username" class="java.lang.String"/>
+	<field name="tbl_activity_log_activity" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="338" y="14" width="132" height="24" uuid="3037b97b-4a54-4def-9b89-c1482dca6082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACTIVITY LOG]]></text>
+			</staticText>
+			<image>
+				<reportElement x="662" y="0" width="124" height="50" uuid="571de846-9bd8-4c86-9144-fd77a3cdd359"/>
+				<imageExpression><![CDATA[$F{tbl_rpt_path_path} + "logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="67">
+			<staticText>
+				<reportElement x="21" y="25" width="81" height="20" uuid="99837f0d-7942-46ba-9c92-1a5224cb0a06"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="110" y="25" width="100" height="20" uuid="983c8f14-84ee-4b97-817b-77725e45b415"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="3" width="81" height="20" uuid="a7c08e45-4faa-4c3a-bbbb-ecf42851f2cd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="110" y="3" width="527" height="20" uuid="125555ad-a2f5-48bf-aea4-33883af164ab"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="36" width="80" height="20" uuid="3acef700-032a-4a58-a9cd-a2e1a22f36f6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="418" y="36" width="40" height="20" uuid="e3ebac94-4125-489c-931f-dee3d9977075"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="74">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="5" width="769" height="65" uuid="9b60a30e-72dc-4d88-8d2c-8836e8c7dbf7"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ActivityLogDataset" uuid="7581c8e8-13d2-4554-940d-9c4ca51cb947">
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="120" uuid="280d80c7-e180-4430-9a00-c0adc95a3856">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="1e79665b-fd3c-4e98-a544-3c120a2bf078"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="120" height="20" uuid="d1abe4d7-e6d6-4d2e-b834-cdc4b70898bc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_activity_log_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="472f584f-5a27-4790-89c3-924ec1573a1d">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="4982192a-7661-4797-9255-4e49ea648f9a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="120" height="20" uuid="db29d7cb-901e-4e51-8208-d6e9873d35c6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="60eda30a-047a-4208-be03-6e0e80e55fa0">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="9c41235c-dc5b-4d62-9c7d-c41e080b8a06"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="120" height="20" uuid="0f52a887-bba7-41e2-9981-47a8adb88fbb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_activity_log_userid}) ? "NA" :$F{tbl_activity_log_userid}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="204" uuid="f6421a12-e6a4-44bb-b77b-73fb2270feb1">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="204" height="30" uuid="dcfce472-5114-4538-b69e-d02bfe04f955"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="204" height="20" uuid="6801b823-9a36-46b2-822b-5f470400ae8e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_activity_log_username}) ? "NA" : $F{tbl_activity_log_username} )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="205" uuid="d5ee82c2-931a-4737-abe6-62cb758bd695">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="205" height="30" uuid="51eed041-f768-4f7b-8d34-5aa0d9d72c06"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTIVITY]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="205" height="20" uuid="5fa5330d-6554-4083-8a4e-d68480a7f680"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_activity_log_activity}) ? "NA" : $F{tbl_activity_log_activity}  )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

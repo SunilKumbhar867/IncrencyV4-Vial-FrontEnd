@@ -1,0 +1,181 @@
+<form [formGroup]="precalibration" (ngSubmit)="onFormSubmit()" style="font-size:15px;color:black">
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:5px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Precalibration</span>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <label>
+              Area :
+            </label>
+            <ngx-select style="padding: 6px;" formControlName="area" [items]="sarr_AreaData" placeholder="Select"
+              (select)="onSelectArea($event)">
+            </ngx-select>
+          </div>
+          <div class="col-md-6" [class.disabled]="bln_cubicle_disabled"  >
+            <label>
+              Cubicle Name :
+            </label>
+            <ngx-select style="padding: 6px;" formControlName="cubicleName" [items]="sarr_cubicleNames" placeholder="Select"
+              (select)="onSelectCubicle($event)" >
+            </ngx-select>
+          </div>
+          <div class="col-md-6" [class.disabled]="bln_equipment_disabled">
+            <label>
+              Instrument Type :
+            </label>
+            <select class="form-control" (change)="onSelectEquipment($event)" placeholder="Select" formControlName="equipmentType">
+                <option value="" disabled selected>Select Equipment Type</option>
+              <option *ngFor="let id of sarr_calibrationData" value="{{id.id}}">{{id.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-6" [class.disabled]="bln_calibrationType_disabled" >
+            <label>
+              Calibration Type :
+            </label>
+            <ngx-select style="padding: 6px;" formControlName="calibrationType" [items]="sarr_calibrationType" placeholder="Select"
+            (select)="onSelectCalibrationType($event)" >
+            </ngx-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="bln_isCubliceSelected">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:5px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Select Weigths for {{selectedEquipment}} ID {{selectedEquipmentID}}</span>
+
+          </div>
+        </div>
+        <br>
+        <div class="row" >
+          <div class="col-md-5" [class.disabled]="bln_standardWeight" >
+            <label style="margin-top:7px">
+              Standard Weight :
+            </label>
+          </div>
+          <div class="col-md-7" [class.disabled]="bln_standardWeight">
+            <ngx-select  [items]="sarr_Standardweights" formControlName="standardWeight" placeholder="Select" (select)="onSelectStandardWeight($event)">
+            </ngx-select>
+          </div>
+          <br><br>
+          <div class="col-md-5">
+            <label style="margin-top:7px">
+               Select Weight Box :
+            </label>
+          </div>
+          <div class="col-md-7">
+            <ngx-select  [items]="sarr_weightBoxId" formControlName="weightBox" placeholder="Select" (select)="onSelectWeightBox($event)">
+            </ngx-select>
+          </div>
+          <br><br>
+          <div class="col-md-5" [class.disabled]="bln_Weights" >
+            <label style="margin-top:7px">
+              Select Weights :
+            </label>
+          </div>
+          <div class="col-md-7" [class.disabled]="bln_Weights" >
+            <ngx-select  [items]="sarr_weights" formControlName="weights" placeholder="Select" (select)="onSelectWeight($event)">
+            </ngx-select>
+          </div>
+          <br><br>
+          <div class="col-md-5">
+            <label style="margin-top:7px">
+              Identifcation No :
+            </label>
+          </div>
+          <div class="col-md-7">
+            <input type="text" class="form-control" value="{{identificationNo}}" readonly>
+          </div>
+        </div>
+        <Br>
+        <div class="text-center">
+          <span class="btn btn1 btn-primary" style="width: 70px" (click)="addWeights()" *ngIf="bln_showAddbtn">ADD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" >
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:5px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Selected Weights</span>
+          </div>
+        </div>
+        <br>
+        <table class="table-bordered" width="100%">
+          <thead >
+            <tr>
+              <td style="width: 33%">Weight Box Id</td>
+              <td style="width: 33%">Weights</td>
+              <td style="width: 33%">Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let weight of sarr_selectedWeights">
+              <td>{{weight.weightBox}}</td>
+              <td>{{weight.weights}}</td>
+              <td><button class="btn btn-xs btn-danger" type="button" (click)="removeSelectedWeights(weight)">REMOVE</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center" *ngIf="bln_showSubmitbtn">
+          <button type="submit" [disabled]="!precalibration.valid" class="btn btn1 btn-primary" style="width: 70px"  [ngClass]="{'disabledBtn' : !precalibration.valid}">ADD</button>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="bln_isCubliceSelected">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:5px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>Selected Weigths for Weightment</span>
+            <button style="float:right;color: black;
+            background-color: white;"  *ngIf="bln_showRefreshButton" type="button" (click)="refresh()" class="btn btn1 btn-inverse">
+              <i class="fa fa-refresh"></i> Refresh</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-bordered" width="100%">
+          <thead >
+            <tr>
+              <td style="width: 20%">Sr No</td>
+              <td style="width: 20%">Standard Weights</td>
+              <td style="width: 20%">Weight Box Id</td>
+              <td style="width: 20%">Weights</td>
+              <td style="width: 20%">Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of sarr_weighmentData;let i = index">
+              <td>{{i+1}}</td>
+              <td>{{data.Standard_Weight_Block | number : '.'+int_balDP}}</td>
+              <td>{{data.CalibrationBox_ID}}</td>
+              <td>{{data.CalibrationBox_Selected_Elements}}</td>
+              <td><button class="btn btn-xs btn-danger" type="button" (click)="removeWeightmentData(data)">REMOVE</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

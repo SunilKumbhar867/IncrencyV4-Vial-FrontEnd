@@ -1,0 +1,95 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>DEPARTMENT DETAIL</span>
+          </div>
+        </div>
+
+        <br>
+
+        <form class="form-horizontal form-material" [formGroup]="frmEditDept" (ngSubmit)="onSaveBtnClick()">
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+          >
+            <thead>
+              <tr>
+                <th [hidden]="true">Departments Id</th>
+                <th>Departments</th>
+                <th>Edit Department</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let departments of sarr_Departments">
+
+                <td [hidden]="true">
+                  <input type='text' value='{{departments.department_id}}'
+                    formControlName="str_DeptId" class="form-control"
+                  />
+                </td>
+
+                <td> {{departments.department_name}} </td>
+
+                <td>
+                    <input type='text'
+                      formControlName="str_DeptName"
+                      class="form-control"
+                      value='{{departments.department_name}}'
+                      *ngIf="departments.department_name == str_editDeptName"
+                      [class.disabled]="false"
+                      maxlength="50"
+                      (keyup)="checkDuplDept($event)"
+                    />
+
+                    <div *ngIf="!str_DeptName.valid && str_DeptName.touched &&
+                    departments.department_name == str_editDeptName" style="color:red;margin-top:3px;font-weight: bold;">{{frmEditDept.get('str_DeptName').errors.required}}</div>
+
+                </td>
+
+                <td>
+                    <div>
+                      <button [hidden]="!bln_rgtEditDept || !bln_editDept" type="button"
+                        class="btn btn-sm btn-success" (click)="editDept(departments)">
+                        <i class="fa fa-pencil"></i>
+                        Edit
+                      </button>
+                      &nbsp;
+
+                      <button [hidden]="bln_editDept" type="submit" class="btn btn-sm btn-success"
+                        *ngIf="departments.department_name == str_editDeptName"
+                        [ngClass]="{'disabledBtn' : !frmEditDept.valid || bln_ShowBlankMsg == true}"
+                        [disabled]="!frmEditDept.valid || bln_ShowBlankMsg == true"
+                      >
+                        <i class="fa fa-pencil"></i>
+                        Save
+                      </button>
+                      &nbsp;
+
+                      <button (click)="reset(departments)" [hidden]="bln_editDept"
+                        type="button" class="btn btn-sm btn-success"
+                        *ngIf="departments.department_name == str_editDeptName"
+                      >
+                      <i class="fa fa-pencil"></i>
+                        Reset
+                      </button>
+                      &nbsp;
+
+                    </div>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1339 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0', fullScreenBackdrop: true }"></ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style="text-align: center;color:white">Manage Tablet</span>
+          </div>
+        </div>
+        <br />
+        <div class="table-responsive">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+            <thead style="font-size: 13px !important; font-weight: 100 !important;">
+              <tr style="text-align:center">
+                <th>BFG Code No</th>
+                <th>Product Name</th>
+                <th>Product Version</th>
+                <th>Version</th>
+                <th>Product Status</th>
+                <th>Only BinWeighing</th>
+                <th style='display:none'>Batch Size</th>
+                <th>View</th>
+                <th [hidden]="!bln_editProduct">Action</th>
+              </tr>
+            </thead>
+            <tbody style="font-size: 13px !important;">
+              <tr *ngFor="let product of dsProductData" style="text-align:center">
+                <td>{{ product.ProductId }}</td>
+                <td>{{ product.ProductName }}</td>
+                <td>{{ product.ProductVersion }}</td>
+                <td>{{ product.Version }}</td>
+                <td>
+                  <span [ngClass]="
+                      product.IsActive.data[0] == 0
+                        ? 'label label-info'
+                        : 'label label-success'
+                    ">
+                    {{ product.IsActive.data[0] == 0 ? "Inactive" : "Active" }}
+                  </span>
+                </td>
+                <td>{{ product.isBinWeighing.data[0] == 0 ? "No" : "Yes" }}</td>
+                <td style='display:none'>{{ product.BatchSize }}{{ product.BatchUnit }}</td>
+                <td>
+                  <button type="button" class="btn btn-block btn-sm btn-info" (click)="viewProduct(product, content)">
+                    <i class="fa fa fa-eye"></i> View
+                  </button>
+                </td>
+                <td>
+                  <button [hidden]="!bln_editProduct" type="button" class="btn btn-block btn-sm btn-warning"
+                    (click)="btnEdit(product)">
+                    <i class="fa fa fa-edit"></i> Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Product Details</h4>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-body">
+                <span class="card-subtitle" style="color:black;">
+                  Product Id : {{ productDetails?.ProductId }} <br />
+
+                  Product Name : {{ productDetails?.ProductName }} <br />
+
+                  Product Version : {{ productDetails?.ProductVersion }} <br />
+
+                  Version : {{ productDetails?.Version }} <br />
+                </span>
+              </div>
+            </div>
+            <ngb-tabset #t="ngbTabset">
+              <ngb-tab id="tab-compressed" title="Uncoated Parameters" tabindex="0"
+              *ngIf="blnShowCompressedParameters">
+                <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+
+                          <div class="table-responsive">
+                            <table class="table table-bordered" style="font-size: 12px;color:black;">
+                              <thead>
+                                <tr>
+                                  <!--1-->
+                                  <th>Individual Nominal</th>
+                                  <th>Ind T1 Neg</th>
+                                  <th>Ind T1 Pos</th>
+                                  <th>Ind T2 Neg</th>
+                                  <th>Ind T2 Pos</th>
+                                  <th>Report Type</th>
+                                  <!--2-->
+                                  <th>Group Nominal</th>
+                                  <th>Group T1 Neg</th>
+                                  <th>Group T1 Pos</th>
+                                  <th>Group T2 Neg</th>
+                                  <th>Group T2 Pos</th>
+                                  <th>Report Type</th>
+                                  <!--3-->
+                                  <th>Thickness Nominal</th>
+                                  <th>Thickness T1 Neg</th>
+                                  <th>Thickness T1 Pos</th>
+                                  <th>Thickness T2 Neg</th>
+                                  <th>Thickness T2 Pos</th>
+                                  <!--4-->
+                                  <th>Breadth Nominal</th>
+                                  <th>Breadth T1 Neg</th>
+                                  <th>Breadth T1 Pos</th>
+                                  <th>Breadth T2 Neg</th>
+                                  <th>Breadth T2 Pos</th>
+                                  <!--5-->
+                                  <th>Length Nominal</th>
+                                  <th>Length T1 Neg</th>
+                                  <th>Length T1 Pos</th>
+                                  <th>Length T2 Neg</th>
+                                  <th>Length T2 Pos</th>
+
+                                  <!--6-->
+                                  <th>Diameter Nominal</th>
+                                  <th>Diameter T1 Neg</th>
+                                  <th>Diameter T1 Pos</th>
+                                  <th>Diameter T2 Neg</th>
+                                  <th>Diameter T2 Pos</th>
+
+                                  <!--7-->
+                                  <th>Hardness Nominal</th>
+                                  <th>NLT</th>
+                                  <th>NMT</th>
+                                  <th>Report Type</th>
+
+                                  <!--8-->
+                                  <th>Friability NMT(%)</th>
+                                  <th>Set Count</th>
+                                  <th>RPM</th>
+
+                                  <!--9-->
+                                  <th>Individual Nominal</th>
+                                  <th>Individual T1 Neg</th>
+                                  <th>Individual T1 Pos</th>
+                                  <th>Individual T2 Neg</th>
+                                  <th>Individual T2 Pos</th>
+                                  <th>Report Type</th>
+
+                                  <!--10-->
+                                  <th>Group Nominal</th>
+                                  <th>Group T1 Neg</th>
+                                  <th>Group T1 Pos</th>
+                                  <th>Group T2 Neg</th>
+                                  <th>Group T2 Pos</th>
+                                  <th>Report Type</th>
+
+                                  <!--11-->
+                                  <th>Individual(Lay-1) Nominal</th>
+                                  <th>Individual(Lay-1) T1 Neg</th>
+                                  <th>Individual(Lay-1) T1 Pos</th>
+                                  <th>Individual(Lay-1) T2 Neg</th>
+                                  <th>Individual(Lay-1) T2 Pos</th>
+                                  <th>Report Type</th>
+
+                                  <!--12-->
+                                  <th>Group(Lay-1) Nominal</th>
+                                  <th>Group(Lay-1) T1 Neg</th>
+                                  <th>Group(Lay-1) T1 Pos</th>
+                                  <th>Group(Lay-1) T2 Neg</th>
+                                  <th>Group(Lay-1) T2 Pos</th>
+                                  <th>Report Type</th>
+
+                                  <!--13-->
+                                  <th>DT Std Limit</th>
+                                  <th>DT Min Temp</th>
+                                  <th>DT Max Temp</th>
+
+                                   <!--15-->
+                                  <th>TD T1(gm/ml)</th>
+                                  <th>TD T2(gm/ml)</th>
+
+                                  <!--16-->
+                                  <th>LOD NLT</th>
+                                  <th>LOD NMT</th>
+
+                                  <!--17-->
+                                  <th>%Fine T1 Limit(%)</th>
+                                  <th>%Fine T2 Limit(%)</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <!--1-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param1_Nom == 99999 || dsTabletDetails?.Param1_Nom == null ? "NA"  : dsTabletDetails?.Param1_Nom
+                                      | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param1_T1Neg == 99999 || dsTabletDetails?.Param1_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param1_T1Neg | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param1_T1Pos == 99999 || dsTabletDetails?.Param1_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param1_T1Pos | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param1_T2Neg == 99999 || dsTabletDetails?.Param1_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param1_T2Neg | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param1_T2Pos == 99999 || dsTabletDetails?.Param1_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param1_T2Pos | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param1_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+                                  <!--2-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param2_Nom == 99999 || dsTabletDetails?.Param2_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param2_Nom | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param2_T1Neg == 99999 || dsTabletDetails?.Param2_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param2_T1Neg | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param2_T1Pos == 99999 || dsTabletDetails?.Param2_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param2_T1Pos | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param2_T2Neg == 99999 || dsTabletDetails?.Param2_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param2_T2Neg | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param2_T2Pos == 99999 || dsTabletDetails?.Param2_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param2_T2Pos | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param2_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+                                  <!--3-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param3_Nom == 99999 || dsTabletDetails?.Param3_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param3_Nom | number:'.'+dsTabletDetails.Param3_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param3_T1Neg == 99999 || dsTabletDetails?.Param3_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param3_T1Neg | number:'.'+dsTabletDetails.Param3_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param3_T1Pos == 99999 || dsTabletDetails?.Param3_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param3_T1Pos | number:'.'+dsTabletDetails.Param3_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param3_T2Neg == 99999 || dsTabletDetails?.Param3_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param3_T2Neg | number:'.'+dsTabletDetails.Param3_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param3_T2Pos == 99999 || dsTabletDetails?.Param3_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param3_T2Pos | number:'.'+dsTabletDetails.Param3_Dp
+                                    }}
+                                  </td>
+                                  <!--4-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param4_Nom == 99999 || dsTabletDetails?.Param4_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param4_Nom | number:'.'+dsTabletDetails.Param4_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param4_T1Neg == 99999 || dsTabletDetails?.Param4_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param4_T1Neg | number:'.'+dsTabletDetails.Param4_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param4_T1Pos == 99999 || dsTabletDetails?.Param4_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param4_T1Pos | number:'.'+dsTabletDetails.Param4_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param4_T2Neg == 99999 || dsTabletDetails?.Param4_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param4_T2Neg | number:'.'+dsTabletDetails.Param4_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param4_T2Pos == 99999 || dsTabletDetails?.Param4_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param4_T2Pos | number:'.'+dsTabletDetails.Param4_Dp
+                                    }}
+                                  </td>
+                                  <!--5-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param5_Nom == 99999 || dsTabletDetails?.Param5_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param5_Nom | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param5_T1Neg == 99999 || dsTabletDetails?.Param5_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param5_T1Neg | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param5_T1Pos == 99999 || dsTabletDetails?.Param5_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param5_T1Pos | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param5_T2Neg == 99999 || dsTabletDetails?.Param5_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param5_T2Neg | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param5_T2Pos == 99999 || dsTabletDetails?.Param5_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param5_T2Pos
+                                    }}
+                                  </td>
+                                  <!--6-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param6_Nom == 99999 || dsTabletDetails?.Param6_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param6_Nom | number:'.'+dsTabletDetails.Param6_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param6_T1Neg == 99999 || dsTabletDetails?.Param6_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param6_T1Neg | number:'.'+dsTabletDetails.Param6_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param6_T1Pos == 99999 || dsTabletDetails?.Param6_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param6_T1Pos | number:'.'+dsTabletDetails.Param6_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param6_T2Neg == 99999  || dsTabletDetails?.Param6_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param6_T2Neg | number:'.'+dsTabletDetails.Param6_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param6_T2Pos == 99999 || dsTabletDetails?.Param6_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param6_T2Pos | number:'.'+dsTabletDetails.Param6_Dp
+                                    }}
+                                  </td>
+                                  <!--7-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param7_Nom == 99999 || dsTabletDetails?.Param7_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param7_Nom | number:'.'+dsTabletDetails.Param7_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param7_T1Neg == 99999 || dsTabletDetails?.Param7_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param7_T1Neg | number:'.'+dsTabletDetails.Param7_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param7_T1Pos == 99999 || dsTabletDetails?.Param7_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param7_T1Pos | number:'.'+dsTabletDetails.Param7_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param7_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--8-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param8_Nom == 99999 || dsTabletDetails?.Param8_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param8_Nom | number:'.'+dsTabletDetails.Param8_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param8_T1Neg == 99999 || dsTabletDetails?.Param8_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param8_T1Neg | number:'.'+dsTabletDetails.Param8_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param8_T1Pos == 99999 || dsTabletDetails?.Param8_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param8_T1Pos | number:'.'+dsTabletDetails.Param8_Dp
+                                    }}
+                                  </td>
+
+                                  <!--9-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param9_Nom == 99999 || dsTabletDetails?.Param9_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param9_Nom | number:'.'+dsTabletDetails.Param9_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param9_T1Neg == 99999 || dsTabletDetails?.Param9_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param9_T1Neg | number:'.'+dsTabletDetails.Param9_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param9_T1Pos == 99999 || dsTabletDetails?.Param9_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param9_T1Pos | number:'.'+dsTabletDetails.Param9_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param9_T2Neg == 99999 || dsTabletDetails?.Param9_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param9_T2Neg | number:'.'+dsTabletDetails.Param9_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param9_T2Pos == 99999 || dsTabletDetails?.Param9_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param9_T2Pos | number:'.'+dsTabletDetails.Param9_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param9_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--10-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param10_Nom == 99999 || dsTabletDetails?.Param10_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param10_Nom  | number:'.'+dsTabletDetails.Param10_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param10_T1Neg == 99999 || dsTabletDetails?.Param10_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param10_T1Neg | number:'.'+dsTabletDetails.Param10_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param10_T1Pos == 99999 || dsTabletDetails?.Param10_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param10_T1Pos | number:'.'+dsTabletDetails.Param10_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param10_T2Neg == 99999 || dsTabletDetails?.Param10_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param10_T2Neg | number:'.'+dsTabletDetails.Param10_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param10_T2Pos == 99999 || dsTabletDetails?.Param10_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param10_T2Pos | number:'.'+dsTabletDetails.Param10_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param10_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--11-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param11_Nom == 99999 || dsTabletDetails?.Param11_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param11_Nom | number:'.'+dsTabletDetails.Param11_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param11_T1Neg == 99999 || dsTabletDetails?.Param11_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param11_T1Neg | number:'.'+dsTabletDetails.Param11_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param11_T1Pos == 99999 || dsTabletDetails?.Param11_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param11_T1Pos | number:'.'+dsTabletDetails.Param11_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param11_T2Neg == 99999 || dsTabletDetails?.Param11_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param11_T2Neg | number:'.'+dsTabletDetails.Param11_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param11_T2Pos == 99999 || dsTabletDetails?.Param11_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param11_T2Pos | number:'.'+dsTabletDetails.Param11_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param11_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--12-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param12_Nom == 99999 || dsTabletDetails?.Param12_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param12_Nom | number:'.'+dsTabletDetails.Param12_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param12_T1Neg == 99999 || dsTabletDetails?.Param12_T1Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param12_T1Neg | number:'.'+dsTabletDetails.Param12_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param12_T1Pos == 99999 || dsTabletDetails?.Param12_T1Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param12_T1Pos | number:'.'+dsTabletDetails.Param12_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param12_T2Neg == 99999 || dsTabletDetails?.Param12_T2Neg == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param12_T2Neg | number:'.'+dsTabletDetails.Param12_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param12_T2Pos == 99999 || dsTabletDetails?.Param12_T2Pos == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param12_T2Pos | number:'.'+dsTabletDetails.Param12_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsTabletDetails?.Param12_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--13-->
+                                  <td>
+                                    {{
+                                      dsTabletDetails?.Param13_Nom == 99999  || dsTabletDetails?.Param13_Nom == null
+                                        ? "NA"
+                                        : dsTabletDetails?.Param13_Nom
+                                    }}
+                                  </td>
+                                  <td>
+                                      {{
+                                        dsTabletDetails?.Param13_T1Neg == 99999 || dsTabletDetails?.Param13_T1Neg == null
+                                          ? "NA"
+                                          : dsTabletDetails?.Param13_T1Neg | number:'.'+dsTabletDetails.Param13_DP
+                                      }}
+                                    </td>
+                                    <td>
+                                        {{
+                                          dsTabletDetails?.Param13_T1Pos == 99999 || dsTabletDetails?.Param13_T1Pos == null
+                                            ? "NA"
+                                            : dsTabletDetails?.Param13_T1Pos | number:'.'+dsTabletDetails.Param13_DP
+                                        }}
+                                      </td>
+
+                    <!--15-->
+                    <td>
+                      {{
+                        dsTabletDetails?.Param15_T1Neg == 99999  || dsTabletDetails?.Param15_T1Neg == null
+                          ? "NA"
+                          : dsTabletDetails?.Param15_T1Neg | number:'.'+dsTabletDetails.Param15_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param15_T1Pos == 99999  || dsTabletDetails?.Param15_T1Pos == null
+                          ? "NA"
+                          : dsTabletDetails?.Param15_T1Pos | number:'.'+dsTabletDetails.Param15_DP
+                      }}
+                  </td>
+                  <!--16-->
+                  <td>
+                      {{
+                        dsTabletDetails?.Param16_T1Neg == 99999  || dsTabletDetails?.Param16_T1Neg == null
+                          ? "NA"
+                          : dsTabletDetails?.Param16_T1Neg | number:'.'+dsTabletDetails.Param16_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param16_T1Pos == 99999  || dsTabletDetails?.Param16_T1Pos == null
+                          ? "NA"
+                          : dsTabletDetails?.Param16_T1Pos | number:'.'+dsTabletDetails.Param16_DP
+                      }}
+                  </td>
+                  <!--17-->
+                  <td>
+                      {{
+                        dsTabletDetails?.Param17_T1Neg == 99999  || dsTabletDetails?.Param17_T1Neg == null
+                          ? "NA"
+                          : dsTabletDetails?.Param17_T1Neg | number:'.'+dsTabletDetails.Param17_DP
+                      }}
+                  </td>
+                  <td>
+                      {{
+                        dsTabletDetails?.Param17_T1Pos == 99999  || dsTabletDetails?.Param17_T1Pos == null
+                          ? "NA"
+                          : dsTabletDetails?.Param17_T1Pos | number:'.'+dsTabletDetails.Param17_DP
+                      }}
+                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="tab-coated" title="Coated Parameters" tabindex="1" *ngIf="blnShowCoatedParameters">
+                <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+
+                          <div class="table-responsive">
+                            <table class="table table-bordered" style="font-size: 12px;color:black;">
+                              <thead>
+                                <tr>
+                                  <!--1-->
+                                  <th>Individual Nominal</th>
+                                  <th>Ind T1 Neg</th>
+                                  <th>Ind T1 Pos</th>
+                                  <th>Ind T2 Neg</th>
+                                  <th>Ind T2 Pos</th>
+                                  <th>Report Type</th>
+                                  <!--2-->
+                                  <th>Group Nominal</th>
+                                  <th>Group T1 Neg</th>
+                                  <th>Group T1 Pos</th>
+                                  <th>Group T2 Neg</th>
+                                  <th>Group T2 Pos</th>
+                                  <th>Report Type</th>
+                                  <!--3-->
+                                  <th>Thickness Nominal</th>
+                                  <th>Thickness T1 Neg</th>
+                                  <th>Thickness T1 Pos</th>
+                                  <th>Thickness T2 Neg</th>
+                                  <th>Thickness T2 Pos</th>
+                                  <!--4-->
+                                  <th>Breadth Nominal</th>
+                                  <th>Breadth T1 Neg</th>
+                                  <th>Breadth T1 Pos</th>
+                                  <th>Breadth T2 Neg</th>
+                                  <th>Breadth T2 Pos</th>
+                                  <!--5-->
+                                  <th>Length Nominal</th>
+                                  <th>Length T1 Neg</th>
+                                  <th>Length T1 Pos</th>
+                                  <th>Length T2 Neg</th>
+                                  <th>Length T2 Pos</th>
+
+                                  <!--6-->
+                                  <th>Diameter Nominal</th>
+                                  <th>Diameter T1 Neg</th>
+                                  <th>Diameter T1 Pos</th>
+                                  <th>Diameter T2 Neg</th>
+                                  <th>Diameter T2 Pos</th>
+
+                                  <!--7-->
+                                  <th>Hardness Nominal</th>
+                                  <th>NLT</th>
+                                  <th>NMT</th>
+                                  <th>Report Type</th>
+
+                                  <!--8-->
+                                  <!-- <th>Friability NMT(%)</th>
+                                  <th>Set Count</th>
+                                  <th>RPM</th> -->
+
+                                  <!-- 13 -->
+                                  <th>DT Std Limit</th>
+                                  <th>DT Min Temp</th>
+                                  <th>DT Max Temp</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <!--1-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param1_Nom == 99999 || dsCoatedTabDetails?.Param1_Nom == null ? "NA"  : dsCoatedTabDetails?.Param1_Nom | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param1_T1Neg == 99999 || dsCoatedTabDetails?.Param1_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param1_T1Neg | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param1_T1Pos == 99999 || dsCoatedTabDetails?.Param1_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param1_T1Pos | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param1_T2Neg == 99999 || dsCoatedTabDetails?.Param1_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param1_T2Neg | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param1_T2Neg == 99999 || dsCoatedTabDetails?.Param1_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param1_T2Neg | number:'.'+dsTabletDetails.Param1_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsCoatedTabDetails?.Param1_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+                                  <!--2-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param2_Nom == 99999 || dsCoatedTabDetails?.Param2_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param2_Nom | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param2_T1Neg == 99999 || dsCoatedTabDetails?.Param2_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param2_T1Neg | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param2_T1Pos == 99999 || dsCoatedTabDetails?.Param2_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param2_T1Pos | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param2_T2Neg == 99999 || dsCoatedTabDetails?.Param2_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param2_T2Neg | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param2_T2Pos == 99999 || dsCoatedTabDetails?.Param2_T2Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param2_T2Pos | number:'.'+dsTabletDetails.Param2_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      (dsCoatedTabDetails?.Param2_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+                                  <!--3-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param3_Nom == 99999 || dsCoatedTabDetails?.Param3_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param3_Nom | number:'.'+dsTabletDetails.Param3_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param3_T1Neg == 99999 || dsCoatedTabDetails?.Param3_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param3_T1Neg | number:'.'+dsTabletDetails.Param3_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param3_T1Pos == 99999 || dsCoatedTabDetails?.Param3_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param3_T1Pos | number:'.'+dsTabletDetails.Param3_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param3_T2Neg == 99999 || dsCoatedTabDetails?.Param3_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param3_T2Neg | number:'.'+dsTabletDetails.Param3_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param3_T2Pos == 99999 || dsCoatedTabDetails?.Param3_T2Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param3_T2Pos | number:'.'+dsTabletDetails.Param3_DP
+                                    }}
+                                  </td>
+                                  <!--4-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param4_Nom == 99999 || dsCoatedTabDetails?.Param4_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param4_Nom | number:'.'+dsTabletDetails.Param4_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param4_T1Neg == 99999 || dsCoatedTabDetails?.Param4_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param4_T1Neg | number:'.'+dsTabletDetails.Param4_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param4_T1Pos == 99999 || dsCoatedTabDetails?.Param4_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param4_T1Pos | number:'.'+dsTabletDetails.Param4_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param4_T2Neg == 99999 || dsCoatedTabDetails?.Param4_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param4_T2Neg | number:'.'+dsTabletDetails.Param4_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param4_T2Pos == 99999 || dsCoatedTabDetails?.Param4_T2Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param4_T2Pos | number:'.'+dsTabletDetails.Param4_DP
+                                    }}
+                                  </td>
+                                  <!--5-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param5_Nom == 99999 || dsCoatedTabDetails?.Param5_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param5_Nom | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param5_T1Neg == 99999 || dsCoatedTabDetails?.Param5_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param5_T1Neg | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param5_T1Pos == 99999 || dsCoatedTabDetails?.Param5_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param5_T1Pos | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param5_T2Neg == 99999 || dsCoatedTabDetails?.Param5_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param5_T2Neg | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param5_T2Pos == 99999 || dsCoatedTabDetails?.Param5_T2Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param5_T2Pos | number:'.'+dsTabletDetails.Param5_Dp
+                                    }}
+                                  </td>
+                                  <!--6-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param6_Nom == 99999 || dsCoatedTabDetails?.Param6_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param6_Nom | number:'.'+dsTabletDetails.Param6_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param6_T1Neg == 99999 || dsCoatedTabDetails?.Param6_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param6_T1Neg | number:'.'+dsTabletDetails.Param6_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param6_T1Pos == 99999 || dsCoatedTabDetails?.Param6_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param6_T1Pos | number:'.'+dsTabletDetails.Param6_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param6_T2Neg == 99999  || dsCoatedTabDetails?.Param6_T2Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param6_T2Neg | number:'.'+dsTabletDetails.Param6_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param6_T2Pos == 99999 || dsCoatedTabDetails?.Param6_T2Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param6_T2Pos | number:'.'+dsTabletDetails.Param6_DP
+                                    }}
+                                  </td>
+                                  <!--7-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param7_Nom == 99999 || dsCoatedTabDetails?.Param7_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param7_Nom | number:'.'+dsTabletDetails.Param7_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param7_T1Neg == 99999 || dsCoatedTabDetails?.Param7_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param7_T1Neg | number:'.'+dsTabletDetails.Param7_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param7_T1Pos == 99999 || dsCoatedTabDetails?.Param7_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param7_T1Pos | number:'.'+dsTabletDetails.Param7_DP
+                                    }}
+                                  </td>
+
+                                  <td>
+                                    {{
+                                      (dsCoatedTabDetails?.Param7_IsOnStd
+                                        .data)[0] == "0"
+                                        ? "Standard"
+                                        : "Average"
+                                    }}
+                                  </td>
+
+                                  <!--8-->
+                                  <!-- <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param8_Nom == 99999 || dsCoatedTabDetails?.Param8_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param8_Nom | number:'.'+dsTabletDetails.Param8_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param8_T1Neg == 99999 || dsCoatedTabDetails?.Param8_T1Neg == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param8_T1Neg | number:'.'+dsTabletDetails.Param8_DP
+                                    }}
+                                  </td>
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param8_T1Pos == 99999 || dsCoatedTabDetails?.Param8_T1Pos == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param8_T1Pos | number:'.'+dsTabletDetails.Param8_DP
+                                    }}
+                                  </td> -->
+
+                                  <!--13-->
+                                  <td>
+                                    {{
+                                      dsCoatedTabDetails?.Param13_Nom == 99999  || dsCoatedTabDetails?.Param13_Nom == null
+                                        ? "NA"
+                                        : dsCoatedTabDetails?.Param13_Nom
+                                    }}
+                                  </td>
+                                  <td>
+                                      {{
+                                        dsCoatedTabDetails?.Param13_T1Neg == 99999 || dsCoatedTabDetails?.Param13_T1Neg == null
+                                          ? "NA"
+                                          : dsCoatedTabDetails?.Param13_T1Neg | number:'.'+dsCoatedTabDetails.Param13_DP
+                                      }}
+                                    </td>
+                                    <td>
+                                        {{
+                                          dsCoatedTabDetails?.Param13_T1Pos == 99999 || dsCoatedTabDetails?.Param13_T1Pos == null
+                                            ? "NA"
+                                            : dsCoatedTabDetails?.Param13_T1Pos | number:'.'+dsCoatedTabDetails.Param13_DP
+                                        }}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="tab-granulation" title="Granulation Parameters" tabindex="2" *ngIf="blnShowGranulationParameters">
+                <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+
+                          <div class="table-responsive">
+                            <table class="table table-bordered" style="font-size: 12px;color:black;">
+                              <thead>
+                                <tr>
+                                  <!--1-->
+                                  <th>LOD (Dry Grannual) Min(%)</th>
+                                  <th>LOD (Dry Grannual) Max(%)</th>
+
+                                  <th>LOD (Lubricated Grannual) Min(%)</th>
+                                  <th>LOD (Lubricated Grannual) Max(%)</th>
+
+                                  <th>LOD Layer1 (Dry Grannual) Min(%)</th>
+                                  <th>LOD Layer1 (Dry Grannual) Max(%)</th>
+
+                                  <th>LOD Layer1 (Lubricated Grannual) Min(%)</th>
+                                  <th>LOD Layer1 (Lubricated Grannual) Max(%)</th>
+
+                                  <th>LOD Layer2 (Dry Grannual) Min(%)</th>
+                                  <th>LOD Layer2 (Dry Grannual) Max(%)</th>
+
+                                  <th>LOD Layer2 (Lubricated Grannual) Min(%)</th>
+                                  <th>LOD Layer2 (Lubricated Grannual) Max(%)</th>
+
+                                  <th>Tapped Density Min(%)</th>
+                                  <th>Tapped Density Max(%)</th>
+
+                                  <th>%Fine Min(%)</th>
+                                  <th>%Fine Max(%)</th>
+
+                                  <th>Particle Sizing Min(%)</th>
+                                  <th>Particle Sizing Max(%)</th>
+
+
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    {{
+                                      dsGranTabDetails?.Param1_Low == 99999  || dsGranTabDetails?.Param1_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param1_Low | number:'.'+dsGranTabDetails.Param1_DP
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param1_Upp == 99999  || dsGranTabDetails?.Param1_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param1_Upp | number:'.'+dsGranTabDetails.Param1_DP
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param2_Low == 99999  || dsGranTabDetails?.Param2_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param2_Low | number:'.'+dsGranTabDetails.Param2_DP
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param2_Upp == 99999  || dsGranTabDetails?.Param2_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param2_Upp | number:'.'+dsGranTabDetails.Param2_DP
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param3_Low == 99999  || dsGranTabDetails?.Param3_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param3_Low | number:'.'+dsGranTabDetails.Param3_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param3_Upp == 99999  || dsGranTabDetails?.Param3_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param3_Upp | number:'.'+dsGranTabDetails.Param3_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param4_Low == 99999  || dsGranTabDetails?.Param4_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param4_Low | number:'.'+dsGranTabDetails.Param4_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param4_Upp == 99999  || dsGranTabDetails?.Param4_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param4_Upp | number:'.'+dsGranTabDetails.Param4_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param5_Low == 99999  || dsGranTabDetails?.Param5_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param5_Low | number:'.'+dsGranTabDetails.Param5_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param5_Upp == 99999  || dsGranTabDetails?.Param5_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param5_Upp | number:'.'+dsGranTabDetails.Param5_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param6_Low == 99999  || dsGranTabDetails?.Param6_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param6_Low | number:'.'+dsGranTabDetails.Param6_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param6_Upp == 99999  || dsGranTabDetails?.Param6_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param6_Upp | number:'.'+dsGranTabDetails.Param6_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param7_Low == 99999  || dsGranTabDetails?.Param7_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param7_Low | number:'.'+dsGranTabDetails.Param7_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param7_Upp == 99999  || dsGranTabDetails?.Param7_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param7_Upp | number:'.'+dsGranTabDetails.Param7_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param8_Low == 99999  || dsGranTabDetails?.Param8_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param8_Low | number:'.'+dsGranTabDetails.Param8_Dp
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param8_Upp == 99999  || dsGranTabDetails?.Param8_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param8_Upp | number:'.'+dsGranTabDetails.Param8_Dp
+                                    }}
+                                </td>
+
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param9_Low == 99999  || dsGranTabDetails?.Param9_Low == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param9_Low | number:'.'+dsGranTabDetails.Param9_DP
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                      dsGranTabDetails?.Param9_Upp == 99999  || dsGranTabDetails?.Param9_Upp == null
+                                        ? "NA"
+                                        : dsGranTabDetails?.Param9_Upp | number:'.'+dsGranTabDetails.Param9_DP
+                                    }}
+                                </td>
+
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+          <div class="modal-footer">
+            <button *ngIf="bln_showActivate == true" type="button" class="btn btn-block btn-info" (click)="activateProduct(dsTabletMasterDetails)" [ngStyle]="{
+                display: isActiveProduct == true ? 'none' : 'block'
+              }">
+              <i class="fa fa fa-thumbs-up"></i> Activate Product
+            </button>
+            <button *ngIf="bln_showActivate == true" style="margin-top:0px" type="button" class="btn btn-block btn-warning" (click)="deactivateProduct(dsTabletMasterDetails)"
+              [ngStyle]="{
+                display: isActiveProduct == true ? 'block' : 'none'
+              }">
+              <i class="fa fa fa-thumbs-down"></i> Deactivate Product
+            </button>
+            <button  style="margin-top:0px" type="button" class="btn btn-block btn-danger"
+              (click)="modal.close('Close click')">
+              <i class="fa fa fa-close"></i> Close
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

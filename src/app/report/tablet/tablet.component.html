@@ -1,0 +1,141 @@
+<ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'> Report Detail</span>
+          </div>
+        </div>
+        <form [formGroup]='tabletReport' (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info"><br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>
+                      From :
+                      </label>
+                    <mat-form-field>
+                      <input matInput md-min-date="minDate" placeholder="Select Date [MM/DD/YYYY]" formControlName="fromDate" [matDatepicker]="picker1" style="font-size:18px" readonly [max]="todayDate" (dateInput)="addEvent()">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                  <label> To :</label>
+                    <mat-form-field>
+                      <input matInput md-min-date="minDate" placeholder="Select Date [MM/DD/YYYY]" formControlName="toDate" [matDatepicker]="picker2" style="font-size:18px"
+                        readonly [max]="todayDate" (dateInput)="addEvent()">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <label>
+                      Report Options :
+                    </label>
+                    <div class="">
+                    <ngx-select formControlName="reportOption" (select)="doSelectRepOption($event)" [items]="arrReportOptions"  placeholder="Select Report Option" class="select">
+                    </ngx-select><br>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label>
+                        Test Type :
+                      </label>
+                      <div class="">
+                        <ngx-select formControlName="testType"  [items]="arrtestType" placeholder="Select Test Type" class="select" (select)="cmbTestType_cleargrid()">
+                        </ngx-select><br>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label>
+                        Report Type :
+                      </label>
+                      <div class="">
+                        <ngx-select formControlName="reportType" (select)='doSelectReportType($event)' [items]="arrReportType" placeholder="Select Report Type" class="select">
+                        </ngx-select><br>
+                      </div>
+                    </div>
+                      <div class="col-md-4">
+                        <label>
+                          Report From :
+                        </label>
+                        <div class="">
+                          <ngx-select formControlName="recordFrom" [items]="arrRecordFrom" placeholder="Report Type From" class="select" (select)="cmbReportFrom_cleargrid()">
+                          </ngx-select><br>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" [disabled]="!tabletReport.valid"
+                    [ngClass]="{'disabledBtn' : !tabletReport.valid}" class="btn btn-primary">Get
+                    Records</button>
+                </div>
+
+              </div>
+
+            </div><br>
+          </div>
+        </form>
+      </div>
+    </div><br>
+    <div class="card" [hidden]='bln_hideDatable'>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <td>Batch No</td>
+                <td>{{str_LblBFGCode}}</td>
+                <td>Product Name</td>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Side</td>
+                <td>User Name</td>
+                <td>Print No</td>
+                <td style="display: none;">Location</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tabRes of tabletResult">
+                <td>{{tabRes.BatchNo}}</td>
+                <td>{{tabRes.BFGCode}}</td>
+                <td>{{tabRes.ProductName}}</td>
+                <td>{{tabRes.PrDate | date}}</td>
+                <td>{{tabRes.PrTime}}</td>
+                <td>{{tabRes.Side}}</td>
+                <td>{{tabRes.UserName}}</td>
+                <td><button type="button" [class.disabled]="tabRes.PrintNo == 0"
+                  (click)="printReportReasons(tabRes)" class="btn btn1 btn-success" [ngx-scroll-to]="'#destination'">{{tabRes.PrintNo}}</button></td>
+                <td style="display: none;">{{tabRes.CubicleLocation}}</td>
+                <td><button type="button" class="btn btn1 btn-danger" (click)="viewReport(tabRes)" [ngx-scroll-to]="'#destination'">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="bln_show" id="destination">
+      <div class="card-body">
+      <object [data]="Url" type="application/pdf" width="100%" height="1000px"></object>
+        <div style="float: right;">
+              <button [hidden]="!bln_verifyReport || bln_isReportVerified" type=" button" class="btn btn1 btn-primary" (click)="VerifyReport()" [ngx-scroll-to]="'#destination'">Verify Report</button> &nbsp;&nbsp;
+          <button *ngIf="(!bln_print || !bln_printAll) && bln_isReportVerified" type="button" class="btn btn1 btn-primary" (click)="printReport()">Print Report</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="bln_showPrintReasons" id="destination">
+      <div class="card-body">
+      <object [data]="Url" type="application/pdf" width="100%" height="1000px"></object>
+        <div style="float: right;">
+          <button *ngIf="(!bln_print || !bln_printAll) && bln_isReportVerified" type="button" class="btn btn1 btn-primary" (click)="printReport()">Print Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

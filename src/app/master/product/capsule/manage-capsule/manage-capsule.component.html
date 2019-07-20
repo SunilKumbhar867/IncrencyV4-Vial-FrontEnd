@@ -1,0 +1,207 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0', fullScreenBackdrop: true }"></ngx-loading>
+          <div class="row" style="background-color:#4680FF; padding:10px;">
+            <div class="col-lg-12">
+              <span style="text-align: center;color:white">Manage Capsule</span>
+            </div>
+          </div>
+          <br />
+            <div class="table-responsive">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+                <thead style="font-size: 13px !important; font-weight: 100 !important;">
+                  <tr style="text-align:center">
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Product Version</th>
+                    <th>Version</th>
+                    <th>Product Status</th>
+                    <th>Only BinWeighing</th>
+                    <th>Batch Size</th>
+                    <th>Action</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody style="font-size: 13px !important;">
+                  <tr *ngFor="let product of dsProductData" style="text-align:center">
+            
+                    <td>{{ product.ProductId }}</td>
+                    <td>{{ product.ProductName }}</td>
+                    <td>{{ product.ProductVersion }}</td>
+                    <td>{{ product.Version }}</td>
+                    <td>
+                      <span [ngClass]="
+                                  product.IsActive.data[0] == 0
+                                    ? 'label label-info'
+                                    : 'label label-success'
+                                ">
+                        {{ product.IsActive.data[0] == 0 ? "Inactive" : "Active" }}
+                      </span>
+                    </td>
+                    <td>{{ product.isBinWeighing.data[0] == 0 ? "No" : "Yes" }}</td>
+                    <td>{{ product.BatchSize }}{{ product.BatchUnit }}</td>
+                    <td>
+                      <button type="button" class="btn btn-block btn-sm btn-info" (click)="viewProduct(product, content)">
+                        <i class="fa fa fa-eye"></i> View
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-block btn-sm btn-warning" (click)="EditCapsule(product)">
+                        <i class="fa fa fa-edit"></i> Edit
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            
+            </div>
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Product Details</h4>
+              </div>
+              <div class="modal-body">
+                <div class="card">
+                  <div class="card-body">
+                    <span class="card-subtitle" style="color:black;">
+                      Product Id : {{ dscapsuleDetails?.ProductId }} <br />
+            
+                      Product Name : {{ dscapsuleDetails?.ProductName }} <br />
+            
+                      Product Version : {{ dscapsuleDetails?.ProductVersion }} <br />
+            
+                      Version : {{ dscapsuleDetails?.Version }} <br />
+                    </span>
+                  </div>
+                </div>
+                <ngb-tabset #t="ngbTabset">
+                  <ngb-tab id="tab-compressed" title="" tabindex="0">
+                    <ng-template ngbTabContent>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <h4 class="card-title"></h4>
+            
+                              <div class="table-responsive">
+                                <table class="table table-bordered" style="font-size: 12px;color:black;">
+                                  <thead>
+                                    <tr>
+                                      <!--1-->
+                                      <th>Individual Nominal</th>
+                                      <th>Ind T1 Neg</th>
+                                      <th>Ind T1 Pos</th>
+                                      <th>Ind T2 Neg</th>
+                                      <th>Ind T2 Pos</th>
+                                      <th>Report Type</th>
+                                      <!--2-->
+                                      <th>Group Nominal</th>
+                                      <th>Group T1 Neg</th>
+                                      <th>Group T1 Pos</th>
+                                      <th>Group T2 Neg</th>
+                                      <th>Group T2 Pos</th>
+                                      <th>Report Type</th>
+                                      <!--3-->
+                                      <th>Differential Nominal</th>
+                                      <th>Differential T1 Neg</th>
+                                      <th>Differential T1 Pos</th>
+                                      <th>Differential T2 Neg</th>
+                                      <th>Differential T2 Pos</th>
+                                      <!--4-->
+                                      <th>Diameter Nominal</th>
+                                      <th>Diameter T1 Neg</th>
+                                      <th>Diameter T1 Pos</th>
+                                      <th>Diameter T2 Neg</th>
+                                      <th>Diameter T2 Pos</th>
+                                      <!--5-->
+                                      <th>Length Nominal</th>
+                                      <th>Length T1 Neg</th>
+                                      <th>Length T1 Pos</th>
+                                      <th>Length T2 Neg</th>
+                                      <th>Length T2 Pos</th>
+                                      
+                                      <!--6-->
+                                      <th>DT Std Limit</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <!--1-->
+                                      <td>{{ dscapsuleDetails?.Param1_Nom == 99999 ? 'NA': dscapsuleDetails?.Param1_Nom}}</td>
+                                      <td>{{ dscapsuleDetails?.Param1_T1Neg == 99999 ? 'NA': dscapsuleDetails?.Param1_T1Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param1_T1Pos == 99999 ? 'NA': dscapsuleDetails?.Param1_T1Pos}}</td>
+                                      <td>{{ dscapsuleDetails?.Param1_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param1_T2Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param1_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param1_T2Neg}}</td>
+                                      <td>
+                                        {{
+                                                  dscapsuleDetails?.Param1_IsOnStd.data[0] == "1"
+                                                    ? "Standard"
+                                                    : "Average"
+                                                }}
+                                      </td>
+                                      <!--2-->
+                                      <td>{{ dscapsuleDetails?.Param2_Nom == 99999 ? 'NA': dscapsuleDetails?.Param2_Nom}}</td>
+                                      <td>{{ dscapsuleDetails?.Param2_T1Neg == 99999 ? 'NA': dscapsuleDetails?.Param2_T1Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param2_T1Pos == 99999 ? 'NA': dscapsuleDetails?.Param2_T1Pos}}</td>
+                                      <td>{{ dscapsuleDetails?.Param2_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param2_T2Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param2_T2Pos == 99999 ? 'NA': dscapsuleDetails?.Param2_T2Pos}}</td>
+                                      <td>
+                                        {{
+                                                  dscapsuleDetails?.Param2_IsOnStd.data[0] == "1"
+                                                    ? "Standard"
+                                                    : "Average"
+                                                }}
+                                      </td>
+                                      <!--3-->
+                                      <td>{{ dscapsuleDetails?.Param3_Nom == 99999 ? 'NA': dscapsuleDetails?.Param3_Nom}}</td>
+                                      <td>{{ dscapsuleDetails?.Param3_T1Neg == 99999 ? 'NA': dscapsuleDetails?.Param3_T1Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param3_T1Pos == 99999 ? 'NA': dscapsuleDetails?.Param3_T1Pos}}</td>
+                                      <td>{{ dscapsuleDetails?.Param3_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param3_T2Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param3_T2Pos == 99999 ? 'NA': dscapsuleDetails?.Param3_T2Pos}}</td>
+                                      <!--4-->
+                                      <td>{{ dscapsuleDetails?.Param4_Nom == 99999 ? 'NA': dscapsuleDetails?.Param4_Nom}}</td>
+                                      <td>{{ dscapsuleDetails?.Param4_T1Neg == 99999 ? 'NA': dscapsuleDetails?.Param4_T1Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param4_T1Pos == 99999 ? 'NA': dscapsuleDetails?.Param4_T1Pos}}</td>
+                                      <td>{{ dscapsuleDetails?.Param4_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param4_T2Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param4_T2Pos == 99999 ? 'NA': dscapsuleDetails?.Param4_T2Pos}}</td>
+                                      
+                                      <!--5-->
+                                      <td>{{ dscapsuleDetails?.Param5_Nom == 99999 ? 'NA': dscapsuleDetails?.Param5_Nom}}</td>
+                                      <td>{{ dscapsuleDetails?.Param5_T1Neg == 99999 ? 'NA': dscapsuleDetails?.Param5_T1Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param5_T1Pos == 99999 ? 'NA': dscapsuleDetails?.Param5_T1Pos}}</td>
+                                      <td>{{ dscapsuleDetails?.Param5_T2Neg == 99999 ? 'NA': dscapsuleDetails?.Param5_T2Neg}}</td>
+                                      <td>{{ dscapsuleDetails?.Param5_T2Pos == 99999 ? 'NA': dscapsuleDetails?.Param5_T2Pos}}</td>
+                                      <!--6-->
+                                      <td>{{ dscapsuleDetails?.Param6_Nom }}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+              </div>
+              <div class="modal-footer">
+            
+                <button type="button" class="btn btn-block btn-info" (click)="activateProduct(dscapsuleDetails)"
+                  [ngStyle]="{'display': isActiveProduct == true ? 'none' : 'block'}">
+                  <i class="fa fa fa-thumbs-up"></i> Active Product
+                </button>
+                <button type="button" class="btn btn-block btn-warning" (click)="deactivateProduct(dscapsuleDetails)"
+                  [ngStyle]="{'display': isActiveProduct == true ? 'block' : 'none'}">
+                  <i class="fa fa fa-thumbs-down"></i> Deactive Product
+                </button>
+                <button type="button" class="btn btn-block btn-danger" (click)="modal.close('Close click')">
+                  <i class="fa fa fa-close"></i> Close
+                </button>
+              </div>
+            </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

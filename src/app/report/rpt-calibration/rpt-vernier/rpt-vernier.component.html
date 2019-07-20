@@ -1,0 +1,65 @@
+<form [formGroup]="vernierCalibration" (ngSubmit)="onFormSubmit()">
+  <div class="row" style="margin-top:20px">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" style="background-color:#4680FF; padding:10px;">
+            <div class="col-lg-12">
+              <span style='text-align: center;color:white'>VERNIER - PERIODIC CALIBRATION REPORT</span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+
+            <div class="col-md-3" >
+              <label>
+                Select Month :
+              </label>
+              <input type="month" id="start" name="start" min="2018-03" value="2018-03" formControlName="date" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label>
+                Report Type :
+              </label>
+              <ngx-select [items]="sarr_reportType" placeholder="Select" formControlName="reportType"></ngx-select>
+            </div>
+            <div class="col-md-3">
+              <label>
+                Vernier Code :
+              </label>
+              <ngx-select [items]="sarr_reportType" placeholder="Select" formControlName="balanceCode"></ngx-select>
+              <Br>
+            </div>
+            <div class="col-md-3">
+              <label>
+                Report Serial No :
+              </label>
+              <ngx-select [items]="sarr_reportType" placeholder="Select" formControlName="reportSerialNo"></ngx-select>
+            </div>
+
+            <div class="col-md-3">
+              <label>
+                Print No :
+              </label>
+              <input type="text" class="form-control" readonly formControlName="printNo">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <button class="btn btn-success btn-block" type="button" type="submit" [disabled]="!vernierCalibration.valid"
+                [ngClass]="{'disabledBtn' : !vernierCalibration.valid}">Preview</button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-info btn-block " type="button">No Calibration Reason</button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-warning btn-block " type="button">Print Reasons for Printout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

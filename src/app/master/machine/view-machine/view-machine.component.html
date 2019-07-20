@@ -1,0 +1,42 @@
+<ngx-loading [show]="bln_Loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}"></ngx-loading>
+<div class="card">
+  <div class="card-body">
+    <div class="row" style="background-color:#4680FF; padding:10px;">
+      <div class="col-lg-12">
+        <span style='text-align: center;color:white'>VIEW EQUIPMENT</span>
+      </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+        <thead>
+          <tr style="text-align:center;">
+            <th >Equipment Code No.</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Serial No</th>
+            <th>Rotary Type</th>
+            <th>Cubicle Type</th>
+            <th *ngIf="bln_showActivate == true">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let machine of arrMachineData" style="text-align:center">
+            <td> {{machine.Machine_ID}}</td>
+            <td> {{machine.Machine_Make}}</td>
+            <td> {{machine.Machine_Model}}</td>
+            <td> {{machine.Machine_SerialNo}}</td>
+            <td> {{machine.Machine_Rotary}}</td>
+            <td> {{machine.Machine_CubicleType}}</td>
+            <td *ngIf="machine.Machine_Active.data[0] == 1 && bln_showActivate == true">
+              <button class="btn btn-danger btn-sm" type="button" style="width:85px" (click)="toggleStatus(machine,0)">Deactivate</button>
+            </td>
+            <td *ngIf="machine.Machine_Active.data[0] == 0 && bln_showActivate == true">
+              <button class="btn btn-success btn-sm" type="button" style="width:85px" (click)="toggleStatus(machine,1)">Activate</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

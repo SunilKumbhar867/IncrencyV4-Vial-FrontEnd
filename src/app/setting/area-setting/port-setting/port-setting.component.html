@@ -1,0 +1,175 @@
+<div class="row" style="margin-top:-15px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>PORT SETTING</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frm_portSetting">
+          <div class="row">
+            <div class="col-md-4">
+                <label>Area :</label>
+                <div class="form-group">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="str_cubicle_areaName"
+                    readonly="readonly">
+                  </div>
+            </div>
+
+            <div class="col-md-4">
+                <label>Cubicle Name :</label>
+                <div class="form-group">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="str_cubicle_cubicleName"
+                    readonly="readonly">
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <label>IDS Type :</label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="int_cubicle_idsNo"
+                  [items]="int_idsPortNo"
+                  (select)="cboidsNo_getData($event)"
+                  placeholder="Select">
+                  </ngx-select>
+                </div>
+              </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Port No.</th>
+                  <th>Instrument Type</th>
+                  <th>Instrument Code No.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                      <ngx-select
+                      formControlName="int_eqpType_Port1"
+                      [items]="sarr_allEquipmentType_1"
+                      [defaultValue]="sarr_allEquipmentType_1[0]"
+                      [disabled]="bln_disable_port1 == true"
+                      (select)="cmbEqpType_Port1_fillId($event)"
+                      placeholder="Select">
+                      </ngx-select>
+                  </td>
+                  <td>
+                    <ngx-select
+                    formControlName="str_eqpId_Port1"
+                    [items]="str_instrumentIDs_1"
+                    [defaultValue]="str_instrumentIDs_1[0]"
+                    [disabled]="bln_disable_port1 == true"
+                    placeholder="Select">
+                    </ngx-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                      <ngx-select
+                      formControlName="int_eqpType_Port2"
+                      [items]="sarr_allEquipmentType_2"
+                      [defaultValue]="sarr_allEquipmentType_2[0]"
+                      [disabled]="bln_disable_port2 == true"
+                      (select)="cmbEqpType_Port2_fillId($event)"
+                      placeholder="Select">
+                      </ngx-select>
+                  </td>
+                  <td>
+                    <ngx-select
+                    formControlName="str_eqpId_Port2"
+                    [items]="str_instrumentIDs_2"
+                    [defaultValue]="str_instrumentIDs_2[0]"
+                    [disabled]="bln_disable_port2 == true"
+                    placeholder="Select">
+                    </ngx-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>
+                      <ngx-select
+                      formControlName="int_eqpType_Port3"
+                      [items]="sarr_allEquipmentType_3"
+                      [defaultValue]="sarr_allEquipmentType_3[0]"
+                      [disabled]="bln_disable_port3 == true"
+                      (select)="cmbEqpType_Port3_fillId($event)"
+                      placeholder="Select">
+                      </ngx-select>
+                  </td>
+                  <td>
+                    <ngx-select
+                    formControlName="str_eqpId_Port3"
+                    [items]="str_instrumentIDs_3"
+                    [defaultValue]="str_instrumentIDs_3[0]"
+                    [disabled]="bln_disable_port3 == true"
+                    placeholder="Select">
+                    </ngx-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>
+                      <ngx-select
+                      formControlName="int_eqpType_Port4"
+                      [items]="sarr_allEquipmentType_4"
+                      [defaultValue]="sarr_allEquipmentType_4[0]"
+                      [disabled]="bln_disable_port4 == true"
+                      (select)="cmbEqpType_Port4_fillId($event)"
+                      placeholder="Select">
+                      </ngx-select>
+                  </td>
+                  <td>
+                    <ngx-select
+                    formControlName="str_eqpId_Port4"
+                    [items]="str_instrumentIDs_4"
+                    [defaultValue]="str_instrumentIDs_4[0]"
+                    [disabled]="bln_disable_port4 == true"
+                    placeholder="Select">
+                    </ngx-select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <button
+              [disabled]="int_locked == 1 || bln_weighingStatus == true || bln_batchRunning == true"
+              [ngClass]="{disabledBtn : int_locked == 1 || bln_weighingStatus == true || bln_batchRunning == true}"
+              type="button"
+              class="btn btn-primary"
+              (click)="onSubmit()"
+              >Save Changes
+              </button>&nbsp;&nbsp;&nbsp;
+
+              <button
+              type="button"
+              class="btn btn-secondary"
+              >Reset
+              </button>&nbsp;&nbsp;&nbsp;
+
+              <button
+              type="button"
+              class="btn btn-default waves-effect"
+              (click)="onClose()">Close
+              </button>
+            </div>
+            <br>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

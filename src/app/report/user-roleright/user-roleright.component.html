@@ -1,0 +1,54 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+          <ngx-loading [show]="bln_loading" [config]="{ backdropBorderRadius: '0' , fullScreenBackdrop:true}">
+            </ngx-loading>
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>ROLE LOG</span>
+          </div>
+        </div>
+        <form  [formGroup]='frm_roleLog' (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info"><br>
+                <div class="row">
+                    <div class="col-md-4">
+                      <label>Role :</label>
+                      <div class="form-group">
+                          <ngx-select
+                          [items]="sarr_Role"
+                          formControlName="str_Role"
+                          (select)="cmbRole_hideGrid()"
+                          placeholder="Select Role">
+                          </ngx-select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label></label>
+                        <div class="form-group">
+                        <button type="submit"
+                        style="margin-top: 7px;"
+                        class="btn btn-success">View Report</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card" *ngIf="bln_show" id="destination">
+        <div class="card-body">
+          <object [data]="Url" type="application/pdf" width="100%" height="1000px"></object>
+          <br><br>
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="btnPrint_showPrintList()">Print Report</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

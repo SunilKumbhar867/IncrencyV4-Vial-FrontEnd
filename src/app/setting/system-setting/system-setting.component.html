@@ -1,0 +1,232 @@
+<div class="row" style="margin-top:20px">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="background-color:#4680FF; padding:10px;">
+          <div class="col-lg-12">
+            <span style='text-align: center;color:white'>System SETTING</span>
+          </div>
+        </div>
+        <br>
+        <form [formGroup]="frmSystemSetting">
+
+          <div class="row">
+            <div class="col-md-6" style="margin:auto;">
+              <div class="form-group" style="display:block">
+                <ngx-select
+                [items]="['1','2']"
+                [formControlName]="strCubicleNumber"
+                placeholder="Select Cubicle Number"
+                (select)="cboareaName_fillData($event)">
+                </ngx-select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col-md-12">
+                <label>Product Detail :
+                  <span style="color:teal">[Product Name | Product Code  | Manufacturing Code | Version]</span>
+                </label>
+                <div class="form-group">
+                  <ngx-select
+                  formControlName="str_prdDetail"
+                  [items]="['ProductName1 | ProductCode | Manufacturing Code | VersionNo ']"
+                  placeholder="Select Product Detail"
+                  (select)="cboProduct_getProductID($event)"
+                  >
+                  </ngx-select>
+
+                  <div class="form__error" style="color:red;margin-top:3px;font-weight: bold;">{{lblProductMsg}}</div>
+
+                </div>
+              </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col-md-6">
+                <label>Batch Number : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="strbatchNumber"
+                  maxlength="20">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                  <label>Manufacturing Code : </label>
+                  <div class="form-group">
+                    <input class="form-control"
+                    type="text"
+                    formControlName="strManufCode"
+                    maxlength="20">
+                  </div>
+                </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col-md-6">
+                <label>Department : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="strDepartment"
+                  maxlength="20">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                  <label>Balance Code : </label>
+                  <div class="form-group">
+                      <ngx-select
+                      formControlName="str_prdDetail"
+                      [items]="['BalCode1', 'BalCode2' , 'BalCode3' , 'BalCode4']"
+                      placeholder="Select Balance Code"
+                      >
+                      </ngx-select>
+                  </div>
+                </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                <label>Area : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="strArea"
+                  maxlength="20">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                  <label>Line Number : </label>
+                  <div class="form-group">
+                    <input class="form-control"
+                    type="text"
+                    formControlName="intLineNumber"
+                    maxlength="20">
+                  </div>
+                </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                <label>IDS Number : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="strIdsNumb"
+                  maxlength="20">
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <label>Nozzle : </label>
+                  <div class="form-group">
+                    <ngx-select
+                    formControlName="str_nozzle"
+                    [items]="['1', '2' , '3' , '4', '5' , '6' , '7' , '8', '9']"
+                    placeholder="Select No of Nozzles"
+                    >
+                    </ngx-select>
+                  </div>
+                </div>
+            
+          </div>
+
+          <hr>
+
+          <div class="row" style="background-color:#4680FF; padding:10px;">
+              <div class="col-lg-12">
+                <span style='text-align: center;color:white'>Standard Weight (Net Filled)</span>
+              </div>
+          </div>
+          <br>
+          <div class="row">
+
+              <div class="col-md-3">
+                <label>Weight : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="intWeight"
+                  maxlength="5"
+                  (keyup)="calculateDensity()">
+                </div>
+              </div>
+
+              <div class="col-md-1">
+                  <label></label>
+                  <div class="form-group">
+                     <span><h3>/</h3></span>
+                    </div>
+              </div>
+
+              <div class="col-md-3">
+                  <label>Volume : </label>
+                  <div class="form-group">
+                    <input class="form-control"
+                    type="text"
+                    formControlName="intVolume"
+                    maxlength="5"
+                    (keyup)="calculateDensity()">
+                  </div>
+                </div>
+                
+
+                <div class="col-md-1">
+                    <label></label>
+                    <div class="form-group">
+                        <h3>=</h3>
+                      </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <label>Density : </label>
+                    <div class="form-group">
+                      <input class="form-control"
+                      type="text"
+                      formControlName="intDensity"
+                      maxlength="20">
+                    </div>
+                  </div>
+
+            
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                <label>Upper Limit : </label>
+                <div class="form-group">
+                  <input class="form-control"
+                  type="text"
+                  formControlName="fltUpperLimit"
+                  maxlength="20">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                  <label>Lower Limit : </label>
+                  <div class="form-group">
+                      <input class="form-control"
+                      type="text"
+                      formControlName="fltLowerLimit"
+                      maxlength="20">
+                  </div>
+                </div>
+          </div>
+
+          <button class="btn btn-success" style="width: 120px;" type="submit">Save</button>&nbsp;&nbsp;&nbsp;
+          
+          <button class="btn btn-default" style="width: 120px;" type="reset">Reset</button>&nbsp;&nbsp;&nbsp;
+
+
+        </form>
+      </div>
+    </div>
+  </div>

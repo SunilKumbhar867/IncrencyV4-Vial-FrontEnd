@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TabletRepoBatchSummaryIndividual" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="545" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="TabletBatchSummaryDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_master_temp.`RepSerNo` AS tbl_batchsummary_master_temp_RepSerNo,
+     tbl_batchsummary_master_temp.`BFGCode` AS tbl_batchsummary_master_temp_BFGCode,
+     tbl_batchsummary_master_temp.`ProductName` AS tbl_batchsummary_master_temp_ProductName,
+     tbl_batchsummary_master_temp.`PVersion` AS tbl_batchsummary_master_temp_PVersion,
+     tbl_batchsummary_master_temp.`Version` AS tbl_batchsummary_master_temp_Version,
+     tbl_batchsummary_master_temp.`PrdType` AS tbl_batchsummary_master_temp_PrdType,
+     tbl_batchsummary_master_temp.`CubType` AS tbl_batchsummary_master_temp_CubType,
+     tbl_batchsummary_master_temp.`BatchNo` AS tbl_batchsummary_master_temp_BatchNo,
+     tbl_batchsummary_master_temp.`Stage` AS tbl_batchsummary_master_temp_Stage,
+     tbl_batchsummary_master_temp.`Dept` AS tbl_batchsummary_master_temp_Dept,
+     tbl_batchsummary_master_temp.`Nom` AS tbl_batchsummary_master_temp_Nom,
+     tbl_batchsummary_master_temp.`Tol1Neg` AS tbl_batchsummary_master_temp_Tol1Neg,
+     tbl_batchsummary_master_temp.`Tol1Pos` AS tbl_batchsummary_master_temp_Tol1Pos,
+     tbl_batchsummary_master_temp.`Tol2Neg` AS tbl_batchsummary_master_temp_Tol2Neg,
+     tbl_batchsummary_master_temp.`Tol2Pos` AS tbl_batchsummary_master_temp_Tol2Pos,
+     tbl_batchsummary_master_temp.`DP` AS tbl_batchsummary_master_temp_DP,
+     tbl_batchsummary_master_temp.`LODLayer` AS tbl_batchsummary_master_temp_LODLayer,
+     tbl_batchsummary_master_temp.`Unit` AS tbl_batchsummary_master_temp_Unit,
+     tbl_batchsummary_master_temp.`FinalMinDT` AS tbl_batchsummary_master_temp_FinalMinDT,
+     tbl_batchsummary_master_temp.`FinalMaxDT` AS tbl_batchsummary_master_temp_FinalMaxDT,
+     tbl_batchsummary_master_temp.`FinalAvgDT` AS tbl_batchsummary_master_temp_FinalAvgDT,
+     tbl_batchsummary_master_temp.`BatchCompleted` AS tbl_batchsummary_master_temp_BatchCompleted,
+     tbl_batchsummary_master_temp.`IsArchived` AS tbl_batchsummary_master_temp_IsArchived,
+     tbl_batchsummary_master_temp.`HMIID` AS tbl_batchsummary_master_temp_HMIID,
+     tbl_batchsummary_detail_temp.`RepSerNo` AS tbl_batchsummary_detail_temp_RepSerNo,
+     tbl_batchsummary_detail_temp.`RecSeqNo` AS tbl_batchsummary_detail_temp_RecSeqNo,
+     tbl_batchsummary_detail_temp.`Date` AS tbl_batchsummary_detail_temp_Date,
+     tbl_batchsummary_detail_temp.`Time` AS tbl_batchsummary_detail_temp_Time,
+     tbl_batchsummary_detail_temp.`InstrumentID` AS tbl_batchsummary_detail_temp_InstrumentID,
+     tbl_batchsummary_detail_temp.`Side` AS tbl_batchsummary_detail_temp_Side,
+     tbl_batchsummary_detail_temp.`MinPer` AS tbl_batchsummary_detail_temp_MinPer,
+     tbl_batchsummary_detail_temp.`MaxPer` AS tbl_batchsummary_detail_temp_MaxPer,
+     tbl_batchsummary_detail_temp.`Min` AS tbl_batchsummary_detail_temp_Min,
+     tbl_batchsummary_detail_temp.`Max` AS tbl_batchsummary_detail_temp_Max,
+     tbl_batchsummary_detail_temp.`Avg` AS tbl_batchsummary_detail_temp_Avg,
+     tbl_batchsummary_detail_temp.`MinTimeDT` AS tbl_batchsummary_detail_temp_MinTimeDT,
+     tbl_batchsummary_detail_temp.`MaxTimeDT` AS tbl_batchsummary_detail_temp_MaxTimeDT,
+     tbl_batchsummary_detail_temp.`AvgTimeDT` AS tbl_batchsummary_detail_temp_AvgTimeDT,
+     tbl_batchsummary_detail_temp.`TestResult` AS tbl_batchsummary_detail_temp_TestResult,
+     tbl_batchsummary_detail_temp.`HMIID` AS tbl_batchsummary_detail_temp_HMIID,
+     tbl_batchsummary_detail_temp.`UserID` AS tbl_batchsummary_detail_temp_UserID,
+     tbl_batchsummary_detail_temp.`UserName` AS tbl_batchsummary_detail_temp_UserName,
+     tbl_batchsummary_master_temp.`ParamName` AS tbl_batchsummary_master_temp_ParamName,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_master_temp` tbl_batchsummary_master_temp,
+     `tbl_batchsummary_detail_temp` tbl_batchsummary_detail_temp,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp.`HMIID` = $P{HmiId}
+and tbl_batchsummary_detail_temp.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_BFGCode" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_ProductName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_PVersion" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Version" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_PrdType" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_CubType" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_BatchNo" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Stage" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Dept" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Nom" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol1Neg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol1Pos" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol2Neg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol2Pos" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_DP" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_LODLayer" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Unit" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalMinDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalMaxDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalAvgDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_BatchCompleted" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_IsArchived" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_RecSeqNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_Date" class="java.sql.Date"/>
+		<field name="tbl_batchsummary_detail_temp_Time" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_InstrumentID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_Side" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_MinPer" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_MaxPer" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Min" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Max" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Avg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_MinTimeDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_MaxTimeDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_AvgTimeDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_TestResult" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_UserID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_UserName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_ParamName" class="java.lang.String"/>
+		<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+		<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+		<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+		<variable name="AvgWeight" class="java.lang.Double" calculation="Average">
+			<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Avg}]]></variableExpression>
+		</variable>
+		<variable name="MaxWeight" class="java.lang.Double" calculation="Highest">
+			<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Max}]]></variableExpression>
+		</variable>
+		<variable name="MinWeight" class="java.lang.Double" calculation="Lowest">
+			<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Min}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_master_temp.`RepSerNo` AS tbl_batchsummary_master_temp_RepSerNo,
+     tbl_batchsummary_master_temp.`BFGCode` AS tbl_batchsummary_master_temp_BFGCode,
+     tbl_batchsummary_master_temp.`ProductName` AS tbl_batchsummary_master_temp_ProductName,
+     tbl_batchsummary_master_temp.`PVersion` AS tbl_batchsummary_master_temp_PVersion,
+     tbl_batchsummary_master_temp.`Version` AS tbl_batchsummary_master_temp_Version,
+     tbl_batchsummary_master_temp.`PrdType` AS tbl_batchsummary_master_temp_PrdType,
+     tbl_batchsummary_master_temp.`CubType` AS tbl_batchsummary_master_temp_CubType,
+     tbl_batchsummary_master_temp.`BatchNo` AS tbl_batchsummary_master_temp_BatchNo,
+     tbl_batchsummary_master_temp.`Stage` AS tbl_batchsummary_master_temp_Stage,
+     tbl_batchsummary_master_temp.`Dept` AS tbl_batchsummary_master_temp_Dept,
+     tbl_batchsummary_master_temp.`Nom` AS tbl_batchsummary_master_temp_Nom,
+     tbl_batchsummary_master_temp.`Tol1Neg` AS tbl_batchsummary_master_temp_Tol1Neg,
+     tbl_batchsummary_master_temp.`Tol1Pos` AS tbl_batchsummary_master_temp_Tol1Pos,
+     tbl_batchsummary_master_temp.`Tol2Neg` AS tbl_batchsummary_master_temp_Tol2Neg,
+     tbl_batchsummary_master_temp.`Tol2Pos` AS tbl_batchsummary_master_temp_Tol2Pos,
+     tbl_batchsummary_master_temp.`DP` AS tbl_batchsummary_master_temp_DP,
+     tbl_batchsummary_master_temp.`LODLayer` AS tbl_batchsummary_master_temp_LODLayer,
+     tbl_batchsummary_master_temp.`Unit` AS tbl_batchsummary_master_temp_Unit,
+     tbl_batchsummary_master_temp.`FinalMinDT` AS tbl_batchsummary_master_temp_FinalMinDT,
+     tbl_batchsummary_master_temp.`FinalMaxDT` AS tbl_batchsummary_master_temp_FinalMaxDT,
+     tbl_batchsummary_master_temp.`FinalAvgDT` AS tbl_batchsummary_master_temp_FinalAvgDT,
+     tbl_batchsummary_master_temp.`BatchCompleted` AS tbl_batchsummary_master_temp_BatchCompleted,
+     tbl_batchsummary_master_temp.`IsArchived` AS tbl_batchsummary_master_temp_IsArchived,
+     tbl_batchsummary_master_temp.`HMIID` AS tbl_batchsummary_master_temp_HMIID,
+     tbl_batchsummary_detail_temp.`RepSerNo` AS tbl_batchsummary_detail_temp_RepSerNo,
+     tbl_batchsummary_detail_temp.`RecSeqNo` AS tbl_batchsummary_detail_temp_RecSeqNo,
+     tbl_batchsummary_detail_temp.`Date` AS tbl_batchsummary_detail_temp_Date,
+     tbl_batchsummary_detail_temp.`Time` AS tbl_batchsummary_detail_temp_Time,
+     tbl_batchsummary_detail_temp.`InstrumentID` AS tbl_batchsummary_detail_temp_InstrumentID,
+     tbl_batchsummary_detail_temp.`Side` AS tbl_batchsummary_detail_temp_Side,
+     tbl_batchsummary_detail_temp.`MinPer` AS tbl_batchsummary_detail_temp_MinPer,
+     tbl_batchsummary_detail_temp.`MaxPer` AS tbl_batchsummary_detail_temp_MaxPer,
+     tbl_batchsummary_detail_temp.`Min` AS tbl_batchsummary_detail_temp_Min,
+     tbl_batchsummary_detail_temp.`Max` AS tbl_batchsummary_detail_temp_Max,
+     tbl_batchsummary_detail_temp.`Avg` AS tbl_batchsummary_detail_temp_Avg,
+     tbl_batchsummary_detail_temp.`MinTimeDT` AS tbl_batchsummary_detail_temp_MinTimeDT,
+     tbl_batchsummary_detail_temp.`MaxTimeDT` AS tbl_batchsummary_detail_temp_MaxTimeDT,
+     tbl_batchsummary_detail_temp.`AvgTimeDT` AS tbl_batchsummary_detail_temp_AvgTimeDT,
+     tbl_batchsummary_detail_temp.`TestResult` AS tbl_batchsummary_detail_temp_TestResult,
+     tbl_batchsummary_detail_temp.`HMIID` AS tbl_batchsummary_detail_temp_HMIID,
+     tbl_batchsummary_detail_temp.`UserID` AS tbl_batchsummary_detail_temp_UserID,
+     tbl_batchsummary_detail_temp.`UserName` AS tbl_batchsummary_detail_temp_UserName,
+     tbl_batchsummary_master_temp.`ParamName` AS tbl_batchsummary_master_temp_ParamName,
+     tbl_nomenclature.`Id` AS tbl_nomenclature_Id,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_master_temp` tbl_batchsummary_master_temp,
+     `tbl_batchsummary_detail_temp` tbl_batchsummary_detail_temp,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp.`HMIID` = $P{HmiId}
+and tbl_batchsummary_detail_temp.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_ProductName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PrdType" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Stage" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Dept" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Nom" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_DP" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_LODLayer" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Unit" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMinDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMaxDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalAvgDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchCompleted" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_IsArchived" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_Date" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_detail_temp_Time" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_InstrumentID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_MinPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MaxPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Min" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Max" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Avg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MinTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_MaxTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_AvgTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_TestResult" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_ParamName" class="java.lang.String"/>
+	<field name="tbl_nomenclature_Id" class="java.lang.Integer"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<variable name="MinWeight" class="java.lang.Double" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Min}]]></variableExpression>
+	</variable>
+	<variable name="MaxWeight" class="java.lang.Double" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Max}]]></variableExpression>
+	</variable>
+	<variable name="AvgWeight" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Avg}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_Max_1" class="java.lang.Float" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Max}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_Min_1" class="java.lang.Float" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Min}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_Max_2" class="java.lang.Float" resetType="Column" calculation="Highest">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Max}]]></variableExpression>
+	</variable>
+	<variable name="tbl_batchsummary_detail_temp_Avg_1" class="java.lang.Float" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Avg}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="792" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{UserId} == ""]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="3" y="3" width="541" height="164" forecolor="#E2E2E2" uuid="550cd679-b1b8-463b-adb9-c78693949b30"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font size="36" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[
+Preview						    Preview
+Only						       Only]]></text>
+			</staticText>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="439" y="2" width="101" height="18" uuid="36d058f9-707a-456d-b4af-a403c0564e6c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1033-CIPLA/PTG-II/PHARMA]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="155" y="18" width="251" height="20" uuid="92dbe91b-cf54-4ce4-8829-e31b06b8f522"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annexure I/u"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="39" width="533" height="20" uuid="37382c76-4649-455f-9321-0c9d6969ba69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BATCH REPORT OF " + $F{tbl_batchsummary_master_temp_ParamName}.toUpperCase() +" WEIGHT VARIATION"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="186">
+			<line>
+				<reportElement x="382" y="21" width="1" height="38" uuid="5cdb43f9-9985-4575-babb-5bc779913c42"/>
+			</line>
+			<line>
+				<reportElement x="543" y="125" width="1" height="55" uuid="c669312b-c0c6-4c5a-9fdb-f92c5e8b5fb5"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="127" y="5" width="391" height="15" uuid="e2d68a64-9cdf-46be-8bcf-9292d17422f0"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="23" width="132" height="15" uuid="84c53d9c-7ddf-4368-84e9-f256a4a98249"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_Dept}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="125" width="1" height="55" uuid="5be034a5-aefa-4247-ae9a-aaf58b26b5bc"/>
+			</line>
+			<textField>
+				<reportElement x="388" y="42" width="132" height="15" uuid="73455ceb-2191-4ad0-a85d-584721fa6a94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_Stage}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="143" width="543" height="1" uuid="4b36f3a2-7c38-4a15-a481-d599525ace7c"/>
+			</line>
+			<textField>
+				<reportElement x="6" y="62" width="115" height="15" uuid="666163f0-5cc7-4deb-9cc6-b0bbbf121563"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Std.Weight (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="23" width="125" height="15" uuid="9cc2d980-7fe0-4bdc-8669-4f0aaf780952"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_BatchNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="145" width="157" height="15" uuid="09a79aa4-320a-40ee-acc0-c111858354b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimum Weight (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="39" width="545" height="1" uuid="bcaa104c-3168-4e63-a6e6-4e83e7e2c80d"/>
+			</line>
+			<line>
+				<reportElement x="262" y="21" width="1" height="38" uuid="f935c8fc-4f05-495a-af92-32593bdc2ee1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="125" width="543" height="1" uuid="d5f029dd-6585-4c80-8c65-6c4a81b11461"/>
+			</line>
+			<line>
+				<reportElement x="0" y="21" width="544" height="1" uuid="dbb324b2-416e-4382-91eb-59df419ed0dd"/>
+			</line>
+			<line>
+				<reportElement x="1" y="79" width="543" height="1" uuid="be5e9b3f-5555-4b8e-8892-f7b871470361"/>
+			</line>
+			<line>
+				<reportElement x="0" y="4" width="1" height="114" uuid="1e446ba6-554d-4e71-b626-f62ba2f1d0be"/>
+			</line>
+			<staticText>
+				<reportElement x="167" y="127" width="232" height="15" uuid="f72a02df-2a90-458a-8808-99a3b1054663"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Batch Summary]]></text>
+			</staticText>
+			<line>
+				<reportElement x="376" y="144" width="1" height="37" uuid="c2601e40-91e0-4984-9bf8-787d7db3b3ea"/>
+			</line>
+			<line>
+				<reportElement x="544" y="4" width="1" height="114" uuid="3cfe9b2f-a883-4ce2-972a-39252c01aa92"/>
+			</line>
+			<line>
+				<reportElement x="185" y="143" width="1" height="37" uuid="5aeaba4f-ccf2-45a3-8716-a6480cccc847"/>
+			</line>
+			<line>
+				<reportElement x="0" y="180" width="544" height="1" uuid="e7530d67-05eb-47c9-8a6f-39f21996eb9d"/>
+			</line>
+			<line>
+				<reportElement x="121" y="4" width="1" height="114" uuid="14e71be8-8577-4558-8717-6dc224827323"/>
+			</line>
+			<line>
+				<reportElement x="1" y="161" width="542" height="1" uuid="64566b00-545c-4cb2-94f0-7715990b952d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="98" width="545" height="1" uuid="37e055fe-b631-4f21-b47d-feb9f1c6c165"/>
+			</line>
+			<line>
+				<reportElement x="0" y="59" width="545" height="1" uuid="fb159880-f585-45a5-9908-de92ebfc07e0"/>
+			</line>
+			<line>
+				<reportElement x="1" y="4" width="543" height="1" uuid="5a6300a6-2301-4df1-8463-08de1075e8c0"/>
+			</line>
+			<textField>
+				<reportElement x="191" y="145" width="164" height="15" uuid="ad9bbd79-4e95-40b0-99cf-4411052d3d9d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Maximum Weight (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="42" width="125" height="15" uuid="6fb2e033-5a8a-49ef-8abd-3442036e7013"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_BFGCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="145" width="158" height="15" uuid="42b2ea45-a053-47e1-a0db-3a1add93939e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Average Weight (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="62" width="228" height="15" uuid="52071054-146f-4e5d-95c9-c48b9a35a5de"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.000").format(new BigDecimal($F{tbl_batchsummary_master_temp_Nom}).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="101" width="180" height="15" uuid="37b606dd-55c3-4a4f-ba6f-92143d0349ed"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_Tol2Neg}.equals( $F{tbl_batchsummary_master_temp_Tol2Pos} )
+?
+(
+    ($F{tbl_batchsummary_master_temp_Tol2Neg} == 0)
+    ? "NA"
+    :
+    "None of tablets by ±"+new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_Tol2Neg})
+)
+:
+"None of tablets by ±"+new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_Tol2Neg})+"-"+new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_Tol2Pos})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="82" width="180" height="15" uuid="4feb91a0-e77c-481b-a6a5-9de1b02b4d94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tbl_batchsummary_master_temp_Tol1Neg} == 0)
+?
+"NA"
+:
+"NMT 2 tablets by ±"+new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_Tol1Neg})+"-"+new DecimalFormat("#,###0.00").format($F{tbl_batchsummary_master_temp_Tol1Pos})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="117" width="545" height="1" uuid="9e243a49-8118-4c79-a5a3-141559b9bc44"/>
+			</line>
+			<line>
+				<reportElement x="383" y="79" width="1" height="39" uuid="7809432c-3186-466d-a4ac-58cc7af704c6"/>
+			</line>
+			<textField>
+				<reportElement x="388" y="82" width="155" height="15" uuid="15ad43a5-b4bf-4d4a-a292-e02a96a1849e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tbl_batchsummary_master_temp_Tol1Neg} == 0)
+?
+"NA"
+:
+new DecimalFormat("#,###0.000").format(new BigDecimal(($F{tbl_batchsummary_master_temp_Nom})-(($F{tbl_batchsummary_master_temp_Nom})*(($F{tbl_batchsummary_master_temp_Tol1Neg})/(100)))).setScale(4, BigDecimal.ROUND_HALF_UP)) +"-"+new DecimalFormat("#,###0.000").format(new BigDecimal(($F{tbl_batchsummary_master_temp_Nom})+(($F{tbl_batchsummary_master_temp_Nom})*(($F{tbl_batchsummary_master_temp_Tol1Pos})/(100)))).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="102" width="155" height="15" uuid="aa18bfef-735f-4a79-8dcb-7ecc38782793"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tbl_batchsummary_master_temp_Tol2Neg} == 0)
+?
+"NA"
+:
+new DecimalFormat("#,###0.000").format(new BigDecimal(($F{tbl_batchsummary_master_temp_Nom})-(($F{tbl_batchsummary_master_temp_Nom})*(($F{tbl_batchsummary_master_temp_Tol2Neg})/(100)))).setScale(4, BigDecimal.ROUND_HALF_UP)) +"-"+new DecimalFormat("#,###0.000").format(new BigDecimal(($F{tbl_batchsummary_master_temp_Nom})+(($F{tbl_batchsummary_master_temp_Nom})*(($F{tbl_batchsummary_master_temp_Tol2Pos})/(100)))).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="80" width="115" height="15" uuid="a8114d20-726c-46f5-9aaa-c359be1dd96e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard Limit 1 (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="100" width="115" height="15" uuid="3fe653f2-f0e5-4d53-9416-a8811ab0b895"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Standard Limit 2 (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="">
+				<reportElement x="9" y="164" width="154" height="15" uuid="4083a390-4f8a-4cc8-9500-c29f6c2cabe2"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.000").format(new BigDecimal($V{tbl_batchsummary_detail_temp_Min_1}).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="192" y="164" width="163" height="15" uuid="4e882106-85c8-4ac1-b381-84d2cc134e66"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.000").format(new BigDecimal($V{tbl_batchsummary_detail_temp_Max_2}).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="383" y="163" width="137" height="17" uuid="5485114b-96fd-49ef-b2ac-443f0451ec5d"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.000").format(new BigDecimal($V{tbl_batchsummary_detail_temp_Avg_1}).setScale(4, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="6" width="115" height="15" uuid="5f6dc015-c06d-40d9-a859-2fa15fb2b9d2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="23" width="115" height="15" uuid="a321ad97-be3c-4114-81bd-135872184160"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Batch No."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="43" width="114" height="15" uuid="234c85ff-8b27-44a5-967b-ca6b6e7b6ed0"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_nomenclature_BFGCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="22" width="115" height="15" uuid="974c42ce-8f5c-45e8-a49b-607a0ef1b35f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Department"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="42" width="115" height="15" uuid="b3bdba2c-a052-4e0e-82c5-54a4baeb5b21"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Stage"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="79">
+			<textField evaluationTime="Report">
+				<reportElement x="297" y="56" width="40" height="20" uuid="b5bf08cd-1316-45a3-899f-21fb45dc2710"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="81" height="20" uuid="4395f6c1-a36a-4267-88dd-0bd6fd99ad88"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="33" width="180" height="20" uuid="a0a7a143-534d-4b9c-b9d8-67ed13f9af11"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="33" width="81" height="20" uuid="2ac5505c-802c-40a5-9e9e-3ae586863205"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="217" y="56" width="80" height="20" uuid="32dcbe88-c268-4ad6-a69c-71baad908016"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="10" width="440" height="20" uuid="18de2a29-eb2e-41f6-b724-1f06f1a15881"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="140" splitType="Stretch">
+			<elementGroup>
+				<elementGroup/>
+			</elementGroup>
+			<componentElement>
+				<reportElement key="table" style="table" positionType="Float" x="3" y="94" width="543" height="40" uuid="518f5014-e324-49c7-ac85-870d600acb5e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TabletBatchSummaryDataset" uuid="b1cdb60e-bf7b-43a2-ae4e-6178f86d5cf6">
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="HmiId">
+							<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="44" uuid="b4d90bd6-fa58-48eb-a7c3-ad25f2976d81">
+						<jr:columnHeader height="29" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="44" height="29" uuid="c747283e-7f2d-456e-a237-315fcf3e03a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="44" height="19" uuid="9f09a311-f952-4723-b4f8-78f40cea669b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="cf2b9f61-9baa-4b10-97d4-2eeca59ddaa9">
+						<jr:columnHeader style="table_CH" height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="52" height="29" uuid="5546cc6d-6e08-4f17-88f3-55052e87bc9a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd.MM.yyyy">
+								<reportElement x="0" y="0" width="52" height="19" uuid="0fdcf67a-8684-427b-a5e7-416cc20e4e6f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43" uuid="935bd164-7551-4ed2-9326-dbe5d72db7a1">
+						<jr:columnHeader style="table_CH" height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="43" height="29" uuid="6490acf3-82b9-4f85-8e13-1cb459bffe1b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Time]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="HH:mm:ss">
+								<reportElement x="0" y="0" width="43" height="19" uuid="42cd3cc6-98b4-430d-89b6-c2ccc4b5124b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Time}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="45" uuid="4e033185-85d8-456d-a976-b1b96de380d9">
+						<jr:columnHeader style="table_CH" height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="1" y="0" width="44" height="29" uuid="fe03c58e-3c56-4977-8006-15d794af1b0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Balance
+Code No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="">
+								<reportElement x="1" y="0" width="44" height="19" uuid="c0c0d89e-95ad-44db-b964-b8838e8ea560"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_InstrumentID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43" uuid="552970d5-13da-4177-9e6c-5af406383856">
+						<jr:columnHeader style="table_CH" height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="1" y="0" width="42" height="29" uuid="3804a993-dbb1-4582-b9e1-870c23fa9847"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Side]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="">
+								<reportElement x="1" y="1" width="42" height="18" uuid="8c0eb2ef-1f5a-4b85-9b4f-f5a6bc08a662"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Side}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="56" uuid="e28506ab-a1a6-4115-bbd0-2709448419d2">
+						<jr:columnHeader style="table_CH" height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="56" height="29" uuid="cf3ca2be-7b83-4876-90c4-c25cd8ba3322"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Minimum
+%]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="###0.00">
+								<reportElement x="0" y="1" width="56" height="18" uuid="25bb7305-7e0b-49bc-bcab-e9fd64bbec45"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_MinPer}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="57" uuid="87271806-3669-415b-a60f-80367d9ed013">
+						<jr:columnHeader height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="57" height="29" uuid="55890629-66b3-4512-b93a-34babd917eec"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Maximum
+%]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="###0.00">
+								<reportElement x="0" y="0" width="57" height="19" uuid="2e5d2e2c-0a91-44e1-9d0e-3eac764fc277"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_MaxPer}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75" uuid="2fd3d05f-2787-4bcd-96d9-6eaf52fe70ad">
+						<jr:columnHeader height="29" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="75" height="29" uuid="92c45d69-4b67-4abc-9d92-9d5032f133e7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Average Weight (" + $F{tbl_batchsummary_master_temp_Unit} + ")"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="75" height="19" uuid="17b5859f-e962-4d59-bc6a-959198227dab"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("#,###0.0000").format(new BigDecimal($F{tbl_batchsummary_detail_temp_Avg}).setScale(5, BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63" uuid="af0de9f6-e030-40bb-b0f6-9208793194df">
+						<jr:columnHeader height="29" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="63" height="29" uuid="5275768d-646c-4d00-a6b5-770a1d19c61f"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test Result]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="1" width="63" height="18" uuid="077bb37f-4854-4419-9729-79bb65b81340"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_TestResult}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63" uuid="3ad647ca-22a5-492b-b71e-11923faf6908">
+						<jr:columnHeader height="29" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="63" height="29" uuid="82e5aa4f-8b1f-44d7-87e4-49d015dcfe1a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Performed By]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="19" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="1" width="63" height="18" uuid="85d41ca1-9d2d-4eab-afc6-b9693179a7e0"/>
+								<box>
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_UserName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<subreport>
+				<reportElement positionType="Float" x="11" y="4" width="528" height="42" uuid="b7c11b33-d6c2-4006-98ae-c914089f46a4"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[($F{tbl_batchsummary_master_temp_Tol1Neg} == 0)
+    ?
+$F{tbl_rpt_path_path} +"RepoBatchSummaryIndividualLeft_subreportForGraph.jasper"
+:
+$F{tbl_rpt_path_path} +"RepoBatchSummaryIndividualLimitLeft_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="10" y="49" width="529" height="42" uuid="518b73d0-e5c7-41b1-8512-072dec4ba44e"/>
+				<subreportParameter name="SelectedValue">
+					<subreportParameterExpression><![CDATA[]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[($F{tbl_batchsummary_master_temp_Tol1Neg} == 0)
+    ?
+$F{tbl_rpt_path_path} +"RepoBatchSummaryIndividualRight_subreportForGraph.jasper"
+:
+$F{tbl_rpt_path_path} +"RepoBatchSummaryIndividualLimitRight_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,20 @@
+label{
+  font-size:18px
+ }
+
+ tr,td{
+   font-size:14px;
+   text-align: center;
+   padding: 5px;
+ }
+
+ .disabledBtn { cursor: not-allowed; }
+
+ .btn1 {
+   font-size: 12px;
+   padding: 3px 3px;
+ }
+
+ .form-control{
+   color:black
+ }

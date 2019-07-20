@@ -1,0 +1,29 @@
+.disabledBtn { cursor: not-allowed; }
+
+ .mat-form-field {
+  display: inherit;
+  position: relative;
+  text-align: left;
+}
+
+thead
+{
+  background-color:#4680ffeb;
+  color:white;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+td
+{
+  width: 20%;
+  height:10%;
+  text-align: center;
+  padding:3px;
+  color:black;
+}
+label
+{
+  font-size:5px
+ }

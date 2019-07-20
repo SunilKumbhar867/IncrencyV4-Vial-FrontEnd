@@ -1,0 +1,57 @@
+<header class="topbar" [class.disabled]="bln_editMode">
+  <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <!-- ============================================================== -->
+    <!-- Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-header">
+      <a class="navbar-brand">
+        <!-- Logo icon --><b>
+          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+          <!-- Dark Logo icon -->
+          <img src="assets/images/logo-small.png" alt="homepage" class="dark-logo" />
+          <!-- Light Logo icon -->
+        </b>
+        <!--End Logo icon -->
+        <!-- Logo text --><span>
+          <!-- dark Logo text -->
+          <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
+          <!-- Light Logo text -->
+        </span> </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-collapse">
+      <!-- ============================================================== -->
+      <!-- toggle and nav items -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav mr-auto mt-md-0">
+        <!-- This is  -->
+
+        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler text-muted waves-effect waves-dark" href="javascript:void(0)"><i
+              class="ti-menu"></i></a> </li>
+      </ul>
+      <!-- ============================================================== -->
+      <!-- User profile and search -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav my-lg-0">
+        <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0)"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Welcome, {{userName}}
+            <span class="mdi mdi-chevron-down"></span></a>
+          <div class="dropdown-menu dropdown-menu-right animated slideInDown" ngbDropdownMenu>
+            <ul class="dropdown-user">
+              <li *ngIf="bln_idAdmin==1 && bln_isLdap!=1" (click)="changeProfile()"><a><i class="fa fa-key"></i> Change
+                  Profile</a></li>
+                  <li (click)="viewProfile()"><a><i class="ti-user"></i> View Profile</a></li>
+              <li *ngIf="bln_idAdmin==1 && bln_isLdap!=1"><a routerLink="/changePassword"><i class="fa fa-key"></i> Change Password</a></li>
+              <li><a><i class="fa fa-question-circle"></i> Help</a></li>
+              <li (click)="logOut()"><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

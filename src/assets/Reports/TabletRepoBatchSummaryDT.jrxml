@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TabletRepoBatchSummaryDT" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="545" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b4d0fe72-64d5-4ddb-90e0-0d6e6ef896f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="TabletBatchSummaryDataset" uuid="8832280f-813e-46d3-97fc-cac7d78050be">
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="HmiId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_detail_temp.`SerNo` AS tbl_batchsummary_detail_temp_SerNo,
+     tbl_batchsummary_detail_temp.`RepSerNo` AS tbl_batchsummary_detail_temp_RepSerNo,
+     tbl_batchsummary_detail_temp.`RecSeqNo` AS tbl_batchsummary_detail_temp_RecSeqNo,
+     tbl_batchsummary_detail_temp.`Date` AS tbl_batchsummary_detail_temp_Date,
+     tbl_batchsummary_detail_temp.`Time` AS tbl_batchsummary_detail_temp_Time,
+     tbl_batchsummary_detail_temp.`InstrumentID` AS tbl_batchsummary_detail_temp_InstrumentID,
+     tbl_batchsummary_detail_temp.`Side` AS tbl_batchsummary_detail_temp_Side,
+     tbl_batchsummary_detail_temp.`MinPer` AS tbl_batchsummary_detail_temp_MinPer,
+     tbl_batchsummary_detail_temp.`MaxPer` AS tbl_batchsummary_detail_temp_MaxPer,
+     tbl_batchsummary_detail_temp.`Min` AS tbl_batchsummary_detail_temp_Min,
+     tbl_batchsummary_detail_temp.`Max` AS tbl_batchsummary_detail_temp_Max,
+     tbl_batchsummary_detail_temp.`Avg` AS tbl_batchsummary_detail_temp_Avg,
+     tbl_batchsummary_detail_temp.`MinTimeDT` AS tbl_batchsummary_detail_temp_MinTimeDT,
+     tbl_batchsummary_detail_temp.`MaxTimeDT` AS tbl_batchsummary_detail_temp_MaxTimeDT,
+     tbl_batchsummary_detail_temp.`AvgTimeDT` AS tbl_batchsummary_detail_temp_AvgTimeDT,
+     tbl_batchsummary_detail_temp.`TestResult` AS tbl_batchsummary_detail_temp_TestResult,
+     tbl_batchsummary_detail_temp.`UserID` AS tbl_batchsummary_detail_temp_UserID,
+     tbl_batchsummary_detail_temp.`UserName` AS tbl_batchsummary_detail_temp_UserName,
+     tbl_batchsummary_detail_temp.`HMIID` AS tbl_batchsummary_detail_temp_HMIID,
+     tbl_batchsummary_master_temp.`SerNo` AS tbl_batchsummary_master_temp_SerNo,
+     tbl_batchsummary_master_temp.`RepSerNo` AS tbl_batchsummary_master_temp_RepSerNo,
+     tbl_batchsummary_master_temp.`BFGCode` AS tbl_batchsummary_master_temp_BFGCode,
+     tbl_batchsummary_master_temp.`ProductName` AS tbl_batchsummary_master_temp_ProductName,
+     tbl_batchsummary_master_temp.`PVersion` AS tbl_batchsummary_master_temp_PVersion,
+     tbl_batchsummary_master_temp.`Version` AS tbl_batchsummary_master_temp_Version,
+     tbl_batchsummary_master_temp.`PrdType` AS tbl_batchsummary_master_temp_PrdType,
+     tbl_batchsummary_master_temp.`CubType` AS tbl_batchsummary_master_temp_CubType,
+     tbl_batchsummary_master_temp.`BatchNo` AS tbl_batchsummary_master_temp_BatchNo,
+     tbl_batchsummary_master_temp.`Stage` AS tbl_batchsummary_master_temp_Stage,
+     tbl_batchsummary_master_temp.`Dept` AS tbl_batchsummary_master_temp_Dept,
+     tbl_batchsummary_master_temp.`Nom` AS tbl_batchsummary_master_temp_Nom,
+     tbl_batchsummary_master_temp.`Tol1Neg` AS tbl_batchsummary_master_temp_Tol1Neg,
+     tbl_batchsummary_master_temp.`Tol1Pos` AS tbl_batchsummary_master_temp_Tol1Pos,
+     tbl_batchsummary_master_temp.`Tol2Neg` AS tbl_batchsummary_master_temp_Tol2Neg,
+     tbl_batchsummary_master_temp.`Tol2Pos` AS tbl_batchsummary_master_temp_Tol2Pos,
+     tbl_batchsummary_master_temp.`DP` AS tbl_batchsummary_master_temp_DP,
+     tbl_batchsummary_master_temp.`LODLayer` AS tbl_batchsummary_master_temp_LODLayer,
+     tbl_batchsummary_master_temp.`Unit` AS tbl_batchsummary_master_temp_Unit,
+     tbl_batchsummary_master_temp.`FinalMinDT` AS tbl_batchsummary_master_temp_FinalMinDT,
+     tbl_batchsummary_master_temp.`FinalMaxDT` AS tbl_batchsummary_master_temp_FinalMaxDT,
+     tbl_batchsummary_master_temp.`FinalAvgDT` AS tbl_batchsummary_master_temp_FinalAvgDT,
+     tbl_batchsummary_master_temp.`BatchCompleted` AS tbl_batchsummary_master_temp_BatchCompleted,
+     tbl_batchsummary_master_temp.`IsArchived` AS tbl_batchsummary_master_temp_IsArchived,
+     tbl_batchsummary_master_temp.`HMIID` AS tbl_batchsummary_master_temp_HMIID,
+     tbl_batchsummary_master_temp.`ParamName` AS tbl_batchsummary_master_temp_ParamName,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName,
+     tbl_nomenclature.`DisintegrationTester` AS tbl_nomenclature_DisintegrationTester,
+     tbl_batchsummary_master_temp.`DTStdTime` AS tbl_batchsummary_master_temp_DTStdTime
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_detail_temp` tbl_batchsummary_detail_temp,
+     `tbl_batchsummary_master_temp` tbl_batchsummary_master_temp,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp.`HMIID` = $P{HmiId}
+     and tbl_batchsummary_detail_temp.`HMIID` = $P{HmiId}]]>
+		</queryString>
+		<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_SerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_RecSeqNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_detail_temp_Date" class="java.sql.Date"/>
+		<field name="tbl_batchsummary_detail_temp_Time" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_InstrumentID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_Side" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_MinPer" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_MaxPer" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Min" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Max" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_Avg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_detail_temp_MinTimeDT" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_MaxTimeDT" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_AvgTimeDT" class="java.sql.Time"/>
+		<field name="tbl_batchsummary_detail_temp_TestResult" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_UserID" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_UserName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_detail_temp_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_SerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_RepSerNo" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_BFGCode" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_ProductName" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_PVersion" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Version" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_PrdType" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_CubType" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_BatchNo" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Stage" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Dept" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Nom" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol1Neg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol1Pos" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol2Neg" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_Tol2Pos" class="java.lang.Float"/>
+		<field name="tbl_batchsummary_master_temp_DP" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_LODLayer" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_Unit" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalMinDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalMaxDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_FinalAvgDT" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_BatchCompleted" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_IsArchived" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_HMIID" class="java.lang.Integer"/>
+		<field name="tbl_batchsummary_master_temp_ParamName" class="java.lang.String"/>
+		<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+		<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+		<field name="tbl_nomenclature_DisintegrationTester" class="java.lang.String"/>
+		<field name="tbl_batchsummary_master_temp_DTStdTime" class="java.sql.Time"/>
+	</subDataset>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_rpt_path.`id` AS tbl_rpt_path_id,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_rpt_path.`Comp_name` AS tbl_rpt_path_Comp_name,
+     tbl_batchsummary_detail_temp.`SerNo` AS tbl_batchsummary_detail_temp_SerNo,
+     tbl_batchsummary_detail_temp.`RepSerNo` AS tbl_batchsummary_detail_temp_RepSerNo,
+     tbl_batchsummary_detail_temp.`RecSeqNo` AS tbl_batchsummary_detail_temp_RecSeqNo,
+     tbl_batchsummary_detail_temp.`Date` AS tbl_batchsummary_detail_temp_Date,
+     tbl_batchsummary_detail_temp.`Time` AS tbl_batchsummary_detail_temp_Time,
+     tbl_batchsummary_detail_temp.`InstrumentID` AS tbl_batchsummary_detail_temp_InstrumentID,
+     tbl_batchsummary_detail_temp.`Side` AS tbl_batchsummary_detail_temp_Side,
+     tbl_batchsummary_detail_temp.`MinPer` AS tbl_batchsummary_detail_temp_MinPer,
+     tbl_batchsummary_detail_temp.`MaxPer` AS tbl_batchsummary_detail_temp_MaxPer,
+     tbl_batchsummary_detail_temp.`Min` AS tbl_batchsummary_detail_temp_Min,
+     tbl_batchsummary_detail_temp.`Max` AS tbl_batchsummary_detail_temp_Max,
+     tbl_batchsummary_detail_temp.`Avg` AS tbl_batchsummary_detail_temp_Avg,
+     tbl_batchsummary_detail_temp.`MinTimeDT` AS tbl_batchsummary_detail_temp_MinTimeDT,
+     tbl_batchsummary_detail_temp.`MaxTimeDT` AS tbl_batchsummary_detail_temp_MaxTimeDT,
+     tbl_batchsummary_detail_temp.`AvgTimeDT` AS tbl_batchsummary_detail_temp_AvgTimeDT,
+     tbl_batchsummary_detail_temp.`TestResult` AS tbl_batchsummary_detail_temp_TestResult,
+     tbl_batchsummary_detail_temp.`UserID` AS tbl_batchsummary_detail_temp_UserID,
+     tbl_batchsummary_detail_temp.`UserName` AS tbl_batchsummary_detail_temp_UserName,
+     tbl_batchsummary_detail_temp.`HMIID` AS tbl_batchsummary_detail_temp_HMIID,
+     tbl_batchsummary_master_temp.`SerNo` AS tbl_batchsummary_master_temp_SerNo,
+     tbl_batchsummary_master_temp.`RepSerNo` AS tbl_batchsummary_master_temp_RepSerNo,
+     tbl_batchsummary_master_temp.`BFGCode` AS tbl_batchsummary_master_temp_BFGCode,
+     tbl_batchsummary_master_temp.`ProductName` AS tbl_batchsummary_master_temp_ProductName,
+     tbl_batchsummary_master_temp.`PVersion` AS tbl_batchsummary_master_temp_PVersion,
+     tbl_batchsummary_master_temp.`Version` AS tbl_batchsummary_master_temp_Version,
+     tbl_batchsummary_master_temp.`PrdType` AS tbl_batchsummary_master_temp_PrdType,
+     tbl_batchsummary_master_temp.`CubType` AS tbl_batchsummary_master_temp_CubType,
+     tbl_batchsummary_master_temp.`BatchNo` AS tbl_batchsummary_master_temp_BatchNo,
+     tbl_batchsummary_master_temp.`Stage` AS tbl_batchsummary_master_temp_Stage,
+     tbl_batchsummary_master_temp.`Dept` AS tbl_batchsummary_master_temp_Dept,
+     tbl_batchsummary_master_temp.`Nom` AS tbl_batchsummary_master_temp_Nom,
+     tbl_batchsummary_master_temp.`Tol1Neg` AS tbl_batchsummary_master_temp_Tol1Neg,
+     tbl_batchsummary_master_temp.`Tol1Pos` AS tbl_batchsummary_master_temp_Tol1Pos,
+     tbl_batchsummary_master_temp.`Tol2Neg` AS tbl_batchsummary_master_temp_Tol2Neg,
+     tbl_batchsummary_master_temp.`Tol2Pos` AS tbl_batchsummary_master_temp_Tol2Pos,
+     tbl_batchsummary_master_temp.`DP` AS tbl_batchsummary_master_temp_DP,
+     tbl_batchsummary_master_temp.`LODLayer` AS tbl_batchsummary_master_temp_LODLayer,
+     tbl_batchsummary_master_temp.`Unit` AS tbl_batchsummary_master_temp_Unit,
+     tbl_batchsummary_master_temp.`FinalMinDT` AS tbl_batchsummary_master_temp_FinalMinDT,
+     tbl_batchsummary_master_temp.`FinalMaxDT` AS tbl_batchsummary_master_temp_FinalMaxDT,
+     tbl_batchsummary_master_temp.`FinalAvgDT` AS tbl_batchsummary_master_temp_FinalAvgDT,
+     tbl_batchsummary_master_temp.`BatchCompleted` AS tbl_batchsummary_master_temp_BatchCompleted,
+     tbl_batchsummary_master_temp.`IsArchived` AS tbl_batchsummary_master_temp_IsArchived,
+     tbl_batchsummary_master_temp.`HMIID` AS tbl_batchsummary_master_temp_HMIID,
+     tbl_batchsummary_master_temp.`ParamName` AS tbl_batchsummary_master_temp_ParamName,
+     tbl_nomenclature.`BFGCode` AS tbl_nomenclature_BFGCode,
+     tbl_nomenclature.`ProductName` AS tbl_nomenclature_ProductName,
+     tbl_nomenclature.`DisintegrationTester` AS tbl_nomenclature_DisintegrationTester,
+     tbl_batchsummary_master_temp.`DTStdTime` AS tbl_batchsummary_master_temp_DTStdTime
+FROM
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_batchsummary_detail_temp` tbl_batchsummary_detail_temp,
+     `tbl_batchsummary_master_temp` tbl_batchsummary_master_temp,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_batchsummary_master_temp.`HMIID` = $P{HmiId}
+     and tbl_batchsummary_detail_temp.`HMIID` = $P{HmiId}]]>
+	</queryString>
+	<field name="tbl_rpt_path_id" class="java.lang.Integer"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_rpt_path_Comp_name" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_Date" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_detail_temp_Time" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_InstrumentID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_MinPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MaxPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Min" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Max" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Avg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MinTimeDT" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_MaxTimeDT" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_AvgTimeDT" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_TestResult" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_ProductName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PrdType" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Stage" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Dept" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Nom" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_DP" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_LODLayer" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Unit" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMinDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMaxDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalAvgDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchCompleted" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_IsArchived" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_ParamName" class="java.lang.String"/>
+	<field name="tbl_nomenclature_BFGCode" class="java.lang.String"/>
+	<field name="tbl_nomenclature_ProductName" class="java.lang.String"/>
+	<field name="tbl_nomenclature_DisintegrationTester" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_DTStdTime" class="java.sql.Time"/>
+	<background>
+		<band height="792" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{UserId} == ""]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="3" width="542" height="164" forecolor="#E2E2E2" uuid="05a249be-647b-4c2c-a661-834afb23c323"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font size="36" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[
+Preview						    Preview
+Only						       Only]]></text>
+			</staticText>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="439" y="2" width="101" height="18" uuid="36d058f9-707a-456d-b4af-a403c0564e6c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1033-CIPLA/PTG-II/PHARMA]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="150" y="15" width="251" height="20" uuid="92dbe91b-cf54-4ce4-8829-e31b06b8f522"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annexure I/s"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="29" width="533" height="20" uuid="37382c76-4649-455f-9321-0c9d6969ba69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BATCH REPORT OF DISINTEGRATION TEST"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="155">
+			<line>
+				<reportElement x="402" y="21" width="1" height="65" uuid="5cdb43f9-9985-4575-babb-5bc779913c42"/>
+			</line>
+			<line>
+				<reportElement x="543" y="96" width="1" height="55" uuid="c669312b-c0c6-4c5a-9fdb-f92c5e8b5fb5"/>
+			</line>
+			<textField pattern="">
+				<reportElement x="6" y="134" width="157" height="16" uuid="23857db2-8ad1-4f36-810c-07c133af920a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_FinalMinDT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="127" y="5" width="391" height="15" uuid="e2d68a64-9cdf-46be-8bcf-9292d17422f0"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="23" width="132" height="15" uuid="84c53d9c-7ddf-4368-84e9-f256a4a98249"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_Dept}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="191" y="134" width="164" height="16" uuid="d52c6347-52e0-4d58-b1d5-1009264526eb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_FinalMaxDT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="96" width="1" height="55" uuid="5be034a5-aefa-4247-ae9a-aaf58b26b5bc"/>
+			</line>
+			<textField>
+				<reportElement x="408" y="41" width="132" height="15" uuid="73455ceb-2191-4ad0-a85d-584721fa6a94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_Stage}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="114" width="543" height="1" uuid="4b36f3a2-7c38-4a15-a481-d599525ace7c"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="23" width="108" height="15" uuid="aa42a2e1-41e2-43bc-b93c-09090ee4e5cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Batch No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="59" width="108" height="26" uuid="666163f0-5cc7-4deb-9cc6-b0bbbf121563"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Std. Disintegration Time (MIN)(NMT)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="23" width="125" height="15" uuid="9cc2d980-7fe0-4bdc-8669-4f0aaf780952"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_BatchNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="115" width="157" height="17" uuid="09a79aa4-320a-40ee-acc0-c111858354b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimum Disintegration Time"]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="381" y="134" width="158" height="16" uuid="5cadd38d-07c4-4ee1-ac02-12a403f0a4dc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_FinalAvgDT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="39" width="542" height="1" uuid="bcaa104c-3168-4e63-a6e6-4e83e7e2c80d"/>
+			</line>
+			<line>
+				<reportElement x="262" y="22" width="1" height="65" uuid="f935c8fc-4f05-495a-af92-32593bdc2ee1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="96" width="543" height="1" uuid="d5f029dd-6585-4c80-8c65-6c4a81b11461"/>
+			</line>
+			<line>
+				<reportElement x="1" y="21" width="542" height="1" uuid="dbb324b2-416e-4382-91eb-59df419ed0dd"/>
+			</line>
+			<line>
+				<reportElement x="0" y="4" width="1" height="83" uuid="1e446ba6-554d-4e71-b626-f62ba2f1d0be"/>
+			</line>
+			<staticText>
+				<reportElement x="167" y="96" width="232" height="17" uuid="f72a02df-2a90-458a-8808-99a3b1054663"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Batch Summary]]></text>
+			</staticText>
+			<line>
+				<reportElement x="375" y="115" width="1" height="36" uuid="c2601e40-91e0-4984-9bf8-787d7db3b3ea"/>
+			</line>
+			<line>
+				<reportElement x="542" y="4" width="1" height="83" uuid="3cfe9b2f-a883-4ce2-972a-39252c01aa92"/>
+			</line>
+			<staticText>
+				<reportElement x="268" y="41" width="66" height="15" uuid="beb98d41-ff81-4397-afd0-0f21deb3631c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stage]]></text>
+			</staticText>
+			<line>
+				<reportElement x="185" y="114" width="1" height="37" uuid="5aeaba4f-ccf2-45a3-8716-a6480cccc847"/>
+			</line>
+			<line>
+				<reportElement x="0" y="151" width="544" height="1" uuid="e7530d67-05eb-47c9-8a6f-39f21996eb9d"/>
+			</line>
+			<staticText>
+				<reportElement x="268" y="24" width="66" height="15" uuid="fcda7c2d-8364-4145-b26e-6e4d4be72934"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="5" width="108" height="15" uuid="0618ed7e-b45c-4789-a8ed-4f54854756d1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Name ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="121" y="4" width="1" height="83" uuid="14e71be8-8577-4558-8717-6dc224827323"/>
+			</line>
+			<line>
+				<reportElement x="1" y="132" width="543" height="1" uuid="64566b00-545c-4cb2-94f0-7715990b952d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="86" width="542" height="1" uuid="37e055fe-b631-4f21-b47d-feb9f1c6c165"/>
+			</line>
+			<line>
+				<reportElement x="1" y="57" width="542" height="1" uuid="fb159880-f585-45a5-9908-de92ebfc07e0"/>
+			</line>
+			<line>
+				<reportElement x="1" y="4" width="542" height="1" uuid="5a6300a6-2301-4df1-8463-08de1075e8c0"/>
+			</line>
+			<textField>
+				<reportElement x="191" y="115" width="164" height="17" uuid="ad9bbd79-4e95-40b0-99cf-4411052d3d9d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Maximum Disintegration Time"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="41" width="125" height="15" uuid="6fb2e033-5a8a-49ef-8abd-3442036e7013"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_BFGCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="115" width="158" height="17" uuid="42b2ea45-a053-47e1-a0db-3a1add93939e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Average Disintegration Time"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="59" width="131" height="15" uuid="65bd719c-5c8b-4827-8190-b1968d370d91"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Temperature Range( ‎°C‎)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="408" y="59" width="131" height="15" uuid="1795e999-4322-47fe-9f10-efa29ee1fbd1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_master_temp_Tol1Neg})+"-"+new DecimalFormat("#,###0.0").format($F{tbl_batchsummary_master_temp_Tol1Pos})]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="127" y="62" width="125" height="20" uuid="ff4d7b8b-1e29-4b86-895b-69647adb6d31"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_batchsummary_master_temp_DTStdTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="41" width="108" height="15" uuid="746c286e-9f24-4fde-9ca6-da8813417f14"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_nomenclature_BFGCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="79">
+			<textField evaluationTime="Report">
+				<reportElement x="297" y="50" width="40" height="20" uuid="bbd849b4-822d-43e0-be72-8d2a65891fdb"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="4" width="440" height="20" uuid="f8f3427d-88ce-44c2-bdc1-96d9c8e3f269"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="27" width="81" height="20" uuid="2be41b38-de28-4172-844d-522dbeefc509"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="4" width="81" height="20" uuid="326ada74-526c-4543-b22e-c8c6e1182f13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="217" y="50" width="80" height="20" uuid="027ec034-fca2-4450-a6ca-00ef182bfa5e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="99" y="27" width="180" height="20" uuid="918bdb1b-c803-4349-95b4-01f2e80fa1f7"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="157" splitType="Stretch">
+			<elementGroup>
+				<elementGroup/>
+			</elementGroup>
+			<line>
+				<reportElement positionType="Float" x="1" y="93" width="1" height="20" uuid="f4b6e464-87b6-4230-847d-69d15dcacd92"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="1" y="92" width="542" height="1" uuid="4346df74-b2ef-4107-b53d-093dbd960cbe"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="163" y="94" width="232" height="17" uuid="585f81dc-104e-48b0-afca-0c4c73eabf6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Detailed Report]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="542" y="92" width="1" height="20" uuid="5a893c73-9ae2-4fe5-98c9-ffdeeb70a0f6"/>
+			</line>
+			<componentElement>
+				<reportElement key="table" style="table" positionType="Float" x="1" y="112" width="543" height="40" uuid="518f5014-e324-49c7-ac85-870d600acb5e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TabletBatchSummaryDataset" uuid="263d1fb1-2818-48c2-a70d-a2c9506e1cb7">
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="HmiId">
+							<datasetParameterExpression><![CDATA[$P{HmiId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="53" uuid="b4d90bd6-fa58-48eb-a7c3-ad25f2976d81">
+						<jr:columnHeader height="40" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="53" height="40" uuid="c747283e-7f2d-456e-a237-315fcf3e03a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="53" height="17" uuid="9f09a311-f952-4723-b4f8-78f40cea669b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="51" uuid="cf2b9f61-9baa-4b10-97d4-2eeca59ddaa9">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="51" height="40" uuid="5546cc6d-6e08-4f17-88f3-55052e87bc9a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="dd.MM.yyyy">
+								<reportElement x="0" y="0" width="51" height="17" uuid="0fdcf67a-8684-427b-a5e7-416cc20e4e6f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="935bd164-7551-4ed2-9326-dbe5d72db7a1">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="40" uuid="6490acf3-82b9-4f85-8e13-1cb459bffe1b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Time]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="HH:mm:ss">
+								<reportElement x="0" y="0" width="48" height="17" uuid="42cd3cc6-98b4-430d-89b6-c2ccc4b5124b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Time}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="64" uuid="4e033185-85d8-456d-a976-b1b96de380d9">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="64" height="40" uuid="fe03c58e-3c56-4977-8006-15d794af1b0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Disintegration Tester Code No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="">
+								<reportElement x="0" y="0" width="64" height="17" uuid="c0c0d89e-95ad-44db-b964-b8838e8ea560"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_InstrumentID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="552970d5-13da-4177-9e6c-5af406383856">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="65" height="40" uuid="3804a993-dbb1-4582-b9e1-870c23fa9847"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Side]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="###0.000">
+								<reportElement x="0" y="0" width="65" height="17" uuid="8c0eb2ef-1f5a-4b85-9b4f-f5a6bc08a662"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Side}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="87271806-3669-415b-a60f-80367d9ed013">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="40" uuid="55890629-66b3-4512-b93a-34babd917eec"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Maximum
+Disintegration
+Time]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="HH:mm:ss">
+								<reportElement x="0" y="0" width="68" height="17" uuid="2e5d2e2c-0a91-44e1-9d0e-3eac764fc277"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_MaxTimeDT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="99" uuid="2fd3d05f-2787-4bcd-96d9-6eaf52fe70ad">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="99" height="40" uuid="b821558e-c9b3-492a-bb8f-4aa11cdff545"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Test Result]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="99" height="17" uuid="17b5859f-e962-4d59-bc6a-959198227dab"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_TestResult}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="94" uuid="af0de9f6-e030-40bb-b0f6-9208793194df">
+						<jr:columnHeader height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="94" height="40" uuid="a1ae5916-2acb-46b1-a925-2844196f60f5"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="9" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[Performed By]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="94" height="17" uuid="077bb37f-4854-4419-9729-79bb65b81340"/>
+								<box>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_batchsummary_detail_temp_UserName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="5" width="541" height="42" uuid="8d1b9aa8-d301-49c1-9442-404e5381e9af"/>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryDTLeft_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="49" width="541" height="38" uuid="f60715cd-3c77-4932-8adb-35b588034370"/>
+				<subreportParameter name="HmiId">
+					<subreportParameterExpression><![CDATA[$P{HmiId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{tbl_rpt_path_path} + "RepoBatchSummaryDTRight_subreportForGraph.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

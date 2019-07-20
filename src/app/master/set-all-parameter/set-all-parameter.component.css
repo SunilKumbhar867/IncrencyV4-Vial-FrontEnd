@@ -1,0 +1,17 @@
+.input-group {
+  margin-bottom: 0em;
+}
+
+.custom-button{
+  background-color: #4680ff;
+  color: #fff;
+  width: 75px;
+  text-align: center;
+}
+
+.custom-button .text{
+  margin-top:5px;
+}
+
+.disabledBtn { cursor: not-allowed; }
+

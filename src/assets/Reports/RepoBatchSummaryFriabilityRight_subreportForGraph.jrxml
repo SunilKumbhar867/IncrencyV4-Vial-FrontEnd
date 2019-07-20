@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoBatchSummaryVernierRight_subreportForGraph" language="groovy" pageWidth="540" pageHeight="325" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cc864282-6f10-4e30-b7ca-cbcf5b468bf1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="HmiId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_batchsummary_detail_temp.`SerNo` AS tbl_batchsummary_detail_temp_SerNo,
+     tbl_batchsummary_detail_temp.`RepSerNo` AS tbl_batchsummary_detail_temp_RepSerNo,
+     tbl_batchsummary_detail_temp.`RecSeqNo` AS tbl_batchsummary_detail_temp_RecSeqNo,
+     tbl_batchsummary_detail_temp.`Date` AS tbl_batchsummary_detail_temp_Date,
+     tbl_batchsummary_detail_temp.`Time` AS tbl_batchsummary_detail_temp_Time,
+     tbl_batchsummary_detail_temp.`InstrumentID` AS tbl_batchsummary_detail_temp_InstrumentID,
+     tbl_batchsummary_detail_temp.`Side` AS tbl_batchsummary_detail_temp_Side,
+     tbl_batchsummary_detail_temp.`MinPer` AS tbl_batchsummary_detail_temp_MinPer,
+     tbl_batchsummary_detail_temp.`MaxPer` AS tbl_batchsummary_detail_temp_MaxPer,
+     tbl_batchsummary_detail_temp.`Min` AS tbl_batchsummary_detail_temp_Min,
+     tbl_batchsummary_detail_temp.`Max` AS tbl_batchsummary_detail_temp_Max,
+     tbl_batchsummary_detail_temp.`Avg` AS tbl_batchsummary_detail_temp_Avg,
+     tbl_batchsummary_detail_temp.`MinTimeDT` AS tbl_batchsummary_detail_temp_MinTimeDT,
+     tbl_batchsummary_detail_temp.`MaxTimeDT` AS tbl_batchsummary_detail_temp_MaxTimeDT,
+     tbl_batchsummary_detail_temp.`AvgTimeDT` AS tbl_batchsummary_detail_temp_AvgTimeDT,
+     tbl_batchsummary_detail_temp.`TestResult` AS tbl_batchsummary_detail_temp_TestResult,
+     tbl_batchsummary_detail_temp.`UserID` AS tbl_batchsummary_detail_temp_UserID,
+     tbl_batchsummary_detail_temp.`UserName` AS tbl_batchsummary_detail_temp_UserName,
+     tbl_batchsummary_detail_temp.`HMIID` AS tbl_batchsummary_detail_temp_HMIID,
+     tbl_batchsummary_master_temp.`SerNo` AS tbl_batchsummary_master_temp_SerNo,
+     tbl_batchsummary_master_temp.`ParamName` AS tbl_batchsummary_master_temp_ParamName,
+     tbl_batchsummary_master_temp.`RepSerNo` AS tbl_batchsummary_master_temp_RepSerNo,
+     tbl_batchsummary_master_temp.`BFGCode` AS tbl_batchsummary_master_temp_BFGCode,
+     tbl_batchsummary_master_temp.`ProductName` AS tbl_batchsummary_master_temp_ProductName,
+     tbl_batchsummary_master_temp.`PVersion` AS tbl_batchsummary_master_temp_PVersion,
+     tbl_batchsummary_master_temp.`Version` AS tbl_batchsummary_master_temp_Version,
+     tbl_batchsummary_master_temp.`PrdType` AS tbl_batchsummary_master_temp_PrdType,
+     tbl_batchsummary_master_temp.`CubType` AS tbl_batchsummary_master_temp_CubType,
+     tbl_batchsummary_master_temp.`BatchNo` AS tbl_batchsummary_master_temp_BatchNo,
+     tbl_batchsummary_master_temp.`Stage` AS tbl_batchsummary_master_temp_Stage,
+     tbl_batchsummary_master_temp.`Dept` AS tbl_batchsummary_master_temp_Dept,
+     tbl_batchsummary_master_temp.`Nom` AS tbl_batchsummary_master_temp_Nom,
+     tbl_batchsummary_master_temp.`Tol1Neg` AS tbl_batchsummary_master_temp_Tol1Neg,
+     tbl_batchsummary_master_temp.`Tol1Pos` AS tbl_batchsummary_master_temp_Tol1Pos,
+     tbl_batchsummary_master_temp.`Tol2Neg` AS tbl_batchsummary_master_temp_Tol2Neg,
+     tbl_batchsummary_master_temp.`Tol2Pos` AS tbl_batchsummary_master_temp_Tol2Pos,
+     tbl_batchsummary_master_temp.`DP` AS tbl_batchsummary_master_temp_DP,
+     tbl_batchsummary_master_temp.`LODLayer` AS tbl_batchsummary_master_temp_LODLayer,
+     tbl_batchsummary_master_temp.`Unit` AS tbl_batchsummary_master_temp_Unit,
+     tbl_batchsummary_master_temp.`FinalMinDT` AS tbl_batchsummary_master_temp_FinalMinDT,
+     tbl_batchsummary_master_temp.`FinalMaxDT` AS tbl_batchsummary_master_temp_FinalMaxDT,
+     tbl_batchsummary_master_temp.`FinalAvgDT` AS tbl_batchsummary_master_temp_FinalAvgDT,
+     tbl_batchsummary_master_temp.`Side` AS tbl_batchsummary_master_temp_Side,
+     tbl_batchsummary_master_temp.`BatchCompleted` AS tbl_batchsummary_master_temp_BatchCompleted,
+     tbl_batchsummary_master_temp.`IsArchived` AS tbl_batchsummary_master_temp_IsArchived,
+     tbl_batchsummary_master_temp.`HMIID` AS tbl_batchsummary_master_temp_HMIID
+FROM
+     `tbl_batchsummary_detail_temp` tbl_batchsummary_detail_temp,
+     `tbl_batchsummary_master_temp` tbl_batchsummary_master_temp
+WHERE
+     tbl_batchsummary_master_temp.`HMIID` = $P{HmiId}
+ AND tbl_batchsummary_detail_temp.`Side` = "RIGHT"]]>
+	</queryString>
+	<field name="tbl_batchsummary_detail_temp_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_RecSeqNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_detail_temp_Date" class="java.sql.Date"/>
+	<field name="tbl_batchsummary_detail_temp_Time" class="java.sql.Time"/>
+	<field name="tbl_batchsummary_detail_temp_InstrumentID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_MinPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MaxPer" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Min" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Max" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_Avg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_detail_temp_MinTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_MaxTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_AvgTimeDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_TestResult" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_UserID" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_UserName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_detail_temp_HMIID" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_SerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_ParamName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_RepSerNo" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_BFGCode" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_ProductName" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PVersion" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Version" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_PrdType" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_CubType" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchNo" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Stage" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Dept" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Nom" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol1Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Neg" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_Tol2Pos" class="java.lang.Float"/>
+	<field name="tbl_batchsummary_master_temp_DP" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_LODLayer" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Unit" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMinDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalMaxDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_FinalAvgDT" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_Side" class="java.lang.String"/>
+	<field name="tbl_batchsummary_master_temp_BatchCompleted" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_IsArchived" class="java.lang.Integer"/>
+	<field name="tbl_batchsummary_master_temp_HMIID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="160">
+			<xyLineChart>
+				<chart isShowLegend="true" evaluationTime="Report" customizerClass="indLimitsDifferentSetShapeAndSize.IndLimitsDifferentSetShapeAndSize" renderType="draw" theme="default">
+					<reportElement x="2" y="1" width="538" height="159" uuid="350fa136-297f-413f-a1b7-2191ecd5b415">
+						<propertyExpression name="net.sf.jasperreports.chart.domain.axis.tick.interval"><![CDATA[($V{COLUMN_COUNT}<=25)? "1" :
+    (($V{COLUMN_COUNT}<=40)) ? "2":
+        (($V{COLUMN_COUNT}<=60)) ? "4":
+          (($V{COLUMN_COUNT}<=90)) ? "6":
+            (($V{COLUMN_COUNT}<=120)) ? "8":"10"]]></propertyExpression>
+					</reportElement>
+					<chartTitle>
+						<font fontName="Calibri" size="8"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="Calibri" size="8"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font fontName="Calibri" size="8"/>
+					</chartLegend>
+				</chart>
+				<xyDataset>
+					<xySeries>
+						<seriesExpression><![CDATA["STD"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_master_temp_Nom}]]></yValueExpression>
+					</xySeries>
+					<xySeries>
+						<seriesExpression><![CDATA["Friability"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_RecSeqNo}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{tbl_batchsummary_detail_temp_Avg}]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
+				<linePlot isShowLines="true" isShowShapes="true">
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF0000"/>
+						<seriesColor seriesOrder="1" color="#0000FF"/>
+					</plot>
+					<categoryAxisLabelExpression><![CDATA["X-Axis : Test no. (RHS)"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat tickLabelMask="0">
+							<labelFont>
+								<font fontName="Calibri" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["Friability"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat tickLabelMask="0.00" verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Calibri" size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Calibri" size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</xyLineChart>
+		</band>
+	</summary>
+</jasperReport>

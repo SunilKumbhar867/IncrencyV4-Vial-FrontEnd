@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAuditVernierNoCalib" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="201c3b0b-0f3f-4e74-9883-5459af08658f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="auditVernier" uuid="8bfffcbc-a4ca-4194-b109-8e099d507739">
+		<parameter name="UserName" class="java.lang.String"/>
+		<parameter name="UserId" class="java.lang.String"/>
+		<parameter name="ToDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FromDate" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SelectedValue" class="java.lang.String"/>
+		<parameter name="SelectedAction" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_vernier.`dt` AS tbl_audit_vernier_dt,
+     tbl_audit_vernier.`tm` AS tbl_audit_vernier_tm,
+     tbl_audit_vernier.`userid` AS tbl_audit_vernier_userid,
+     tbl_audit_vernier.`username` AS tbl_audit_vernier_username,
+     tbl_audit_vernier.`ACT` AS tbl_audit_vernier_ACT,
+     tbl_audit_vernier.`Remark` AS tbl_audit_vernier_Remark,
+     tbl_audit_vernier.`VernierID` AS tbl_audit_vernier_VernierID,
+     tbl_audit_vernier.`OldParameter` AS tbl_audit_vernier_OldParameter,
+     tbl_audit_vernier.`NewParameter` AS tbl_audit_vernier_NewParameter,
+     tbl_audit_vernier.`NewWeight` AS tbl_audit_vernier_NewWeight,
+     tbl_audit_vernier.`OldWeight` AS tbl_audit_vernier_OldWeight,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_nomenclature.`VernierID` AS tbl_nomenclature_VernierID
+FROM
+     `tbl_audit_vernier` tbl_audit_vernier,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_audit_vernier.`VernierID` LIKE
+    CASE
+        WHEN
+            $P{SelectedValue} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedValue}
+    END
+     and
+ tbl_audit_vernier.`ACT` LIKE
+    CASE
+        WHEN
+            $P{SelectedAction} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedAction}
+    END
+     and tbl_audit_vernier.`dt` >= $P{FromDate}
+ AND tbl_audit_vernier.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_vernier.`dt` DESC, tbl_audit_vernier.`tm` DESC]]>
+		</queryString>
+		<field name="TIMEONLY" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_dt" class="java.sql.Date"/>
+		<field name="tbl_audit_vernier_tm" class="java.sql.Time"/>
+		<field name="tbl_audit_vernier_userid" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_username" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_ACT" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_Remark" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_VernierID" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_OldParameter" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_NewParameter" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_NewWeight" class="java.lang.String"/>
+		<field name="tbl_audit_vernier_OldWeight" class="java.lang.String"/>
+		<field name="tbl_rpt_path_path" class="java.lang.String"/>
+		<field name="tbl_nomenclature_VernierID" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SelectedAction" class="java.lang.String"/>
+	<parameter name="SelectedValue" class="java.lang.String"/>
+	<parameter name="FromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ToDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     DATE_FORMAT(tm,'%H:%i:%s')TIMEONLY,
+     tbl_audit_vernier.`dt` AS tbl_audit_vernier_dt,
+     tbl_audit_vernier.`tm` AS tbl_audit_vernier_tm,
+     tbl_audit_vernier.`userid` AS tbl_audit_vernier_userid,
+     tbl_audit_vernier.`username` AS tbl_audit_vernier_username,
+     tbl_audit_vernier.`ACT` AS tbl_audit_vernier_ACT,
+     tbl_audit_vernier.`Remark` AS tbl_audit_vernier_Remark,
+     tbl_audit_vernier.`VernierID` AS tbl_audit_vernier_VernierID,
+     tbl_audit_vernier.`OldParameter` AS tbl_audit_vernier_OldParameter,
+     tbl_audit_vernier.`NewParameter` AS tbl_audit_vernier_NewParameter,
+     tbl_audit_vernier.`NewWeight` AS tbl_audit_vernier_NewWeight,
+     tbl_audit_vernier.`OldWeight` AS tbl_audit_vernier_OldWeight,
+     tbl_rpt_path.`path` AS tbl_rpt_path_path,
+     tbl_nomenclature.`VernierID` AS tbl_nomenclature_VernierID
+FROM
+     `tbl_audit_vernier` tbl_audit_vernier,
+     `tbl_rpt_path` tbl_rpt_path,
+     `tbl_nomenclature` tbl_nomenclature
+WHERE
+     tbl_audit_vernier.`VernierID` LIKE
+    CASE
+        WHEN
+            $P{SelectedValue} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedValue}
+    END
+     and
+ tbl_audit_vernier.`ACT` LIKE
+    CASE
+        WHEN
+            $P{SelectedAction} = ''
+        THEN
+            '%'
+    ELSE
+        $P{SelectedAction}
+    END
+     and tbl_audit_vernier.`dt` >= $P{FromDate}
+ AND tbl_audit_vernier.`dt` <= $P{ToDate}
+ORDER BY tbl_audit_vernier.`dt` DESC, tbl_audit_vernier.`tm` DESC]]>
+	</queryString>
+	<field name="TIMEONLY" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_dt" class="java.sql.Date"/>
+	<field name="tbl_audit_vernier_tm" class="java.sql.Time"/>
+	<field name="tbl_audit_vernier_userid" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_username" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_ACT" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_Remark" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_VernierID" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_OldParameter" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_NewParameter" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_NewWeight" class="java.lang.String"/>
+	<field name="tbl_audit_vernier_OldWeight" class="java.lang.String"/>
+	<field name="tbl_rpt_path_path" class="java.lang.String"/>
+	<field name="tbl_nomenclature_VernierID" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="301" y="14" width="225" height="24" uuid="b28f7f27-eaf2-4b43-bf4e-fc9e840fceec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUDIT TRAIL FOR VERNIER]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="72">
+			<printWhenExpression><![CDATA[$P{UserId} != ""]]></printWhenExpression>
+			<staticText>
+				<reportElement x="14" y="32" width="81" height="20" uuid="0fb5ec6e-1d8c-47d8-944e-7f549884876b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date & Time]]></text>
+			</staticText>
+			<textField pattern="dd.MM.yyyy HH:mm:ss">
+				<reportElement x="95" y="32" width="100" height="20" uuid="388d2a98-6919-4803-a625-9d9c954db06e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="12" width="89" height="20" uuid="e97c7bee-8ad1-496b-85c1-031358d5032e"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[User ID & Name ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="103" y="12" width="370" height="20" uuid="b07106a8-f828-4490-a0cd-bf9d3f3c81bf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{UserId} + " & "+ $P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="48" width="80" height="20" uuid="bcd95d76-4c66-41f8-86f9-8af64ea7342b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="429" y="48" width="40" height="20" uuid="c67303f1-db07-475f-996e-de6cabb50c43"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="94">
+			<componentElement>
+				<reportElement x="14" y="14" width="777" height="70" uuid="556014b4-79f6-4466-830b-84accde14903"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="auditVernier" uuid="f540aa09-5edf-418d-9499-b2e2aecdfcde">
+						<datasetParameter name="UserName">
+							<datasetParameterExpression><![CDATA[$P{UserName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UserId">
+							<datasetParameterExpression><![CDATA[$P{UserId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FromDate">
+							<datasetParameterExpression><![CDATA[$P{FromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ToDate">
+							<datasetParameterExpression><![CDATA[$P{ToDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedValue">
+							<datasetParameterExpression><![CDATA[$P{SelectedValue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SelectedAction">
+							<datasetParameterExpression><![CDATA[$P{SelectedAction}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="55" uuid="0f3c9471-9767-433b-a07c-e297527c36cc">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="55" height="30" uuid="3aa69a02-189c-4b5d-911a-34595529b1b3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="55" height="39" uuid="8a300f58-48a1-48bd-bc60-c6dda91e4ecb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{tbl_audit_vernier_dt})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="1c8b5e4b-d967-48bf-b72a-0d49f2140738">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="24ad63af-f096-4f5a-aa1f-9856bcd88e65"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="39" uuid="4c137868-c2d6-4343-b806-2efe76ef7e16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIMEONLY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="ab8b348b-1810-4ee3-97ad-8f958367fa49">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="65" height="30" uuid="258bbae4-5ca3-440c-b78f-e32cd1f9c8ae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[USER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="65" height="39" uuid="15d53e1a-3cfe-427f-b475-6a0a885df26d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_vernier_userid}) || "".equals($F{tbl_audit_vernier_userid})) ? "NA" : $F{tbl_audit_vernier_userid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="030c713f-3419-4f08-a6c0-d31f99f78c18">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="a18cdf43-b32a-4da4-a0c6-48aef5c3116c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbl_nomenclature_VernierID}.toLowerCase()]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="100" height="39" uuid="2204e096-29da-41fe-8302-e2e07d37bf91"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_vernier_VernierID}) || "".equals($F{tbl_audit_vernier_VernierID})) ? "NA" : $F{tbl_audit_vernier_VernierID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="f3941175-b4f2-4946-8b16-960aa454c5b1">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="55" height="30" uuid="cb5ca631-7a4e-4b00-a050-22f8b26c5da1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="55" height="39" uuid="0bd453e4-0c9b-47cf-bef8-84a95ba6dd46"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_vernier_ACT}) ||  "".equals($F{tbl_audit_vernier_ACT})) ? "NA" : $F{tbl_audit_vernier_ACT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="29f38f13-c352-4a93-89c8-a844899765b6">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="0c9d89b1-ad8a-477f-8e8d-b1080fe0ad7e"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[OLD PARAMETER]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="150" height="39" uuid="36dd0c46-2d65-4999-bbb6-1f4be31b57a8"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_vernier_OldParameter}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="a4fc463b-df80-4ada-bc4d-9bb4e48619dc">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="a7d7c58c-dfdc-4e9d-b0fa-ec74652357fb"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NEW PARAMETER]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="150" height="39" uuid="ccc68b3f-20f2-44a0-8c37-97dff5828eb9"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tbl_audit_vernier_NewParameter}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="a4ec78c9-1b62-41fc-b61d-9cdc739b9666">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="aabe3bb7-0096-45db-b6a0-cfe919e14c0a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMARK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="150" height="39" uuid="cc36c22b-8782-4ab6-bf13-b43ca0237a1a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( "NULL".equals($F{tbl_audit_vernier_Remark}) || "".equals($F{tbl_audit_vernier_Remark})) ? "NA" : $F{tbl_audit_vernier_Remark}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
