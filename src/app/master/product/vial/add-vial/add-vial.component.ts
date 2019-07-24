@@ -122,13 +122,32 @@ export class AddVialComponent implements OnInit {
                     { Activity : str_activity},
                     { Remark : remark}
                   );
-                  console.log(JSON.stringify(ObjectData));
 
-                  //   this.http.postMethod(`product/addVial` , ObjectData).subscribe(
-                  //   (res : any) =>{
-                  //     console.log(res);
-                  //   }
-                  // );
+                    this.http.postMethod(`vial/addVial` , ObjectData).subscribe(
+                    (res : any) =>{
+                      if (res.result === 'Vial Added Successfully') 
+                      {
+                        swal
+                          ({
+                            title: "Vial Added Successfully",
+                            text: "",
+                            type: "success",
+                            allowOutsideClick: false,
+                          });
+                          this.addVialForm.reset();
+                      }
+                      else
+                      {
+                        swal
+                          ({
+                            title: "Unable to Add New Vial",
+                            text: "",
+                            type: "error",
+                            allowOutsideClick: false,
+                          });
+                          this.addVialForm.reset();
+                      }
+                  );
 
                 }
               })
