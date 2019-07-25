@@ -122,7 +122,7 @@ export class AddVialComponent implements OnInit {
                     { Activity : str_activity},
                     { Remark : remark}
                   );
-
+ 
                     this.http.postMethod(`vial/addVial` , ObjectData).subscribe(
                     (res : any) =>{
                       if (res.result === 'Vial Added Successfully') 
