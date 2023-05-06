@@ -29,7 +29,7 @@
     "angular-calendar": "^0.22.1",
     "angular-datatables": "^7.0.0",
     "angular-user-idle": "^2.0.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "chart.js": "^2.7.1",
     "chartist": "^0.11.0",
     "core-js": "^2.4.1",
